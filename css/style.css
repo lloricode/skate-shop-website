@@ -1,0 +1,233 @@
+#getlogin{
+    width: 500px; 
+    height: 500px; 
+    background:rgba(0,0,0,.5); 
+}
+#log{
+    float: right;
+}
+#inside_header{
+    width: 1100px; 
+    height: 50px; 
+    background:rgba(0,0,0,.5); 
+}
+a,p,div{
+    text-decoration: none;
+    color: white;
+    font-family: sans-serif;/*segoe ui light*/
+}
+body{
+	background-image: url("../img/background website.jpg");
+	background-attachment: fixed;
+}
+.header{
+	height: 270px;
+    width: 1100px;
+	margin-top: 0;
+	background-image: url("../img/header.jpg");
+}
+.menu{
+	height: 90px;
+    width: 1100px;
+	background-color: black;
+}
+.menu2{
+    width: 900px;
+    height: 55px;
+    background-color: orange;
+}
+.menu3{
+    width: 900px;
+    height: 45px;
+    background-color: black;
+}
+.main_body{
+    margin-top: -16px;
+	height: 1139px;
+	width: 900px;
+	background-color: gray;
+}
+.footer{
+    padding-top: 10px;
+	height: 30px;
+	background-color: black;
+}
+#input{
+	margin-top: 35px;
+	margin-right: 20px;
+}
+#m{
+	background-color: white;
+	font-size: 98px;
+}
+
+#menuH:hover{
+    position: absolute;
+    height: 90px;
+    background-color: orange;
+    margin-top: -2px;
+    clear: both;
+}
+#menuH2:hover{
+    position: absolute;
+    height: 20px;
+    background-color: orange;
+    margin-top: -2px;
+}
+#menuH{
+    position: absolute;
+    margin-top: 25px;
+}
+#n{
+	background-color: black;
+}
+#t1{
+	margin-left: 10px;
+	float: left;
+	background-attachment: fixed;
+}
+#t2{
+}
+#table_{
+	border: 4;
+}
+#box{
+	height: 300px;
+	width: 250px;
+}
+#tdpad{
+    padding: 0px 100px;
+}
+#tdpad2{
+    padding: 10px 45px;
+}
+#tdpad3{
+    padding: 5px 39px;
+}
+/*----------------------table css------------------------------------------*/
+.mainTable{
+
+}
+.tableRow{
+  
+}
+.tableRow td{
+    padding: 20px;
+}
+.tableData{
+    width: 250px;
+    height: 290px;
+    clear: both;
+}
+.mardagz{
+    width: 100%;
+    height: 260px;
+}
+.details{
+    background-color: transparent;
+    width: 100%;
+    height: 25px;
+    position: relative;
+    top: 235px;
+}
+.name{
+    background: orange;
+    width: 50%;
+    height: 25px;
+    float: left;
+}
+.cart{
+    background: pink;
+    width: 50%;
+    height: 25px;
+    float: right
+}
+.tddiv span{
+    position: relative;
+    margin: 0px 10px;
+    top: 2px;
+    color: white;
+    text-transform: uppercase;;
+    text-shadow: 1px 1px gray;
+    font-size: 10px;
+    
+}
+.tddiv{
+    transition: opacity 0.5s ease;
+    text-align: center;
+}
+.tddiv:hover{
+    cursor: pointer;
+    opacity: 0.5;
+}
+/*-------------------------------PREV   NEXT------------------------------------*/
+.prev{
+    margin-left: -3px;
+    background: red;
+    width: 200px;
+    height: 30px;
+    margin-right: 60px;
+}
+.view{
+    background: brown;
+    width: 200px;
+    height: 40px;
+    margin: 0px  60px;
+}
+.next{
+    background: red;
+    width: 200px;
+    height: 30px;
+    margin-left: 62px;
+}
+#nptdpad{
+  margin: 0px 80px;
+}
+/*--------------------------signup.php---------------*/
+#text{
+    width: 340px;
+    float: right;
+    
+}
+#label{
+   
+    float: left;
+}
+/*-------------------------------about.php----------------------------*/
+
+.aboutUp{
+    width: 900px;
+    height: 569px;
+    
+    
+}
+
+
+.aleft{
+    float: left;
+    height: 569px;
+    width: 450px;
+    
+   
+}
+.aright{
+    float: right;
+    height: 569px;
+    width: 450px;
+   
+   
+}
+
+
+.anamel{
+    height: 50px;
+    width: 450px;
+    background-color: green;
+    margin-top: 133px;
+}
+.anamer{
+    height: 50px;
+    width: 450px;
+    background-color: green;
+    margin-top: 91px;
+}
