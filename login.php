@@ -64,8 +64,10 @@
 						<? for($i=0;$i<10;$i++) echo "<BR>"; ?>
 						<table>
 							<tr>
-								<td ><a href="signup.php">
-									<input type="button" name="signup" value="SIGN UP" style="background-color:orange"></a>
+								<td >
+									<a href="signup.php">
+										<input type="button" name="signup" value="SIGN UP" style="background-color:orange">
+									</a>
 								</td>
 								<td><? for($i=0;$i<50;$i++) echo "&nbsp"; ?></td>
 								<td>
