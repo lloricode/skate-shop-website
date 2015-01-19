@@ -41,7 +41,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Skate Shop | Log In</title>
+		<title>Skate Shop | Recovery</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
         <link href="img/Skateboard-2-512.png" rel="shortcut icon" type="image/x-icon" />
 	</head>
@@ -73,23 +73,17 @@
 				<div id="getlogin">
 					<form action="<?=htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 						<BR><BR><BR><BR><BR>
-						<?php if(isset($error)) echo "$error"; ?>
-						E-MAIL ADDRESS/USERNAME:<? for($i=0;$i<14;$i++) echo "&nbsp"; ?><br>
-						<input type="text" name="user" style="width:300px; height:22px;"><BR><BR><BR>
-						PASSWORD:<? for($i=0;$i<42;$i++) echo "&nbsp"; ?><br>
-						<input type="password" name="pass" style="width:300px; height:22px;"><BR>
-						<? for($i=0;$i<8;$i++) echo "<BR>"; ?>
-						<a href="recovery.php">forgot password?</a>
+						
 						<table>
 							<tr>
 								<td >
-									<a href="signup.php">
-										<input type="button" name="signup" value="SIGN UP" style="background-color:orange">
+									<a href="login.php">
+										<input type="button" name="signup" value="BACK TO LOGIN" style="background-color:orange">
 									</a>
 								</td>
 								<td><? for($i=0;$i<50;$i++) echo "&nbsp"; ?></td>
 								<td>
-									<input type="submit" name="login" value="LOG IN" style="background-color:red">
+									<input type="submit" name="login" value="SUBMIT" style="background-color:red">
 								</td>
 							</tr>
 						</table>

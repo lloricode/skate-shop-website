@@ -63,8 +63,8 @@
 			$byrr = "invalid year";
 		if(!preg_match("/^[0-9]*$/", $mobile))
 			$mobilerr="Invalid mobile number";
-		if(!filter_var($email, FILTER_VALIDATE_EMAIL) and !empty($_POST['email']) )
-			$emailrr="Invalid email format";
+	//	if(!filter_var($email, FILTER_VALIDATE_EMAIL) and !empty($_POST['email']) )
+	//		$emailrr="Invalid email format";
 
 		//check if password and secret answer is match
 		$pass2=check_data($_POST['pass2']);
@@ -157,7 +157,7 @@
 							<input placeholder="password"  type="password" name="pass" id="text">
 							<span id="err"><? if(isset($passrr)) echo $passrr;?></span><BR><BR>
 						<label id="label">RE-TYPE PASSWORD:</label>
-							<input placeholder="re-type password" type="pass2" name="pass2" id="text"><BR><BR>
+							<input placeholder="re-type password" type="password" name="pass2" id="text"><BR><BR>
 						<label id="label">BIRTHDATE: </label>
 							<input type="text" name="by" placeholder="year" style="width:130px" value="<?=$by;?>">
 							<select name="bm">
@@ -206,7 +206,7 @@
 						<label id="label">RETYPE ANSWER: </label>
 							<input placeholder="re-type secret answer" type="password" name="ans2" id="text"><BR><BR>
 						
-						<textarea rows="3" cols="10" id="text" name="qq">
+						<!--<textarea rows="3" cols="10" id="text" name="qq">-->
 							
 						</textarea><BR><BR><BR><BR><BR><BR>
 						<table>

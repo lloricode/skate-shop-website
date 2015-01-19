@@ -33,8 +33,11 @@ $path = "../img/product/";
                             //$imgfile = $txt . "." . $ext;
 							$tmp = $_FILES['pimage']['tmp_name'];
 							if(move_uploaded_file($tmp, $path.$imgfile)) {	
+								$sale=($_POST['psale']=="yes")?1:0;
 								$query = "INSERT INTO Product(
+									Sale,
 									ProductName,
+									Brand,
 									ProductPrice,
 									ProductType,
 									ProductStatus,
@@ -43,7 +46,9 @@ $path = "../img/product/";
 									ProductAttactment,
 									UserAccountID
 									) VALUES(
+									$sale,
 									'". $_POST['pname'] . "',
+									'". $_POST['pbrand'] . "',
 									'". $_POST['pprice'] . "',
 									'". $_POST['ptype'] . "',
 									'". $_POST['pstatus'] . "',
