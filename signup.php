@@ -16,7 +16,7 @@
 		if(empty($_POST['ln'])) $lnrr="Last Name is required"; else $ln=$_POST['ln'];
 		if(empty($_POST['username'])) $usernamerr="Usename is required"; else $username=$_POST['username'];
 		if(empty($_POST['pass'])) $passrr="Password is required"; else $pass=$_POST['pass'];
-		if(empty($_POST['bm'])) $bmrr="Birth Month is required"; else $bm=$_POST['bm'];
+		if($_POST['bm']=="month") $bmrr="Birth Month is required"; else $bm=$_POST['bm'];
 		if(empty($_POST['bd'])) $bdrr="Birth Date is required"; else $bd=$_POST['bd'];
 		if(empty($_POST['by'])) $byrr="Birth Year is required"; else $by=$_POST['by'];
 
@@ -57,25 +57,48 @@
 		  	$fnrr = "Only letters and white space allowed";
 		if (!preg_match("/^[a-zA-Z ]*$/",$ln)) 
 		  	$lnrr = "Only letters and white space allowed";
-		if (!preg_match("/[0-9]/",$username)) 
-		  	$byrr = "year invalid";
-		if(!preg_match("/^[A-Za-z]*$/", $by))
-
+		if (!preg_match("/^[a-zA-Z0-9_]*$/",$username)) 
+		  	$usernamerr = "Only letters, 0-9 and _ allowed";
+		if(!preg_match("/^(19|20)\d{2}$/", $by) && !$by=="")//For 1900-2099   //from 1000 to 2999   ^[12][0-9]{3}$
+			$byrr = "invalid year";
 		if(!preg_match("/^[0-9]*$/", $mobile))
 			$mobilerr="Invalid mobile number";
 		if(!filter_var($email, FILTER_VALIDATE_EMAIL) and !empty($_POST['email']) )
 			$emailrr="Invalid email format";
 
-		$gen=($gender=="male")?"male.png":"female.png";//set the dafault photo depends on user's gender
+		//check if password and secret answer is match
+		$pass2=check_data($_POST['pass2']);
+		if($pass2!=$pass)
+			$passrr="Password mismatch";
+		$ans2=check_data($_POST['ans2']);
+		if($ans2!=$ans)
+			$ansrr="Secret Answer mismatch";
 
- 		$sql="INSERT INTO UserAccount(UserAccountImage,UserAccountFisrtName,UserAccountLastName,UserAccountUserName,UserAccountPassword,UserAccountBM,UserAccountBD,UserAccountBY,
- 			UserAccountGender,UserAccountHomeAddress,UserAccountMobile,UserAccountEmail,UserAccountShipping,UserAccountSecretQuestion,UserAccountAnswer)
-			VALUES('$gen','".$_POST['fn']."','".$_POST['ln']."','".$_POST['username']."','".md5($_POST['pass'])."','".$_POST['bm']."','".$_POST['bd']."','".$_POST['by']."',
-				'$gender','".$_POST['home']."','".$_POST['mobile']."','".$_POST['email']."','".$_POST['shipping']."','".$_POST['ques']."','".md5($_POST['ans'])."')";
-		//DB::query($sql);
-		$ok="Account Created!";
-		//header("Location: signup.php");
-		$bdrr=$byrr;
+		// error for birth date
+		$bdate=" ";	
+		if($byrr==" "){
+			if($bmrr==" "){
+				if($bdrr!=" ")
+					$bdate=$bdrr;//   coming soon!
+			}
+			else
+				$bdate=$bmrr;
+		}
+		else
+			$bdate=$byrr;
+		if($fnrr==" " && $lnrr==" " && $usernamerr==" " && $passrr==" " && $bmrr==" " && $bdrr==" " && $byrr==" " && 
+			$genderrr==" " && $homerr==" " && $mobilerr==" " && $emailrr==" " && $shippingrr==" " && $quesrr==" " && $ansrr==" "){
+			$gen=($gender=="male")?"male.png":"female.png";//set the default photo depends on user's gender
+
+	 		$sql="INSERT INTO UserAccount(UserAccountImage,UserAccountFisrtName,UserAccountLastName,UserAccountUserName,UserAccountPassword,UserAccountBM,UserAccountBD,UserAccountBY,
+	 			UserAccountGender,UserAccountHomeAddress,UserAccountMobile,UserAccountEmail,UserAccountShipping,UserAccountSecretQuestion,UserAccountAnswer)
+				VALUES('$gen','".$_POST['fn']."','".$_POST['ln']."','".$_POST['username']."','".md5($_POST['pass'])."','".$_POST['bm']."','".$_POST['bd']."','".$_POST['by']."',
+					'$gender','".$_POST['home']."','".$_POST['mobile']."','".$_POST['email']."','".$_POST['shipping']."','".$_POST['ques']."','".md5($_POST['ans'])."')";
+			DB::query($sql);
+			$ok="Account Created!";
+		}
+		else
+			$ok="please complete the fields.";
 	}
 ?>
 <!DOCTYPE html>
@@ -153,7 +176,7 @@
 								<option <?php if(isset($_POST['bm']) && $bm=="December" ) echo "selected"; ?> >December</option>
 							</select>
 							<input type="text" name="bd" placeholder="day" style="width:110px;margin-right:35px" value="<?=$bd;?>">
-							<span id="err"><? if(isset($bdrr)) echo $bdrr;?></span>
+							<span id="err"><? if(isset($bdate)) echo $bdate;?></span>
 						<BR><BR>
 
 						<label id="label">GENDER: </label>
