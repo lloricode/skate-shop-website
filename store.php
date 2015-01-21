@@ -39,7 +39,7 @@
 		            </table>
 					<form action="" >
 						<span style="float:right">
-							<input type="text" id="input" height="100px" value="PRODUCT NAME..">
+							<input type="text" id="input" height="100px" placeholder="PRODUCT NAME.." name="search">
 						</span>
 					</form>
 				</div>
@@ -81,7 +81,7 @@
 	            </table>
 			</div>
 			<?php
-				$actualURL = /*"http://localhost/webdev/pages/store.php?".*/ isset($_GET["query"]) ? "query=" . $_GET["query"] : "";
+				$actualURL = /*"http://localhost/webdev/pages/store.php?".*/ isset($_GET["query"]) ? "query=" . $_GET["query"] : "query=all";
 			?>
 			<div class="menu3">
 			    <table id="t3">
@@ -120,7 +120,8 @@
 								$dir=$_GET['query'];
 							if(isset($_GET['cat'])) 
 								$dir=$dir.">".$_GET['cat'];
-
+							if(isset($_GET['search']))
+								$dir="product name searched";
 
 							echo $dir;
 					?></p>
@@ -221,6 +222,8 @@
 										}
 									}
 								}
+								else if(isset($_GET['search']))
+									$query="SELECT * FROM Product WHERE ProductName='".$_GET['search']."'";
 								else{
 									if($_GET['query']=="all"){
 										$query="SELECT * FROM Product";
@@ -243,6 +246,7 @@
 										$ready=0;
 									}
 								}
+
 								if($ready){
 									$result =DB::query($query);
 									if($brand){
@@ -292,6 +296,8 @@
 									else
 									{
 										echo "No product";
+										if(isset($_GET['search']))
+											echo "<BR>for name \"".$_GET['search']."\".";
 									}
 								}
 							

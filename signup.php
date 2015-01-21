@@ -63,8 +63,8 @@
 			$byrr = "invalid year";
 		if(!preg_match("/^[0-9]*$/", $mobile))
 			$mobilerr="Invalid mobile number";
-	//	if(!filter_var($email, FILTER_VALIDATE_EMAIL) and !empty($_POST['email']) )
-	//		$emailrr="Invalid email format";
+		if(!filter_var($email, FILTER_VALIDATE_EMAIL) and !empty($_POST['email']) )
+			$emailrr="Invalid email format";
 
 		//check if password and secret answer is match
 		$pass2=check_data($_POST['pass2']);

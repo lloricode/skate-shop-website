@@ -144,7 +144,7 @@ require_once('../config.php');
 				$query = "SELECT t0.ProductID,t0.Sale,t0.ProductName, t0.Brand ,t0.ProductPrice, t0.ProductType, 
 				t0.ProductStatus, t0.ProductAvailability, t0.ProductGender, t0.ProductAttactment, 
 				t1.AdminAccountName,t0.DateAdded 
-				FROM Product AS t0 INNER JOIN AdminAccount AS t1 ON t0.UserAccountID = t1.AdminAccountID";
+				FROM Product AS t0 INNER JOIN AdminAccount AS t1 ON t0.AdminAccountName = t1.AdminAccountID";
 
 				$result = DB::query($query);
 				if(DB::getNumRows() > 0)
