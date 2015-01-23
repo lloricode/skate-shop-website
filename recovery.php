@@ -29,12 +29,12 @@
 		unset($error);
 		if (DB::getNumRows()>0) {
 			$row=$rs->fetch_object();
-			setcookie("recID",$row->UserAccountID,time()+3600,"/");
-			setcookie("fn",$row->UserAccountFisrtName,time()+3600,"/");
-			setcookie("ln",$row->UserAccountLastName,time()+3600,"/");
-			setcookie("ques",$row->UserAccountSecretQuestion,time()+3600,"/");
-			setcookie("ans",$row->UserAccountAnswer,time()+3600,"/");
-			setcookie("img",$row->UserAccountImage,time()+3600,"/");
+			setcookie("recID",$row->UserAccountID,time()+60,"/");
+			setcookie("fn",$row->UserAccountFisrtName,time()+60,"/");
+			setcookie("ln",$row->UserAccountLastName,time()+60,"/");
+			setcookie("ques",$row->UserAccountSecretQuestion,time()+60,"/");
+			setcookie("ans",$row->UserAccountAnswer,time()+60,"/");
+			setcookie("img",$row->UserAccountImage,time()+60,"/");
 			header("Location: ans.php");
 		}
 		else

@@ -88,14 +88,33 @@
 			$bdate=$byrr;
 		if($fnrr==" " && $lnrr==" " && $usernamerr==" " && $passrr==" " && $bmrr==" " && $bdrr==" " && $byrr==" " && 
 			$genderrr==" " && $homerr==" " && $mobilerr==" " && $emailrr==" " && $shippingrr==" " && $quesrr==" " && $ansrr==" "){
+
 			$gen=($gender=="male")?"male.png":"female.png";//set the default photo depends on user's gender
 
 	 		$sql="INSERT INTO UserAccount(UserAccountImage,UserAccountFisrtName,UserAccountLastName,UserAccountUserName,UserAccountPassword,UserAccountBM,UserAccountBD,UserAccountBY,
 	 			UserAccountGender,UserAccountHomeAddress,UserAccountMobile,UserAccountEmail,UserAccountShipping,UserAccountSecretQuestion,UserAccountAnswer)
-				VALUES('$gen','".$_POST['fn']."','".$_POST['ln']."','".$_POST['username']."','".md5($_POST['pass'])."','".$_POST['bm']."','".$_POST['bd']."','".$_POST['by']."',
-					'$gender','".$_POST['home']."','".$_POST['mobile']."','".$_POST['email']."','".$_POST['shipping']."','".$_POST['ques']."','".md5($_POST['ans'])."')";
+				VALUES('$gen','$fn','$ln','$username','".md5($pass)."','$bm','$bd','$by',
+					'$gender','$home','$mobile','$email','$shipping','$ques','".md5($ans)."')";
 			DB::query($sql);
-			$ok="Account Created!";
+			$ok="Account Created!<BR><a href='login.php'>Back to Log in.</a>";
+//------------------------------------------------------------------------------------------
+			$sql="SELECT UserAccountID,UserAccountFisrtName,UserAccountLastName,UserAccountImage FROM UserAccount WHERE UserAccountUserName='$username' AND UserAccountPassword='".md5($pass)."'";
+			/*
+				if sign up is success will go to the home
+			*/
+			//if result matched usercode and passcode, table must be 1 row.
+	/*		$rs=DB::query($sql);
+			
+			
+			if (DB::getNumRows()>0) {
+				$row=$rs->fetch_object();
+				setcookie("authFn",$row->UserAccountFisrtName,time()+3600,"/");
+				setcookie("authLn",$row->UserAccountLastName,time()+3600,"/");
+				setcookie("authImg",$row->UserAccountImage,time()+3600,"/");
+				setcookie("authID",$row->UserAccountID,time()+3600,"/");
+				unset($error);
+				//header("Location: index.php");
+			}*/
 		}
 		else
 			$ok="please complete the fields.";
@@ -137,7 +156,10 @@
 	            </table>
 			</div>
 			<div class="main_body" style="margin-top:1px;">
-				<?php if(isset($ok)) echo $ok;?>
+				<?php 	if(isset($ok)){
+							echo $ok;
+							unset($ok);
+						}?>
 				<div style="background-color:; width:800px; float:right;">
 					<BR><BR><BR><BR>
 					<? if(!isset($fn))$fn=$ln=$username=$pass=$bm=$bd=$by=$gender=$home=$mobile=$email=$shipping=$ques=$ans="";?>

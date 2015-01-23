@@ -44,7 +44,7 @@ $path = "../img/product/";
 									ProductAvailability,
 									ProductGender,
 									ProductAttactment,
-									UserAccountID
+									AdminAccountID
 									) VALUES(
 									$sale,
 									'". $_POST['pname'] . "',
@@ -57,6 +57,7 @@ $path = "../img/product/";
 									'". $imgfile . "',
 									'". $_COOKIE['auth_account'] . "'
 									)";
+								echo $query;
                                 DB::query($query);
 								//echo "Success";
 								header("Location: index.php");

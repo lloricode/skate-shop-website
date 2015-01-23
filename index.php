@@ -30,7 +30,7 @@ include 'header.php';
 		</div>
 		<center>
 			<div class="main_body" style="margin-top:1px;">
-
+		
 			</div>
 		</center>
 

@@ -7,6 +7,7 @@
 ?>
 <?php
 	//session_start();
+	setcookie("recID","",time()-3600,"/");
 	if ( isset($_GET) and $_SERVER["REQUEST_METHOD"]=="POST") {
 		$usercode=addslashes($_POST['user']);
 		$passcode=addslashes(md5($_POST['pass']));

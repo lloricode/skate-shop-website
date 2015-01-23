@@ -11,10 +11,16 @@
 	if ( isset($_GET) and $_SERVER["REQUEST_METHOD"]=="POST") {
 		$data=addslashes($_POST['sec_ans']);
 
-	//	$data=trim($data);
-	//	$data=stripslashes($data);
-	//	$data=htmlspecialchars($data);
+		$data=trim($data);
+		$data=stripslashes($data);
+		$data=htmlspecialchars($data);
+		
 		if($_COOKIE['ans']==md5($data)){
+			setcookie("fn","",time()-3600,"/");
+			setcookie("ln","",time()-3600,"/");
+			setcookie("ques","",time()-3600,"/");
+			setcookie("ans","",time()-3600,"/");
+			setcookie("img","",time()-3600,"/");
 			header("Location: resetpass.php");
 		}
 		else
@@ -22,8 +28,10 @@
 	}
 	include 'headerlogin.php';
 ?>
-						<?  echo $_COOKIE['ques']; ?><br>
-						<input placeholder="enter your secret answer" type="text" name="sec_ans" style="width:300px; height:22px;"><BR><BR><BR>
+						<?  if(!isset($_COOKIE['ques']))
+								header("Location: recovery.php");?>
+								<?=$_COOKIE['ques']?><br>
+						<input placeholder="enter your secret answer" type="password" name="sec_ans" style="width:300px; height:22px;"><BR><BR><BR>
 						
 						<? for($i=0;$i<11;$i++) echo "<BR>"; ?>
 						

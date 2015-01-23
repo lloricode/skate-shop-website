@@ -12,22 +12,16 @@
 		$data=addslashes($_POST['newpass']);
 		$data2=addslashes($_POST['newpass2']);
 
-	//	$data=trim($data);
-	//	$data=stripslashes($data);
-	//	$data=htmlspecialchars($data);
+		$data=trim($data);
+		$data=stripslashes($data);
+		$data=htmlspecialchars($data);
 		if($data==$data2){
-			//include("config.php");
 			$sql="UPDATE UserAccount
 			SET UserAccountPassword='".md5($data)."' 
 			WHERE UserAccountID='".$_COOKIE['recID']."'"; 
-			DB::query($sql);
 			setcookie("recID","",time()-3600,"/");
-			setcookie("fn","",time()-3600,"/");
-			setcookie("ln","",time()-3600,"/");
-			setcookie("ques","",time()-3600,"/");
-			setcookie("ans","",time()-3600,"/");
-			setcookie("img","",time()-3600,"/");
-			$error="match<BR>";
+			DB::query($sql);
+			$match="1";
 		}
 		else
 			$error= "password not match.<BR>";
@@ -35,12 +29,16 @@
 	include 'headerlogin.php';
 ?>
 
-
+						<?php
+							if(isset($match))
+								echo"<p>reset password successfull!<BR><a href='login.php' >back to log in</a></p>";
+							else{
+							?>
 						Enter new password:<br>
 						<input placeholder="new password" type="password" name="newpass" style="width:300px; height:22px;">
 						<input placeholder="re-type new password" type="password" name="newpass2" style="width:300px; height:22px;"><BR><BR><BR>
 						
-						<? for($i=0;$i<11;$i++) echo "<BR>"; ?>
+						<?} for($i=0;$i<11;$i++) echo "<BR>"; ?>
 					
 						<table>
 							<tr>

@@ -13,7 +13,7 @@ require_once('../config.php');
 	<head>
 		<title>Skate Shop Admin Panel</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-
+		<link href="../img/Skateboard-2-512.png" rel="shortcut icon" type="image/x-icon" />
 	</head>uploads
 	<body>
 	<?php 
@@ -127,6 +127,7 @@ require_once('../config.php');
 			<legend>Datagrid View</legend>
 			<table class="grid">
 					<tr>
+						<th>no.</th>
 						<th>ID</th>
 						<th>Sale</th>
 						<th>Name</th>
@@ -144,20 +145,22 @@ require_once('../config.php');
 				$query = "SELECT t0.ProductID,t0.Sale,t0.ProductName, t0.Brand ,t0.ProductPrice, t0.ProductType, 
 				t0.ProductStatus, t0.ProductAvailability, t0.ProductGender, t0.ProductAttactment, 
 				t1.AdminAccountName,t0.DateAdded 
-				FROM Product AS t0 INNER JOIN AdminAccount AS t1 ON t0.AdminAccountName = t1.AdminAccountID";
+				FROM Product AS t0 INNER JOIN AdminAccount AS t1 ON t0.AdminAccountID = t1.AdminAccountID";
 
 				$result = DB::query($query);
+				$count=1;
 				if(DB::getNumRows() > 0)
 				{
 					while($row = $result->fetch_object())
 					{
 						?>
 							<tr>
+								<td><?=$count++?></td>
 								<td><?= $row->ProductID; ?></td>
-								<td><?= $row->ProductName; ?></td>
 								<td><?= $row->Sale; ?></td>
+								<td><?= $row->ProductName; ?></td>
 								<td><?= $row->Brand; ?></td>
-								<td><?= "₱".$row->ProductPrice; ?></td>
+								<td><?= "&#8369 ".$row->ProductPrice; ?></td>
 								<td><?= $row->ProductType; ?></td>
 								<td><?= $row->ProductStatus; ?></td>
 								<td><?= $row->ProductAvailability; ?></td>
