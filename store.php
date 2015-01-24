@@ -1,4 +1,6 @@
 <?php
+	include 'main_style.php';
+	include 'fresco_style.php';
 	include 'header.php';
 	include("config.php");
 ?>
@@ -84,7 +86,7 @@
 				$actualURL = /*"http://localhost/webdev/pages/store.php?".*/ isset($_GET["query"]) ? "query=" . $_GET["query"] : "query=all";
 			?>
 			<div class="menu3">
-			    <table id="t3">
+			    <table ><!--id="t3">-->
 	                <tr style="font-size:25px">
 	                    <td id="tdpad3">
 	                        <a href="store.php?<?= $actualURL; ?>&cat=shoes" >
@@ -289,20 +291,24 @@
 								$ready=0;
 							}
 
-								$start=(isset($_GET['start']))?$_GET['start']:0;
-								$end=(isset($_GET['end']))?$_GET['end']:9;
+								$prev=(isset($_GET['page']))?$_GET['page']:0;
+								$nxt=($prev==0)?9:$prev*9;
+								$prev=$nxt-9;
+								
+								
 								if($ready){
-									$result =DB::query($query." LIMIT $start, $end");
-									echo "no. of product: ".DB::getNumRows();
+									$query.=" ORDER BY ProductID LIMIT $prev, $nxt";
+									echo "<BR>$query<BR>";
+									$result =DB::query($query);
+									echo "no. of product: ".DB::getNumRows()."<BR>";
 									if($brand){
-										while($row=$result->fetch_object()){
+										while($row=$result->fetch_object())
 											echo $row->Brand."<BR>";
-										}
 									}
-									else
-									if(DB::getNumRows() > 0)
-									{
-										echo "<table id='table_'>";
+									else{
+										if(DB::getNumRows() > 0)
+										{
+											echo "<table id='table_'>";
 											echo "<tr class='tableRow'>";
 											for($int = 1; $row = $result->fetch_object(); $int++)
 											{
@@ -321,28 +327,22 @@
 															<div class="cart tddiv">
 																<span>ADD TO CART</span>
 															</div><BR>
-															<p style="color:white;">&nbsp;&nbsp;&nbsp;&nbsp; <?= $row->ProductName?> &nbsp;<b>|&nbsp; &#8369;<?= $row->ProductPrice?></b></p>
+															<p style="color:white;">&nbsp;&nbsp;&nbsp;&nbsp; <?= $row->ProductID?>&nbsp;&nbsp; <?= $row->ProductName?> &nbsp;<b>|&nbsp; &#8369;<?= $row->ProductPrice?></b></p>
 														</div>
 													</div>
 												</td>
 												<?php
 												if($int % 3 == 0)
-												{
-													?>
-														</tr><tr class="tableRow">	
-													<?php
-												}
-												if($int==9)
-													break;
-										        $pagination=" ";
+													echo "</tr><tr class='tableRow'>";	
 											}	
-											echo "</table>";
-									}
-									else
-									{
-										echo "No product";
-										if(isset($_GET['search']))
-											echo "<BR>for name \"".$_GET['search']."\".";
+											echo "</tr></table>";
+										}
+										else
+										{
+											echo "No product";
+											if(isset($_GET['search']))
+												echo "<BR>for name \"".$_GET['search']."\".";
+										}
 									}
 								}
 							
@@ -355,7 +355,8 @@
 				<table style="margin-top:-10px">
 					<tr style="font-size:25px;">
 						<td id="nptdpad">
-							<a href="store.php?query=<?=$q.$cat."&start=".($start-9)."&end=".($end-9);?>">
+						<? $page=(isset($_GET['page']))?$_GET['page']:1;?>
+							<a href="store.php?query=<?=$q.$cat."&page=".($page-1);?>">
 								<div class="prev tddiv">
 									PREV
 								</div>
@@ -369,7 +370,7 @@
 							</a>
 						</td>
 						<td id="nptdpad">
-							<a href="store.php?query=<?=$q.$cat."&start=".($start+9)."&end=".($end+9);?>">
+							<a href="store.php?query=<?=$q.$cat."&page=".($page+1);?>">
 								<div class="prev tddiv">
 									NEXT
 								</div>

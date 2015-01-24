@@ -1,4 +1,5 @@
 <?php
+include 'main_style.php';
 	include 'header.php';
 ?>
 		<div style="background-color:black; height:90;">
