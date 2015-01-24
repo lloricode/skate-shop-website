@@ -290,7 +290,9 @@
 								echo "error query";
 								$ready=0;
 							}
-
+								$result =DB::query($query);
+								echo "no. of product: ".DB::getNumRows()."<BR>";
+								
 								$prev=(isset($_GET['page']))?$_GET['page']:0;
 								$nxt=($prev==0)?9:$prev*9;
 								$prev=$nxt-9;
@@ -300,7 +302,7 @@
 									$query.=" ORDER BY ProductID LIMIT $prev, $nxt";
 									echo "<BR>$query<BR>";
 									$result =DB::query($query);
-									echo "no. of product: ".DB::getNumRows()."<BR>";
+									
 									if($brand){
 										while($row=$result->fetch_object())
 											echo $row->Brand."<BR>";
