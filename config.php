@@ -7,7 +7,7 @@
 
     define('DB_SERVER', 'localhost');       //by mardags
     define('DB_USER', 'root');                      //
-    define('DB_PASSWD', '');                        //
+    define('DB_PASSWD', 'mnmn');                        //
     define('DB_NAME', 'MyShopDB');
      
     define("DIR_NAME", (dirname(__FILE__)));

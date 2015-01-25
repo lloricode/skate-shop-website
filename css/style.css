@@ -1,3 +1,5 @@
+/*By Torlao && Garcia*/
+
 #getlogin{
     width: 500px; 
     height: 500px; 
@@ -42,7 +44,7 @@ body{
     background-color: black;
 }
 .main_body{
-    margin-top: -16px;
+   /* margin-top: -16px;*/
 	height: 1139px;
 	width: 900px;
 	background-color: gray;
