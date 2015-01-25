@@ -60,7 +60,7 @@ $path = "../img/product/";
 								echo $query;
                                 DB::query($query);
 								//echo "Success";
-								header("Location: index.php");
+								header("Location: view_product.php");
 
 							}else {
 								echo "failed";

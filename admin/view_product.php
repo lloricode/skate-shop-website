@@ -126,7 +126,7 @@
 				$count=1;
 				if(DB::getNumRows() > 0)
 				{
-					while($row = $result->fetch_object())
+					for($i=1;$row = $result->fetch_object();$i++)
 					{
 						?>
 							<tr>
@@ -135,7 +135,7 @@
 								<td><?= $row->Sale; ?></td>
 								<td><?= $row->ProductName; ?></td>
 								<td><?= $row->Brand; ?></td>
-								<td><?= "&#8369 ".$row->ProductPrice; ?></td>
+								<td><?= "&#8369; ".$row->ProductPrice; ?></td>
 								<td><?= $row->ProductType; ?></td>
 								<td><?= $row->ProductStatus; ?></td>
 								<td><?= $row->ProductAvailability; ?></td>
@@ -147,6 +147,23 @@
 								<td><?= $row->DateAdded; ?></td>
 							</tr>
 						<?php
+							if($i%5==0){?>
+							<tr>
+						<th>no.</th>
+						<th>ID</th>
+						<th>Sale</th>
+						<th>Name</th>
+						<th>Brand</th>
+						<th>Price</th>
+						<th>Type</th>
+						<th>Status</th>
+						<th>Availability</th>
+						<th>Gender</th>
+						<th>Picture</th>
+						<th>Added by</th>
+						<th>Date Added</th>
+					</tr>
+							<?}
 					}
 				}
 				?>

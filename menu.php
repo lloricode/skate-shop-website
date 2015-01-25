@@ -33,7 +33,7 @@
 		                    </td>
 		                </tr>
 		            </table>
-					<form action="" >
+					<form action="store.php" >
 						<span style="float:right">
 							<input type="text" id="input" height="100px" placeholder="PRODUCT NAME.." name="search">
 						</span>

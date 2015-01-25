@@ -132,8 +132,6 @@
 										$ready=0;
 									}
 								}
-								else if(isset($_GET['search']))
-									$query="SELECT * FROM Product WHERE ProductName='".htmlspecialchars(stripcslashes(trim($_GET['search'])))."'";
 								else{
 									if($_GET['query']=="all"){
 										$query="SELECT * FROM Product";
@@ -156,6 +154,9 @@
 										$ready=0;
 									}
 								}
+							}
+							else if(isset($_GET['search'])){
+									$query="SELECT * FROM Product WHERE ProductName='".htmlspecialchars(stripcslashes(trim($_GET['search'])))."'";
 							}
 							else{
 								echo "error query";

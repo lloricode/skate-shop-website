@@ -76,11 +76,11 @@
 	            </table>
 			</div>
 			<div class="main_body">
-				<div style="background-color:green; height:1010px;">
+				<div style="background-color:; height:1010px;">
 					<? 		
-					$dir="";
+					$dir=$q="";
 					if(isset($_GET['query'])) 
-						$dir=$_GET['query'];
+						$q=$dir=$_GET['query'];
 					if(isset($_GET['cat'])) 
 						$dir=$dir.">".$_GET['cat'];
 					if(isset($_GET['search']))
@@ -99,7 +99,9 @@
 					$nxt=($prev==0)?9:$prev*9;
 					$prev=$nxt-9;
 					
-					
+					$cat=(isset($_GET['cat']))?"cat=".$_GET['cat']."&":"";   $q=(isset($_GET['query']))?"query=".$_GET['query']."&":""; 
+				 	$page=(isset($_GET['page']))?$_GET['page']:1; 
+				 	$srch=(isset($_GET['search']))?"search=".$_GET['search']."&":""; 
 					if($ready){
 						$query.=" ORDER BY ProductID LIMIT $prev, $nxt";
 						echo "$query<BR>";
@@ -121,16 +123,18 @@
 										<div class="mardagz" style="background: url('img/product/<?= $row->ProductAttactment; ?>');background-repeat: no-repeat; background-size: cover;">
 											<div class="details">
 												<a href="img/product/<?= $row->ProductAttactment; ?>" class='fresco'
-												data-fresco-group="product"
-												data-fresco-caption="Name: <?= $row->ProductName; ?> <br />
-												Price: &#8369;<?= $row->ProductPrice; ?>" >
-												<div class="name tddiv">
-													<span>ZOOM IMAGE</span>
-												</div>
+													data-fresco-group="product"
+													data-fresco-caption="Name: <?= $row->ProductName; ?> <br />
+													Price: &#8369;<?= $row->ProductPrice; ?>" >
+													<div class="name tddiv">
+														<span>ZOOM IMAGE</span>
+													</div>
 												</a>
-												<div class="cart tddiv">
-													<span>ADD TO CART</span>
-												</div><BR>
+												<a href="cart.php?<?=$q;?><?=$cat?><?=$srch?>file=<?= $row->ProductID?>&page=<?=$page?>">
+													<div class="cart tddiv">
+														<span>ADD TO CART</span>
+													</div>
+												</a>	<BR>
 												<p style="color:white;">&nbsp;&nbsp;&nbsp;&nbsp; <?= $row->ProductID?>&nbsp;&nbsp; <?= $row->ProductName?> &nbsp;<b>|&nbsp; &#8369;<?= $row->ProductPrice?></b></p>
 											</div>
 										</div>
@@ -150,23 +154,21 @@
 						}
 					} ?>
 				</div>
-				<div style="background-color:black; height:30px; margin-top:50px;">
+				<div style="background-color:; height:30px; margin-top:50px;">
 					<a href="cart.php">
 						<div style="float:bottom; background-color:green; width:150px; height:50px;">
 							<p>VIEW CART</p>
 						</div>
 					</a>
 				</div>
-				<div style="background-color:yellow; height:30px; margin-top:5px;">
-					<?  $cat=(isset($_GET['cat']))?"&cat=".$_GET['cat']:"";   $q=$_GET['query']; ?>
-					<? $page=(isset($_GET['page']))?$_GET['page']:1; ?>
+				<div style="background-color:; height:30px; margin-top:5px;">
 		<?php 		if(0==$prev) {?>
 						<div style="float:left; background-color:orange; width:120px; height:45px">
 							<p>PREV</p>
 						</div>
 		<?php 		}
 					else{		?>
-						<a href="store.php?query=<?=$q.$cat."&page=".($page-1);?>">
+						<a href="store.php?<?=$q.$cat."&page=".($page-1);?>">
 							<div style="float:left; background-color:orange; width:120px; height:45px">
 								<p>PREV</p>
 							</div>
@@ -180,7 +182,7 @@
 						</div>
 		<?php 		}
 					else{		?>
-						<a href="store.php?query=<?=$q.$cat."&page=".($page+1);?>">
+						<a href="store.php?<?=$q.$cat."&page=".($page+1);?>">
 							<div style="float:right; background-color:orange; width:120px; height:45px">
 								<p>NEXT</p>
 							</div>

@@ -8,17 +8,13 @@ include 'menu.php';
 		<center>
 			<div class="main_body" style="margin-top:1px;">
 			<!--            ##################################################-->
-				<div class="container">
-					<div class="jumbotron">
-			            <h1>My First Bootstrap Page</h1>
-			            <p>Resize this responsive page to see the effect!</p> 
-			        </div>
+				
 
 					<div id="myCarousel" class="carousel slide" data-ride="carousel">
 				 
 						<?php
 							include("config.php");
-							$sqlcmd="SELECT * FROM Product LIMIT 2";
+							$sqlcmd="SELECT * FROM Product ";
 							$rs=DB::query($sqlcmd);
 							if(DB::getNumRows()>0){
 								echo "<ol class='carousel-indicators'><li data-target='#myCarousel' data-slide-to='0' class='active'></li>";
@@ -37,7 +33,7 @@ include 'menu.php';
 						?>
 					</div>
 				 	
-				</div>
+				
 				  <!--             #############################################-->
 			</div>
 		</center>

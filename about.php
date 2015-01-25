@@ -11,6 +11,7 @@
 						<BR>
 						<h1 style="float:left">&nbsp;&nbsp;&nbsp;WHO ARE WE?</h1>
 						<img src="img/about.jpg" width="380">
+						
 						<div class="anamel">
 							<p style="font-size:25px; ">LLORIC <b>GARCIA</b></p>
 						</div>
@@ -23,15 +24,14 @@
 							Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
 							Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
 							Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
-							Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
-							Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
-							Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
 						</p>
 						<p>
 							Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
 							Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
 							Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
-						</p>
+						</p><div class="fb-like" data-href="/webdev/index.php" data-layout="standard" data-action="like" data-show-faces="true" data-share="true">
+			
+		</div>
 						<div class="anamer">
 							<p style="font-size:25px">MEGAN HAYRANA <b>TORLAO</b></p>
 						</div
@@ -39,7 +39,7 @@
 				</div>
 				<div > 
 					<div class="aleft">
-						<img src="img/zombie.jpg" width="300" style="margin-top:30px;">
+						<img src="img/icon.jpg" width="300" style="margin-top:30px;">
 						<p>
 							Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
 							Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 

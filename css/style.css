@@ -163,7 +163,7 @@ body{
     opacity: 0.5;
 }
 /*-------------------------------PREV   NEXT------------------------------------*/
-.prev{
+/*.prev{
     margin-left: -3px;
     background: red;
     width: 200px;
@@ -184,7 +184,7 @@ body{
 }
 #nptdpad{
   margin: 0px 80px;
-}
+}*/
 /*--------------------------signup.php---------------*/
 #text{
     width: 340px;
