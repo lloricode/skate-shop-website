@@ -40,13 +40,16 @@
 				if(DB::getNumRows()>0){
 					echo "<table border=1><tr>";
 					echo "<th>ID</th>";
-					echo "<th>First name</th>";
-					echo "<th>Last name</th>";
+					echo "<th colspan='2'>Full Name</th>";
+					echo "<th>UserName</th>";
+					echo "<th>Email</th>";
 					echo "<th>Gender</th></tr><tr>";
 					while ($row=$rs->fetch_object()) {
 						echo "<td>".$row->UserAccountID."</td>";
 						echo "<td>".$row->UserAccountLastName."</td>";
 						echo "<td>".$row->UserAccountFisrtName."</td>";
+						echo "<td>".$row->UserAccountUserName."</td>";
+						echo "<td>".$row->UserAccountEmail."</td>";
 						echo "<td>".$row->UserAccountGender."</td>";
 						echo "</tr><tr>";
 					}

@@ -14,7 +14,7 @@
 
 		if(filter_var($usercode, FILTER_VALIDATE_EMAIL)){//check if email is use bu user
 			$tmp="UserAccountEmail";
-			list($usercode,$r)=explode(".", $usercode);
+		//	list($usercode,$r)=explode(".", $usercode);
 		}
 		else
 			$tmp="UserAccountUserName";

@@ -59,12 +59,26 @@
 		  	$lnrr = "Only letters and white space allowed";
 		if (!preg_match("/^[a-zA-Z0-9_]*$/",$username)) 
 		  	$usernamerr = "Only letters, 0-9 and _ allowed";
+		else{
+			$sqlcmd="SELECT 1 From UserAccount WHERE UserAccountUserName='$username'";
+			DB::query($sqlcmd);
+			if(DB::getNumRows())
+				$usernamerr="Username already exist.";
+		}
 		if(!preg_match("/^(19|20)\d{2}$/", $by) && !$by=="")//For 1900-2099   //from 1000 to 2999   ^[12][0-9]{3}$
 			$byrr = "invalid year";
 		if(!preg_match("/^[0-9]*$/", $mobile))
 			$mobilerr="Invalid mobile number";
+
+		
 		if(!filter_var($email, FILTER_VALIDATE_EMAIL) and !empty($_POST['email']) )
 			$emailrr="Invalid email format";
+		else{
+			$sqlcmd="SELECT 1 From UserAccount WHERE UserAccountEmail='$email'";echo $sqlcmd."  ".DB::getNumRows();
+			DB::query($sqlcmd);
+			if(DB::getNumRows())
+				$emailrr="Email already exist.";
+		}
 
 		//check if password and secret answer is match
 		$pass2=check_data($_POST['pass2']);
@@ -160,92 +174,112 @@
 							echo $ok;
 							unset($ok);
 						}?>
-				<div style="background-color:; width:800px; float:right;">
+			
 					<BR><BR><BR><BR>
 					<? if(!isset($fn))$fn=$ln=$username=$pass=$bm=$bd=$by=$gender=$home=$mobile=$email=$shipping=$ques=$ans="";?>
 					<form action="<?=htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-						<BR><BR>
-						
-						<label id="label">FIRST NAME:  </label>
-							<input placeholder="first name"  type="text" name="fn" id="text" value="<?=$fn;?>">
-							<span id="err"><? if(isset($fnrr)) echo $fnrr;?></span><BR><BR>
-							<label id="label">LAST NAME: </label>
-							<input placeholder="last name"  type="text" name="ln" id="text" value="<?=$ln;?>">
-							<span id="err"><? if(isset($lnrr)) echo $lnrr;?></span><BR><BR>
-						<label id="label">USERNAME: </label>
-							<input placeholder="username"  type="text" name="username" id="text" value="<?=$username;?>">
-							<span id="err"><? if(isset($usernamerr)) echo $usernamerr;?></span><BR><BR>
-						<label id="label">PASSWORD: </label>
-							<input placeholder="password"  type="password" name="pass" id="text">
-							<span id="err"><? if(isset($passrr)) echo $passrr;?></span><BR><BR>
-						<label id="label">RE-TYPE PASSWORD:</label>
-							<input placeholder="re-type password" type="password" name="pass2" id="text"><BR><BR>
-						<label id="label">BIRTHDATE: </label>
-							<input type="text" name="by" placeholder="year" style="width:130px" value="<?=$by;?>">
-							<select name="bm">
-								<option <?php if(isset($_POST['bm']) && $bm=="month" ) echo "selected"; ?> >month</option>
-								<option <?php if(isset($_POST['bm']) && $bm=="January" ) echo "selected"; ?> >January</option>
-								<option <?php if(isset($_POST['bm']) && $bm=="February" ) echo "selected"; ?> >February</option>
-								<option <?php if(isset($_POST['bm']) && $bm=="March" ) echo "selected"; ?> >March</option>
-								<option <?php if(isset($_POST['bm']) && $bm=="April" ) echo "selected"; ?> >April</option>
-								<option <?php if(isset($_POST['bm']) && $bm=="May" ) echo "selected"; ?> >May</option>
-								<option <?php if(isset($_POST['bm']) && $bm=="June" ) echo "selected"; ?> >June</option>
-								<option <?php if(isset($_POST['bm']) && $bm=="July" ) echo "selected"; ?> >July</option>
-								<option <?php if(isset($_POST['bm']) && $bm=="August" ) echo "selected"; ?> >August</option>
-								<option <?php if(isset($_POST['bm']) && $bm=="September" ) echo "selected"; ?> >September</option>
-								<option <?php if(isset($_POST['bm']) && $bm=="October" ) echo "selected"; ?> >October</option>
-								<option <?php if(isset($_POST['bm']) && $bm=="November" ) echo "selected"; ?> >November</option>
-								<option <?php if(isset($_POST['bm']) && $bm=="December" ) echo "selected"; ?> >December</option>
-							</select>
-							<input type="text" name="bd" placeholder="day" style="width:110px;margin-right:35px" value="<?=$bd;?>">
-							<span id="err"><? if(isset($bdate)) echo $bdate;?></span>
-						<BR><BR>
-
-						<label id="label">GENDER: </label>
-							<input type="radio" name="gender" <?php if(isset($_POST['gender']) && $gender=="male" ) echo "checked"; ?> value="male"> male
-							<input type="radio" name="gender" <?php if(isset($_POST['gender']) && $gender=="female" ) echo "checked"; ?>  value="female">female
-							<span id="err"><? if(isset($genderrr)) echo $genderrr;?></span><BR><BR>
-
-						<label id="label">HOME ADDRESS: </label>
-							<textarea placeholder="home address" rows="3" cols="48" name="home"  id="text" ><?=$home;?></textarea>
-							<span id="err"><? if(isset($homerr)) echo $homerr;?></span><BR><BR><BR>
-						<label id="label">MOBILE NUMBER: </label>
-							<input placeholder="mobile number" type="text" name="mobile" id="text" value="<?=$mobile;?>">
-							<span id="err"><? if(isset($mobilerr)) echo $mobilerr;?></span><BR><BR>
-						<label id="label">EMAIL ADDRESS: </label>
-							<input placeholder="email address" type="text" name="email" id="text" value="<?=$email;?>">
-							<span id="err"><? if(isset($emailrr)) echo $emailrr;?></span><BR>
-						<label id="label">SHIPPING ADDRESS: </label>
-							<textarea placeholder="shipping address" rows="3" cols="48" name="shipping"  id="text" ><?=$shipping;?></textarea>
-							<span id="err"><? if(isset($shippingrr)) echo $shippingrr;?></span><BR><BR>
-						<p>---------------------------------------------------------------------------</p>
-						<label id="label">SECRET QUESTION: </label>
-							<input placeholder="secret question" type="text" name="ques" id="text" value="<?=$ques;?>">
-							<span id="err"><? if(isset($quesrr)) echo $quesrr;?></span><BR><BR>
-						<label id="label">SECRET ANSWER: </label>
-							<input placeholder="secret answer " type="password" name="ans" id="text">
-							<span id="err"><? if(isset($ansrr)) echo $ansrr;?></span><BR><BR>
-						<label id="label">RETYPE ANSWER: </label>
-							<input placeholder="re-type secret answer" type="password" name="ans2" id="text"><BR><BR>
-						
-						<!--<textarea rows="3" cols="10" id="text" name="qq">-->
-							
-						</textarea><BR><BR><BR><BR><BR><BR>
-						<table>
+						<table border="1">
 							<tr>
+								<td>FIRST NAME: </td>
+								<td><input placeholder="first name"  type="text" name="fn"  value="<?=$fn;?>"></td>
+								<td><span id="err"><? if(isset($fnrr)) echo $fnrr;?></span></td>
+							</tr>
+							<tr>
+								<td>LAST NAME:</td>
+								<td><input placeholder="last name"  type="text" name="ln" value="<?=$ln;?>"></td>
+								<td><span id="err"><? if(isset($lnrr)) echo $lnrr;?></span></td>
+							</tr>
+							<tr>
+								<td>USERNAME:</td>
+								<td><input placeholder="username"  type="text" name="username" value="<?=$username;?>"></td>
+								<td><span id="err"><? if(isset($usernamerr)) echo $usernamerr;?></span></td>
+							</tr>
+							<tr>
+								<td>PASSWORD:</td>
+								<td><input placeholder="password"  type="password" name="pass" ></td>
+								<td><span id="err"><? if(isset($passrr)) echo $passrr;?></span></td>
+							</tr>
+							<tr>
+								<td>RE-TYPE PASSWORD</td>
+								<td><input placeholder="re-type password" type="password" name="pass2"></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>BIRTHDATE:</td>
 								<td>
-									<? for($i=0;$i<50;$i++) echo "&nbsp"; ?>
+									<input type="text" name="by" placeholder="year" style="width:130px" value="<?=$by;?>">
+									<select name="bm">
+										<option <?php if(isset($_POST['bm']) && $bm=="month" ) echo "selected"; ?> >month</option>
+										<option <?php if(isset($_POST['bm']) && $bm=="January" ) echo "selected"; ?> >January</option>
+										<option <?php if(isset($_POST['bm']) && $bm=="February" ) echo "selected"; ?> >February</option>
+										<option <?php if(isset($_POST['bm']) && $bm=="March" ) echo "selected"; ?> >March</option>
+										<option <?php if(isset($_POST['bm']) && $bm=="April" ) echo "selected"; ?> >April</option>
+										<option <?php if(isset($_POST['bm']) && $bm=="May" ) echo "selected"; ?> >May</option>
+										<option <?php if(isset($_POST['bm']) && $bm=="June" ) echo "selected"; ?> >June</option>
+										<option <?php if(isset($_POST['bm']) && $bm=="July" ) echo "selected"; ?> >July</option>
+										<option <?php if(isset($_POST['bm']) && $bm=="August" ) echo "selected"; ?> >August</option>
+										<option <?php if(isset($_POST['bm']) && $bm=="September" ) echo "selected"; ?> >September</option>
+										<option <?php if(isset($_POST['bm']) && $bm=="October" ) echo "selected"; ?> >October</option>
+										<option <?php if(isset($_POST['bm']) && $bm=="November" ) echo "selected"; ?> >November</option>
+										<option <?php if(isset($_POST['bm']) && $bm=="December" ) echo "selected"; ?> >December</option>
+									</select>
+									<input type="text" name="bd" placeholder="day" style="width:110px;margin-right:35px" value="<?=$bd;?>">
 								</td>
+								<td><span id="err"><? if(isset($bdate)) echo $bdate;?></span></td>
+							</tr>
+							<tr>
+								<td>GENDER:</td>
+								<td>
+									<input type="radio" name="gender" <?php if(isset($_POST['gender']) && $gender=="male" ) echo "checked"; ?> value="male"> male
+									<input type="radio" name="gender" <?php if(isset($_POST['gender']) && $gender=="female" ) echo "checked"; ?>  value="female">female
+								</td>
+								<td><span id="err"><? if(isset($genderrr)) echo $genderrr;?></span></td>
+							</tr>
+							<tr>
+								<td>HOME ADDRESS:</td>
+								<td><textarea placeholder="home address" rows="3" cols="48" name="home"><?=$home;?></textarea></td>
+								<td><span id="err"><? if(isset($homerr)) echo $homerr;?></span></td>
+							</tr>
+							<tr>
+								<td>MOBILE NUMBER:</td>
+								<td><input placeholder="mobile number" type="text" name="mobile" value="<?=$mobile;?>"></td>
+								<td><span id="err"><? if(isset($mobilerr)) echo $mobilerr;?></span></td>
+							</tr>
+							<tr>
+								<td>EMAIL ADDRESS:</td>
+								<td><input placeholder="email address" type="text" name="email" value="<?=$email;?>"></td>
+								<td><span id="err"><? if(isset($emailrr)) echo $emailrr;?></span></td>
+							</tr>
+							<tr>
+								<td>SHIPPING ADDRESS:</td>
+								<td><textarea placeholder="shipping address" rows="3" cols="48" name="shipping"   ><?=$shipping;?></textarea></td>
+								<td><span id="err"><? if(isset($shippingrr)) echo $shippingrr;?></span></td>
+							</tr>
+							<tr>
+								<td>SECRET QUESTION:</td>
+								<td><input placeholder="secret question" type="text" name="ques" value="<?=$ques;?>"></td>
+								<td><span id="err"><? if(isset($quesrr)) echo $quesrr;?></span></td>
+							</tr>
+							<tr>
+								<td>SECRET ANSWER:</td>
+								<td><input placeholder="secret answer " type="password" name="ans" ></td>
+								<td><span id="err"><? if(isset($ansrr)) echo $ansrr;?></span></td>
+							</tr>
+							<tr>
+								<td>RETYPE ANSWER:</td>
+								<td><input placeholder="re-type secret answer" type="password" name="ans2" ></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
 								<td>
 									<a href="login.php" style="font-size:15px;">
-										<input type="button" value="   CANCEL  ">
+										<button>CANCEL</button>
 									</a>
-								</td>
-								<td>
 									<input type="submit" value="CREATE ACCOUNT">
 								</td>
 								<td>
-									<? for($i=0;$i<50;$i++) echo "&nbsp"; ?>
+									
 								</td>
 							</tr>
 						</table>
@@ -254,7 +288,6 @@
 					</form>
 
 
-				</dv>
 			</div>
 		</center>
 <?php

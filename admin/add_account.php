@@ -1,7 +1,10 @@
 <?php
+
+	include 'header.php';
+	if(!isset($_COOKIE['auth_accountID']))
+		header("Location: index.php");
 	if($_COOKIE['auth_permission']=="editor")
 		header("Location: view_accounts.php");
-	include 'header.php';
 	include '../config.php';
 
 	if(isset($_POST) and $_SERVER['REQUEST_METHOD']=="POST"){
@@ -39,6 +42,12 @@
 		  	$lnrr = "Only letters and white space allowed";
 		if (!preg_match("/^[a-zA-Z0-9_]*$/",$un)) 
 		  	$unrr = "Only letters, 0-9 and _ allowed";
+		else{
+			$sqlcmd="SELECT 1 From AdminAccount WHERE AdminAccountUserName='$un'";
+			DB::query($sqlcmd);
+			if(DB::getNumRows())
+				$unrr="User name already exist.";
+		}
 
 		//check if password and secret answer is match
 		$pass2=check_data($_POST['pass2']);
@@ -68,32 +77,32 @@
 				<form action="<?=htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 					<table>
 						<tr>
-							<td><label id="lbl">FIRST NAME: </label></td>
-							<td><input id="text" type="text" placeholder="first name" name="fn" value="<?=$fn?>"></td>
+							<td>FIRST NAME:</td>
+							<td><input type="text" placeholder="first name" name="fn" value="<?=$fn?>"></td>
 							<td><span id="err"><? if(isset($fnrr)) echo $fnrr?></span></td>
 						</tr>
 						<tr>
-							<td><label id="lbl">LAST NAME: </label></td>
-							<td><input id="text" type="text" placeholder="last name" name="ln" value="<?=$ln?>"></td>
+							<td>LAST NAME:</td>
+							<td><input  type="text" placeholder="last name" name="ln" value="<?=$ln?>"></td>
 							<td><span id="err"><? if(isset($lnrr)) echo $lnrr?></span></td>
 						</tr>
 						<tr>
-							<td><label id="lbl">USERNAME: </label></td>
-							<td><input id="text" type="text" placeholder="username" name="un" value="<?=$un?>"></td>
+							<td>USERNAME:</td>
+							<td><input type="text" placeholder="username" name="un" value="<?=$un?>"></td>
 							<td><span id="err"><? if(isset($unrr)) echo $unrr?></span></td>
 						</tr>
 						<tr>
-							<td><label id="lbl">PASSWORD: </label></td>
-							<td><input id="text" type="password" placeholder="password" name="pass"></td>
+							<td>PASSWORD:</td>
+							<td><input type="password" placeholder="password" name="pass"></td>
 							<td><span id="err"><? if(isset($passrr)) echo $passrr?></span></td>
 						</tr>
 						<tr>
-							<td><label id="lbl">RE-TYPE PASSWORD: </label></td>
-							<td><input id="text" type="password" placeholder="re-type password" name="pass2"></td>
+							<td>RE-TYPE PASSWORD:</td>
+							<td><input type="password" placeholder="re-type password" name="pass2"></td>
 							<td></td>
 						</tr>
 						<tr>
-							<td><label>PERMISSION:</label></td>
+							<td>PERMISSION</td>
 							<td>
 								<input type="radio" name="per" <?php if(isset($_POST['per']) && $per=="admin" ) echo "checked"; ?> value="admin"> admin
 								<input type="radio" name="per" <?php if(isset($_POST['per']) && $per=="editor" ) echo "checked"; ?> value="editor"> editor

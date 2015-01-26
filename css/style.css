@@ -196,10 +196,8 @@ body{
     float: left;
 }
 #err{
-    color: red;
+    color: darkred;
     font-size: 10px;
-    float: left;
-    margin-left: 610px;
 }
 /*-------------------------------about.php----------------------------*/
 

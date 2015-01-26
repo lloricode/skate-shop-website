@@ -21,7 +21,7 @@
 			<div  class="d">
 			<a href="view_accounts.php"><button>view accounts</button></a><BR>
 			<a href="view_product.php"><button>view product</button></a><BR>
-			<a href="../SKATESHOP.pdf" target=""><button>view documentation</button></a>
+			<a href="../SKATESHOP.pdf" target="blank_"><button>view documentation</button></a>
 			</div>
 			<?
 		}
