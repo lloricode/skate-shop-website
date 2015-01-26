@@ -1,12 +1,13 @@
-	<!DOCTYPE <!DOCTYPE html>
-	<html>
-	<head>
-		<title></title>
-	</head>
-	<body>
-	<?php if(isset($_COOKIE['auth_account'])){ ?>
-		<p>add product</p><a href="index.php"><button>back to main</button></a>
-		<br	/>
+
+	<?php
+	include 'header.php';
+	?>
+		<div  class="d">
+<a href="index.php"><button>back to main</button></a>
+	<?
+	 if(isset($_COOKIE['auth_accountID'])){ ?>
+	<?	if($_COOKIE['auth_permission']=="admin"){ 		?>
+		<p>add product</p>
 		<form method="POST" action="addproduct.php" enctype="multipart/form-data">
 			<table>
 				<tr>
@@ -85,7 +86,8 @@
 				</tr>
 			</table>
 		</form>
-
+<?	}		?>
+		</div>
 		<br /> <br />
 		<hr />
 		<style type="text/css">

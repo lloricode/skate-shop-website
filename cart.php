@@ -33,7 +33,7 @@
 			$srch=(isset($_GET['search']))?"search=".$_GET['search']."&":""; ?>
 				<a href="store.php?<?=$q?><?=$srch?><?=$c?>page=<?=$p?>">
 					<div style="float:bottom; background-color:green; width:150px; height:50px;">
-						<p>BACK</p>
+						<p>BACK TO SHOP</p>
 					</div>
 				</a>
 			</div>

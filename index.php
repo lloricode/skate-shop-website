@@ -7,6 +7,7 @@ include 'menu.php';
 		
 		<center>
 			<div class="main_body" style="margin-top:1px;">
+				<div style="width:350px; padding-top:20px; ">
 			<!--            ##################################################-->
 				
 
@@ -32,9 +33,8 @@ include 'menu.php';
 							}
 						?>
 					</div>
-				 	
-				
-				  <!--             #############################################-->
+					<!--             #############################################-->
+				</div>
 			</div>
 		</center>
 

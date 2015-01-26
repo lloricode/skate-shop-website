@@ -1,0 +1,21 @@
+body{
+	background-color: gray;
+}
+.d{
+	background-color:; 
+	margin: 20px 20px;
+}
+
+/*---------------------- add account------------------------*/
+.ad{
+	width:600px;
+	background-color: ;
+}
+#text{
+    margin-right: 100px;
+}
+#err{
+	float: left;
+	font-size: 10px;
+	color: darkred;
+}
