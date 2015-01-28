@@ -55,7 +55,7 @@ $path = "../img/product/";
 									'". $_POST['pstock'] . "',
 									'". $_POST['pgender'] . "',
 									'". $imgfile . "',
-									'". $_COOKIE['auth_account'] . "'
+									'". $_COOKIE['auth_accountID'] . "'
 									)";
 								echo $query;
                                 DB::query($query);

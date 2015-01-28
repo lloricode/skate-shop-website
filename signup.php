@@ -52,7 +52,11 @@
 		$ques=check_data($ques);
 		$ans=check_data($ans);
 
+		$valid = array("male","female");
 		//validation
+		if(!in_array($gender, $valid) and $gender!==" ") //if user modify from inspect in browser
+			$genderrr="this is for human.";
+
 		if (!preg_match("/^[a-zA-Z ]*$/",$fn)) 
 		  	$fnrr = "Only letters and white space allowed";
 		if (!preg_match("/^[a-zA-Z ]*$/",$ln)) 
@@ -178,7 +182,7 @@
 					<BR><BR><BR><BR>
 					<? if(!isset($fn))$fn=$ln=$username=$pass=$bm=$bd=$by=$gender=$home=$mobile=$email=$shipping=$ques=$ans="";?>
 					<form action="<?=htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-						<table border="1">
+						<table>
 							<tr>
 								<td>FIRST NAME: </td>
 								<td><input placeholder="first name"  type="text" name="fn"  value="<?=$fn;?>"></td>

@@ -103,7 +103,7 @@
 				 	$page=(isset($_GET['page']))?$_GET['page']:1; 
 				 	$srch=(isset($_GET['search']))?"search=".$_GET['search']."&":""; 
 					if($ready){
-						$query.=" ORDER BY ProductID LIMIT $prev, $nxt";
+						$query.=" ORDER BY ProductID LIMIT $prev,9";
 						echo "$query<BR>";
 						$result =DB::query($query);
 						
@@ -155,7 +155,7 @@
 					} ?>
 				</div>
 				<div style="background-color:; height:30px; margin-top:50px;">
-					<a href="cart.php">
+					<a href="cart.php?<?=$q;?><?=$cat?><?=$srch?>&page=<?=$page?>">
 						<div style="float:bottom; background-color:green; width:150px; height:50px;">
 							<p>VIEW CART</p>
 						</div>

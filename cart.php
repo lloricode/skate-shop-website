@@ -1,15 +1,18 @@
 <?php
+	if(!isset($_COOKIE['authID'])) header("Location: login.php");
 	include 'main_style.php';
 	include 'header.php';
 	include 'menu.php';
 	include("config.php");
-	$sqlcmd="SELECT * FROM Product WHERE ProductID='".$_GET['file'] ."'";
-	$rs=DB::query($sqlcmd);
 ?>
 	<center>
 		<div class="main_body">
-			<div style="background-color:; height:1010px;">
-		<?		if($row=$rs->fetch_object()){
+			<div style="background-color:; height:1000px;">
+		<?		
+			if(isset($_GET['file'])){
+				$sqlcmd="SELECT * FROM Product WHERE ProductID='".$_GET['file'] ."'";
+				$rs=DB::query($sqlcmd);
+				if($row=$rs->fetch_object()){
 
 					?>
 					<div style="float:left; margin-left:50px; margin-top:50px; ">
@@ -22,15 +25,19 @@
 						<p>Gender: <b><?=$row->ProductGender?></b></p>
 					</div>
 		<?		}
-				else{
-					header("Location: store.php?query=all");
-				}
+			}else{  ?>
+				<BR><BR><BR>
+				<p>my cart</p>
+
+	<?		}
 
 					?>
 			</div>
 			<div style="background-color:; height:30px; margin-top:50px;">
-			<?$q=(isset($_GET['query']))?"query=".$_GET['query']."&":"";$c=(isset($_GET['cat']))?"cat=".$_GET['cat']."&":"";$p=$_GET['page'];
-			$srch=(isset($_GET['search']))?"search=".$_GET['search']."&":""; ?>
+			<?	$q=(isset($_GET['query']))?"query=".$_GET['query']."&":"";
+				$c=(isset($_GET['cat']))?"cat=".$_GET['cat']."&":"";
+				$p=$_GET['page'];
+				$srch=(isset($_GET['search']))?"search=".$_GET['search']."&":""; ?>
 				<a href="store.php?<?=$q?><?=$srch?><?=$c?>page=<?=$p?>">
 					<div style="float:bottom; background-color:green; width:150px; height:50px;">
 						<p>BACK TO SHOP</p>
