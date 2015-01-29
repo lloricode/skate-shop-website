@@ -155,7 +155,7 @@
 					} ?>
 				</div>
 				<div style="background-color:; height:30px; margin-top:50px;">
-					<a href="cart.php?<?=$q;?><?=$cat?><?=$srch?>&page=<?=$page?>">
+					<a href="cart.php?<?=$q;?><?=$cat?><?=$srch?>page=<?=$page?>">
 						<div style="float:bottom; background-color:green; width:150px; height:50px;">
 							<p>VIEW CART</p>
 						</div>

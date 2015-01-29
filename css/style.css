@@ -243,3 +243,8 @@ body{
     background-color: green;
     margin-top: 91px;
 }
+/*-------------------add_cart---------------------*/
+.err{
+    font-size: 10px;
+    color: darkred;
+}
