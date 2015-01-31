@@ -78,7 +78,7 @@
 		if(!filter_var($email, FILTER_VALIDATE_EMAIL) and !empty($_POST['email']) )
 			$emailrr="Invalid email format";
 		else{
-			$sqlcmd="SELECT 1 From UserAccount WHERE UserAccountEmail='$email'";echo $sqlcmd."  ".DB::getNumRows();
+			$sqlcmd="SELECT 1 From UserAccount WHERE UserAccountEmail='$email'";//echo $sqlcmd."  ".DB::getNumRows();
 			DB::query($sqlcmd);
 			if(DB::getNumRows())
 				$emailrr="Email already exist.";
@@ -275,11 +275,11 @@
 								<td></td>
 							</tr>
 							<tr>
-								<td></td>
 								<td>
 									<a href="login.php" style="font-size:15px;">
 										<button>CANCEL</button>
-									</a>
+									</a></td>
+								<td>
 									<input type="submit" value="CREATE ACCOUNT">
 								</td>
 								<td>

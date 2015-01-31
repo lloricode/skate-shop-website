@@ -4,8 +4,8 @@
 	include 'menu.php';
 ?>
 			<!--              -->
-	<div id="fb-root"></div>
-	<!--	<script>(function(d, s, id) {
+	<!-- <div id="fb-root"></div>
+		<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
 		  if (d.getElementById(id)) return;
 		  js = d.createElement(s); js.id = id;
@@ -45,7 +45,7 @@
 		</div>
 						<div class="anamer">
 							<p style="font-size:25px">MEGAN HAYRANA <b>TORLAO</b></p>
-						</div
+						</div>
 					</div>
 				</div>
 				<div > 

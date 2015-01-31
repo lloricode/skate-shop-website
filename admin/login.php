@@ -15,7 +15,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 		setcookie('auth_accountID', $row->AdminAccountID, time() + 3600 , "/"); // 86400 = 1 day
 		setcookie('auth_name', $row->AdminAccountName, time() + 3600 , "/"); // 86400 = 1 day
 		setcookie('auth_lname', $row->AdminAccountLastName, time() + 3600 , "/"); // 86400 = 1 day
-		setcookie('auth_permission', $row->permission, time() + 3600 , "/"); // 86400 = 1 day
+		setcookie('auth_permission', $row->AdminPermission, time() + 3600 , "/"); // 86400 = 1 day
 		header("Location: index.php");
 	}
 	else

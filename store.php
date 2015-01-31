@@ -86,25 +86,27 @@
 					if(isset($_GET['search']))
 						$dir="product name searched";
 
-					echo $dir;
+					echo $dir."<BR>";
 					if(isset($_COOKIE['sqle_error']))
 						echo $_COOKIE['sqle_error'];
 					
 					include 'store_query.php';
-					$result =DB::query($query);
-					$total_result=DB::getNumRows();
-					echo "result: $total_result<BR>";
+					
 					
 					$prev=(isset($_GET['page']))?$_GET['page']:0;
 					$nxt=($prev==0)?9:$prev*9;
 					$prev=$nxt-9;
+
+					$result =DB::query($query);
+					$total_result=DB::getNumRows();
+					if($total_result>0) echo ($prev+1)."-".(($total_result<$nxt)?$total_result:$nxt)." of ";echo "$total_result result.<BR>";
 					
 					$cat=(isset($_GET['cat']))?"cat=".$_GET['cat']."&":"";   $q=(isset($_GET['query']))?"query=".$_GET['query']."&":""; 
 				 	$page=(isset($_GET['page']))?$_GET['page']:1; 
 				 	$srch=(isset($_GET['search']))?"search=".$_GET['search']."&":""; 
 					if($ready){
 						$query.=" ORDER BY ProductID LIMIT $prev,9";
-						echo "$query<BR>";
+						//echo "$query<BR>";
 						$result =DB::query($query);
 						
 						if($brand){
@@ -163,28 +165,28 @@
 				</div>
 				<div style="background-color:; height:30px; margin-top:5px;">
 		<?php 		if(0==$prev) {?>
-						<div style="float:left; background-color:orange; width:120px; height:45px">
-							<p>PREV</p>
-						</div>
+					<!--	<div style="float:left; background-color:orange; width:120px; height:45px">
+							<p>PREV PAGE</p>
+						</div> -->
 		<?php 		}
 					else{		?>
-						<a href="store.php?<?=$q.$cat."&page=".($page-1);?>">
+						<a href="store.php?<?=$q.$cat."page=".($page-1);?>">
 							<div style="float:left; background-color:orange; width:120px; height:45px">
-								<p>PREV</p>
+								<p>PREV PAGE</p>
 							</div>
 						</a>
 			<?php 	}	
 						
 
 			 		if($total_result<=$nxt) {?>
-						<div style="float:right; background-color:orange; width:120px; height:45px">
-							<p>NEXT</p>
-						</div>
+				<!--		<div style="float:right; background-color:orange; width:120px; height:45px">
+							<p>NEXT PAGE</p>
+						</div>-->
 		<?php 		}
 					else{		?>
-						<a href="store.php?<?=$q.$cat."&page=".($page+1);?>">
+						<a href="store.php?<?=$q.$cat."page=".($page+1);?>">
 							<div style="float:right; background-color:orange; width:120px; height:45px">
-								<p>NEXT</p>
+								<p>NEXT PAGE</p>
 							</div>
 						</a>
 			<?php 	}	
