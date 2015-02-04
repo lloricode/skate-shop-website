@@ -132,7 +132,7 @@
 														<span>ZOOM IMAGE</span>
 													</div>
 												</a>
-												<a href="cart.php?<?=$q;?><?=$cat?><?=$srch?>file=<?= $row->ProductID?>&page=<?=$page?>">
+												<a href="cart.php?<?=$q;?><?=$cat?><?=$srch?>file=<?=$row->ProductID?>&page=<?=$page?>">
 													<div class="cart tddiv">
 														<span>ADD TO CART</span>
 													</div>
