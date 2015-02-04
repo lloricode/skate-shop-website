@@ -41,7 +41,7 @@
 						echo "<td>".$row->AdminAccountName."</td>";
 						echo "<td>".$row->AdminAccountLastName."</td>";
 						echo "<td>".$row->AdminAccountUserName."</td>";
-						echo "<td>".$row->AdminPermission."</td>";
+						echo "<td>".$row->AdminAccountPermission."</td>";
 						echo "</tr><tr>";
 					}
 					echo "</tr></table>";

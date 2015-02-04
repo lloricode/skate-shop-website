@@ -54,7 +54,7 @@
 
 		$valid = array("male","female");
 		//validation
-		if(!in_array($gender, $valid) and $gender!==" ") //if user modify from inspect in browser
+		if(!in_array($gender, $valid) and $gender!=="") //if user modify from inspect in browser
 			$genderrr="this is for human.";
 
 		if (!preg_match("/^[a-zA-Z ]*$/",$fn)) 
@@ -164,11 +164,11 @@
 			</center>
 		</div>
 		<center>
-			<div style="width: 900px; height: 45px; background-color: orange;">
+			<div style="width: 900px; height: 45px; background-color: #990033;">
 			    <table>
 	                <tr style="font-size:30px;">
 	                    <td id="tdpad3" style="float:left;">
-	                    	SIGN UP FORM<? for($i=0;$i<50;$i++) echo "&nbsp"; ?>
+	                    	SIGN UP FORM<? for($i=0;$i<50;$i++) echo "&nbsp;"; ?>
 	                    </td>
 	                </tr>
 	            </table>
@@ -276,9 +276,7 @@
 							</tr>
 							<tr>
 								<td>
-									<a href="login.php" style="font-size:15px;">
-										<button>CANCEL</button>
-									</a></td>
+								</td>
 								<td>
 									<input type="submit" value="CREATE ACCOUNT">
 								</td>
@@ -287,11 +285,13 @@
 								</td>
 							</tr>
 						</table>
+						</form>
+									<a href="login.php" style="font-size:15px;">
+										<button>CANCEL</button>
+									</a>
 						<p>Learn how to validate form in</p>
-						<a href="http://www.w3schools.com/php/php_form_complete.asp" target="blank_">http://www.w3schools.com/php/php_form_complete.asp</a>
-					</form>
-
-
+						<a class="w3" href="http://www.w3schools.com/php/php_form_complete.asp" target="blank_">http://www.w3schools.com/php/php_form_complete.asp</a>
+					
 			</div>
 		</center>
 <?php

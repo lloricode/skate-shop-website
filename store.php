@@ -158,7 +158,7 @@
 				</div>
 				<div style="background-color:; height:30px; margin-top:50px;">
 					<a href="cart.php?<?=$q;?><?=$cat?><?=$srch?>page=<?=$page?>">
-						<div style="float:bottom; background-color:green; width:150px; height:50px;">
+						<div style="float:bottom; background-color:#990033; width:150px; height:50px;">
 							<p>VIEW CART</p>
 						</div>
 					</a>
@@ -171,7 +171,7 @@
 		<?php 		}
 					else{		?>
 						<a href="store.php?<?=$q.$cat."page=".($page-1);?>">
-							<div style="float:left; background-color:orange; width:120px; height:45px">
+							<div style="float:left; background-color:#D14719; width:120px; height:45px">
 								<p>PREV PAGE</p>
 							</div>
 						</a>
@@ -185,7 +185,7 @@
 		<?php 		}
 					else{		?>
 						<a href="store.php?<?=$q.$cat."page=".($page+1);?>">
-							<div style="float:right; background-color:orange; width:120px; height:45px">
+							<div style="float:right; background-color:#D14719; width:120px; height:45px">
 								<p>NEXT PAGE</p>
 							</div>
 						</a>

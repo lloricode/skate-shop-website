@@ -19,7 +19,7 @@
 						</form>";
 					}
 					else
-						echo "please log in first.."; 
+						header("Location: index.php") 
 				?>
 			</div>
 		</center>

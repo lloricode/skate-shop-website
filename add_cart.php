@@ -16,7 +16,6 @@
 		require_once('config.php');
 		$sq=$mq=$lq=$size="";
 		$ok1=$ok2=$ok3=$error=0;
-		$valid = array("small","medium","large" );
 
 		$sq=check($_POST['small_quant']);
 		$mq=check($_POST['medium_quant']);
@@ -24,38 +23,86 @@
 		
 
 		//if(!empty($_POST['quant'])) $quant=$_POST['quant']; else{ setcookie("qrr","quantity required",time()+20,"/"); $error++;}
-		if(empty($_POST['size_small']) and empty($_POST['size_medium']) and empty($_POST['size_large'])){ setcookie("sizerr","size required",time()+20,"/"); $error++;}
-		//validation
-		else if(in_array($size, $valid) and ( !empty($_POST['size_small']) or !empty($_POST['size_medium']) or !empty($_POST['size_large'])) ) { //------
-			setcookie("sizerr","this is for human.",time()+20,"/"); $error++;}													//-----------
-		else {
+		if(empty($_POST['size_small']) and empty($_POST['size_medium']) and empty($_POST['size_large'])){ 
+			setcookie("sizerr","quantity required",time()+20,"/"); 
+			$error++;
+		}
+		
+		//check if injected
+		if(isset($_POST['size_small'])){ //------
+			if($_POST['size_small']!="small"){
+				setcookie("sizerr","this is for human.",time()+20,"/"); 
+				$error++;											//-----------
+			}
+		}
+		if(isset($_POST['size_medium'])){ //------
+			if($_POST['size_medium']!="medium"){
+				setcookie("sizerr","this is for human.",time()+20,"/"); 
+				$error++;											//-----------
+			}
+		}
+		if(isset($_POST['size_large'])){ //------
+			if($_POST['size_large']!="large"){
+				setcookie("sizerr","this is for human.",time()+20,"/"); 
+				$error++;											//-----------
+			}
+		}
+
+		if($error==0) {
 			if(isset($_POST['size_small'])){
 				if(preg_match("/^[0-9]*$/",$sq)){
-					$sqlcmd1="INSERT INTO Cart(UserAccountID,ProductID,CartQuantity,CartItemSize,CartPurchased) VALUES('".$_COOKIE['authID']."','".$_COOKIE['prodID']."','$sq','small','0')";
+					$check_query="SELECT CartID,CartQuantity FROM Cart WHERE UserAccountID='".$_COOKIE['authID']."' AND ProductID='".$_COOKIE['prodID']."' AND CartItemSize='small'";
+					$rs=DB::query($check_query);
+					if(DB::getNumRows()>0){
+						$row = $rs->fetch_object();
+						$cartid=$row->CartID;
+						$val=$row->CartQuantity;
+						$sqlcmd1="UPDATE Cart SET CartQuantity=".($val+$sq)." WHERE CartID=$cartid";
+					}
+					else
+						$sqlcmd1="INSERT INTO Cart(UserAccountID,ProductID,CartQuantity,CartItemSize,CartPurchased) VALUES('".$_COOKIE['authID']."','".$_COOKIE['prodID']."','$sq','small','0')";
 					$ok1=1;
 				}
 				else{
-					setcookie("qrr","quantity required",time()+20,"/");
+					setcookie("qrr","ivl quantity required",time()+20,"/");
 					$error++;
 				}
 			}
 			if(isset($_POST['size_medium'])){
 				if(preg_match("/^[0-9]*$/",$mq)){
-					$sqlcmd2="INSERT INTO Cart(UserAccountID,ProductID,CartQuantity,CartItemSize,CartPurchased) VALUES('".$_COOKIE['authID']."','".$_COOKIE['prodID']."','$mq','medium','0')";
+					$check_query="SELECT CartID,CartQuantity FROM Cart WHERE UserAccountID='".$_COOKIE['authID']."' AND ProductID='".$_COOKIE['prodID']."' AND CartItemSize='medium'";
+					$rs=DB::query($check_query);
+					if(DB::getNumRows()>0){
+						$row = $rs->fetch_object();
+						$cartid=$row->CartID;
+						$val=$row->CartQuantity;
+						$sqlcmd2="UPDATE Cart SET CartQuantity=".($val+$mq)." WHERE CartID=$cartid";
+					}
+					else
+						$sqlcmd2="INSERT INTO Cart(UserAccountID,ProductID,CartQuantity,CartItemSize,CartPurchased) VALUES('".$_COOKIE['authID']."','".$_COOKIE['prodID']."','$mq','medium','0')";
 					$ok2=1;
 				}
 				else{
-					setcookie("qrr","quantity required",time()+20,"/");
+					setcookie("qrr","ivl quantity required",time()+20,"/");
 					$error++;
 				}
 			}
 			if(isset($_POST['size_large'])){
 				if(preg_match("/^[0-9]*$/",$lq)){
-					$sqlcmd3="INSERT INTO Cart(UserAccountID,ProductID,CartQuantity,CartItemSize,CartPurchased) VALUES('".$_COOKIE['authID']."','".$_COOKIE['prodID']."','$lq','large','0')";
+					$check_query="SELECT CartID,CartQuantity FROM Cart WHERE UserAccountID='".$_COOKIE['authID']."' AND ProductID='".$_COOKIE['prodID']."' AND CartItemSize='large'";
+					$rs=DB::query($check_query);
+					if(DB::getNumRows()>0){
+						$row = $rs->fetch_object();
+						$cartid=$row->CartID;
+						$val=$row->CartQuantity;
+						$sqlcmd3="UPDATE Cart SET CartQuantity=".($val+$lq)." WHERE CartID=$cartid";
+					}
+					else
+						$sqlcmd3="INSERT INTO Cart(UserAccountID,ProductID,CartQuantity,CartItemSize,CartPurchased) VALUES('".$_COOKIE['authID']."','".$_COOKIE['prodID']."','$lq','large','0')";
 					$ok3=1;
 				}
 				else{
-					setcookie("qrr","quantity required",time()+20,"/");
+					setcookie("qrr","ivl quantity required",time()+20,"/");
 					$error++;
 				}
 			}

@@ -18,7 +18,7 @@
 		                    	</a>
 		                    </td>
 		                    <td id="tdpad">
-		                    	<a href="contact.php">
+		                    	<a href="contact.php" >
 		                    		<div id="menuH">
 		                    			CONTACT
 		                    		</div>

@@ -30,7 +30,7 @@
 				</tr>
 				<tr>
 					<td>SALE</td>
-					<td><?	$t=$row->Sale;?>
+					<td><?	$t=$row->ProductSale;?>
 						<select name="psale">
 							<option <?php if($t=="1") echo "selected";?>>yes</option>
 							<option <?php if($t=="0") echo "selected";?>>no</option>
@@ -43,7 +43,7 @@
 				</tr>
 				<tr>
 					<td>Brand Name</td>
-					<td><input type="text" placeholder="Brand Name" name="pbrand" value="<?= $row->Brand; ?>" /></td>
+					<td><input type="text" placeholder="Brand Name" name="pbrand" value="<?= $row->ProductBrand; ?>" /></td>
 				</tr>
 				<tr>
 					<td>Product Price</td>
@@ -80,9 +80,9 @@
 					<td>Product For</td>
 					<td><?	$t=$row->ProductGender;?>
 						<select name="pgender">
-							<option <?php if($t=="Male") echo "selected";?>>Male</option>
-							<option <?php if($t=="Female") echo "selected";?>>Female</option>
-							<option <?php if($t=="Both") echo "selected";?>>Both</option>
+							<option <?php if($t=="male") echo "selected";?>>male</option>
+							<option <?php if($t=="female") echo "selected";?>>female</option>
+							<option <?php if($t=="both") echo "selected";?>>both</option>
 						</select>
 					</td>
 				</tr>

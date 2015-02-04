@@ -6,7 +6,7 @@ include 'menu.php';
 ?>
 		
 		<center>
-			<div class="main_body" style="margin-top:1px;">
+			<div class="main_body">
 				<div style="width:350px; padding-top:20px; ">
 			<!--            ##################################################-->
 				

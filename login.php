@@ -49,12 +49,12 @@
 							<tr>
 								<td >
 									<a href="signup.php">
-										<input type="button" name="signup" value="SIGN UP" style="background-color:orange">
+										<input type="button" name="signup" value="SIGN UP" style="background-color:#FF6600">
 									</a>
 								</td>
 								<td><? for($i=0;$i<50;$i++) echo "&nbsp"; ?></td>
 								<td>
-									<input type="submit" name="login" value="LOG IN" style="background-color:red">
+									<input type="submit" name="login" value="LOG IN" style="background-color:#990033">
 								</td>
 							</tr>
 						</table>

@@ -15,8 +15,8 @@
 						<div id="log" >
 							<?php 
 								if(isset($_COOKIE['authFn'])){
-									echo "<p>Welcome, ".$_COOKIE['authFn']."!&nbsp;&nbsp;&nbsp;<img src='./img/UserImage/".$_COOKIE['authImg']."' alt='' height='28' >&nbsp;&nbsp;&nbsp;&nbsp; 
-									 <a href='setting.php'>SETTING</a>&nbsp;&nbsp; <a href='logout.php' style='color:brown'>LOG OUT</a>&nbsp;</p>";
+									echo "<p>Welcome, <a href='profile.php' >".$_COOKIE['authFn']."!&nbsp;&nbsp;&nbsp;<img src='./img/UserImage/".$_COOKIE['authImg']."' alt='' height='28' ></a>&nbsp;&nbsp;&nbsp;&nbsp; 
+									 <a href='setting.php'>SETTING</a>&nbsp;&nbsp; <a href='logout.php' style='color:#CC3300'>LOG OUT</a>&nbsp;</p>";
 								}
 								else
 									echo "<p><a href='login.php'>LOG IN</a>&nbsp;&nbsp;</p>";

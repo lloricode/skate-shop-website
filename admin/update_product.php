@@ -56,9 +56,9 @@ $path = "../img/product/";
 				if($err==0){
 					$sale=($_POST['psale']=="yes")?1:0;
 					$query = "UPDATE Product SET
-										Sale=$sale,
+										ProductSale=$sale,
 										ProductName='". $_POST['pname'] . "',
-										Brand='". $_POST['pbrand'] . "',
+										ProductBrand='". $_POST['pbrand'] . "',
 										ProductPrice=". $_POST['pprice'] . ",
 										ProductType='". $_POST['ptype'] . "',
 										ProductStatus='". $_POST['pstatus'] . "',

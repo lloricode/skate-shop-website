@@ -26,7 +26,11 @@ $path = "img/UserImage/";
 							$imgfile = md5($txt . time()) . "." . $ext;
                             //$imgfile = $txt . "." . $ext;
 							$tmp = $_FILES['imgfile']['tmp_name'];
-							if(move_uploaded_file($tmp, $path.$imgfile)) {	
+							if(move_uploaded_file($tmp, $path.$imgfile)) {
+								if($_COOKIE['authImg']=="male.png" or $_COOKIE['authImg']=="female.png")
+									;
+								else
+									unlink($path.$_COOKIE['authImg']);	
 								$query = "UPDATE UserAccount 
 								SET UserAccountImage='".$imgfile."' 
 								WHERE UserAccountID='".$_COOKIE['authID']."'";
