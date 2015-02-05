@@ -52,13 +52,13 @@
 			if(isset($_POST['size_small'])){
 				if(preg_match("/^[0-9]*$/",$sq)){
 					if($sq!=""){
-						$check_query="SELECT CartID,CartQuantity FROM Cart WHERE UserAccountID='".$_COOKIE['authID']."' AND ProductID='".$_COOKIE['prodID']."' AND CartItemSize='small'";
+						$check_query="SELECT CartID,CartQuantity FROM Cart WHERE CartPurchased=0 AND UserAccountID='".$_COOKIE['authID']."' AND ProductID='".$_COOKIE['prodID']."' AND CartItemSize='small'";
 						$rs=DB::query($check_query);
 						if(DB::getNumRows()>0){
 							$row = $rs->fetch_object();
 							$cartid=$row->CartID;
 							$val=$row->CartQuantity;
-							$sqlcmd1="UPDATE Cart SET CartQuantity=".($val+$sq)." WHERE CartID=$cartid";
+							$sqlcmd1="UPDATE Cart SET CartQuantity=".($val+$sq)." WHERE CartPurchased=0 AND CartID=$cartid";
 						}
 						else
 							$sqlcmd1="INSERT INTO Cart(UserAccountID,ProductID,CartQuantity,CartItemSize,CartPurchased) VALUES('".$_COOKIE['authID']."','".$_COOKIE['prodID']."','$sq','small','0')";
@@ -77,13 +77,13 @@
 			if(isset($_POST['size_medium'])){
 				if(preg_match("/^[0-9]*$/",$mq)){
 					if($mq!=""){
-						$check_query="SELECT CartID,CartQuantity FROM Cart WHERE UserAccountID='".$_COOKIE['authID']."' AND ProductID='".$_COOKIE['prodID']."' AND CartItemSize='medium'";
+						$check_query="SELECT CartID,CartQuantity FROM Cart WHERE CartPurchased=0 AND UserAccountID='".$_COOKIE['authID']."' AND ProductID='".$_COOKIE['prodID']."' AND CartItemSize='medium'";
 						$rs=DB::query($check_query);
 						if(DB::getNumRows()>0){
 							$row = $rs->fetch_object();
 							$cartid=$row->CartID;
 							$val=$row->CartQuantity;
-							$sqlcmd2="UPDATE Cart SET CartQuantity=".($val+$mq)." WHERE CartID=$cartid";
+							$sqlcmd2="UPDATE Cart SET CartQuantity=".($val+$mq)." WHERE CartPurchased=0 AND CartID=$cartid";
 						}
 						else
 							$sqlcmd2="INSERT INTO Cart(UserAccountID,ProductID,CartQuantity,CartItemSize,CartPurchased) VALUES('".$_COOKIE['authID']."','".$_COOKIE['prodID']."','$mq','medium','0')";
@@ -102,13 +102,13 @@
 			if(isset($_POST['size_large'])){
 				if(preg_match("/^[0-9]*$/",$lq)){
 					if($lq!=""){
-						$check_query="SELECT CartID,CartQuantity FROM Cart WHERE UserAccountID='".$_COOKIE['authID']."' AND ProductID='".$_COOKIE['prodID']."' AND CartItemSize='large'";
+						$check_query="SELECT CartID,CartQuantity FROM Cart WHERE CartPurchased=0 AND UserAccountID='".$_COOKIE['authID']."' AND ProductID='".$_COOKIE['prodID']."' AND CartItemSize='large'";
 						$rs=DB::query($check_query);
 						if(DB::getNumRows()>0){
 							$row = $rs->fetch_object();
 							$cartid=$row->CartID;
 							$val=$row->CartQuantity;
-							$sqlcmd3="UPDATE Cart SET CartQuantity=".($val+$lq)." WHERE CartID=$cartid";
+							$sqlcmd3="UPDATE Cart SET CartQuantity=".($val+$lq)." WHERE CartPurchased=0 AND CartID=$cartid";
 						}
 						else
 							$sqlcmd3="INSERT INTO Cart(UserAccountID,ProductID,CartQuantity,CartItemSize,CartPurchased) VALUES('".$_COOKIE['authID']."','".$_COOKIE['prodID']."','$lq','large','0')";

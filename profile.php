@@ -1,4 +1,5 @@
 <?php
+	$docfile="profile";
 	if(!isset($_COOKIE['authID']))
 		header("Location: index.php");
 	include 'main_style.php';

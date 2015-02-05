@@ -14,15 +14,19 @@ body            {background-image: url("../img/background website.jpg");	backgro
 #input          {margin-top:35px;margin-right: 20px;}
 #m              {background-color: white;font-size:98px;}
 #active         {position: absolute;height: 90px;background-color:orange;margin-top:-2px;clear:both;}
-#menuH:hover    {position: absolute;height: 90px;background-color: #D14719;margin-top:-2px;clear:both;}
-#menuH          {position: absolute;margin-top: 25px;}
+/*#menuH:hover    {position: absolute;height: 90px;background-color: #D14719;margin-top:-2px;clear:both;}
+#menuH          {position: absolute;margin-top: 25px;}*/
 #n              {background-color: black;}
-#t1             {margin-left: 10px;float:left;background-attachment:fixed;}
+/*#t1             {margin-left: 10px;float:left;background-attachment:fixed;}*/
 #t2             {}
 #box            {height: 300px;	width: 250px;}
-#tdpad          {padding: 0px 100px;}
+/*#tdpad          {padding: 0px 100px;}*/
 #tdpad2         {padding: 10px 45px;}
 #tdpad3         {padding: 5px 39px;}
+/*----------------------menu css------------------------------------------*/
+.active_menu    {background-color:#D14719;padding-top: 110px;}
+#mainmenu:hover       	{background-color: #D14719;}
+#navlist #mainmenu     {font-size: 43px; display: inline;list-style-type: none;padding: 20px 25px;}
 /*----------------------table css------------------------------------------*/
 #table_         {border: 4;}
 .mainTable      {}
@@ -61,3 +65,5 @@ body            {background-image: url("../img/background website.jpg");	backgro
 /*------------------------contact.php=----------*/
 .social         {padding: 10px 10px;}
 .media          {height:30px; margin-top:-10px;   }
+/*------------------------log in----------*/
+.login:hover    {font-color: red;}

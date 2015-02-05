@@ -1,6 +1,7 @@
 <?php
+	$docfile="index";
 include 'main_style.php';
-include 'bootstrap_style.php';
+//include 'bootstrap_style.php';
 include 'header.php';
 include 'menu.php';
 ?>
@@ -8,12 +9,13 @@ include 'menu.php';
 		<center>
 			<div class="main_body">
 				<div style="width:350px; padding-top:20px; ">
-			<!--            ##################################################-->
+			<!--            ################################################ 
 				
 
 					<div id="myCarousel" class="carousel slide" data-ride="carousel">
 				 
 						<?php
+						/*
 							include("config.php");
 							$sqlcmd="SELECT * FROM Product ";
 							$rs=DB::query($sqlcmd);
@@ -30,10 +32,10 @@ include 'menu.php';
 									echo "<img src='img/product/".$row->ProductAttactment."' alt='image not found'></div>";
 								}
 								echo "</div>";
-							}
+							}*/
 						?>
-					</div>
-					<!--             #############################################-->
+				 	</div>
+			#############################################-->
 				</div>
 			</div>
 		</center>

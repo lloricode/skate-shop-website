@@ -7,11 +7,37 @@
 	include("config.php");
 
 	if(isset($_GET['del']) and $_SERVER["REQUEST_METHOD"]=="GET"){
-			
-			$id=trim(stripcslashes(htmlspecialchars($_GET['del'])));
-			$sqlcmd="DELETE FROM Cart Where CartID=$id";
+		$id=trim(stripcslashes(htmlspecialchars($_GET['del'])));
+		$sqlcmd="DELETE FROM Cart Where CartID=$id";
+		DB::query($sqlcmd);
+	}
+	if(isset($_GET['purchase']) and $_SERVER["REQUEST_METHOD"]=="GET"){
+		if($_GET['purchase']=="yes"){
+			$sql="SELECT SUM(p.ProductPrice*c.CartQuantity) AS total_ FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE c.CartPurchased=0 AND UserAccountID=".$_COOKIE['authID'];  
+			$rs=DB::query($sql);
+			$row = $rs->fetch_object();
+			$amount=$row->total_;
+			$sql="SELECT SUM(CartQuantity) AS total_Q FROM Cart WHERE CartPurchased=0 AND UserAccountID=".$_COOKIE['authID'];  
+			$rs=DB::query($sql);
+			$row = $rs->fetch_object();
+			$quant=$row->total_Q;
+			$sqlcmd="INSERT INTO Purchased(PurchasedAmount,PurchasedQuantity,UserAccountID,PurchasedDelivered) VALUES($amount,$quant,".$_COOKIE['authID'].",0)";
 			DB::query($sqlcmd);
-			
+			$sql="SELECT PurchasedId FROM Purchased ORDER BY PurchasedId DESC LIMIT 0,1";
+			$rs=DB::query($sql);
+			$row = $rs->fetch_object();
+			$pid=$row->PurchasedId;
+			//-------
+			$sql="SELECT ProductId,CartQuantity FROM Cart WHERE CartPurchased=0 AND UserAccountID=".$_COOKIE['authID']; 
+			$rs=DB::query($sql);
+			while($row = $rs->fetch_object()){
+				$insertline="INSERT INTO PurchasedLine(PurchasedId,ProductID,Quantity) VALUES($pid,".$row->ProductId.",".$row->CartQuantity.")";
+				DB::query($insertline);
+			}
+			//------
+			$sqlcmd="UPDATE Cart SET CartPurchased=1 WHERE CartPurchased=0 AND UserAccountID=".$_COOKIE['authID']; 
+			DB::query($sqlcmd);
+		}
 	}
 
 	$q=(isset($_GET['query']))?"query=".$_GET['query']."&":"";
@@ -31,9 +57,9 @@
 			$row = $rs->fetch_object();
 			?>
 			<div class="menu2"><BR>
-				<span style="float:left">&nbsp;&nbsp;&nbsp;&nbsp;<?=$_COOKIE['authFn']?></span>
+				<span style="float:left">&nbsp;&nbsp;&nbsp;&nbsp;<?=$_COOKIE['authFn']." ".$_COOKIE['authLn']?></span>
 				<span style="font-size:25px"><b>YOUR CART</b></span>
-				<span style="float:right">TOTAL: &#8369;<?=($row->total_>0)?$row->total_:0?>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				<span style="float:right">UNPURCHASE TOTAL: &#8369;<?=($row->total_>0)?$row->total_:0?>&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			</div>
 	<?	}
 	?>
@@ -104,7 +130,7 @@
 				}else{  
 
 					$sqlcmd="SELECT c.CartPurchased,c.CartID,c.UserAccountID,p.ProductAttactment,p.ProductID,p.ProductName,c.CartItemSize,c.CartQuantity,p.ProductPrice
-								FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE UserAccountID=".$_COOKIE['authID']." GROUP BY c.ProductID,c.CartItemSize";
+								FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE UserAccountID=".$_COOKIE['authID']." GROUP BY c.ProductID,c.CartItemSize,CartPurchased,CartDateAdded";
 							
 					$result=DB::query($sqlcmd);
 					if(DB::getNumRows() > 0)
@@ -171,7 +197,7 @@
 					</div>
 				</a>
 				<?if(!isset($_GET['file'])){?>
-				<a href="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>?<?=$q?><?=$srch?><?=$c?>page=<?=$p?>">
+				<a href="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>?<?=$q?><?=$srch?><?=$c?>page=<?=$p?>&purchase=yes">
 					<div style="float:right; background-color:#990033; width:150px; height:50px;">
 						<p>PURCHASE</p>
 					</div>

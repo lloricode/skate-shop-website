@@ -1,4 +1,5 @@
 <?php
+	$docfile="contact";
 	include 'main_style.php';
 	include 'header.php';
 	include 'menu.php';

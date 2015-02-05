@@ -19,7 +19,7 @@
 									 <a href='setting.php'>SETTING</a>&nbsp;&nbsp; <a href='logout.php' style='color:#CC3300'>LOG OUT</a>&nbsp;</p>";
 								}
 								else
-									echo "<p><a href='login.php'>LOG IN</a>&nbsp;&nbsp;</p>";
+									echo "<p><a href='login.php' class='login'>LOG IN</a>&nbsp;&nbsp;</p>";
 							?>
 						</div>
 					</div>

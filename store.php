@@ -1,4 +1,5 @@
 <?php
+	$docfile="store";
 	include 'main_style.php';
 	include 'fresco_style.php';
 	include 'header.php';
