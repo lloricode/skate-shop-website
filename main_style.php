@@ -22,11 +22,14 @@
 		case 'about':
 			$title="About";
 			break;
+		case 'setting':
+			$title="Setting";
+			break;
 		case 'profile':
 			$title=$_COOKIE['authFn']." ".$_COOKIE['authLn'];
 			break;
 		default:
-			$title="Skate Shop";
+			$title="Skate Apparel";
 			break;
 	}
 ?>

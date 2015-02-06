@@ -1,4 +1,5 @@
 <?php
+	$docfile="setting";
 	include 'main_style.php';
 	include 'header.php';
 	include 'menu.php';
