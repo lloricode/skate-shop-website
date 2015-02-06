@@ -1,9 +1,9 @@
 <?php
 	$docfile="store";
-	include 'main_style.php';
-	include 'fresco_style.php';
-	include 'header.php';
-	include 'menu.php';
+	include 'php/main_style.php';
+	include 'php/fresco_style.php';
+	include 'php/header.php';
+	include 'php/menu.php';
 	include("config.php");
 ?>
 		
@@ -91,7 +91,7 @@
 					if(isset($_COOKIE['sqle_error']))
 						echo $_COOKIE['sqle_error'];
 					
-					include 'store_query.php';
+					include 'php/store_query.php';
 					
 					
 					$prev=(isset($_GET['page']))?$_GET['page']:0;
@@ -165,12 +165,7 @@
 					</a>
 				</div>
 				<div style="background-color:; height:30px; margin-top:5px;">
-		<?php 		if(0==$prev) {?>
-					<!--	<div style="float:left; background-color:orange; width:120px; height:45px">
-							<p>PREV PAGE</p>
-						</div> -->
-		<?php 		}
-					else{		?>
+		<?php 		if(0!=$prev){		?>
 						<a href="store.php?<?=$q.$cat."page=".($page-1);?>">
 							<div style="float:left; background-color:#D14719; width:120px; height:45px">
 								<p>PREV PAGE</p>
@@ -179,12 +174,7 @@
 			<?php 	}	
 						
 
-			 		if($total_result<=$nxt) {?>
-				<!--		<div style="float:right; background-color:orange; width:120px; height:45px">
-							<p>NEXT PAGE</p>
-						</div>-->
-		<?php 		}
-					else{		?>
+			 		if($total_result>$nxt){		?>
 						<a href="store.php?<?=$q.$cat."page=".($page+1);?>">
 							<div style="float:right; background-color:#D14719; width:120px; height:45px">
 								<p>NEXT PAGE</p>
@@ -196,5 +186,5 @@
 			</div>
 		</center>
 <?php
-	include 'footer.php';
+	include 'php/footer.php';
 ?>

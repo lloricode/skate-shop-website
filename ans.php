@@ -26,7 +26,8 @@
 		else
 			$error= "Incorrect Answer.<BR>";
 	}
-	include 'headerlogin.php';
+	$docfile="ans";
+	include 'php/headerlogin.php';
 ?>
 						<?  if(!isset($_COOKIE['ques']))
 								header("Location: recovery.php");?>
@@ -42,7 +43,7 @@
 										<input type="button" name="signup" value="BACK TO LOG IN" style="background-color:orange">
 									</a>
 								</td>
-								<td><? for($i=0;$i<50;$i++) echo "&nbsp"; ?></td>
+								<td><? for($i=0;$i<50;$i++) echo "&nbsp;"; ?></td>
 								<td>
 									<input type="submit" name="login" value="SUMBIT" style="background-color:red">
 								</td>
@@ -53,5 +54,5 @@
 			</div>
 		</center>
 <?php
-	include 'footer.php';
+	include 'php/footer.php';
 ?>

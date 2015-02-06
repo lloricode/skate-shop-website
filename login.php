@@ -37,11 +37,12 @@
 		else
 			$error= "Your Login UserName/Email or Pasword is invalid.<BR>";
 	}
-	include 'headerlogin.php';
+	$docfile="login";
+	include 'php/headerlogin.php';
 ?>
-						E-MAIL ADDRESS/USERNAME:<? for($i=0;$i<14;$i++) echo "&nbsp"; ?><br>
+						E-MAIL ADDRESS/USERNAME:<? for($i=0;$i<14;$i++) echo "&nbsp;"; ?><br>
 						<input type="text" name="user" style="width:300px; height:22px;"><BR><BR><BR>
-						PASSWORD:<? for($i=0;$i<42;$i++) echo "&nbsp"; ?><br>
+						PASSWORD:<? for($i=0;$i<42;$i++) echo "&nbsp;"; ?><br>
 						<input type="password" name="pass" style="width:300px; height:22px;"><BR>
 						<? for($i=0;$i<8;$i++) echo "<BR>"; ?>
 						<a href="recovery.php">forgot password?</a>
@@ -52,7 +53,7 @@
 										<input type="button" name="signup" value="SIGN UP" style="background-color:#FF6600">
 									</a>
 								</td>
-								<td><? for($i=0;$i<50;$i++) echo "&nbsp"; ?></td>
+								<td><? for($i=0;$i<50;$i++) echo "&nbsp;"; ?></td>
 								<td>
 									<input type="submit" name="login" value="LOG IN" style="background-color:#990033">
 								</td>
@@ -63,5 +64,5 @@
 			</div>
 		</center>
 <?php
-	include 'footer.php';
+	include 'php/footer.php';
 ?>

@@ -26,7 +26,8 @@
 		else
 			$error= "password not match.<BR>";
 	}
-	include 'headerlogin.php';
+	$docfile=(!isset($match))?"reset":"success";
+	include 'php/headerlogin.php';
 ?>
 
 						<?php
@@ -47,7 +48,7 @@
 										<input type="button" name="signup" value="BACK TO LOG IN" style="background-color:orange">
 									</a>
 								</td>
-								<td><? for($i=0;$i<50;$i++) echo "&nbsp"; ?></td>
+								<td><? for($i=0;$i<50;$i++) echo "&nbsp;"; ?></td>
 								<td>
 									<input type="submit" name="login" value="LOG IN" style="background-color:red">
 								</td>
@@ -58,5 +59,5 @@
 			</div>
 		</center>
 <?php
-	include 'footer.php';
+	include 'php/footer.php';
 ?>

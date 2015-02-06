@@ -1,8 +1,8 @@
 <?php
 	$docfile="about";
-	include 'main_style.php';
-	include 'header.php';
-	include 'menu.php';
+	include 'php/main_style.php';
+	include 'php/header.php';
+	include 'php/menu.php';
 ?>
 			<!--              -->
 	<!-- <div id="fb-root"></div>
@@ -82,5 +82,5 @@
 			</div>
 		</center>
 <?php
-	include 'footer.php';
+	include 'php/footer.php';
 ?>

@@ -1,9 +1,9 @@
 <?php
 	$docfile="index";
-include 'main_style.php';
-//include 'bootstrap_style.php';
-include 'header.php';
-include 'menu.php';
+include 'php/main_style.php';
+//include 'php/bootstrap_style.php';
+include 'php/header.php';
+include 'php/menu.php';
 ?>
 		
 		<center>
@@ -41,5 +41,5 @@ include 'menu.php';
 		</center>
 
 <?php
-include 'footer.php';
+include 'php/footer.php';
 ?>

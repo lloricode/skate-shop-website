@@ -1,8 +1,8 @@
 <?php
 	$docfile="contact";
-	include 'main_style.php';
-	include 'header.php';
-	include 'menu.php';
+	include 'php/main_style.php';
+	include 'php/header.php';
+	include 'php/menu.php';
 ?>
 		
 		<center>
@@ -28,5 +28,5 @@
 			</div>
 		</center>
 <?php
-	include 'footer.php';
+	include 'php/footer.php';
 ?>

@@ -40,12 +40,13 @@
 		else
 			$error= "UserName/Email or Pasword not found.<BR>";
 	}
-	include 'headerlogin.php';
+	$docfile="recover";
+	include 'php/headerlogin.php';
 ?>
 
 
 
-						E-MAIL ADDRESS/USERNAME:<? for($i=0;$i<14;$i++) echo "&nbsp"; ?><br>
+						E-MAIL ADDRESS/USERNAME:<? for($i=0;$i<14;$i++) echo "&nbsp;"; ?><br>
 						<input type="text" name="email_username" style="width:300px; height:22px;"><BR><BR><BR>
 						
 						<? for($i=0;$i<11;$i++) echo "<BR>"; ?>
@@ -57,7 +58,7 @@
 										<input type="button" name="signup" value="BACK TO LOG IN" style="background-color:orange">
 									</a>
 								</td>
-								<td><? for($i=0;$i<50;$i++) echo "&nbsp"; ?></td>
+								<td><? for($i=0;$i<50;$i++) echo "&nbsp;"; ?></td>
 								<td>
 									<input type="submit" name="login" value="SUBMIT" style="background-color:red">
 								</td>
@@ -68,5 +69,5 @@
 			</div>
 		</center>
 <?php
-	include 'footer.php';
+	include 'php/footer.php';
 ?>
