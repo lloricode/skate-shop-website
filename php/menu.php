@@ -1,7 +1,7 @@
 		<div style="background-color:black; height:90;">
 			<center>
 				<div class="menu">
-		            <div style="float:left;margin-top:4px;">
+		            <div style="float:left;margin-top:3px;">
 		           	<ul id="navlist">
 						<li id="mainmenu" <?=($docfile=="index")?"class='active_menu'":""?> ><a href="index.php" id="current">HOME</a></li>
 						<li id="mainmenu" <?=($docfile=="store")?"class='active_menu'":""?> ><a href="store.php?query=all">STORE</a></li>

@@ -13,7 +13,7 @@
 		return htmlspecialchars(trim(stripcslashes($data)));
 	}
 	if( /*isset($_COOKIE['prodID']) and*/ isset($_POST) and $_SERVER["REQUEST_METHOD"]=="POST"){
-		require_once('config.php');
+		require_once('../config.php');
 		$sq=$mq=$lq=$size="";
 		$ok1=$ok2=$ok3=$error=0;
 
@@ -140,5 +140,5 @@
 	else
 		setcookie("tmp","error in post",time()+5,"/");
 
- 	header("Location: cart.php?$q$c$srch file=".$_GET['file']."&page=$p");
+ 	header("Location: ../cart.php?$q$c$srch file=".$_GET['file']."&page=$p");
 ?>

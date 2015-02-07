@@ -1,8 +1,8 @@
 <?php
 	$docfile="setting";
-	include 'main_style.php';
-	include 'header.php';
-	include 'menu.php';
+	include 'php/main_style.php';
+	include 'php/header.php';
+	include 'php/menu.php';
 ?>
 		<center>
 			<div class="main_body" style="margin-top:1px;">
@@ -25,5 +25,5 @@
 			</div>
 		</center>
 <?php
-	include 'footer.php';
+	include 'php/footer.php';
 ?>

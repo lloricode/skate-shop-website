@@ -58,8 +58,8 @@
 					echo "<th>Gender</th></tr><tr>";
 					while ($row=$rs->fetch_object()) {
 						echo "<td>".$row->UserAccountID."</td>";
-						echo "<td>".$row->UserAccountLastName."</td>";
 						echo "<td>".$row->UserAccountFisrtName."</td>";
+						echo "<td>".$row->UserAccountLastName."</td>";
 						echo "<td>".$row->UserAccountUserName."</td>";
 						echo "<td>".$row->UserAccountEmail."</td>";
 						echo "<td>".$row->UserAccountGender."</td>";

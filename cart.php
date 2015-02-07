@@ -75,7 +75,7 @@
 						?>
 						
 						<? if(isset($_COOKIE['tmp'])){ echo $_COOKIE['tmp']; setcookie("tmp","",time()-5,"/");}?>
-						<form action="add_cart.php?<?=$q?><?=$srch?><?=$c?>page=<?=$p?>&file=<?=$_GET['file']?>" method="post" >
+						<form action="php/add_cart.php?<?=$q?><?=$srch?><?=$c?>page=<?=$p?>&file=<?=$_GET['file']?>" method="post" >
 							<table>
 								<tr>
 									<td rowspan="8"><img src="img/product/<?=$row->ProductAttactment?>" width="300" ></td>

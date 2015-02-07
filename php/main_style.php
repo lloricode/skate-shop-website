@@ -19,10 +19,10 @@
 		case 'about':
 			$title="About";
 			break;
-		case 'cart':
+		case 'profile':
 			$title=$_COOKIE['authFn']." ".$_COOKIE['authLn'];
 			break;
-		case 'profile':
+		case 'cart':
 			$title=$_COOKIE['authFn']."'s' Cart";
 			break;
 		default:

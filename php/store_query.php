@@ -10,7 +10,7 @@
 									if($_GET['cat']=="shoes"){
 										if(isset($_GET['query'])){
 											if($_GET['query']=="sale"){
-												$query="SELECT * FROM Product WHERE Sale=1 AND ProductType='shoes'";
+												$query="SELECT * FROM Product WHERE ProductSale=1 AND ProductType='shoes'";
 											}
 											else if($_GET['query']=="male"){
 												$query="SELECT * FROM Product WHERE ProductGender='male' AND ProductType='shoes'";
@@ -34,7 +34,7 @@
 									else if($_GET['cat']=="jackets"){
 										if(isset($_GET['query'])){
 											if($_GET['query']=="sale"){
-												$query="SELECT * FROM Product WHERE Sale=1 AND ProductType='jackets'";
+												$query="SELECT * FROM Product WHERE ProductSale=1 AND ProductType='jackets'";
 											}
 											else if($_GET['query']=="male"){
 												$query="SELECT * FROM Product WHERE ProductGender='male' AND ProductType='jackets'";
@@ -58,7 +58,7 @@
 									else if($_GET['cat']=="tees"){
 										if(isset($_GET['query'])){
 											if($_GET['query']=="sale"){
-												$query="SELECT * FROM Product WHERE Sale=1 AND ProductType='tees'";
+												$query="SELECT * FROM Product WHERE ProductSale=1 AND ProductType='tees'";
 											}
 											else if($_GET['query']=="male"){
 												$query="SELECT * FROM Product WHERE ProductGender='male' AND ProductType='tees'";
@@ -82,7 +82,7 @@
 									else if($_GET['cat']=="jeans"){
 										if(isset($_GET['query'])){
 											if($_GET['query']=="sale"){
-												$query="SELECT * FROM Product WHERE Sale=1 AND ProductType='jeans'";
+												$query="SELECT * FROM Product WHERE ProductSale=1 AND ProductType='jeans'";
 											}
 											else if($_GET['query']=="male"){
 												$query="SELECT * FROM Product WHERE ProductGender='male' AND ProductType='jeans'";
@@ -106,7 +106,7 @@
 									else if($_GET['cat']=="shorts"){
 										if(isset($_GET['query'])){
 											if($_GET['query']=="sale"){
-												$query="SELECT * FROM Product WHERE Sale=1 AND ProductType='shorts'";
+												$query="SELECT * FROM Product WHERE ProductSale=1 AND ProductType='shorts'";
 											}
 											else if($_GET['query']=="male"){
 												$query="SELECT * FROM Product WHERE ProductGender='male' AND ProductType='shorts'";
@@ -137,7 +137,7 @@
 										$query="SELECT * FROM Product";
 									}
 									else if($_GET['query']=="sale"){
-										$query="SELECT * FROM Product WHERE Sale=1";
+										$query="SELECT * FROM Product WHERE ProductSale=1";
 									}
 									else if($_GET['query']=="male"){
 										$query="SELECT * FROM Product WHERE ProductGender='male'";

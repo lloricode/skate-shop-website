@@ -2,9 +2,9 @@
 	$docfile="profile";
 	if(!isset($_COOKIE['authID']))
 		header("Location: index.php");
-	include 'main_style.php';
-	include 'header.php';
-	include 'menu.php';
+	include 'php/main_style.php';
+	include 'php/header.php';
+	include 'php/menu.php';
 	require_once('config.php');
 	$rs=DB::query("SELECT *  FROM UserAccount WHERE UserAccountID=".$_COOKIE['authID']);
 	$row=$rs->fetch_object();
@@ -41,5 +41,5 @@
 			</div>
 		</center>
 <?php
-	include 'footer.php';
+	include 'php/footer.php';
 ?>

@@ -25,16 +25,16 @@ body            {background-image: url("../img/background website.jpg");	backgro
 #tdpad3         {padding: 5px 39px;}
 /*----------------------menu css------------------------------------------*/
 .active_menu    {background-color:#D14719;}
-#mainmenu:hover {background-color: #D14719;}
-#navlist #mainmenu{font-size: 43px; display: inline;list-style-type: none;padding: 20px 25px;}
+#mainmenu:hover {background-color: #D14719;cursor: pointer;   opacity: 0.9;}
+#navlist #mainmenu{font-size: 43px; display: inline;list-style-type: none;padding: 19px 25px;}
 /*----------------------sale male female misc css------------------------------------------*/
 .active_menu2    {background-color:#D14719;}
-#mainmenu2:hover {background-color: #D14719;}
-#navlist2 #mainmenu2{margin-top: 100px; font-size: 30px; display: inline;list-style-type: none;padding: 9px 50px;}
+#mainmenu2:hover {background-color: #D14719;cursor: pointer;   opacity: 0.9;}
+#navlist2 #mainmenu2{margin-top: 100px; font-size: 30px; display: inline;list-style-type: none;padding: 9.75px 50px;}
 /*----------------------shoes jackets tees jeans shorts css------------------------------------------*/
 .active_menu3    {background-color:#D14719;}
-#mainmenu3:hover {background-color: #D14719;}
-#navlist3 #mainmenu3{margin-top: 100px; font-size: 25px; display: inline;list-style-type: none;padding: 9px 30px;}
+#mainmenu3:hover {background-color: #D14719;cursor: pointer;   opacity: 0.9;}
+#navlist3 #mainmenu3{margin-top: 100px; font-size: 25px; display: inline;list-style-type: none;padding: 8px 30px;}
 /*----------------------table css------------------------------------------*/
 #table_         {border: 4;}
 .mainTable      {}
@@ -74,4 +74,8 @@ body            {background-image: url("../img/background website.jpg");	backgro
 .social         {padding: 10px 10px;}
 .media          {height:30px; margin-top:-10px;   }
 /*------------------------log in----------*/
-.login:hover    {font-color: red;}
+.login:hover    {color: #D14719;}
+.logout			{color:#CC3300}
+.logout:hover    {color: red;}
+.setting:hover       {color:#D14719;}
+.profile { inline;list-style-type: none;}
