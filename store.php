@@ -8,46 +8,22 @@
 ?>
 		
 		<center>
-			<div class="menu2">
-			    <table id="t2">
-	                <tr style="font-size:30px">
-	                    <td id="tdpad2">
-	                        <a href="store.php?query=sale">
-	                        	<div >
-	                        		SALE
-	                        	</div>
-	                        </a>
-	                    </td>
-	                    <td id="tdpad2">
-	                        <a href="store.php?query=male">
-	                        	<div>
-	                        		MALE
-	                        	</div> 
-	                        </a>
-	                    </td>
-	                    <td id="tdpad2">
-	                        <a href="store.php?query=female">
-	                        	<div>
-	                        		FEMALE
-	                        	</div>  
-	                        </a>
-	                    </td>
-	                    <td id="tdpad2">
-	                        <a href="store.php?query=brands">
-		                        <div>
-		                        	BRANDS
-		                        </div>
-	                        </a>
-	                    </td>
-	                </tr>
-	            </table>
+			<div class="menu2" >
+            	<ul id="navlist2" style="padding-top:9px;">
+	            	<?if(isset($_GET['query'])) 
+							$qq=$_GET['query'];?>
+					<li id="mainmenu2" <?=($qq=="sale")?"class='active_menu2'":""?> ><a href="store.php?query=sale" >SALE</a></li>
+					<li id="mainmenu2" <?=($qq=="male")?"class='active_menu2'":""?> ><a href="store.php?query=male">MALE</a></li>
+					<li id="mainmenu2" <?=($qq=="female")?"class='active_menu2'":""?> ><a href="store.php?query=female">FEMALE</a></li>
+					<li id="mainmenu2" <?=($qq=="brands")?"class='active_menu2'":""?> ><a href="store.php?query=brands">MISC</a></li>
+				</ul>
 			</div>
 			<?php
-				$actualURL = /*"http://localhost/webdev/pages/store.php?".*/ isset($_GET["query"]) ? "query=" . $_GET["query"] : "query=all";
+				$actualURL = isset($_GET["query"]) ? "query=" . $_GET["query"] : "query=all";
 			?>
 			<div class="menu3">
-			    <table ><!--id="t3">-->
-	                <tr style="font-size:25px">
+			 <!--   <table >
+	             <tr style="font-size:25px">
 	                    <td id="tdpad3">
 	                        <a href="store.php?<?= $actualURL; ?>&cat=shoes" >
 	                        	SHOES 
@@ -74,7 +50,16 @@
 	                        </a>
 	                    </td>
 	                </tr>
-	            </table>
+	            </table>-->
+	            <ul id="navlist3" style="padding-top:9px;">
+	            	<?if(isset($_GET['cat'])) 
+							$qq=$_GET['cat'];?>
+					<li id="mainmenu3" <?=($qq=="shoes")?"class='active_menu3'":""?> ><a href="store.php?<?= $actualURL; ?>&cat=shoes">SHOES</a></li>
+					<li id="mainmenu3" <?=($qq=="jackets")?"class='active_menu3'":""?> ><a href="store.php?<?= $actualURL; ?>&cat=jackets">JACKETS</a></li>
+					<li id="mainmenu3" <?=($qq=="tees")?"class='active_menu3'":""?> ><a href="store.php?<?= $actualURL; ?>&cat=tees">TEES</a></li>
+					<li id="mainmenu3" <?=($qq=="jeans")?"class='active_menu3'":""?> ><a href="store.php?<?= $actualURL; ?>&cat=jeans">JEANS</a></li>
+					<li id="mainmenu3" <?=($qq=="shorts")?"class='active_menu3'":""?> ><a href="store.php?<?= $actualURL; ?>&cat=shorts">SHORTS</a></li>
+				</ul>
 			</div>
 			<div class="main_body">
 				<div style="background-color:; height:1010px;">

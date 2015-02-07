@@ -7,7 +7,7 @@ a,p,div         {text-decoration:none;color: white;font-family: sans-serif;/*seg
 body            {background-image: url("../img/background website.jpg");	background-attachment: fixed;}
 .header         {height: 270px;width: 1100px;margin-top:0;background-image:url("../img/header.jpg");}
 .menu           {height: 90px;width: 1100px;background-color:black;}
-.menu2          {width: 900px;height: 55px;background-color:#990033;}
+.menu2          {margin-top:-17px; width: 900px;height: 55px;background-color:#990033;}
 .menu3          {width: 900px;height: 45px;background-color:black;}
 .main_body      {/* margin-top: -16px;*/height:1139px;width:900px;background-color:#42423E;}
 .footer         {padding-top:10px;height:30px;background-color:black;}
@@ -18,15 +18,23 @@ body            {background-image: url("../img/background website.jpg");	backgro
 #menuH          {position: absolute;margin-top: 25px;}*/
 #n              {background-color: black;}
 /*#t1             {margin-left: 10px;float:left;background-attachment:fixed;}*/
-#t2             {}
+/*#t2             {}*/
 #box            {height: 300px;	width: 250px;}
 /*#tdpad          {padding: 0px 100px;}*/
-#tdpad2         {padding: 10px 45px;}
+/*#tdpad2         {padding: 10px 45px;}*/
 #tdpad3         {padding: 5px 39px;}
 /*----------------------menu css------------------------------------------*/
-.active_menu    {background-color:#D14719;padding-top: 110px;}
-#mainmenu:hover       	{background-color: #D14719;}
-#navlist #mainmenu     {font-size: 43px; display: inline;list-style-type: none;padding: 20px 25px;}
+.active_menu    {background-color:#D14719;}
+#mainmenu:hover {background-color: #D14719;}
+#navlist #mainmenu{font-size: 43px; display: inline;list-style-type: none;padding: 20px 25px;}
+/*----------------------sale male female misc css------------------------------------------*/
+.active_menu2    {background-color:#D14719;}
+#mainmenu2:hover {background-color: #D14719;}
+#navlist2 #mainmenu2{margin-top: 100px; font-size: 30px; display: inline;list-style-type: none;padding: 9px 50px;}
+/*----------------------shoes jackets tees jeans shorts css------------------------------------------*/
+.active_menu3    {background-color:#D14719;}
+#mainmenu3:hover {background-color: #D14719;}
+#navlist3 #mainmenu3{margin-top: 100px; font-size: 25px; display: inline;list-style-type: none;padding: 9px 30px;}
 /*----------------------table css------------------------------------------*/
 #table_         {border: 4;}
 .mainTable      {}

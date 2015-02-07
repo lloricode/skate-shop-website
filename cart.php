@@ -1,9 +1,10 @@
 <?php
+	$docfile="cart";
 	if(!isset($_COOKIE['authID'])) header("Location: login.php");
-	include 'main_style.php';
-	include 'fresco_style.php';
-	include 'header.php';
-	include 'menu.php';
+	include 'php/main_style.php';
+	include 'php/fresco_style.php';
+	include 'php/header.php';
+	include 'php/menu.php';
 	include("config.php");
 
 	if(isset($_GET['del']) and $_SERVER["REQUEST_METHOD"]=="GET"){
@@ -56,7 +57,7 @@
 			$rs=DB::query($sql);
 			$row = $rs->fetch_object();
 			?>
-			<div class="menu2"><BR>
+			<div class="menu2" style="margin-top:1px;"><BR>
 				<span style="float:left">&nbsp;&nbsp;&nbsp;&nbsp;<?=$_COOKIE['authFn']." ".$_COOKIE['authLn']?></span>
 				<span style="font-size:25px"><b>YOUR CART</b></span>
 				<span style="float:right">UNPURCHASE TOTAL: &#8369;<?=($row->total_>0)?$row->total_:0?>&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -207,5 +208,5 @@
 		</div>
 	</center>
 <?php
-	include 'footer.php';
+	include 'php/footer.php';
 ?>
