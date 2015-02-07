@@ -3,12 +3,14 @@
 	 * @author Lloric Garcia
 	 * @copyright 2015
 	 */
+	if(!isset($_COOKIE['recID']))
+		header("Location: login.php");
 	include("config.php");
 ?>
 <?php
 	//session_start();
 	
-	if ( isset($_GET) and $_SERVER["REQUEST_METHOD"]=="POST") {
+	if ( isset($_POST) and $_SERVER["REQUEST_METHOD"]=="POST") {
 		$data=addslashes($_POST['newpass']);
 		$data2=addslashes($_POST['newpass2']);
 

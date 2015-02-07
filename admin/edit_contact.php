@@ -14,12 +14,12 @@
 ?>
 	<div class="d">
 		<a href="index.php"><button>back to main</button></a><BR>
-		<div style="background:rgba(0,0,0,.4); height:1079px; width:750px; float:left;">
+		<div style="background:rgba(0,0,0,.4); height:698; width:750px; float:left;">
 		<BR>
 			<?php
 				$file=fopen("../text file/contact.txt","r+") or die("Unable to open file!.");
 				$afile=fread($file, filesize("../text file/contact.txt"));
-				echo "<center>$afile</center><BR>";
+				echo "$afile<BR>";
 			?>
 		</div>
 		<div style="float:right;">

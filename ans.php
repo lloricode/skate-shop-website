@@ -3,12 +3,12 @@
 	 * @author Lloric Garcia
 	 * @copyright 2015
 	 */
-	
-?>
-<?php
+	 if(!isset($_COOKIE['ques']))
+	 	header("Location: login.php");
+
 	//session_start();
 	
-	if ( isset($_GET) and $_SERVER["REQUEST_METHOD"]=="POST") {
+	if ( isset($_POST) and $_SERVER["REQUEST_METHOD"]=="POST") {
 		$data=addslashes($_POST['sec_ans']);
 
 		$data=trim($data);
@@ -29,8 +29,7 @@
 	$docfile="ans";
 	include 'php/headerlogin.php';
 ?>
-						<?  if(!isset($_COOKIE['ques']))
-								header("Location: recovery.php");?>
+						
 								<?=$_COOKIE['ques']?><br>
 						<input placeholder="enter your secret answer" type="password" name="sec_ans" style="width:300px; height:22px;"><BR><BR><BR>
 						

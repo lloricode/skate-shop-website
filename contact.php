@@ -6,24 +6,17 @@
 ?>
 		
 		<center>
-			<div class="main_body" >
-				<div style="background:rgba(0,0,0,.2); height:1079px; width:750px;">
-				<BR>
-					<?php
-						$file=fopen("text file/contact.txt","r") or die("Unable to open file!.");
-						echo fread($file, filesize("text file/contact.txt"));
-						fclose($file);
-					?>
+			<div class="main_body" ><BR>
+				<iframe src="html/slide.html" alt="Img" height="350" width="800" scrolling="no">
+				</iframe> 
+				<div style="background:rgba(0,0,0,.2); height:700px; width:750px;">
+					<iframe src="php/contact.php" alt="Img" height="698" width="750" scrolling="no">
+					</iframe> 
 				</div>
 				<div style="background:rgba(0,0,0,.6); height:70px; width:900px;">
-					CHECK US OUT ON SOCIAL MEDIA:
-					<table>
-						<tr>
-							<td class="social"><a href="#" target="blank_"><div class="media" style="background-color:#0066FF; ">facebook</div></a></td>
-							<td class="social"><a href="#" target="blank_"><div class="media" style="background-color:#00FFFF; ">twitter</div></a></td>
-							<td class="social"><a href="#" target="blank_"><div class="media" style="background-color:#CC0000; ">google plus</div></a></td>
-						</tr>
-					</table>
+					CHECK US OUT ON SOCIAL MEDIA:<BR>
+					<iframe src="html/social.html" alt="Img" height="37" width="185" scrolling="no">
+					</iframe> 
 				</div>
 			</div>
 		</center>

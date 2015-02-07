@@ -35,9 +35,9 @@ $path = "../img/product/";
 							if(move_uploaded_file($tmp, $path.$imgfile)) {	
 								$sale=($_POST['psale']=="yes")?1:0;
 								$query = "INSERT INTO Product(
-									Sale,
+									ProductSale,
 									ProductName,
-									Brand,
+									ProductBrand,
 									ProductPrice,
 									ProductType,
 									ProductStatus,
@@ -77,3 +77,4 @@ $path = "../img/product/";
 			
 	}
 ?>
+<a href="view_product.php"><button>back</button></a>

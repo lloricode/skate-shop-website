@@ -10,8 +10,10 @@
 		<center>
 			<div class="menu2" >
             	<ul id="navlist2" style="padding-top:9px;">
-	            	<?if(isset($_GET['query'])) 
-							$qq=$_GET['query'];?>
+	            <?	if(isset($_GET['query'])) 
+						$qq=$_GET['query'];
+					else
+						$qq="";?>
 					<li id="mainmenu2" <?=($qq=="sale")?"class='active_menu2'":""?> ><a href="store.php?query=sale" >SALE</a></li>
 					<li id="mainmenu2" <?=($qq=="male")?"class='active_menu2'":""?> ><a href="store.php?query=male">MALE</a></li>
 					<li id="mainmenu2" <?=($qq=="female")?"class='active_menu2'":""?> ><a href="store.php?query=female">FEMALE</a></li>
@@ -23,8 +25,11 @@
 			?>
 			<div class="menu3">
 	            <ul id="navlist3" style="margin-top:0px; padding-top:8px;">
-	            	<?if(isset($_GET['cat'])) 
-							$qq=$_GET['cat'];?>
+	            <?	if(isset($_GET['cat'])) 
+						$qq=$_GET['cat'];
+					else
+						$qq="";
+					?>
 					<li id="mainmenu3" <?=($qq=="shoes")?"class='active_menu3'":""?> ><a href="store.php?<?= $actualURL; ?>&cat=shoes">SHOES</a></li>
 					<li id="mainmenu3" <?=($qq=="jackets")?"class='active_menu3'":""?> ><a href="store.php?<?= $actualURL; ?>&cat=jackets">JACKETS</a></li>
 					<li id="mainmenu3" <?=($qq=="tees")?"class='active_menu3'":""?> ><a href="store.php?<?= $actualURL; ?>&cat=tees">TEES</a></li>

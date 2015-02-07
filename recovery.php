@@ -38,7 +38,7 @@
 			header("Location: ans.php");
 		}
 		else
-			$error= "UserName/Email or Pasword not found.<BR>";
+			$error= "UserName or Email not found.<BR>";
 	}
 	$docfile="recover";
 	include 'php/headerlogin.php';

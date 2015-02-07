@@ -23,7 +23,7 @@
 			$title=$_COOKIE['authFn']." ".$_COOKIE['authLn'];
 			break;
 		case 'cart':
-			$title=$_COOKIE['authFn']."'s' Cart";
+			$title=$_COOKIE['authFn']."'s Cart";
 			break;
 		default:
 			$title="Skate Apparel";
