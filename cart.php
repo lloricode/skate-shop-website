@@ -14,28 +14,44 @@
 	}
 	if(isset($_GET['purchase']) and $_SERVER["REQUEST_METHOD"]=="GET"){
 		if($_GET['purchase']=="yes"){
+			//total purchanse in all item
 			$sql="SELECT SUM(p.ProductPrice*c.CartQuantity) AS total_ FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE c.CartPurchased=0 AND UserAccountID=".$_COOKIE['authID'];  
 			$rs=DB::query($sql);
 			$row = $rs->fetch_object();
 			$amount=$row->total_;
+			//total quantity in all purchase
 			$sql="SELECT SUM(CartQuantity) AS total_Q FROM Cart WHERE CartPurchased=0 AND UserAccountID=".$_COOKIE['authID'];  
 			$rs=DB::query($sql);
 			$row = $rs->fetch_object();
 			$quant=$row->total_Q;
+			//insert purchase including 2 above
 			$sqlcmd="INSERT INTO Purchased(PurchasedAmount,PurchasedQuantity,UserAccountID,PurchasedDelivered) VALUES($amount,$quant,".$_COOKIE['authID'].",0)";
 			DB::query($sqlcmd);
+			//slect purchaseID for purchaseLine
 			$sql="SELECT PurchasedId FROM Purchased ORDER BY PurchasedId DESC LIMIT 0,1";
 			$rs=DB::query($sql);
 			$row = $rs->fetch_object();
 			$pid=$row->PurchasedId;
-			//-------
+			//select all item to be insert in purchaseLine WHERE purchase=0
 			$sql="SELECT ProductId,CartQuantity FROM Cart WHERE CartPurchased=0 AND UserAccountID=".$_COOKIE['authID']; 
 			$rs=DB::query($sql);
 			while($row = $rs->fetch_object()){
-				$insertline="INSERT INTO PurchasedLine(PurchasedId,ProductID,Quantity) VALUES($pid,".$row->ProductId.",".$row->CartQuantity.")";
+				//select availabilty and sold to be update
+				$sqlcmd="SELECT ProductAvailability,ProductSold FROM Product WHERE ProductID=".$row->ProductId;
+				$rs2=DB::query($sqlcmd);
+				$row2=$rs2->fetch_object();
+				$avail=$row2->ProductAvailability;
+				$sold=$row2->ProductSold;
+				//insert the update
+				$quantity=$row->CartQuantity;
+				$sqlcmd="UPDATE Product SET ProductAvailability=".($avail-$quantity)." , ProductSold=".($sold+$quantity)." WHERE ProductID=".$row->ProductId;
+				DB::query($sqlcmd);
+				//insert purchaseLine incuding purchaseID
+				$insertline="INSERT INTO PurchasedLine(PurchasedId,ProductID,Quantity) VALUES($pid,".$row->ProductId.",".$quantity.")";
 				DB::query($insertline);
 			}
 			//------
+			//change purchase to true where false
 			$sqlcmd="UPDATE Cart SET CartPurchased=1 WHERE CartPurchased=0 AND UserAccountID=".$_COOKIE['authID']; 
 			DB::query($sqlcmd);
 		}
@@ -48,7 +64,7 @@
 ?>
 	<center><?
 		if(isset($_GET['file'])){ ?>
-			<div  class="menu2">
+			<div  class="menu2" style="margin-top:0px;">
 				add cart
 			</div>
 	<?	}
@@ -57,7 +73,7 @@
 			$rs=DB::query($sql);
 			$row = $rs->fetch_object();
 			?>
-			<div class="menu2" style="margin-top:1px;"><BR>
+			<div class="menu2" style="margin-top:0px;"><BR>
 				<span style="float:left">&nbsp;&nbsp;&nbsp;&nbsp;<?=$_COOKIE['authFn']." ".$_COOKIE['authLn']?></span>
 				<span style="font-size:25px"><b>YOUR CART</b></span>
 				<span style="float:right">UNPURCHASE TOTAL: &#8369;<?=($row->total_>0)?$row->total_:0?>&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -134,55 +150,51 @@
 								FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE UserAccountID=".$_COOKIE['authID']." GROUP BY c.ProductID,c.CartItemSize,CartPurchased,CartDateAdded";
 							
 					$result=DB::query($sqlcmd);
-					if(DB::getNumRows() > 0)
-							{				?>
-								
-								<table id="table_">
-								<tr class="tableRow">
-						<?		for($int = 1; $row = $result->fetch_object(); $int++)
-								{
-									 ?>
-									<td class="tableData">
-										<div class="mardagz" style="background: url('img/product/<?= $row->ProductAttactment; ?>');background-repeat: no-repeat; background-size: cover;">
-											<div class="details">
-												<a href="img/product/<?= $row->ProductAttactment; ?>" class='fresco'
-													data-fresco-group="product"
-													data-fresco-caption="<?=$int?> Name: <?= $row->ProductName; ?> <br />
-													Price: &#8369;<?= $row->ProductPrice; ?>" >
-													<div class="name tddiv">
-														<span>ZOOM IMAGE</span>
-													</div>
-												</a>
-										<?		if($row->CartPurchased){		?>
-													<div class="purchased tddiv">
-														<span>PURCHASED</span>
-													</div>
-										<?		}
-												else{		?>
-													<a href="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>?<?=$q?><?=$srch?><?=$c?>page=<?=$p?>&del=<?=$row->CartID?>">
-														<div class="cart tddiv">
-															<span>REMOVE TO CART</span>
-														</div>
-													</a>
-										<?		}			?>	
-												<BR>
-												<p style="color:white;"><?=$int?>:&nbsp;<?=$row->CartItemSize?>:<?=$row->CartQuantity?>&nbsp;&nbsp;<?= $row->ProductName?> <b><BR> &#8369;<?= $row->ProductPrice?></b></p>
+					if(DB::getNumRows() > 0){				?>
+						<table id="table_">
+						<tr class="tableRow">
+				<?		for($int = 1; $row = $result->fetch_object(); $int++)
+						{
+							 ?>
+							<td class="tableData">
+								<div class="mardagz" style="background: url('img/product/<?= $row->ProductAttactment; ?>');background-repeat: no-repeat; background-size: cover;">
+									<div class="details">
+										<a href="img/product/<?= $row->ProductAttactment; ?>" class='fresco'
+											data-fresco-group="product"
+											data-fresco-caption="<?=$int?> Name: <?= $row->ProductName; ?> <br />
+											Price: &#8369;<?= $row->ProductPrice; ?>" >
+											<div class="name tddiv">
+												<span>ZOOM IMAGE</span>
 											</div>
-										</div>
-									</td>
-									<?php
-									if($int % 3 == 0)
-										echo "</tr><tr class='tableRow'>";	
-								}	
-								echo "</tr></table>";
-							}
-							else
-							{
-								echo "No product";
-							}
-			}
-
-					?>
+										</a>
+								<?		if($row->CartPurchased){		?>
+											<div class="purchased tddiv">
+												<span>PURCHASED</span>
+											</div>
+								<?		}
+										else{		?>
+											<a href="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>?<?=$q?><?=$srch?><?=$c?>page=<?=$p?>&del=<?=$row->CartID?>">
+												<div class="cart tddiv">
+													<span>REMOVE TO CART</span>
+												</div>
+											</a>
+								<?		}			?>	
+										<BR>
+										<p style="color:white;"><?=$int?>:&nbsp;<?=$row->CartItemSize?>:<?=$row->CartQuantity?>&nbsp;&nbsp;<?= $row->ProductName?> <b><BR> &#8369;<?= $row->ProductPrice?></b></p>
+									</div>
+								</div>
+							</td>
+							<?php
+							if($int % 3 == 0)
+								echo "</tr><tr class='tableRow'>";	
+						}	
+						echo "</tr></table>";
+					}
+					else
+					{
+						echo "No product";
+					}
+				}	?>
 			
 			
 			</div>

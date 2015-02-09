@@ -4,7 +4,7 @@
 	include 'php/fresco_style.php';
 	include 'php/header.php';
 	include 'php/menu.php';
-	include("config.php");
+	include "config.php";
 ?>
 		
 		<center>
@@ -94,11 +94,29 @@
 														<span>ZOOM IMAGE</span>
 													</div>
 												</a>
-												<a href="cart.php?<?=$q;?><?=$cat?><?=$srch?>file=<?=$row->ProductID?>&page=<?=$page?>">
+									<?			if($row->ProductStatus=="Close"){     ?>
 													<div class="cart tddiv">
-														<span>ADD TO CART</span>
+														<span>CLOSE</span>
 													</div>
-												</a>	<BR>
+									<?			}
+												else if($row->ProductStatus=="Out of Stock"){     ?>
+													<div class="cart tddiv">
+														<span>OUT OF STOCK</span>
+													</div>
+									<?			}
+												else if($row->ProductAvailability>0){     ?>
+													<a href="cart.php?<?=$q;?><?=$cat?><?=$srch?>file=<?=$row->ProductID?>&page=<?=$page?>">
+														<div class="cart tddiv">
+															<span>ADD TO CART</span>
+														</div>
+													</a>	
+									<?			}
+												else{  		?>
+													<div class="cart tddiv">
+														<span>OUT OF STOCK</span>
+													</div>
+									<?			}		?>
+												<BR>
 												<p style="color:white;">&nbsp;&nbsp;&nbsp;&nbsp; <?= $row->ProductID?>&nbsp;&nbsp; <?= $row->ProductName?> &nbsp;<b>|&nbsp; &#8369;<?= $row->ProductPrice?></b></p>
 											</div>
 										</div>
