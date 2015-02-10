@@ -16,7 +16,8 @@ class DB {
 		);
 		
 		if (mysqli_connect_errno()) {
-			throw new Exception('Database error.');
+			//throw new Exception('Database error.');
+			die('Database error.');
 		}
 
 		$this->MySQLi->set_charset("utf8");

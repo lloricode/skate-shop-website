@@ -33,21 +33,50 @@
 			$row = $rs->fetch_object();
 			$pid=$row->PurchasedId;
 			//select all item to be insert in purchaseLine WHERE purchase=0
-			$sql="SELECT ProductId,CartQuantity FROM Cart WHERE CartPurchased=0 AND UserAccountID=".$_COOKIE['authID']; 
+			$sql="SELECT ProductId,CartQuantity,CartItemSize FROM Cart WHERE CartPurchased=0 AND UserAccountID=".$_COOKIE['authID']; 
 			$rs=DB::query($sql);
 			while($row = $rs->fetch_object()){
-				//select availabilty and sold to be update
-				$sqlcmd="SELECT ProductAvailability,ProductSold FROM Product WHERE ProductID=".$row->ProductId;
-				$rs2=DB::query($sqlcmd);
-				$row2=$rs2->fetch_object();
-				$avail=$row2->ProductAvailability;
-				$sold=$row2->ProductSold;
-				//insert the update
-				$quantity=$row->CartQuantity;
-				$sqlcmd="UPDATE Product SET ProductAvailability=".($avail-$quantity)." , ProductSold=".($sold+$quantity)." WHERE ProductID=".$row->ProductId;
-				DB::query($sqlcmd);
+				$quantity=0;
+				switch ($row->CartItemSize) {
+					case 'small':
+						//select availabilty and sold to be update
+						$sqlcmd="SELECT ProductAvailabilitySmall,ProductSoldSmall FROM Product WHERE ProductID=".$row->ProductId;
+						$rs2=DB::query($sqlcmd);
+						$row2=$rs2->fetch_object();
+						$avail=$row2->ProductAvailabilitySmall;
+						$sold=$row2->ProductSoldSmall;
+						$quantity=$row->CartQuantity;
+						//insert the update
+						$sqlcmd="UPDATE Product SET ProductAvailabilitySmall=".($avail-$quantity).", ProductSoldSmall=".($sold+$quantity)." WHERE ProductID=".$row->ProductId;
+						DB::query($sqlcmd);
+						break;
+					case 'medium':
+						//select availabilty and sold to be update
+						$sqlcmd="SELECT ProductAvailabilityMedium,ProductSoldMedium FROM Product WHERE ProductID=".$row->ProductId;
+						$rs2=DB::query($sqlcmd);
+						$row2=$rs2->fetch_object();
+						$avail=$row2->ProductAvailabilityMedium;
+						$sold=$row2->ProductSoldMedium;
+						$quantity=$row->CartQuantity;
+						//insert the update
+						$sqlcmd="UPDATE Product SET ProductAvailabilityMedium=".($avail-$quantity).", ProductSoldMedium=".($sold+$quantity)." WHERE ProductID=".$row->ProductId;
+						DB::query($sqlcmd);
+						break;
+					case 'large':
+						//select availabilty and sold to be update
+						$sqlcmd="SELECT ProductAvailabilityLarge,ProductSoldLarge FROM Product WHERE ProductID=".$row->ProductId;
+						$rs2=DB::query($sqlcmd);
+						$row2=$rs2->fetch_object();
+						$avail=$row2->ProductAvailabilityLarge;
+						$sold=$row2->ProductSoldLarge;
+						$quantity=$row->CartQuantity;
+						//insert the update
+						$sqlcmd="UPDATE Product SET ProductAvailabilityLarge=".($avail-$quantity).", ProductSoldLarge=".($sold+$quantity)." WHERE ProductID=".$row->ProductId;
+						DB::query($sqlcmd);
+						break;
+				}
 				//insert purchaseLine incuding purchaseID
-				$insertline="INSERT INTO PurchasedLine(PurchasedId,ProductID,Quantity) VALUES($pid,".$row->ProductId.",".$quantity.")";
+				$insertline="INSERT INTO PurchasedLine(PurchasedId,ProductID,Quantity,Size) VALUES($pid,".$row->ProductId.",".$quantity.",'".$row->CartItemSize."')";
 				DB::query($insertline);
 			}
 			//------

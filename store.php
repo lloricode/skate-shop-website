@@ -104,7 +104,7 @@
 														<span>OUT OF STOCK</span>
 													</div>
 									<?			}
-												else if($row->ProductAvailability>0){     ?>
+												else if(($row->ProductAvailabilitySmall+$row->ProductAvailabilityMedium+$row->ProductAvailabilityLarge)>0){     ?>
 													<a href="cart.php?<?=$q;?><?=$cat?><?=$srch?>file=<?=$row->ProductID?>&page=<?=$page?>">
 														<div class="cart tddiv">
 															<span>ADD TO CART</span>
