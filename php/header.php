@@ -8,7 +8,7 @@
 	</head>
 	<body>
 
-		<div style="background-color:black; height:270;">
+		<div style="background-color:#101010; height:270;">
 			<center>
 				<div class="header">
 					<div id="inside_header">

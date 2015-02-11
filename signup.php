@@ -296,5 +296,5 @@
 		</center>
 <?php
 
-	include 'footer.php';
+	include 'php/footer.php';
 ?>

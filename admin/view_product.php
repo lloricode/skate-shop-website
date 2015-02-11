@@ -101,12 +101,13 @@
 		</style>
 		<fieldset>
 			<legend>Datagrid View</legend>
-			<table class="grid">
+			<table class="grid" style="text-align:center">
 				<?php
 				require_once('../config.php');
-				$query = "SELECT p.ProductID,p.ProductSale,p.ProductName, p.ProductBrand ,p.ProductPrice,p.ProductType, 
+			/*	$query = "SELECT p.ProductID,p.ProductSale,p.ProductName, p.ProductBrand ,p.ProductPrice,p.ProductType, 
 				p.ProductStatus,p.ProductAvailability,p.ProductGender,p.ProductAttactment, 
-				a.AdminAccountName,p.ProductDateAdded 
+				a.AdminAccountName,p.ProductDateAdded */
+				$query=" SELECT p.*,a.AdminAccountName,(CASE ProductSale WHEN 1 THEN 'Sale' ELSE 'Not sale' END) AS sale
 				FROM Product AS p INNER JOIN AdminAccount AS a ON p.AdminAccountID = a.AdminAccountID ORDER BY ProductID";
 
 				$result = DB::query($query);
@@ -121,8 +122,8 @@
 								<th>Brand</th>
 								<th>Price</th>
 								<th>Type</th>
-								<th>Status</th>
-								<th>Availability</th>
+								<th>StatusSet</th>
+								<th colspan="2">Stocks</th>
 								<th>Gender</th>
 								<th>Picture</th>
 								<th>Added by</th>
@@ -130,21 +131,36 @@
 							</tr>
 					<?	}	?>	
 						<tr>
-							<td><?=($i+1)?></td>
-							<td><?= $row->ProductID; ?></td>
-							<td><?= $row->ProductSale; ?></td>
-							<td><?= $row->ProductName; ?></td>
-							<td><?= $row->ProductBrand; ?></td>
-							<td><?= "&#8369; ".$row->ProductPrice; ?></td>
-							<td><?= $row->ProductType; ?></td>
-							<td><?= $row->ProductStatus; ?></td>
-							<td><?= $row->ProductAvailability; ?></td>
-							<td><?= $row->ProductGender; ?></td>
-							<td>
+							<td rowspan="4"><?=($i+1)?></td>
+							<td rowspan="4"><?= $row->ProductID; ?></td>
+							<td rowspan="4"><?= $row->sale; ?></td>
+							<td rowspan="4"><?= $row->ProductName; ?></td>
+							<td rowspan="4"><?= $row->ProductBrand; ?></td>
+							<td rowspan="4"><?= "&#8369; ".$row->ProductPrice; ?></td>
+							<td rowspan="4"><?= $row->ProductType; ?></td>
+							<td rowspan="4"><?= $row->ProductStatus; ?></td>
+
+							<td><b>S</b></td>
+							<td><?= $row->ProductAvailabilitySmall; ?></td>
+
+							<td rowspan="4"><?= $row->ProductGender; ?></td>
+							<td rowspan="4">
 								<a href="edit.php?edit_product=<?= $row->ProductID; ?>"><img src="../img/product/<?= $row->ProductAttactment; ?>" width="100" /></a>
 							</td>
-							<td><?= $row->AdminAccountName; ?></td>
-							<td><?= $row->ProductDateAdded; ?></td>
+							<td rowspan="4"><?= $row->AdminAccountName; ?></td>
+							<td rowspan="4"><?= $row->ProductDateAdded; ?></td>
+						</tr>
+						<tr>
+							<td><b>M</b></td>
+							<td><?= $row->ProductAvailabilityMedium; ?></td>
+						</tr>
+						<tr>
+							<td><b>L</b></td>
+							<td><?= $row->ProductAvailabilityLarge; ?></td>
+						</tr>
+						<tr>
+							<td><b>+</b></td>
+							<td><?=( $row->ProductAvailabilitySmall+$row->ProductAvailabilityMedium+$row->ProductAvailabilityLarge)?></td>
 						</tr>
 		<?php 		}
 				}

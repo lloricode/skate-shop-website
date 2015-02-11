@@ -73,8 +73,16 @@
 					</td>
 				</tr>
 				<tr>
-					<td>Product Stock</td>
-					<td><input type="text" placeholder="Product Stock" name="pstock" value="<?= $row->ProductAvailability; ?>" /></td>
+					<td>Product Stock Small</td>
+					<td><input type="text" placeholder="Product Stock" name="pstockS" value="<?= $row->ProductAvailabilitySmall; ?>" /></td>
+				</tr>
+				<tr>
+					<td>Product Stock Medium</td>
+					<td><input type="text" placeholder="Product Stock" name="pstockM" value="<?= $row->ProductAvailabilityMedium; ?>" /></td>
+				</tr>
+				<tr>
+					<td>Product Stock Large</td>
+					<td><input type="text" placeholder="Product Stock" name="pstockL" value="<?= $row->ProductAvailabilityLarge; ?>" /></td>
 				</tr>
 				<tr>
 					<td>Product For</td>

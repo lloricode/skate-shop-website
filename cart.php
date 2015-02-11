@@ -46,7 +46,7 @@
 						$avail=$row2->ProductAvailabilitySmall;
 						$sold=$row2->ProductSoldSmall;
 						$quantity=$row->CartQuantity;
-						//insert the update
+						// the update
 						$sqlcmd="UPDATE Product SET ProductAvailabilitySmall=".($avail-$quantity).", ProductSoldSmall=".($sold+$quantity)." WHERE ProductID=".$row->ProductId;
 						DB::query($sqlcmd);
 						break;
@@ -58,7 +58,7 @@
 						$avail=$row2->ProductAvailabilityMedium;
 						$sold=$row2->ProductSoldMedium;
 						$quantity=$row->CartQuantity;
-						//insert the update
+						// the update
 						$sqlcmd="UPDATE Product SET ProductAvailabilityMedium=".($avail-$quantity).", ProductSoldMedium=".($sold+$quantity)." WHERE ProductID=".$row->ProductId;
 						DB::query($sqlcmd);
 						break;
@@ -70,7 +70,7 @@
 						$avail=$row2->ProductAvailabilityLarge;
 						$sold=$row2->ProductSoldLarge;
 						$quantity=$row->CartQuantity;
-						//insert the update
+						// the update
 						$sqlcmd="UPDATE Product SET ProductAvailabilityLarge=".($avail-$quantity).", ProductSoldLarge=".($sold+$quantity)." WHERE ProductID=".$row->ProductId;
 						DB::query($sqlcmd);
 						break;
@@ -147,19 +147,40 @@
 												<td colspan="2">
 													<span class="err"><? if(isset($_COOKIE['sizerr'])){ echo $_COOKIE['sizerr']."<BR>"; setcookie("sizerr","",time()-5,"/");}?></span>
 													<span class="err"><? if(isset($_COOKIE['qrr'])){ echo $_COOKIE['qrr']; setcookie("qrr","",time()-5,"/");}?></span>
+													<span class="oos"><? if(isset($_COOKIE['oosS'])){ echo $_COOKIE['oosS']; setcookie("oosS","",time()-5,"/");}?></span>
+													<span class="oos"><? if(isset($_COOKIE['oosM'])){ echo $_COOKIE['oosM']; setcookie("oosM","",time()-5,"/");}?></span>
+													<span class="oos"><? if(isset($_COOKIE['oosL'])){ echo $_COOKIE['oosL']; setcookie("oosL","",time()-5,"/");}?></span>
 												</td>
 											</tr>
 											<tr>
-												<td><input type="checkbox" name="size_small" value="small">small</td>
-												<td><input type="text" name="small_quant" placeholder="quantity of small" value="1"></td>
+											<?	if($row->ProductAvailabilitySmall>0){?>
+													<td><input type="checkbox" name="size_small" value="small">small</td>
+													<td><input type="text" name="small_quant" placeholder="quantity of small" value="1"></td>
+											<?	}
+												else{	?>
+													<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;small</td>
+													<td>Out Of Stock</td>
+											<?	}	?>
 											</tr>
 											<tr>
-												<td><input type="checkbox" name="size_medium" value="medium">medium</td>
-												<td><input type="text" name="medium_quant" placeholder="quantity of medium" value="1"></td>
+											<?	if($row->ProductAvailabilityMedium>0){?>
+													<td><input type="checkbox" name="size_medium" value="medium">medium</td>
+													<td><input type="text" name="medium_quant" placeholder="quantity of medium" value="1"></td>
+											<?	}
+												else{	?>
+													<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;medium</td>
+													<td>Out Of Stock</td>
+											<?	}	?>
 											</tr>
 											<tr>
-												<td><input type="checkbox" name="size_large" value="large">large</td>
-												<td><input type="text" name="large_quant" placeholder="quantity of large" value="1"></td>
+											<?	if($row->ProductAvailabilityLarge>0){?>
+													<td><input type="checkbox" name="size_large" value="large">large</td>
+													<td><input type="text" name="large_quant" placeholder="quantity of large" value="1"></td>
+											<?	}
+												else{	?>
+													<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;large</td>
+													<td>Out Of Stock</td>
+											<?	}	?>
 											</tr>
 										</table>
 									</td>
@@ -244,6 +265,13 @@
 						<p>PURCHASE</p>
 					</div>
 				</a>
+				<?}
+				else{?>
+					<a href="cart.php?<?=$q;?><?=$cat?><?=$srch?>page=<?=$page?>">
+						<div style="float:right; background-color:#990033; width:150px; height:50px;">
+							<p>VIEW CART</p>
+						</div>
+					</a>
 				<?}?>
 			</div>
 		</div>

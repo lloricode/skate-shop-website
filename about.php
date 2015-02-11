@@ -58,7 +58,7 @@
 						</div>
 				</div>
 				<div > 
-					<div class="aleft">
+					<div class="aleft" style="background-color:#363636">
 						<img src="img/icon.jpg" width="300" style="margin-top:30px;">
 						<p>
 							<?php
@@ -68,7 +68,7 @@
 							?>
 						</p>
 					</div>
-					<div class="aright" style="background:rgba(0,0,0,.2); ">
+					<div class="aright" style="background:#252525; ">
 						<img src="img/samurai.jpg" width="300" style="margin-top:30px;">
 						<p>
 							<?php

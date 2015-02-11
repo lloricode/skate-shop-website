@@ -30,11 +30,11 @@
 					else
 						$qq="";
 					?>
-					<li id="mainmenu3" <?=($qq=="shoes")?"class='active_menu3'":""?> ><a href="store.php?<?= $actualURL; ?>&cat=shoes">SHOES</a></li>
-					<li id="mainmenu3" <?=($qq=="jackets")?"class='active_menu3'":""?> ><a href="store.php?<?= $actualURL; ?>&cat=jackets">JACKETS</a></li>
-					<li id="mainmenu3" <?=($qq=="tees")?"class='active_menu3'":""?> ><a href="store.php?<?= $actualURL; ?>&cat=tees">TEES</a></li>
-					<li id="mainmenu3" <?=($qq=="jeans")?"class='active_menu3'":""?> ><a href="store.php?<?= $actualURL; ?>&cat=jeans">JEANS</a></li>
-					<li id="mainmenu3" <?=($qq=="shorts")?"class='active_menu3'":""?> ><a href="store.php?<?= $actualURL; ?>&cat=shorts">SHORTS</a></li>
+					<li id="mainmenu3" ><a <?=($qq=="shoes")?"class='active_menu3'":""?> href="store.php?<?= $actualURL; ?>&cat=shoes">SHOES</a></li>
+					<li id="mainmenu3" ><a <?=($qq=="jackets")?"class='active_menu3'":""?> href="store.php?<?= $actualURL; ?>&cat=jackets">JACKETS</a></li>
+					<li id="mainmenu3" ><a <?=($qq=="tees")?"class='active_menu3'":""?> href="store.php?<?= $actualURL; ?>&cat=tees">TEES</a></li>
+					<li id="mainmenu3" ><a <?=($qq=="jeans")?"class='active_menu3'":""?> href="store.php?<?= $actualURL; ?>&cat=jeans">JEANS</a></li>
+					<li id="mainmenu3" ><a <?=($qq=="shorts")?"class='active_menu3'":""?> href="store.php?<?= $actualURL; ?>&cat=shorts">SHORTS</a></li>
 				</ul>
 			</div>
 			<div class="main_body">

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>text</title>
+        <link href="../img/icon.jpg" rel="shortcut icon" type="image/x-icon" />
 		<style type="text/css">
 		a,p,div         {text-decoration:none;color: white;font-family: sans-serif;/*segoe ui light*/}
 		</style>
