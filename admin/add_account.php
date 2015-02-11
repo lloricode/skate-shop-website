@@ -1,6 +1,6 @@
 <?php
 
-	include 'header.php';
+	include 'php/header.php';
 	if(!isset($_COOKIE['auth_accountID']))
 		header("Location: index.php");
 	if($_COOKIE['auth_permission']=="editor")
@@ -55,7 +55,7 @@
 			$passrr="Password mismatch";
 
 		if($fnrr==""&&$lnrr==""&&$unrr==""&&$passrr==""&&$perrr==""){
-			$sqlcmd="INSERT INTO AdminAccount(AdminAccountUserName,AdminAccountName,AdminAccountLastName,AdminAccountPass,permission) 
+			$sqlcmd="INSERT INTO AdminAccount(AdminAccountUserName,AdminAccountName,AdminAccountLastName,AdminAccountPass,AdminAccountPermission) 
 			VALUES('$un','$fn','$ln','".md5($pass)."','$per')";
 			DB::query($sqlcmd);
 			$ok="ok!!";

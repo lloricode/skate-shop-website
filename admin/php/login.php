@@ -2,7 +2,7 @@
 //setcookie('auth_account', '1', time() + (86400 * 30), "/"); // 86400 = 1 day
 //header("Location: index.php");
 
-require_once('../config.php');
+require_once('../../config.php');
 
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 {
@@ -16,7 +16,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 		setcookie('auth_name', $row->AdminAccountName, time() + 3600 , "/"); // 86400 = 1 day
 		setcookie('auth_lname', $row->AdminAccountLastName, time() + 3600 , "/"); // 86400 = 1 day
 		setcookie('auth_permission', $row->AdminAccountPermission, time() + 3600 , "/"); // 86400 = 1 day
-		header("Location: index.php");
+		header("Location: ../index.php");
 	}
 	else
 	{
@@ -25,6 +25,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 }
 else
 {
-	header("Location: index.php");
+	header("Location: ../index.php");
 }
 ?>

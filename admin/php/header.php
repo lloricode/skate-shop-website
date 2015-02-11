@@ -19,7 +19,7 @@
 	<div class="d">
 <?php
 	if(isset($_COOKIE['auth_accountID']))
-		echo "Hello!, ".$_COOKIE['auth_name']."! &nbsp;&nbsp;&nbsp;<a href='logout.php'><button>Logout</button></a><BR>";
+		echo "Hello!, ".$_COOKIE['auth_name']."! &nbsp;&nbsp;&nbsp;<a href='php/logout.php'><button>Logout</button></a><BR>";
 	
 
 ?>

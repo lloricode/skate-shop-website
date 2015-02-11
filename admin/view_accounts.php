@@ -1,6 +1,6 @@
 
 		<?php
-		include 'header.php';
+		include 'php/header.php';
 		require_once('../config.php');
 		?>
 

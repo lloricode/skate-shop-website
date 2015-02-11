@@ -12,8 +12,8 @@
 
 
 
-require_once('../config.php');
-$path = "../img/product/";
+require_once('../../config.php');
+$path = "../../img/product/";
 
 	$valid_formats = array("jpg","png");
 	if(isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST")
@@ -41,7 +41,9 @@ $path = "../img/product/";
 									ProductPrice,
 									ProductType,
 									ProductStatus,
-									ProductAvailability,
+									ProductAvailabilitySmall,
+									ProductAvailabilityMedium,
+									ProductAvailabilityLarge,
 									ProductGender,
 									ProductAttactment,
 									AdminAccountID
@@ -52,7 +54,9 @@ $path = "../img/product/";
 									'". $_POST['pprice'] . "',
 									'". $_POST['ptype'] . "',
 									'". $_POST['pstatus'] . "',
-									'". $_POST['pstock'] . "',
+									'". $_POST['pstockS'] . "',
+									'". $_POST['pstockM'] . "',
+									'". $_POST['pstockL'] . "',
 									'". $_POST['pgender'] . "',
 									'". $imgfile . "',
 									'". $_COOKIE['auth_accountID'] . "'
@@ -60,7 +64,7 @@ $path = "../img/product/";
 								echo $query;
                                 DB::query($query);
 								//echo "Success";
-								header("Location: view_product.php");
+								header("Location: ../view_product.php");
 
 							}else {
 								echo "failed";
@@ -77,4 +81,4 @@ $path = "../img/product/";
 			
 	}
 ?>
-<a href="view_product.php"><button>back</button></a>
+<a href="../view_product.php"><button>back</button></a>

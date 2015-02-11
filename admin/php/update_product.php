@@ -12,8 +12,8 @@
 
 
 
-require_once('../config.php');
-$path = "../img/product/";
+require_once('../../config.php');
+$path = "../../img/product/";
 	$err=0;
 	$valid_formats = array("jpg","png");
 	if(isset($_GET['id'])){
@@ -39,7 +39,7 @@ $path = "../img/product/";
 	                               DB::query($query);
 								}
 								else {
-									setcookie("tmp","failed.",time()+5,"/");	
+									setcookie("tmp","failed update image.",time()+5,"/");	
 									$err++;
 	                            }
 							}
@@ -70,12 +70,12 @@ $path = "../img/product/";
 	                               DB::query($query);
 	                               setcookie("tmp","update successfull!",time()+5,"/");	
 	            }
-				header("Location: edit.php?edit_product=".$_GET['id']);
+				header("Location: ../edit.php?edit_product=".$_GET['id']);
 				
 		}
 		else
-			header("Location: view_product.php");
+			header("Location: ../view_product.php");
 	}
 	else
-		header("Location: view_product.php");
+		header("Location: ../view_product.php");
 ?>

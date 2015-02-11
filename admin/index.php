@@ -5,11 +5,11 @@
  */
 
 
-		include 'header.php';
+		include 'php/header.php';
 		if(!isset($_COOKIE['auth_accountID']))
 		{
 			?>
-			<form method="POST" action="login.php">
+			<form method="POST" action="php/login.php">
 				<input type="text" placeholder="Username" name="user" />
 				<input type="password" placeholder="Password" name="pass" />
 				<input type="submit" value="Login" />

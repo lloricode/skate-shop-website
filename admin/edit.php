@@ -1,5 +1,5 @@
 <?php
-	include 'header.php';
+	include 'php/header.php';
 	require_once('../config.php');
 ?>
 	<div class="d">
@@ -14,7 +14,7 @@
 			if(DB::getNumRows()){	
 				$row=$rs->fetch_object();
 				setcookie("del",$row->ProductAttactment,time()+900,"/");
-				echo "<form action='update_product.php?id=$row->ProductID' method='post' enctype='multipart/form-data'>";
+				echo "<form action='php/update_product.php?id=$row->ProductID' method='post' enctype='multipart/form-data'>";
 	?>			<table>
 				<tr>
 					<td><img src="../img/product/<?= $row->ProductAttactment; ?>" width="200" ></td>

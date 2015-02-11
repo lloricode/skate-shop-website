@@ -1,6 +1,6 @@
 
 	<?php
-	include 'header.php';
+	include 'php/header.php';
 	?>
 		<div  class="d">
 <a href="index.php"><button>back to main</button></a>
@@ -8,7 +8,7 @@
 	 if(isset($_COOKIE['auth_accountID'])){ ?>
 	<?	if($_COOKIE['auth_permission']=="admin"){ 		?>
 		<p>add product</p>
-		<form method="POST" action="addproduct.php" enctype="multipart/form-data">
+		<form method="POST" action="php/addproduct.php" enctype="multipart/form-data">
 			<table>
 				<tr>
 					<td>SALE</td>
@@ -57,8 +57,16 @@
 					</td>
 				</tr>
 				<tr>
-					<td>Product Stock</td>
-					<td><input type="text" placeholder="Product Stock" name="pstock" /></td>
+					<td>Product Stock Small</td>
+					<td><input type="text" placeholder="SMALL" name="pstockS" /></td>
+				</tr>
+				<tr>
+					<td>Product Stock Medium</td>
+					<td><input type="text" placeholder="MEDIUM" name="pstockM" /></td>
+				</tr>
+				<tr>
+					<td>Product Stock Large</td>
+					<td><input type="text" placeholder="LARGE" name="pstockL" /></td>
 				</tr>
 				<tr>
 					<td>Product For</td>
