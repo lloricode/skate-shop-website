@@ -46,10 +46,10 @@
 
 
 
-						E-MAIL ADDRESS/USERNAME:<? for($i=0;$i<14;$i++) echo "&nbsp;"; ?><br>
+						E-MAIL ADDRESS/USERNAME:<?php for($i=0;$i<14;$i++) echo "&nbsp;"; ?><br>
 						<input type="text" name="email_username" style="width:300px; height:22px;"><BR><BR><BR>
 						
-						<? for($i=0;$i<11;$i++) echo "<BR>"; ?>
+						<?php for($i=0;$i<11;$i++) echo "<BR>"; ?>
 						
 						<table>
 							<tr>
@@ -58,7 +58,7 @@
 										<input type="button" name="signup" value="BACK TO LOG IN" style="background-color:orange">
 									</a>
 								</td>
-								<td><? for($i=0;$i<50;$i++) echo "&nbsp;"; ?></td>
+								<td><?php for($i=0;$i<50;$i++) echo "&nbsp;"; ?></td>
 								<td>
 									<input type="submit" name="login" value="SUBMIT" style="background-color:red">
 								</td>

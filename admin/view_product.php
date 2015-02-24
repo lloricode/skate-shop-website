@@ -6,7 +6,7 @@
 <a href="index.php"><button>back to main</button></a>
 	<?
 	 if(isset($_COOKIE['auth_accountID'])){ ?>
-	<?	if($_COOKIE['auth_permission']=="admin"){ 		?>
+	<?php if($_COOKIE['auth_permission']=="admin"){ 		?>
 		<p>add product</p>
 		<form method="POST" action="php/addproduct.php" enctype="multipart/form-data">
 			<table>
@@ -94,7 +94,7 @@
 				</tr>
 			</table>
 		</form>
-<?	}		?>
+<?php }		?>
 		</div>
 		<br /> <br />
 		<hr />
@@ -137,7 +137,7 @@
 								<th>Added by</th>
 								<th>Date Added</th>
 							</tr>
-					<?	}	?>	
+					<?php }	?>	
 						<tr>
 							<td rowspan="4"><?=($i+1)?></td>
 							<td rowspan="4"><?= $row->ProductID; ?></td>

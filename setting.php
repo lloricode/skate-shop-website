@@ -14,7 +14,7 @@
 						if(isset($_COOKIE['tmp']))
 							 echo $_COOKIE['tmp']."<BR>";
 						echo "<img src='./img/UserImage/".$_COOKIE['authImg']."' alt='' height='300' >";
-						echo "<form action='updateimage.php' method='post' enctype='multipart/form-data'>
+						echo "<form action='php/updateimage.php' method='post' enctype='multipart/form-data'>
 							<label>Browse image</label><input type='file' name='imgfile'>
 							<input type='submit' value='update image'>
 						</form>";

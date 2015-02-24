@@ -10,14 +10,14 @@
 		<center>
 			<div class="menu2" >
             	<ul id="navlist2" style="padding-top:9px;">
-	            <?	if(isset($_GET['query'])) 
+	            <?php if(isset($_GET['query'])) 
 						$qq=$_GET['query'];
 					else
 						$qq="";?>
-					<li id="mainmenu2" <?=($qq=="sale")?"class='active_menu2'":""?> ><a href="store.php?query=sale" >SALE</a></li>
-					<li id="mainmenu2" <?=($qq=="male")?"class='active_menu2'":""?> ><a href="store.php?query=male">MALE</a></li>
-					<li id="mainmenu2" <?=($qq=="female")?"class='active_menu2'":""?> ><a href="store.php?query=female">FEMALE</a></li>
-					<li id="mainmenu2" <?=($qq=="brands")?"class='active_menu2'":""?> ><a href="store.php?query=brands">MISC</a></li>
+					<li id="mainmenu2" <?php if(isset($qq)){ if($qq=="sale") echo "class='active_menu2'"; }?> ><a href="store.php?query=sale" >SALE</a></li>
+					<li id="mainmenu2" <?php if(isset($qq)){ if($qq=="male") echo "class='active_menu2'"; }?> ><a href="store.php?query=male">MALE</a></li>
+					<li id="mainmenu2" <?php if(isset($qq)){ if($qq=="female") echo "class='active_menu2'"; }?> ><a href="store.php?query=female">FEMALE</a></li>
+					<li id="mainmenu2" <?php if(isset($qq)){ if($qq=="brand") echo "class='active_menu2'"; }?> ><a href="store.php?query=brands">MISC</a></li>
 				</ul>
 			</div>
 			<?php
@@ -25,21 +25,22 @@
 			?>
 			<div class="menu3">
 	            <ul id="navlist3" style="margin-top:0px; padding-top:8px;">
-	            <?	if(isset($_GET['cat'])) 
+	            <?php if(isset($_GET['cat'])) 
 						$qq=$_GET['cat'];
 					else
 						$qq="";
 					?>
-					<li id="mainmenu3" ><a <?=($qq=="shoes")?"class='active_menu3'":""?> href="store.php?<?= $actualURL; ?>&cat=shoes">SHOES</a></li>
-					<li id="mainmenu3" ><a <?=($qq=="jackets")?"class='active_menu3'":""?> href="store.php?<?= $actualURL; ?>&cat=jackets">JACKETS</a></li>
-					<li id="mainmenu3" ><a <?=($qq=="tees")?"class='active_menu3'":""?> href="store.php?<?= $actualURL; ?>&cat=tees">TEES</a></li>
-					<li id="mainmenu3" ><a <?=($qq=="jeans")?"class='active_menu3'":""?> href="store.php?<?= $actualURL; ?>&cat=jeans">JEANS</a></li>
-					<li id="mainmenu3" ><a <?=($qq=="shorts")?"class='active_menu3'":""?> href="store.php?<?= $actualURL; ?>&cat=shorts">SHORTS</a></li>
+
+					<li id="mainmenu3" ><a <?php if(isset($qq)){ if($qq=="shoes") echo "class='active_menu3'"; }?> href="store.php?<?php echo  $actualURL; ?>&cat=shoes">SHOES</a></li>
+					<li id="mainmenu3" ><a <?php if(isset($qq)){ if($qq=="jackets") echo "class='active_menu3'"; }?> href="store.php?<?php echo  $actualURL; ?>&cat=jackets">JACKETS</a></li>
+					<li id="mainmenu3" ><a <?php if(isset($qq)){ if($qq=="tees") echo "class='active_menu3'"; }?> href="store.php?<?php echo  $actualURL; ?>&cat=tees">TEES</a></li>
+					<li id="mainmenu3" ><a <?php if(isset($qq)){ if($qq=="jeans") echo "class='active_menu3'"; }?> href="store.php?<?php echo  $actualURL; ?>&cat=jeans">JEANS</a></li>
+					<li id="mainmenu3" ><a <?php if(isset($qq)){ if($qq=="shorts") echo "class='active_menu3'"; }?> href="store.php?<?php echo  $actualURL; ?>&cat=shorts">SHORTS</a></li>
 				</ul>
 			</div>
 			<div class="main_body">
 				<div style="background-color:; height:1010px;">
-					<? 		
+					<?php 		
 					$dir=$q="";
 					if(isset($_GET['query'])) 
 						$q=$dir=$_GET['query'];
@@ -84,40 +85,40 @@
 								{
 									 ?>
 									<td class="tableData">
-										<div class="mardagz" style="background: url('img/product/<?= $row->ProductAttactment; ?>');background-repeat: no-repeat; background-size: cover;">
+										<div class="mardagz" style="background: url('img/product/<?php echo  $row->ProductAttactment; ?>');background-repeat: no-repeat; background-size: cover;">
 											<div class="details">
-												<a href="img/product/<?= $row->ProductAttactment; ?>" class='fresco'
+												<a href="img/product/<?php echo  $row->ProductAttactment; ?>" class='fresco'
 													data-fresco-group="product"
-													data-fresco-caption="Name: <?= $row->ProductName; ?> <br />
-													Price: &#8369;<?= $row->ProductPrice; ?>" >
+													data-fresco-caption="Name: <?php echo  $row->ProductName; ?> <br />
+													Price: &#8369;<?php echo  $row->ProductPrice; ?>" >
 													<div class="name tddiv">
 														<span>ZOOM IMAGE</span>
 													</div>
 												</a>
-									<?			if($row->ProductStatus=="Close"){     ?>
+									<?php 		if($row->ProductStatus=="Close"){     ?>
 													<div class="cart tddiv">
 														<span>CLOSE</span>
 													</div>
-									<?			}
+									<?php 		}
 												else if($row->ProductStatus=="Out of Stock"){     ?>
 													<div class="cart tddiv">
 														<span>OUT OF STOCK</span>
 													</div>
-									<?			}
+									<?php 		}
 												else if(($row->ProductAvailabilitySmall+$row->ProductAvailabilityMedium+$row->ProductAvailabilityLarge)>0){     ?>
-													<a href="cart.php?<?=$q;?><?=$cat?><?=$srch?>file=<?=$row->ProductID?>&page=<?=$page?>">
+													<a href="cart.php?<?php echo $q;?><?php echo $cat?><?php echo $srch?>file=<?php echo $row->ProductID?>&page=<?php echo $page?>">
 														<div class="cart tddiv">
 															<span>ADD TO CART</span>
 														</div>
 													</a>	
-									<?			}
+									<?php 		}
 												else{  		?>
 													<div class="cart tddiv">
 														<span>OUT OF STOCK</span>
 													</div>
-									<?			}		?>
+									<?php 		}		?>
 												<BR>
-												<p style="color:white;">&nbsp;&nbsp;&nbsp;&nbsp; <?= $row->ProductID?>&nbsp;&nbsp; <?= $row->ProductName?> &nbsp;<b>|&nbsp; &#8369;<?= $row->ProductPrice?></b></p>
+												<p style="color:white;">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo  $row->ProductID?>&nbsp;&nbsp; <?php echo  $row->ProductName?> &nbsp;<b>|&nbsp; &#8369;<?php echo  $row->ProductPrice?></b></p>
 											</div>
 										</div>
 									</td>
@@ -137,7 +138,7 @@
 					} ?>
 				</div>
 				<div style="background-color:; height:30px; margin-top:50px;">
-					<a href="cart.php?<?=$q;?><?=$cat?><?=$srch?>page=<?=$page?>">
+					<a href="cart.php?<?php echo $q;?><?php echo $cat?><?php echo $srch?>page=<?php echo $page?>">
 						<div style="float:bottom; background-color:#990033; width:150px; height:50px;">
 							<p>VIEW CART</p>
 						</div>
@@ -145,7 +146,7 @@
 				</div>
 				<div style="background-color:; height:30px; margin-top:5px;">
 		<?php 		if(0!=$prev){		?>
-						<a href="store.php?<?=$q.$cat."page=".($page-1);?>">
+						<a href="store.php?<?php echo $q.$cat."page=".($page-1);?>">
 							<div style="float:left; background-color:#D14719; width:120px; height:45px">
 								<p>PREV PAGE</p>
 							</div>
@@ -154,7 +155,7 @@
 						
 
 			 		if($total_result>$nxt){		?>
-						<a href="store.php?<?=$q.$cat."page=".($page+1);?>">
+						<a href="store.php?<?php echo $q.$cat."page=".($page+1);?>">
 							<div style="float:right; background-color:#D14719; width:120px; height:45px">
 								<p>NEXT PAGE</p>
 							</div>

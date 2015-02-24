@@ -41,7 +41,7 @@
 						<input placeholder="new password" type="password" name="newpass" style="width:300px; height:22px;">
 						<input placeholder="re-type new password" type="password" name="newpass2" style="width:300px; height:22px;"><BR><BR><BR>
 						
-						<?} for($i=0;$i<11;$i++) echo "<BR>"; ?>
+						<?php } for($i=0;$i<11;$i++) echo "<BR>"; ?>
 					
 						<table>
 							<tr>
@@ -50,7 +50,7 @@
 										<input type="button" name="signup" value="BACK TO LOG IN" style="background-color:orange">
 									</a>
 								</td>
-								<td><? for($i=0;$i<50;$i++) echo "&nbsp;"; ?></td>
+								<td><?php for($i=0;$i<50;$i++) echo "&nbsp;"; ?></td>
 								<td>
 									<input type="submit" name="login" value="LOG IN" style="background-color:red">
 								</td>

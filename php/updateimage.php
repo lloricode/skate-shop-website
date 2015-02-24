@@ -53,5 +53,5 @@ $path = "img/UserImage/";
 			setcookie("tmp","please select a file.!",time()+3,"/");
 			
 	}
-	header("Location: setting.php");
+	header("Location: ../setting.php");
 ?>

@@ -168,7 +168,7 @@
 			    <table>
 	                <tr style="font-size:30px;">
 	                    <td id="tdpad3" style="float:left;">
-	                    	SIGN UP FORM<? for($i=0;$i<50;$i++) echo "&nbsp;"; ?>
+	                    	SIGN UP FORM<?php for($i=0;$i<50;$i++) echo "&nbsp;"; ?>
 	                    </td>
 	                </tr>
 	            </table>
@@ -180,28 +180,28 @@
 						}?>
 			
 					<BR><BR><BR><BR>
-					<? if(!isset($fn))$fn=$ln=$username=$pass=$bm=$bd=$by=$gender=$home=$mobile=$email=$shipping=$ques=$ans="";?>
+					<?php if(!isset($fn))$fn=$ln=$username=$pass=$bm=$bd=$by=$gender=$home=$mobile=$email=$shipping=$ques=$ans="";?>
 					<form action="<?=htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 						<table>
 							<tr>
 								<td>FIRST NAME: </td>
 								<td><input placeholder="first name"  type="text" name="fn"  value="<?=$fn;?>"></td>
-								<td><span id="err"><? if(isset($fnrr)) echo $fnrr;?></span></td>
+								<td><span id="err"><?php if(isset($fnrr)) echo $fnrr;?></span></td>
 							</tr>
 							<tr>
 								<td>LAST NAME:</td>
 								<td><input placeholder="last name"  type="text" name="ln" value="<?=$ln;?>"></td>
-								<td><span id="err"><? if(isset($lnrr)) echo $lnrr;?></span></td>
+								<td><span id="err"><?php if(isset($lnrr)) echo $lnrr;?></span></td>
 							</tr>
 							<tr>
 								<td>USERNAME:</td>
 								<td><input placeholder="username"  type="text" name="username" value="<?=$username;?>"></td>
-								<td><span id="err"><? if(isset($usernamerr)) echo $usernamerr;?></span></td>
+								<td><span id="err"><?php if(isset($usernamerr)) echo $usernamerr;?></span></td>
 							</tr>
 							<tr>
 								<td>PASSWORD:</td>
 								<td><input placeholder="password"  type="password" name="pass" ></td>
-								<td><span id="err"><? if(isset($passrr)) echo $passrr;?></span></td>
+								<td><span id="err"><?php if(isset($passrr)) echo $passrr;?></span></td>
 							</tr>
 							<tr>
 								<td>RE-TYPE PASSWORD</td>
@@ -229,7 +229,7 @@
 									</select>
 									<input type="text" name="bd" placeholder="day" style="width:110px;margin-right:35px" value="<?=$bd;?>">
 								</td>
-								<td><span id="err"><? if(isset($bdate)) echo $bdate;?></span></td>
+								<td><span id="err"><?php if(isset($bdate)) echo $bdate;?></span></td>
 							</tr>
 							<tr>
 								<td>GENDER:</td>
@@ -237,37 +237,37 @@
 									<input type="radio" name="gender" <?php if(isset($_POST['gender']) && $gender=="male" ) echo "checked"; ?> value="male"> male
 									<input type="radio" name="gender" <?php if(isset($_POST['gender']) && $gender=="female" ) echo "checked"; ?>  value="female">female
 								</td>
-								<td><span id="err"><? if(isset($genderrr)) echo $genderrr;?></span></td>
+								<td><span id="err"><?php if(isset($genderrr)) echo $genderrr;?></span></td>
 							</tr>
 							<tr>
 								<td>HOME ADDRESS:</td>
 								<td><textarea placeholder="home address" rows="3" cols="48" name="home"><?=$home;?></textarea></td>
-								<td><span id="err"><? if(isset($homerr)) echo $homerr;?></span></td>
+								<td><span id="err"><?php if(isset($homerr)) echo $homerr;?></span></td>
 							</tr>
 							<tr>
 								<td>MOBILE NUMBER:</td>
 								<td><input placeholder="mobile number" type="text" name="mobile" value="<?=$mobile;?>"></td>
-								<td><span id="err"><? if(isset($mobilerr)) echo $mobilerr;?></span></td>
+								<td><span id="err"><?php if(isset($mobilerr)) echo $mobilerr;?></span></td>
 							</tr>
 							<tr>
 								<td>EMAIL ADDRESS:</td>
 								<td><input placeholder="email address" type="text" name="email" value="<?=$email;?>"></td>
-								<td><span id="err"><? if(isset($emailrr)) echo $emailrr;?></span></td>
+								<td><span id="err"><?php if(isset($emailrr)) echo $emailrr;?></span></td>
 							</tr>
 							<tr>
 								<td>SHIPPING ADDRESS:</td>
 								<td><textarea placeholder="shipping address" rows="3" cols="48" name="shipping"   ><?=$shipping;?></textarea></td>
-								<td><span id="err"><? if(isset($shippingrr)) echo $shippingrr;?></span></td>
+								<td><span id="err"><?php if(isset($shippingrr)) echo $shippingrr;?></span></td>
 							</tr>
 							<tr>
 								<td>SECRET QUESTION:</td>
 								<td><input placeholder="secret question" type="text" name="ques" value="<?=$ques;?>"></td>
-								<td><span id="err"><? if(isset($quesrr)) echo $quesrr;?></span></td>
+								<td><span id="err"><?php if(isset($quesrr)) echo $quesrr;?></span></td>
 							</tr>
 							<tr>
 								<td>SECRET ANSWER:</td>
 								<td><input placeholder="secret answer " type="password" name="ans" ></td>
-								<td><span id="err"><? if(isset($ansrr)) echo $ansrr;?></span></td>
+								<td><span id="err"><?php if(isset($ansrr)) echo $ansrr;?></span></td>
 							</tr>
 							<tr>
 								<td>RETYPE ANSWER:</td>

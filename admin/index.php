@@ -25,7 +25,7 @@
 			<a href="edit_contact.php"><button>add/edit document in CONTACT</button></a><BR>
 			<a href="../SKATESHOP.pdf" target="blank_"><button>view documentation</button></a>
 			</div>
-			<?
+			<?php
 		}
 	?>
 	</body>

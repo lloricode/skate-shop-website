@@ -23,7 +23,7 @@
 										</a>&nbsp;&nbsp;&nbsp;&nbsp; 
 									 	<a href="setting.php" class="setting">SETTING</a>&nbsp;&nbsp; <a href="logout.php" class="logout">LOG OUT</a>&nbsp;
 									</p>
-						<?		}
+						<?php		}
 								else
 									echo "<p><a href='login.php' class='login'>LOG IN</a>&nbsp;&nbsp;</p>";
 							?>
