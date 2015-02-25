@@ -13,14 +13,14 @@
 				<div class="header">
 					<div id="inside_header">
 						<div id="log" >
-							<?php 
+							<?php
 								if(isset($_COOKIE['authFn'])){  ?>
-									<p>	
-										Welcome, 
+									<p>
+										Welcome,
 										<a href='profile.php' >
 											<?=$_COOKIE['authFn']?>!&nbsp;&nbsp;&nbsp;
-											<img src="./img/UserImage/<?=$_COOKIE['authImg'];?>" alt="" height="28" >
-										</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+											<img src="img/UserImage/<?php echo $_COOKIE['authImg'];?>" alt="" height="28" >
+										</a>&nbsp;&nbsp;&nbsp;&nbsp;
 									 	<a href="setting.php" class="setting">SETTING</a>&nbsp;&nbsp; <a href="logout.php" class="logout">LOG OUT</a>&nbsp;
 									</p>
 						<?php		}

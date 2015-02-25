@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.7.1
+-- version 4.2.11
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Feb 11, 2015 at 07:58 AM
--- Server version: 5.5.39
--- PHP Version: 5.4.31
+-- Host: 127.0.0.1
+-- Generation Time: Feb 25, 2015 at 05:34 AM
+-- Server version: 5.6.21
+-- PHP Version: 5.6.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,29 +17,29 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `MyShopDB`
+-- Database: `myshopdb`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `AdminAccount`
+-- Table structure for table `adminaccount`
 --
 
-CREATE TABLE IF NOT EXISTS `AdminAccount` (
+CREATE TABLE IF NOT EXISTS `adminaccount` (
 `AdminAccountID` int(11) NOT NULL,
   `AdminAccountUserName` varchar(20) NOT NULL,
   `AdminAccountName` varchar(50) NOT NULL,
   `AdminAccountLastName` varchar(20) NOT NULL,
   `AdminAccountPass` varchar(50) NOT NULL,
   `AdminAccountPermission` enum('admin','editor','','') NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `AdminAccount`
+-- Dumping data for table `adminaccount`
 --
 
-INSERT INTO `AdminAccount` (`AdminAccountID`, `AdminAccountUserName`, `AdminAccountName`, `AdminAccountLastName`, `AdminAccountPass`, `AdminAccountPermission`) VALUES
+INSERT INTO `adminaccount` (`AdminAccountID`, `AdminAccountUserName`, `AdminAccountName`, `AdminAccountLastName`, `AdminAccountPass`, `AdminAccountPermission`) VALUES
 (11, 'admin', 'Lloric', 'Garcia', '21232f297a57a5a743894a0e4a801fc3', 'admin'),
 (12, 'q', 'user', 'fsfa', '7694f4a66316e53c8cdd9d9954bd611d', 'editor'),
 (13, 'mos', 'Ard', 'Moses', 'mos', 'editor'),
@@ -53,10 +53,10 @@ INSERT INTO `AdminAccount` (`AdminAccountID`, `AdminAccountUserName`, `AdminAcco
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Cart`
+-- Table structure for table `cart`
 --
 
-CREATE TABLE IF NOT EXISTS `Cart` (
+CREATE TABLE IF NOT EXISTS `cart` (
 `CartID` int(11) NOT NULL,
   `UserAccountID` int(11) NOT NULL,
   `ProductID` int(11) NOT NULL,
@@ -64,15 +64,22 @@ CREATE TABLE IF NOT EXISTS `Cart` (
   `CartQuantity` int(11) NOT NULL,
   `CartItemSize` enum('small','medium','large') NOT NULL,
   `CartDateAdded` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`CartID`, `UserAccountID`, `ProductID`, `CartPurchased`, `CartQuantity`, `CartItemSize`, `CartDateAdded`) VALUES
+(1, 10, 84, 1, 1, 'small', '2015-02-25 03:19:56');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Product`
+-- Table structure for table `product`
 --
 
-CREATE TABLE IF NOT EXISTS `Product` (
+CREATE TABLE IF NOT EXISTS `product` (
 `ProductID` int(11) NOT NULL,
   `ProductName` varchar(50) NOT NULL,
   `ProductPrice` double NOT NULL,
@@ -90,55 +97,23 @@ CREATE TABLE IF NOT EXISTS `Product` (
   `ProductSoldSmall` int(11) NOT NULL,
   `ProductSoldMedium` int(11) NOT NULL,
   `ProductSoldLarge` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=83 ;
+) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Product`
+-- Dumping data for table `product`
 --
 
-INSERT INTO `Product` (`ProductID`, `ProductName`, `ProductPrice`, `ProductType`, `ProductStatus`, `ProductAvailabilitySmall`, `ProductAvailabilityMedium`, `ProductAvailabilityLarge`, `ProductGender`, `ProductAttactment`, `AdminAccountID`, `ProductDateAdded`, `ProductSale`, `ProductBrand`, `ProductSoldSmall`, `ProductSoldMedium`, `ProductSoldLarge`) VALUES
-(49, 'black jac', 757, 'shoes', 'Available', 0, 0, 0, 'male', 'e06125a16c1446f81868096a35bb2609.jpg', 12, '2015-01-21 15:05:22', 0, 'ballos', 10, 11, 10),
-(50, 'ballos', 8898, 'shoes', 'Available', 10, 10, 10, 'male', 'ff4b41246e3a881a9bea221f4fad912f.jpg', 12, '2015-01-21 15:14:43', 0, 'name', 0, 0, 0),
-(51, 'dad', 2423, 'shoes', 'Close', 10, 10, 9, 'male', '0912e713f05745fbf45c448f188fb7a0.jpg', 12, '2015-01-23 06:26:39', 0, 'ssf', 0, 0, 1),
-(52, 'eew', 2342, 'jackets', 'Available', 10, 10, 10, 'male', '480ed5ddecc68f23f9052bcac30c9f89.jpg', 11, '2015-01-23 06:28:36', 0, 'efws', 0, 0, 0),
-(53, 'wer', 2342, 'shoes', 'Close', 10, 10, 10, 'male', '8d0e54b6e7af546a94dff9de661daeeb.jpg', 11, '2015-01-23 06:29:27', 0, 'wefw', 0, 0, 0),
-(54, 'fdg', 433, 'jackets', 'Available', 10, 10, 10, 'male', '1643a617dfa75d76bf2622a46ee5a682.jpg', 11, '2015-01-23 06:29:51', 0, 'dg', 0, 0, 0),
-(55, 'tyry', 464, 'tees', 'Available', 10, 10, 10, 'male', '9bdfc236a8be498259937d37f24b0f33.jpg', 11, '2015-01-23 06:30:19', 0, 'yryr', 0, 0, 0),
-(56, 'dfgd', 436, 'shoes', 'Available', 10, 10, 10, 'male', 'b812c58e38f5811907c304e8df5b768e.jpg', 11, '2015-01-23 06:30:56', 0, 'dfbdsb', 0, 0, 0),
-(57, 'dfg', 335, 'jackets', 'Available', 10, 10, 10, 'male', '62f9352df5a06a827b48b5138d9e3487.jpg', 11, '2015-01-23 06:31:21', 0, 'gfedgfd', 0, 0, 0),
-(58, 'fdsg', 3453, 'shoes', 'Available', 10, 10, 10, 'male', '8cb7fd7f92fd0a9051b2a59fd13c50a0.jpg', 11, '2015-01-23 06:31:39', 0, 'fdgsd', 0, 0, 0),
-(59, 'ewwe', 523, 'jackets', 'Available', 10, 10, 10, 'male', '28d724e01c32bcc6bfa279ac6474340e.jpg', 11, '2015-01-23 06:32:05', 0, 'ewwet', 0, 0, 0),
-(60, 'fbdbf', 2342, 'jackets', 'Available', 10, 10, 10, 'male', 'e2d1532231d56dbb112b93a2d28697cb.jpg', 11, '2015-01-23 06:35:19', 0, 'wfw', 0, 0, 0),
-(61, 'edwin', 123456, 'tees', 'Available', 10, 10, 10, 'male', '0e0058efc38826e2a138ea536605186f.jpg', 12, '2015-01-25 02:38:18', 1, 'rudas', 0, 0, 0),
-(62, 'egsgs', 3634, 'shoes', 'Available', 10, 10, 10, 'male', 'ff418c6f3d026954a312dea869d144d3.jpg', 12, '2015-01-25 06:40:31', 1, 'gdfs', 0, 0, 0),
-(63, 'hjhg', 89778, 'shoes', 'Available', 10, 10, 10, 'male', '0692e3b5c51c1009e917728132278892.jpg', 11, '2015-01-25 06:41:49', 0, 'jj', 0, 0, 0),
-(64, 'lloric', 123456, 'shoes', 'Available', 10, 10, 10, 'male', '7b25869914f9413278e1c1673a7d8798.jpg', 11, '2015-01-25 09:47:39', 0, 'm/', 0, 0, 0),
-(65, 'Onyok', 3454678, 'tees', 'Available', 10, 10, 10, 'female', '424b8bf632d1fa7a2466e5a2b58b94e3.jpg', 12, '2015-01-25 12:59:42', 0, 'Embrado', 0, 0, 0),
-(66, 'kaaka', 87987, 'shoes', 'Close', 10, 10, 10, 'male', '5f91ddee776d4273f7939dc6d64739ca.jpg', 11, '2015-01-28 06:26:00', 0, 'guyg', 0, 0, 0),
-(67, 'nike', 234324321, 'jackets', 'Available', 10, 10, 10, 'male', 'abadd4bd81ff40a61bf430edc170066f.jpg', 11, '2015-01-28 06:34:35', 0, 'steffan ja', 0, 0, 0),
-(68, 'hgj', 8768, 'shoes', 'Available', 10, 10, 10, 'male', '7d3d6d946f59ecb68a41e61f9f019441.jpg', 11, '2015-01-28 08:45:13', 0, 'ghg', 0, 0, 0),
-(69, 'jhjh', 0, 'shoes', 'Available', 10, 10, 10, 'male', '88c97de27cc47af79104b89b2239efdb.jpg', 11, '2015-01-28 09:02:20', 0, 'kjhk', 0, 0, 0),
-(70, 'jhgjhg', 876876, 'shorts', 'Available', 10, 10, 10, 'male', 'cac54197e63168ad9b2ff7280d371b84.jpg', 12, '2015-01-28 09:02:52', 0, 'jhgj', 0, 0, 0),
-(71, 'hcfb', 35, 'shoes', 'Available', 10, 10, 10, 'female', 'de0c88f4e6e1eb32fdfbafb51fd224af.jpg', 12, '2015-02-07 15:37:56', 1, 'dg', 0, 0, 0),
-(72, 'sdg', 242, 'jackets', 'Available', 10, 10, 10, 'female', 'd60b9606686e4c471113877a55a419ec.jpg', 11, '2015-02-07 15:38:38', 0, 'dgf', 0, 0, 0),
-(73, 'ewrw', 234, 'shoes', 'Available', 10, 10, 10, 'female', '7118062ff0129bd3e4ac1b5724409c66.jpg', 11, '2015-02-07 15:38:59', 0, 'wrew', 0, 0, 0),
-(74, 'sgs', 224, 'jackets', 'Available', 10, 10, 10, 'female', 'd5a719929a9d12ee49c44bd5fec15312.jpg', 11, '2015-02-07 15:39:24', 0, 'gdx', 0, 0, 0),
-(75, 'sdfs', 234, 'tees', 'Available', 10, 10, 10, 'female', '3986f35e6a9c5853804008700df5afe3.jpg', 11, '2015-02-07 15:39:47', 0, 'dsgs', 0, 0, 0),
-(76, 'fe', 34, 'jackets', 'Available', 10, 10, 10, 'female', '640be5c56510cf4a76d06511ca27e99d.jpg', 11, '2015-02-07 15:40:12', 0, 'sfs', 0, 0, 0),
-(77, 'qr', 10, 'tees', '', 10, 10, 10, 'female', '8e5637abbeb54269ef310e743cf6b67e.jpg', 11, '2015-02-07 15:40:34', 0, 'wr', 0, 0, 0),
-(78, 'wefa', 523, 'jackets', 'Available', 10, 10, 10, 'female', 'a32e6858d41913935359a0d262856f85.jpg', 11, '2015-02-07 15:40:52', 0, 'sf', 0, 0, 0),
-(79, 'ers', 23, 'jackets', 'Available', 10, 10, 10, 'female', '0d3d4941e564dbf46a18c34e7f6c6294.jpg', 11, '2015-02-07 15:41:12', 0, 'sf', 0, 0, 0),
-(80, 'wre', 23, 'shoes', 'Available', 10, 10, 10, 'female', 'be6993f4f7ac6f9b5cc331a6ffc953b0.jpg', 12, '2015-02-07 15:41:29', 1, 'rw', 0, 0, 0),
-(81, 'jinky', 100000, 'shoes', 'Available', 10, 10, 10, 'male', '83eed3c5fa0df44361252111e72128e7.jpg', 12, '2015-02-10 03:50:00', 1, 'jsky', 0, 0, 0),
-(82, 'q', 1, 'shoes', 'Available', 1, 1, 1, 'male', '45b6405b533c992b88f711364483b555.jpg', 20, '2015-02-11 06:13:33', 1, 'q', 0, 0, 0);
+INSERT INTO `product` (`ProductID`, `ProductName`, `ProductPrice`, `ProductType`, `ProductStatus`, `ProductAvailabilitySmall`, `ProductAvailabilityMedium`, `ProductAvailabilityLarge`, `ProductGender`, `ProductAttactment`, `AdminAccountID`, `ProductDateAdded`, `ProductSale`, `ProductBrand`, `ProductSoldSmall`, `ProductSoldMedium`, `ProductSoldLarge`) VALUES
+(83, 'lloricc', 8767, 'shoes', 'Available', 10, 10, 10, 'male', '7edc9b8f3bb006105814aa608cd0d3dc.jpg', 11, '2015-02-24 09:46:14', 1, 'nova', 0, 0, 0),
+(84, 'lira', 9999, 'shoes', 'Available', 0, 1, 1, 'female', '1a1064995548a9317f00784967226575.jpg', 11, '2015-02-25 03:07:13', 1, 'luba', 1, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Purchased`
+-- Table structure for table `purchased`
 --
 
-CREATE TABLE IF NOT EXISTS `Purchased` (
+CREATE TABLE IF NOT EXISTS `purchased` (
 `PurchasedID` int(11) NOT NULL,
   `PurchasedAmount` double NOT NULL,
   `PurchasedQuantity` int(11) NOT NULL,
@@ -146,37 +121,49 @@ CREATE TABLE IF NOT EXISTS `Purchased` (
   `AdminAccountID` int(11) DEFAULT NULL,
   `PurchasedDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `PurchasedDelivered` tinyint(1) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `purchased`
+--
+
+INSERT INTO `purchased` (`PurchasedID`, `PurchasedAmount`, `PurchasedQuantity`, `UserAccountID`, `AdminAccountID`, `PurchasedDate`, `PurchasedDelivered`) VALUES
+(1, 9999, 1, 10, NULL, '2015-02-25 03:19:55', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `PurchasedLine`
+-- Table structure for table `purchasedline`
 --
 
-CREATE TABLE IF NOT EXISTS `PurchasedLine` (
+CREATE TABLE IF NOT EXISTS `purchasedline` (
   `PurchasedID` int(11) NOT NULL,
   `ProductID` int(11) NOT NULL,
   `Quantity` int(11) NOT NULL,
   `Size` enum('small','medium','large') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `purchasedline`
+--
+
+INSERT INTO `purchasedline` (`PurchasedID`, `ProductID`, `Quantity`, `Size`) VALUES
+(1, 84, 1, 'small');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `UserAccount`
+-- Table structure for table `useraccount`
 --
 
-CREATE TABLE IF NOT EXISTS `UserAccount` (
+CREATE TABLE IF NOT EXISTS `useraccount` (
 `UserAccountID` int(11) NOT NULL,
   `UserAccountImage` varchar(60) NOT NULL,
   `UserAccountFisrtName` varchar(20) NOT NULL,
   `UserAccountLastName` varchar(20) NOT NULL,
   `UserAccountUserName` varchar(20) NOT NULL,
   `UserAccountPassword` varchar(60) NOT NULL,
-  `UserAccountBM` enum('January','February','March','April','May','June','July','August','September','October','November','December') NOT NULL,
-  `UserAccountBD` int(11) NOT NULL,
-  `UserAccountBY` int(11) NOT NULL,
+  `UserAccountBD` varchar(10) NOT NULL,
   `UserAccountGender` enum('female','male') NOT NULL,
   `UserAccountHomeAddress` varchar(60) NOT NULL,
   `UserAccountMobile` varchar(20) NOT NULL,
@@ -184,60 +171,62 @@ CREATE TABLE IF NOT EXISTS `UserAccount` (
   `UserAccountShipping` varchar(60) NOT NULL,
   `UserAccountSecretQuestion` varchar(20) NOT NULL,
   `UserAccountAnswer` varchar(100) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `UserAccount`
+-- Dumping data for table `useraccount`
 --
 
-INSERT INTO `UserAccount` (`UserAccountID`, `UserAccountImage`, `UserAccountFisrtName`, `UserAccountLastName`, `UserAccountUserName`, `UserAccountPassword`, `UserAccountBM`, `UserAccountBD`, `UserAccountBY`, `UserAccountGender`, `UserAccountHomeAddress`, `UserAccountMobile`, `UserAccountEmail`, `UserAccountShipping`, `UserAccountSecretQuestion`, `UserAccountAnswer`) VALUES
-(7, 'male.png', 'll', 'll', 'll', '0cc175b9c0f1b6a831c399e269772661', 'January', 1, 1990, 'male', 'hh', '766', 'hh@yahoo.com', 'hh', 'hh', '5e36941b3d856737e81516acd45edc50'),
-(8, 'female.png', 'bb', 'bb', 'bb', '21ad0bd836b90d08f4cf640b4c298e7c', 'January', 6, 1990, 'female', 'bb', '88', 'bb@yahoo.com', 'bb', 'bb', '21ad0bd836b90d08f4cf640b4c298e7c'),
-(9, 'male.png', 'mm', 'mm', 'mm', 'b3cd915d758008bd19d0f2428fbb354a', 'January', 6, 1990, 'male', 'mm', '88', 'mm@yahoo.com', 'mm', 'mm', 'b3cd915d758008bd19d0f2428fbb354a'),
-(10, '2e161ce9d8ff5b8da0fd794ed80fbe59.jpg', 'Lloric', 'Garcia', 'q', '7694f4a66316e53c8cdd9d9954bd611d', 'March', 15, 1990, 'male', 'egot turno dipolog city', '09487761477', 'emorickfighter@yahoo.com', 'dipolog', 'q', '7694f4a66316e53c8cdd9d9954bd611d'),
-(11, 'male.png', 'ard', 'moses', 'ardmoses', 'e10adc3949ba59abbe56e057f20f883e', 'January', 1, 1999, 'male', 'asdsadasdasd', '12323123123', 'aasdasdasd@yahoo.com', 'asdasdasdasasdasd', 'ard', '4ce0bec67fe735f4997426101dd5292b'),
-(12, 'male.png', 'z', 'z', 'z', 'fbade9e36a3f36d3d676c1b808451dd7', 'January', 6, 1990, 'male', 'z', '11', 'z@yahoo.com', 'z', 'z', 'fbade9e36a3f36d3d676c1b808451dd7'),
-(13, 'female.png', 'Jerald', 'Buljatin', 'jeraldin', '97784fec6e2313cf5f1d7ffac21c7098', 'May', 10, 1995, 'female', 'Me Bang, Dipolog City', '09213456789', 'jeraldin@yahoo.com', 'Me Bang, Dipolog City', 'What name?', '8b80876f51614e59f3224af17b48aa9b'),
-(14, 'female.png', 'Angel May', 'Magaway', 'angel', 'f4f068e71e0d87bf0ad51e6214ab84e9', 'May', 10, 1993, 'female', 'katipnan', '0909', 'angle@yahoo.com', '...', 'aa', '4124bc0a9335c27f086f24ba207a4912');
+INSERT INTO `useraccount` (`UserAccountID`, `UserAccountImage`, `UserAccountFisrtName`, `UserAccountLastName`, `UserAccountUserName`, `UserAccountPassword`, `UserAccountBD`, `UserAccountGender`, `UserAccountHomeAddress`, `UserAccountMobile`, `UserAccountEmail`, `UserAccountShipping`, `UserAccountSecretQuestion`, `UserAccountAnswer`) VALUES
+(7, 'male.png', 'll', 'll', 'll', '0cc175b9c0f1b6a831c399e269772661', '02/17/2015', 'male', 'hh', '766', 'hh@yahoo.com', 'hh', 'hh', '5e36941b3d856737e81516acd45edc50'),
+(8, 'female.png', 'bb', 'bb', 'bb', '21ad0bd836b90d08f4cf640b4c298e7c', '02/17/2015', 'female', 'bb', '88', 'bb@yahoo.com', 'bb', 'bb', '21ad0bd836b90d08f4cf640b4c298e7c'),
+(9, 'male.png', 'mm', 'mm', 'mm', 'b3cd915d758008bd19d0f2428fbb354a', '02/17/2015', 'male', 'mm', '88', 'mm@yahoo.com', 'mm', 'mm', 'b3cd915d758008bd19d0f2428fbb354a'),
+(10, 'male.png', 'Lloric', 'Garcia', 'q', '7694f4a66316e53c8cdd9d9954bd611d', '03/15/1990', 'male', 'egot turno dipolog city', '09487761477', 'emorickfighter@yahoo.com', 'dipolog', 'q', '7694f4a66316e53c8cdd9d9954bd611d'),
+(11, 'male.png', 'ard', 'moses', 'ardmoses', 'e10adc3949ba59abbe56e057f20f883e', '02/17/2015', 'male', 'asdsadasdasd', '12323123123', 'aasdasdasd@yahoo.com', 'asdasdasdasasdasd', 'ard', '4ce0bec67fe735f4997426101dd5292b'),
+(12, 'male.png', 'z', 'z', 'z', 'fbade9e36a3f36d3d676c1b808451dd7', '02/17/2015', 'male', 'z', '11', 'z@yahoo.com', 'z', 'z', 'fbade9e36a3f36d3d676c1b808451dd7'),
+(13, 'female.png', 'Jerald', 'Buljatin', 'jeraldin', '97784fec6e2313cf5f1d7ffac21c7098', '02/17/2015', 'female', 'Me Bang, Dipolog City', '09213456789', 'jeraldin@yahoo.com', 'Me Bang, Dipolog City', 'What name?', '8b80876f51614e59f3224af17b48aa9b'),
+(14, 'female.png', 'Angel May', 'Magaway', 'angel', 'f4f068e71e0d87bf0ad51e6214ab84e9', '02/17/2015', 'female', 'katipnan', '0909', 'angle@yahoo.com', '...', 'aa', '4124bc0a9335c27f086f24ba207a4912'),
+(15, 'female.png', 'Amie', 'Ongayo', 'amie', 'e6a4370aca6970175dee8c72cc7e08dc', '02/17/2015', 'female', 'qq', '9878', 'amie@yahoo.com', 'ww', 't', 'e358efa489f58062f10dd7316b65649e'),
+(16, 'male.png', 'aa', 'aa', 'aa', '4124bc0a9335c27f086f24ba207a4912', '02/17/2015', 'male', 'aa', '11', 'aa@yahoo.com', 'aa', 'aa', '4124bc0a9335c27f086f24ba207a4912');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `AdminAccount`
+-- Indexes for table `adminaccount`
 --
-ALTER TABLE `AdminAccount`
+ALTER TABLE `adminaccount`
  ADD PRIMARY KEY (`AdminAccountID`), ADD UNIQUE KEY `AdminAccountUserName` (`AdminAccountUserName`);
 
 --
--- Indexes for table `Cart`
+-- Indexes for table `cart`
 --
-ALTER TABLE `Cart`
+ALTER TABLE `cart`
  ADD PRIMARY KEY (`CartID`), ADD KEY `fk_cart_useraccount` (`UserAccountID`), ADD KEY `fk_cart_product` (`ProductID`);
 
 --
--- Indexes for table `Product`
+-- Indexes for table `product`
 --
-ALTER TABLE `Product`
+ALTER TABLE `product`
  ADD PRIMARY KEY (`ProductID`), ADD UNIQUE KEY `ProductAttactment` (`ProductAttactment`), ADD KEY `fk_product_adminaccount` (`AdminAccountID`);
 
 --
--- Indexes for table `Purchased`
+-- Indexes for table `purchased`
 --
-ALTER TABLE `Purchased`
+ALTER TABLE `purchased`
  ADD PRIMARY KEY (`PurchasedID`), ADD KEY `fk_purchased_useraccount` (`UserAccountID`), ADD KEY `fk_purchased_adminaccount` (`AdminAccountID`);
 
 --
--- Indexes for table `PurchasedLine`
+-- Indexes for table `purchasedline`
 --
-ALTER TABLE `PurchasedLine`
+ALTER TABLE `purchasedline`
  ADD KEY `fk_purchasedline_product` (`ProductID`), ADD KEY `fk_purchasedline_purchased` (`PurchasedID`);
 
 --
--- Indexes for table `UserAccount`
+-- Indexes for table `useraccount`
 --
-ALTER TABLE `UserAccount`
+ALTER TABLE `useraccount`
  ADD PRIMARY KEY (`UserAccountID`), ADD UNIQUE KEY `UserAccountUserName` (`UserAccountUserName`), ADD UNIQUE KEY `UserAccountEmail` (`UserAccountEmail`);
 
 --
@@ -245,60 +234,60 @@ ALTER TABLE `UserAccount`
 --
 
 --
--- AUTO_INCREMENT for table `AdminAccount`
+-- AUTO_INCREMENT for table `adminaccount`
 --
-ALTER TABLE `AdminAccount`
+ALTER TABLE `adminaccount`
 MODIFY `AdminAccountID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
--- AUTO_INCREMENT for table `Cart`
+-- AUTO_INCREMENT for table `cart`
 --
-ALTER TABLE `Cart`
-MODIFY `CartID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+ALTER TABLE `cart`
+MODIFY `CartID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `Product`
+-- AUTO_INCREMENT for table `product`
 --
-ALTER TABLE `Product`
-MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=83;
+ALTER TABLE `product`
+MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=85;
 --
--- AUTO_INCREMENT for table `Purchased`
+-- AUTO_INCREMENT for table `purchased`
 --
-ALTER TABLE `Purchased`
-MODIFY `PurchasedID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+ALTER TABLE `purchased`
+MODIFY `PurchasedID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `UserAccount`
+-- AUTO_INCREMENT for table `useraccount`
 --
-ALTER TABLE `UserAccount`
-MODIFY `UserAccountID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+ALTER TABLE `useraccount`
+MODIFY `UserAccountID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `Cart`
+-- Constraints for table `cart`
 --
-ALTER TABLE `Cart`
-ADD CONSTRAINT `fk_cart_product` FOREIGN KEY (`ProductID`) REFERENCES `Product` (`ProductID`),
-ADD CONSTRAINT `fk_cart_useraccount` FOREIGN KEY (`UserAccountID`) REFERENCES `UserAccount` (`UserAccountID`);
+ALTER TABLE `cart`
+ADD CONSTRAINT `fk_cart_product` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`),
+ADD CONSTRAINT `fk_cart_useraccount` FOREIGN KEY (`UserAccountID`) REFERENCES `useraccount` (`UserAccountID`);
 
 --
--- Constraints for table `Product`
+-- Constraints for table `product`
 --
-ALTER TABLE `Product`
-ADD CONSTRAINT `fk_product_useraccount` FOREIGN KEY (`AdminAccountID`) REFERENCES `AdminAccount` (`AdminAccountID`);
+ALTER TABLE `product`
+ADD CONSTRAINT `fk_product_useraccount` FOREIGN KEY (`AdminAccountID`) REFERENCES `adminaccount` (`AdminAccountID`);
 
 --
--- Constraints for table `Purchased`
+-- Constraints for table `purchased`
 --
-ALTER TABLE `Purchased`
-ADD CONSTRAINT `fk_purchased_adminaccount` FOREIGN KEY (`AdminAccountID`) REFERENCES `AdminAccount` (`AdminAccountID`),
-ADD CONSTRAINT `fk_purchased_useraccount` FOREIGN KEY (`UserAccountID`) REFERENCES `UserAccount` (`UserAccountID`);
+ALTER TABLE `purchased`
+ADD CONSTRAINT `fk_purchased_adminaccount` FOREIGN KEY (`AdminAccountID`) REFERENCES `adminaccount` (`AdminAccountID`),
+ADD CONSTRAINT `fk_purchased_useraccount` FOREIGN KEY (`UserAccountID`) REFERENCES `useraccount` (`UserAccountID`);
 
 --
--- Constraints for table `PurchasedLine`
+-- Constraints for table `purchasedline`
 --
-ALTER TABLE `PurchasedLine`
-ADD CONSTRAINT `fk_purchasedline_product` FOREIGN KEY (`ProductID`) REFERENCES `Product` (`ProductID`),
-ADD CONSTRAINT `fk_purchasedline_purchased` FOREIGN KEY (`PurchasedID`) REFERENCES `Purchased` (`PurchasedID`);
+ALTER TABLE `purchasedline`
+ADD CONSTRAINT `fk_purchasedline_product` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`),
+ADD CONSTRAINT `fk_purchasedline_purchased` FOREIGN KEY (`PurchasedID`) REFERENCES `purchased` (`PurchasedID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

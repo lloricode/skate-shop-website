@@ -4,7 +4,7 @@
 	?>
 		<div  class="d">
 <a href="index.php"><button>back to main</button></a>
-	<?
+	<?php 
 	 if(isset($_COOKIE['auth_accountID'])){ ?>
 	<?php if($_COOKIE['auth_permission']=="admin"){ 		?>
 		<p>add product</p>
@@ -174,7 +174,7 @@
 				}
 				?>
 			</table>
-			<?}
+			<?php }
 			else
 				header("Location: index.php");?>
 		</fieldset>

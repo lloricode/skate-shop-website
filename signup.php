@@ -9,16 +9,14 @@
 	if(isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST"){
 
 		$fn=$ln=$username=$pass=$bm=$bd=$by=$gender=$home=$mobile=$email=$shipping=$ques=$ans="";
-		$fnrr=$lnrr=$usernamerr=$passrr=$bmrr=$bdrr=$byrr=$genderrr=$homerr=$mobilerr=$emailrr=$shippingrr=$quesrr=$ansrr=" ";
+		$fnrr=$lnrr=$usernamerr=$passrr=$bdrr=$genderrr=$homerr=$mobilerr=$emailrr=$shippingrr=$quesrr=$ansrr=" ";
 
 		//check if empty
 		if(empty($_POST['fn'])) $fnrr="First Name is required"; else $fn=$_POST['fn'];
 		if(empty($_POST['ln'])) $lnrr="Last Name is required"; else $ln=$_POST['ln'];
 		if(empty($_POST['username'])) $usernamerr="Usename is required"; else $username=$_POST['username'];
 		if(empty($_POST['pass'])) $passrr="Password is required"; else $pass=$_POST['pass'];
-		if($_POST['bm']=="month") $bmrr="Birth Month is required"; else $bm=$_POST['bm'];
 		if(empty($_POST['bd'])) $bdrr="Birth Date is required"; else $bd=$_POST['bd'];
-		if(empty($_POST['by'])) $byrr="Birth Year is required"; else $by=$_POST['by'];
 
 		if(isset($_POST['gender'])) $gender=$_POST['gender']; else $gender="";
 		
@@ -41,9 +39,7 @@
 		$ln=check_data($ln);
 		$username=check_data($username);
 		$pass=check_data($pass);
-		$bm=check_data($bm);
 		$bd=check_data($bd);
-		$by=check_data($by);
 		$gender=check_data($gender);
 		$home=check_data($home);
 		$mobile=check_data($mobile);
@@ -69,8 +65,6 @@
 			if(DB::getNumRows())
 				$usernamerr="Username already exist.";
 		}
-		if(!preg_match("/^(19|20)\d{2}$/", $by) && !$by=="")//For 1900-2099   //from 1000 to 2999   ^[12][0-9]{3}$
-			$byrr = "invalid year";
 		if(!preg_match("/^[0-9]*$/", $mobile))
 			$mobilerr="Invalid mobile number";
 
@@ -92,26 +86,15 @@
 		if($ans2!=$ans)
 			$ansrr="Secret Answer mismatch";
 
-		// error for birth date
-		$bdate=" ";	
-		if($byrr==" "){
-			if($bmrr==" "){
-				if($bdrr!=" ")
-					$bdate=$bdrr;//   coming soon!
-			}
-			else
-				$bdate=$bmrr;
-		}
-		else
-			$bdate=$byrr;
-		if($fnrr==" " && $lnrr==" " && $usernamerr==" " && $passrr==" " && $bmrr==" " && $bdrr==" " && $byrr==" " && 
+		
+		if($fnrr==" " && $lnrr==" " && $usernamerr==" " && $passrr==" "  && $bdrr==" "  && 
 			$genderrr==" " && $homerr==" " && $mobilerr==" " && $emailrr==" " && $shippingrr==" " && $quesrr==" " && $ansrr==" "){
 
 			$gen=($gender=="male")?"male.png":"female.png";//set the default photo depends on user's gender
 
-	 		$sql="INSERT INTO UserAccount(UserAccountImage,UserAccountFisrtName,UserAccountLastName,UserAccountUserName,UserAccountPassword,UserAccountBM,UserAccountBD,UserAccountBY,
+	 		$sql="INSERT INTO UserAccount(UserAccountImage,UserAccountFisrtName,UserAccountLastName,UserAccountUserName,UserAccountPassword,UserAccountBD,
 	 			UserAccountGender,UserAccountHomeAddress,UserAccountMobile,UserAccountEmail,UserAccountShipping,UserAccountSecretQuestion,UserAccountAnswer)
-				VALUES('$gen','$fn','$ln','$username','".md5($pass)."','$bm','$bd','$by',
+				VALUES('$gen','$fn','$ln','$username','".md5($pass)."','$bd',
 					'$gender','$home','$mobile','$email','$shipping','$ques','".md5($ans)."')";
 			DB::query($sql);
 			$ok="Account Created!<BR><a href='login.php'>Back to Log in.</a>";
@@ -143,10 +126,34 @@
 	<head>
 		<title>Skate Shop | Sign Up</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-        <link href="img/Skateboard-2-512.png" rel="shortcut icon" type="image/x-icon" />
+        <link href="img/icon.jpg" rel="shortcut icon" type="image/x-icon" />
+
+<!-- date picker-->
+         <meta charset="utf-8">
+		<title>jQuery UI Datepicker - Default functionality</title>
+		<link rel="stylesheet" href="js/datepicker/jquery-ui.css">
+		<script src="js/datepicker/jquery-1.10.2.js"></script>
+		<script src="js/datepicker/jquery-ui.js"></script>
+		<link rel="stylesheet" href="js/datepicker/style.css">
+		<script>
+		/*	$(function() {
+			$( "#datepicker" ).datepicker();
+			});*/
+
+			$(function() {
+			      var elem = document.createElement('input');
+			      elem.setAttribute('type', 'date');
+			 
+			      if ( elem.type === 'text' ) {
+			    //     $('#date').datepicker();
+			         $( "#datepicker" ).datepicker();
+			      }
+		   	})();
+		</script>
+		<!-- date picker-->
 	</head>
 	<body>
-		<div style="background-color:black; height:270;">
+		<div style="background-color:#111111; height:270;">
 			<center>
 				<div class="header">
 					<div id="inside_header">
@@ -157,7 +164,7 @@
 				</div>
 			</center>
 		</div>
-		<div style="background-color:black; height:90;">
+		<div style="background-color:#111111; height:90;">
 			<center>
 				<div class="menu" >
 				</div>
@@ -211,25 +218,10 @@
 							<tr>
 								<td>BIRTHDATE:</td>
 								<td>
-									<input type="text" name="by" placeholder="year" style="width:130px" value="<?=$by;?>">
-									<select name="bm">
-										<option <?php if(isset($_POST['bm']) && $bm=="month" ) echo "selected"; ?> >month</option>
-										<option <?php if(isset($_POST['bm']) && $bm=="January" ) echo "selected"; ?> >January</option>
-										<option <?php if(isset($_POST['bm']) && $bm=="February" ) echo "selected"; ?> >February</option>
-										<option <?php if(isset($_POST['bm']) && $bm=="March" ) echo "selected"; ?> >March</option>
-										<option <?php if(isset($_POST['bm']) && $bm=="April" ) echo "selected"; ?> >April</option>
-										<option <?php if(isset($_POST['bm']) && $bm=="May" ) echo "selected"; ?> >May</option>
-										<option <?php if(isset($_POST['bm']) && $bm=="June" ) echo "selected"; ?> >June</option>
-										<option <?php if(isset($_POST['bm']) && $bm=="July" ) echo "selected"; ?> >July</option>
-										<option <?php if(isset($_POST['bm']) && $bm=="August" ) echo "selected"; ?> >August</option>
-										<option <?php if(isset($_POST['bm']) && $bm=="September" ) echo "selected"; ?> >September</option>
-										<option <?php if(isset($_POST['bm']) && $bm=="October" ) echo "selected"; ?> >October</option>
-										<option <?php if(isset($_POST['bm']) && $bm=="November" ) echo "selected"; ?> >November</option>
-										<option <?php if(isset($_POST['bm']) && $bm=="December" ) echo "selected"; ?> >December</option>
-									</select>
-									<input type="text" name="bd" placeholder="day" style="width:110px;margin-right:35px" value="<?=$bd;?>">
+									<input type="date" name="bd" id="datepicker"  value="<?=$bd;?>">
+									<script src="js/datepicker/jquery.min.js"></script>
 								</td>
-								<td><span id="err"><?php if(isset($bdate)) echo $bdate;?></span></td>
+								<td><span id="err"><?php if(isset($bdrr)) echo $bdrr;?></span></td>
 							</tr>
 							<tr>
 								<td>GENDER:</td>

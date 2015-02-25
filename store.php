@@ -49,7 +49,7 @@
 					if(isset($_GET['search']))
 						$dir="product name searched";
 
-					echo $dir."<BR>";
+					echo $dir."<br />";
 					if(isset($_COOKIE['sqle_error']))
 						echo $_COOKIE['sqle_error'];
 					
@@ -62,19 +62,19 @@
 
 					$result =DB::query($query);
 					$total_result=DB::getNumRows();
-					if($total_result>0) echo ($prev+1)."-".(($total_result<$nxt)?$total_result:$nxt)." of ";echo "$total_result result.<BR>";
+					if($total_result>0) echo ($prev+1)."-".(($total_result<$nxt)?$total_result:$nxt)." of ";echo "$total_result result.<br />";
 					
 					$cat=(isset($_GET['cat']))?"cat=".$_GET['cat']."&":"";   $q=(isset($_GET['query']))?"query=".$_GET['query']."&":""; 
 				 	$page=(isset($_GET['page']))?$_GET['page']:1; 
 				 	$srch=(isset($_GET['search']))?"search=".$_GET['search']."&":""; 
 					if($ready){
 						$query.=" ORDER BY ProductID LIMIT $prev,9";
-						//echo "$query<BR>";
+						//echo "$query<br />";
 						$result =DB::query($query);
 						
 						if($brand){
 							while($row=$result->fetch_object())
-								echo $row->Brand."<BR>";
+								echo $row->Brand."<br />";
 						}
 						else{
 							if(DB::getNumRows() > 0)
@@ -117,8 +117,13 @@
 														<span>OUT OF STOCK</span>
 													</div>
 									<?php 		}		?>
-												<BR>
-												<p style="color:white;">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo  $row->ProductID?>&nbsp;&nbsp; <?php echo  $row->ProductName?> &nbsp;<b>|&nbsp; &#8369;<?php echo  $row->ProductPrice?></b></p>
+												<br />
+												<p style="font-size:13px">
+												<span style="color:red">	
+													&nbsp;&nbsp; <?php echo  $row->ProductBrand?> &nbsp;<b></span><br />
+													&nbsp;&nbsp; <?php echo  $row->ProductName?> &nbsp;<b><br />
+													&nbsp;&nbsp; &#8369;<?php echo  $row->ProductPrice?></b>
+												</p>
 											</div>
 										</div>
 									</td>
@@ -132,7 +137,7 @@
 							{
 								echo "No product";
 								if(isset($_GET['search']))
-									echo "<BR>for name \"".$_GET['search']."\".";
+									echo "<br />for name \"".$_GET['search']."\".";
 							}
 						}
 					} ?>

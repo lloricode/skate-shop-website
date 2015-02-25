@@ -12,7 +12,7 @@
 	function check($data){
 		return htmlspecialchars(trim(stripcslashes($data)));
 	}
-	if( /*isset($_COOKIE['prodID']) and*/ isset($_POST) and $_SERVER["REQUEST_METHOD"]=="POST"){
+	if( isset($_COOKIE['prodID']) and isset($_POST) and $_SERVER["REQUEST_METHOD"]=="POST"){
 		require_once('../config.php');
 		$sq=$mq=$lq=$size="";
 		$oos=$ok1=$ok2=$ok3=$error=0;
@@ -172,8 +172,8 @@
 		else
 			setcookie("tmp","quantity reach",time()+5,"/");
 	}
-	else
-		setcookie("tmp","error in post",time()+5,"/");
+	/*else
+		setcookie("tmp","error in post",time()+5,"/");*/
 
  	header("Location: ../cart.php?$q$c$srch file=".$_GET['file']."&page=$p");
 ?>

@@ -12,30 +12,30 @@
 		
 		<center>
 			<div class="main_body">
-				<div class="primary" style="  background-image: url('img/UserImage/<?=$_COOKIE['authImg']?>');background-repeat: no-repeat; background-size: cover;">
+				<div class="primary" style="  background-image: url('img/UserImage/<?php echo $_COOKIE['authImg']?>');background-repeat: no-repeat; background-size: cover;">
 				</div>
 				<BR><BR><BR><BR><BR><BR>
 				<table>
 					<tr>
-						<th><?=$row->UserAccountFisrtName."   ".$row->UserAccountLastName?></th>
+						<th><?php echo $row->UserAccountFisrtName."   ".$row->UserAccountLastName?></th>
 					</tr>
 					<tr>
-						<th><?=$row->UserAccountBM." ".$row->UserAccountBD.", ".$row->UserAccountBY?></th>
+						<th><?php echo $row->UserAccountBD?></th>
 					</tr>
 					<tr>
-						<th><?=$row->UserAccountGender?></th>
+						<th><?php echo $row->UserAccountGender?></th>
 					</tr>
 					<tr>
-						<th><?="Home: ".$row->UserAccountHomeAddress?></th>
+						<th><?php echo "Home: ".$row->UserAccountHomeAddress?></th>
 					</tr>
 					<tr>
-						<th><?=$row->UserAccountMobile?></th>
+						<th><?php echo $row->UserAccountMobile?></th>
 					</tr>
 					<tr>
-						<th><?=$row->UserAccountEmail?></th>
+						<th><?php echo $row->UserAccountEmail?></th>
 					</tr>
 					<tr>
-						<th><?="Shpping Address: ".$row->UserAccountShipping?></th>
+						<th><?php echo "Shpping Address: ".$row->UserAccountShipping?></th>
 					</tr>
 				</table>
 			</div>

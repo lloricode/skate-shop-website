@@ -5,13 +5,13 @@
 #inside_header  {width: 1100px;height: 50px;background:rgba(0,0,0,.5);}
 a,p,div         {text-decoration:none;color: white;font-family: sans-serif;/*segoe ui light*/}
 body            {background-image: url("../img/background website.jpg");	background-attachment: fixed;}
-.header         {height: 270px;width: 1100px;margin-top:0;background-image:url("../img/header.jpg");}
+.header         {height: 270px;width: 1100px;margin-top:0;background-image:url("../img/banner.jpg");background-repeat: no-repeat; background-size: cover;}
 .menu           {height: 90px;width: 1100px;background-color:#111111;}
 .menu2          {margin-top:-17px; width: 900px;height: 55px;background-color:#9E003A;}
 .menu3          {width: 900px;height: 45px;background-color:#252525;}
 .main_body      {/* margin-top: -16px;*/height:1139px;width:900px;background-color:#464646;}
 .footer         {padding-top:10px;height:30px;background-color:#111111;}
-#input          {margin-top:35px;margin-right: 20px;}
+/*#input          {margin-top:35px;margin-right: 20px;}*/
 #m              {background-color: white;font-size:98px;}
 #active         {position: absolute;height: 90px;background-color:orange;margin-top:-2px;clear:both;}
 /*#menuH:hover    {position: absolute;height: 90px;background-color: #D14719;margin-top:-2px;clear:both;}
@@ -49,7 +49,6 @@ body            {background-image: url("../img/background website.jpg");	backgro
 .tddiv span     {position: relative;margin: 0px 10px;top: 2px;color: white;text-transform: uppercase;;text-shadow: 1px 1px gray;font-size: 10px;}
 .tddiv          {transition: opacity 0.5s ease;text-align: center;}
 .tddiv:hover    {cursor: pointer;   opacity: 0.5;}
-
 /*-------------------------------PREV   NEXT------------------------------------*/
 /*.prev         {margin-left: -3px; background: red;  width: 200px;    height: 30px;    margin-right: 60px;}
 .view           {background: brown;    width: 200px;    height: 40px;    margin: 0px  60px;}
@@ -77,6 +76,34 @@ body            {background-image: url("../img/background website.jpg");	backgro
 /*------------------------log in----------*/
 .login:hover    {color: #D14719;}
 .logout			{color:#CC3300}
-.logout:hover    {color: red;}
-.setting:hover       {color:#D14719;}
-.profile { inline;list-style-type: none;}
+.logout:hover   {color: red;}
+.setting:hover  {color:#D14719;}
+.profile 		{ inline;list-style-type: none;}
+/*------------------------text box----------*/
+.txtF 			{border: 1px dotted #000000;outline:0;height:25px;width: 175px;margin-top:35px;margin-right: 20px; } 
+.btnred {
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #990033;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btnred:hover {
+  background: #591028;
+  text-decoration: none;
+}
+.btnorange {
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #FF6600;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btnorange:hover {
+  background: #cc7033;
+  text-decoration: none;
+}
