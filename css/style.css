@@ -57,7 +57,7 @@ body            {background-image: url("../img/background website.jpg");	backgro
 /*--------------------------signup.php---------------*/
 #text           {width: 340px;    float: right;    margin-right: 200px;}
 #label          {float: left;}
-#err            {color: darkred;    font-size: 10px;}
+#err            {color: green;    font-size: 12px;}
 .w3:hover       {color: yellow;}
 /*-------------------------------about.php----------------------------*/
 .aboutUp        {width: 900px;height: 549px;        }

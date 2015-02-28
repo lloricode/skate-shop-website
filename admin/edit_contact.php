@@ -1,9 +1,10 @@
 <?php
-	if(!isset($_COOKIE['auth_accountID']))
+	include 'php/header.php';
+	if(!isset($_SESSION['auth_accountID']))
 		header("Location: index.php");
 
-	include 'header.php';?> <link rel="stylesheet" type="text/css" href="../css/style.css"><?
-	if( isset($_COOKIE['auth_accountID']) and isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST"){
+	?> <link rel="stylesheet" type="text/css" href="../css/style.css"><?
+	if( isset($_SESSION['auth_accountID']) and isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST"){
 		$contact_file="";
 		if(isset($_POST['contact_file']))
 			$contact_file=$_POST['contact_file'];//trim(stripcslashes(htmlspecialchars($_POST['contact_file'])));

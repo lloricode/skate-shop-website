@@ -11,7 +11,7 @@
  */
 
 
-
+session_start();
 require_once('../../config.php');
 $path = "../../img/product/";
 
@@ -59,7 +59,7 @@ $path = "../../img/product/";
 									'". $_POST['pstockL'] . "',
 									'". $_POST['pgender'] . "',
 									'". $imgfile . "',
-									'". $_COOKIE['auth_accountID'] . "'
+									'". $_SESSION['auth_accountID'] . "'
 									)";
 								echo $query;
                                 DB::query($query);

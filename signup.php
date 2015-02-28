@@ -28,26 +28,22 @@
 		if(empty($_POST['ques'])) $quesrr="Secret Question is required"; else $ques=$_POST['ques'];
 		if(empty($_POST['ans'])) $ansrr="Secret Answer is required"; else $ans=$_POST['ans'];
 
-		//check/filtering the input
-		function check_data($data){
-			$data=trim($data);
-			$data=stripslashes($data);
-			$data=htmlspecialchars($data);
-			return $data;
-		}
-		$fn=check_data($fn);
-		$ln=check_data($ln);
-		$username=check_data($username);
-		$pass=check_data($pass);
-		$bd=check_data($bd);
-		$gender=check_data($gender);
-		$home=check_data($home);
-		$mobile=check_data($mobile);
-		$email=check_data($email);
-		$shipping=check_data($shipping);
-		$ques=check_data($ques);
-		$ans=check_data($ans);
-
+		
+		$fn=DB::esc($fn);
+		$ln=DB::esc($ln);
+		$username=DB::esc($username);
+		$pass=DB::esc($pass);
+		$bd=DB::esc($bd);
+		$gender=DB::esc($gender);
+		$home=DB::esc($home);
+		$mobile=DB::esc($mobile);
+		$email=DB::esc($email);
+		$shipping=DB::esc($shipping);
+		$ques=DB::esc($ques);
+		$ans=DB::esc($ans);
+		if(!preg_match("/^[0-9]{2}-[0-9]{2}-[0-9]{4}*$/", $bd))
+			$bdrr="invalid birhtday";
+		
 		$valid = array("male","female");
 		//validation
 		if(!in_array($gender, $valid) and $gender!=="") //if user modify from inspect in browser
@@ -79,10 +75,10 @@
 		}
 
 		//check if password and secret answer is match
-		$pass2=check_data($_POST['pass2']);
+		$pass2=DB::esc($_POST['pass2']);
 		if($pass2!=$pass)
 			$passrr="Password mismatch";
-		$ans2=check_data($_POST['ans2']);
+		$ans2=DB::esc($_POST['ans2']);
 		if($ans2!=$ans)
 			$ansrr="Secret Answer mismatch";
 
@@ -172,6 +168,7 @@
 		</div>
 		<center>
 			<div style="width: 900px; height: 45px; background-color: #990033;">
+				<a style="float:left;margin-left:10px;margin-top:15px" href="index.php">HOME</a>
 			    <table>
 	                <tr style="font-size:30px;">
 	                    <td id="tdpad3" style="float:left;">
@@ -233,7 +230,7 @@
 							</tr>
 							<tr>
 								<td>HOME ADDRESS:</td>
-								<td><textarea placeholder="home address" rows="3" cols="48" name="home"><?=$home;?></textarea></td>
+								<td colspan="2"><textarea placeholder="home address" rows="3" cols="48" name="home"><?=$home;?></textarea></td>
 								<td><span id="err"><?php if(isset($homerr)) echo $homerr;?></span></td>
 							</tr>
 							<tr>
@@ -248,7 +245,7 @@
 							</tr>
 							<tr>
 								<td>SHIPPING ADDRESS:</td>
-								<td><textarea placeholder="shipping address" rows="3" cols="48" name="shipping"   ><?=$shipping;?></textarea></td>
+								<td colspan="2"><textarea placeholder="shipping address" rows="3" cols="48" name="shipping"   ><?=$shipping;?></textarea></td>
 								<td><span id="err"><?php if(isset($shippingrr)) echo $shippingrr;?></span></td>
 							</tr>
 							<tr>

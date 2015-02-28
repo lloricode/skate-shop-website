@@ -8,6 +8,7 @@
 <!--   -->
 <!--   -->
 <?php
+	session_start();
 	$title="";
 	switch ($docfile) {
 		case 'login':

@@ -7,7 +7,7 @@
 <!--   -->
 <!--   -->
 <!--   -->
-
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -18,8 +18,8 @@
 	<body>
 	<div class="d">
 <?php
-	if(isset($_COOKIE['auth_accountID']))
-		echo "Hello!, ".$_COOKIE['auth_name']."! &nbsp;&nbsp;&nbsp;<a href='php/logout.php'><button>Logout</button></a><BR>";
+	if(isset($_SESSION['auth_accountID']))
+		echo "Hello!, ".$_SESSION['auth_name']."! &nbsp;&nbsp;&nbsp;<a href='php/logout.php'><button>Logout</button></a><br />";
 	
 
 ?>

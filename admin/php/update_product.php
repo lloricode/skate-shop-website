@@ -11,7 +11,7 @@
  */
 
 
-
+session_start();
 require_once('../../config.php');
 $path = "../../img/product/";
 	$err=0;
@@ -66,7 +66,7 @@ $path = "../../img/product/";
 										ProductAvailabilityMedium=". $_POST['pstockM'] . ",
 										ProductAvailabilityLarge=". $_POST['pstockL'] . ",
 										ProductGender='". $_POST['pgender'] . "',
-										AdminAccountID='". $_COOKIE['auth_accountID'] . "' WHERE ProductID=".$_GET['id'];
+										AdminAccountID='". $_SESSION['auth_accountID'] . "' WHERE ProductID=".$_GET['id'];
 	                               DB::query($query);
 	                               setcookie("tmp","update successfull!",time()+5,"/");	
 	            }

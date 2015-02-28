@@ -1,9 +1,9 @@
 <?php
 
 	include 'php/header.php';
-	if(!isset($_COOKIE['auth_accountID']))
+	if(!isset($_SESSION['auth_accountID']))
 		header("Location: index.php");
-	if($_COOKIE['auth_permission']=="editor")
+	if($_SESSION['auth_permission']=="editor")
 		header("Location: view_accounts.php");
 	include '../config.php';
 
@@ -73,22 +73,22 @@
 ?>
 		<div class="d ad">
 		<a href="view_accounts.php"><button>back</button></a>
-		<?	if(!isset($ok)){	?>
-				<form action="<?=htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+		<?php if(!isset($ok)){	?>
+				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 					<table>
 						<tr>
 							<td>FIRST NAME:</td>
-							<td><input type="text" placeholder="first name" name="fn" value="<?=$fn?>"></td>
+							<td><input type="text" placeholder="first name" name="fn" value="<?php echo $fn?>"></td>
 							<td><span id="err"><? if(isset($fnrr)) echo $fnrr?></span></td>
 						</tr>
 						<tr>
 							<td>LAST NAME:</td>
-							<td><input  type="text" placeholder="last name" name="ln" value="<?=$ln?>"></td>
+							<td><input  type="text" placeholder="last name" name="ln" value="<?php echo $ln?>"></td>
 							<td><span id="err"><? if(isset($lnrr)) echo $lnrr?></span></td>
 						</tr>
 						<tr>
 							<td>USERNAME:</td>
-							<td><input type="text" placeholder="username" name="un" value="<?=$un?>"></td>
+							<td><input type="text" placeholder="username" name="un" value="<?php echo $un?>"></td>
 							<td><span id="err"><? if(isset($unrr)) echo $unrr?></span></td>
 						</tr>
 						<tr>
@@ -115,17 +115,17 @@
 						</tr>
 					</table>
 				</form>
-	<?		}
+	<?php 	}
 			else{		?>
 				<p>Register succesfully!</p>
 				<table>
 					<tr>
 						<td>FULL NAME: </td>
-						<td><?=$fn." ".$ln?></td>
+						<td><?php echo $fn." ".$ln?></td>
 					</tr>
 					<tr>
 						<td>USERNAME: </td>
-						<td><?=$un?> </td>
+						<td><?php echo $un?> </td>
 					</tr>
 					<tr>
 						<td>PASSWORD: </td>
@@ -133,10 +133,10 @@
 					</tr>
 					<tr>
 						<td>PERMISSION: </td>
-						<td><?=$per?> </td>
+						<td><?php echo $per?> </td>
 					</tr>
 				</table>
-		<?	}
+		<?php }
 			?>
 
 		</div>

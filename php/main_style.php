@@ -8,6 +8,7 @@
 <!--   -->
 <!--   -->
 <?php
+	session_start();
 	$title="";
 	switch ($docfile) {
 		case 'store':
@@ -20,10 +21,10 @@
 			$title="About";
 			break;
 		case 'profile':
-			$title=$_COOKIE['authFn']." ".$_COOKIE['authLn'];
+			$title=$_SESSION['authFn']." ".$_SESSION['authLn'];
 			break;
 		case 'cart':
-			$title=$_COOKIE['authFn']."'s Cart";
+			$title=$_SESSION['authFn']."'s Cart";
 			break;
 		default:
 			$title="Skate Apparel";

@@ -5,10 +5,10 @@
  * @copyright 2015
  */
 
+session_start();
+include '../config.php';
 
-include 'config.php';
-
-$path = "img/UserImage/";
+$path = "../img/UserImage/";
 
 	$valid_formats = array("jpg","png");
 	if(isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST"){
@@ -27,15 +27,15 @@ $path = "img/UserImage/";
                             //$imgfile = $txt . "." . $ext;
 							$tmp = $_FILES['imgfile']['tmp_name'];
 							if(move_uploaded_file($tmp, $path.$imgfile)) {
-								if($_COOKIE['authImg']=="male.png" or $_COOKIE['authImg']=="female.png")
+								if($_SESSION['authImg']=="male.png" or $_SESSION['authImg']=="female.png")
 									;
 								else
-									unlink($path.$_COOKIE['authImg']);	
+									unlink($path.$_SESSION['authImg']);	
 								$query = "UPDATE UserAccount 
 								SET UserAccountImage='".$imgfile."' 
-								WHERE UserAccountID='".$_COOKIE['authID']."'";
+								WHERE UserAccountID='".$_SESSION['authID']."'";
                                 DB::query($query);
-                                setcookie("authImg",$imgfile,time()+3600,"/");
+                               	$_SESSION['authImg']=$imgfile;
 								setcookie("tmp","Updated!",time()+3,"/");
 								//header("Location: setting.php");
 							}

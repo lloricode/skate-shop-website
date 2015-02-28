@@ -5,8 +5,8 @@
 		<div  class="d">
 <a href="index.php"><button>back to main</button></a>
 	<?php 
-	 if(isset($_COOKIE['auth_accountID'])){ ?>
-	<?php if($_COOKIE['auth_permission']=="admin"){ 		?>
+	 if(isset($_SESSION['auth_accountID'])){ ?>
+	<?php if($_SESSION['auth_permission']=="admin"){ 		?>
 		<p>add product</p>
 		<form method="POST" action="php/addproduct.php" enctype="multipart/form-data">
 			<table>

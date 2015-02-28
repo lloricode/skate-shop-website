@@ -17,7 +17,7 @@ class DB {
 		
 		if (mysqli_connect_errno()) {
 			//throw new Exception('Database error.');
-			die('Database error.');
+			die('<p>Database error.</p>');
 		}
 
 		$this->MySQLi->set_charset("utf8");
@@ -36,11 +36,14 @@ class DB {
 	}
 	
 	public static function query($q){
-		return self::$instance->MySQLi->query($q);
+		$var=self::$instance->MySQLi->query($q);
+		if(!$var)
+			die("error query: " . self::$instance->MySQLi->error);
+		return $var;
 	}
 	
 	public static function esc($str){
-		return self::$instance->MySQLi->real_escape_string(htmlspecialchars($str));
+		return self::$instance->MySQLi->real_escape_string(trim(htmlspecialchars($str)));
 	}
 
 }

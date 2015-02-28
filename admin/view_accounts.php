@@ -5,12 +5,12 @@
 		?>
 
 		<?php
-			if(isset($_COOKIE['auth_accountID'])){ ?>
+			if(isset($_SESSION['auth_accountID'])){ ?>
 				<div  class="d">
 				<a href="index.php"><button>back to main</button></a>
 			<?php 
 
-				if($_COOKIE['auth_permission']=="admin"){ 		 ?>
+				if($_SESSION['auth_permission']=="admin"){ 		 ?>
 				<a href="add_account.php"><button>add admin account</button></a>
 		<?php		}
 				//--------------------------

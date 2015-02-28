@@ -120,8 +120,8 @@
 												<br />
 												<p style="font-size:13px">
 												<span style="color:red">	
-													&nbsp;&nbsp; <?php echo  $row->ProductBrand?> &nbsp;<b></span><br />
-													&nbsp;&nbsp; <?php echo  $row->ProductName?> &nbsp;<b><br />
+													&nbsp;&nbsp; <?php echo  $row->ProductBrand?> &nbsp;</span><br />
+												<b>	&nbsp;&nbsp; <?php echo  $row->ProductName?> &nbsp;<br />
 													&nbsp;&nbsp; &#8369;<?php echo  $row->ProductPrice?></b>
 												</p>
 											</div>

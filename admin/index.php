@@ -6,7 +6,7 @@
 
 
 		include 'php/header.php';
-		if(!isset($_COOKIE['auth_accountID']))
+		if(!isset($_SESSION['auth_accountID']))
 		{
 			?>
 			<form method="POST" action="php/login.php">

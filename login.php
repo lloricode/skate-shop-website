@@ -6,39 +6,34 @@
 	include("config.php");
 ?>
 <?php
-	//session_start();
+	$docfile="login";
+	include 'php/headerlogin.php';
 	setcookie("recID","",time()-3600,"/");
 	if ( isset($_GET) and $_SERVER["REQUEST_METHOD"]=="POST") {
 		$usercode=addslashes($_POST['user']);
 		$passcode=addslashes(md5($_POST['pass']));
 
-		if(filter_var($usercode, FILTER_VALIDATE_EMAIL)){//check if email is use bu user
+		if(filter_var($usercode, FILTER_VALIDATE_EMAIL)){
 			$tmp="UserAccountEmail";
-		//	list($usercode,$r)=explode(".", $usercode);
 		}
 		else
 			$tmp="UserAccountUserName";
 
-		$sql="SELECT UserAccountID,UserAccountFisrtName,UserAccountLastName,UserAccountImage FROM UserAccount WHERE $tmp='$usercode' AND UserAccountPassword='$passcode'";
-		
-		//if result matched usercode and passcode, table must be 1 row.
+		$sql="SELECT UserAccountID,UserAccountFisrtName,UserAccountLastName,UserAccountImage 
+			FROM UserAccount WHERE $tmp='$usercode' AND UserAccountPassword='$passcode'";
 		$rs=DB::query($sql);
-		
-		//if (DB::getNumRows()>0) {
 		if (DB::getNumRows()>0) {
 			$row=$rs->fetch_object();
-			setcookie("authFn",$row->UserAccountFisrtName,time()+3600,"/");
-			setcookie("authLn",$row->UserAccountLastName,time()+3600,"/");
-			setcookie("authImg",$row->UserAccountImage,time()+3600,"/");
-			setcookie("authID",$row->UserAccountID,time()+3600,"/");
+			$_SESSION["authFn"]=$row->UserAccountFisrtName;//setcookie("authFn",$row->UserAccountFisrtName,time()+3600,"/");
+			$_SESSION["authLn"]=$row->UserAccountLastName;//setcookie("authLn",$row->UserAccountLastName,time()+3600,"/");
+			$_SESSION["authImg"]=$row->UserAccountImage;//setcookie("authImg",$row->UserAccountImage,time()+3600,"/");
+			$_SESSION["authID"]=$row->UserAccountID;//setcookie("authID",$row->UserAccountID,time()+3600,"/");
 			unset($error);
 			header("Location: index.php");
 		}
 		else
 			$error= "Your Login UserName/Email or Pasword is invalid.<BR>";
 	}
-	$docfile="login";
-	include 'php/headerlogin.php';
 ?>
 						E-MAIL ADDRESS/USERNAME:<?php for($i=0;$i<14;$i++) echo "&nbsp;"; ?><br>
 						<input type="text" name="user" style="width:300px; height:22px;"><BR><BR><BR>

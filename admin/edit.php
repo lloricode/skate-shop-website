@@ -7,7 +7,7 @@
 	<a href="view_product.php"><button>back</button></a>
 	</div>
 	<?php
-	if(isset($_COOKIE['auth_accountID'])){
+	if(isset($_SESSION['auth_accountID'])){
 		if(isset($_GET['edit_product'])){
 			if(isset($_COOKIE['tmp'])) echo $_COOKIE['tmp'];
 			$rs=DB::query("SELECT * FROM Product WHERE ProductID='".trim(stripcslashes(htmlspecialchars($_GET['edit_product'])))."'");
