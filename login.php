@@ -28,18 +28,18 @@
 			$_SESSION["authLn"]=$row->UserAccountLastName;//setcookie("authLn",$row->UserAccountLastName,time()+3600,"/");
 			$_SESSION["authImg"]=$row->UserAccountImage;//setcookie("authImg",$row->UserAccountImage,time()+3600,"/");
 			$_SESSION["authID"]=$row->UserAccountID;//setcookie("authID",$row->UserAccountID,time()+3600,"/");
-			unset($error);
+			//unset($error);
 			header("Location: index.php");
 		}
 		else
-			$error= "Your Login UserName/Email or Pasword is invalid.<BR>";
+			echo "Your Login UserName/Email or Pasword is invalid.<br />";
 	}
 ?>
-						E-MAIL ADDRESS/USERNAME:<?php for($i=0;$i<14;$i++) echo "&nbsp;"; ?><br>
-						<input type="text" name="user" style="width:300px; height:22px;"><BR><BR><BR>
-						PASSWORD:<?php for($i=0;$i<42;$i++) echo "&nbsp;"; ?><br>
-						<input type="password" name="pass" style="width:300px; height:22px;"><BR>
-						<?php for($i=0;$i<8;$i++) echo "<BR>"; ?>
+						E-MAIL ADDRESS/USERNAME:<?php for($i=0;$i<14;$i++) echo "&nbsp;"; ?><br />
+						<input type="text" name="user" style="width:300px; height:22px;"><br /><br /><br />
+						PASSWORD:<?php for($i=0;$i<42;$i++) echo "&nbsp;"; ?><br />
+						<input type="password" name="pass" style="width:300px; height:22px;"><br />
+						<?php for($i=0;$i<8;$i++) echo "<br />"; ?>
 						<a href="recovery.php">forgot password?</a>
 						<table>
 							<tr>

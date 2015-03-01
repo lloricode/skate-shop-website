@@ -1,5 +1,5 @@
 
-<?php 
+<?php
 	/**
 	 * @author Lloric Garcia
 	 * @copyright 2015
@@ -19,7 +19,7 @@
 		if(empty($_POST['bd'])) $bdrr="Birth Date is required"; else $bd=$_POST['bd'];
 
 		if(isset($_POST['gender'])) $gender=$_POST['gender']; else $gender="";
-		
+
 		if(empty($gender)) $genderrr="Gender is required";
 		if(empty($_POST['home'])) $homerr="Home Address is required"; else $home=$_POST['home'];
 		if(empty($_POST['mobile'])) $mobilerr="Mobile is required"; else $mobile=$_POST['mobile'];
@@ -28,7 +28,6 @@
 		if(empty($_POST['ques'])) $quesrr="Secret Question is required"; else $ques=$_POST['ques'];
 		if(empty($_POST['ans'])) $ansrr="Secret Answer is required"; else $ans=$_POST['ans'];
 
-		
 		$fn=DB::esc($fn);
 		$ln=DB::esc($ln);
 		$username=DB::esc($username);
@@ -41,19 +40,24 @@
 		$shipping=DB::esc($shipping);
 		$ques=DB::esc($ques);
 		$ans=DB::esc($ans);
-		if(!preg_match("/^[0-9]{2}-[0-9]{2}-[0-9]{4}*$/", $bd))
+
+		if(!preg_match("/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/", $bd) and !empty($bd))
 			$bdrr="invalid birhtday";
-		
+		else{//----------------------------checking age input
+			list($tmp,$tmp,$year)=explode("/", $bd);
+			if($year>=2015)
+				$bdrr="age is not valid";
+		}
 		$valid = array("male","female");
 		//validation
 		if(!in_array($gender, $valid) and $gender!=="") //if user modify from inspect in browser
 			$genderrr="this is for human.";
 
-		if (!preg_match("/^[a-zA-Z ]*$/",$fn)) 
+		if (!preg_match("/^[a-zA-Z ]*$/",$fn))
 		  	$fnrr = "Only letters and white space allowed";
-		if (!preg_match("/^[a-zA-Z ]*$/",$ln)) 
+		if (!preg_match("/^[a-zA-Z ]*$/",$ln))
 		  	$lnrr = "Only letters and white space allowed";
-		if (!preg_match("/^[a-zA-Z0-9_]*$/",$username)) 
+		if (!preg_match("/^[a-zA-Z0-9_]*$/",$username))
 		  	$usernamerr = "Only letters, 0-9 and _ allowed";
 		else{
 			$sqlcmd="SELECT 1 From UserAccount WHERE UserAccountUserName='$username'";
@@ -64,7 +68,6 @@
 		if(!preg_match("/^[0-9]*$/", $mobile))
 			$mobilerr="Invalid mobile number";
 
-		
 		if(!filter_var($email, FILTER_VALIDATE_EMAIL) and !empty($_POST['email']) )
 			$emailrr="Invalid email format";
 		else{
@@ -82,8 +85,8 @@
 		if($ans2!=$ans)
 			$ansrr="Secret Answer mismatch";
 
-		
-		if($fnrr==" " && $lnrr==" " && $usernamerr==" " && $passrr==" "  && $bdrr==" "  && 
+
+		if($fnrr==" " && $lnrr==" " && $usernamerr==" " && $passrr==" "  && $bdrr==" "  &&
 			$genderrr==" " && $homerr==" " && $mobilerr==" " && $emailrr==" " && $shippingrr==" " && $quesrr==" " && $ansrr==" "){
 
 			$gen=($gender=="male")?"male.png":"female.png";//set the default photo depends on user's gender
@@ -93,25 +96,22 @@
 				VALUES('$gen','$fn','$ln','$username','".md5($pass)."','$bd',
 					'$gender','$home','$mobile','$email','$shipping','$ques','".md5($ans)."')";
 			DB::query($sql);
-			$ok="Account Created!<BR><a href='login.php'>Back to Log in.</a>";
+			//$ok="Account Created!<br /><a href='login.php'>Back to Log in.</a>";
 //------------------------------------------------------------------------------------------
-			$sql="SELECT UserAccountID,UserAccountFisrtName,UserAccountLastName,UserAccountImage FROM UserAccount WHERE UserAccountUserName='$username' AND UserAccountPassword='".md5($pass)."'";
-			/*
-				if sign up is success will go to the home
-			*/
-			//if result matched usercode and passcode, table must be 1 row.
-	/*		$rs=DB::query($sql);
-			
-			
+			$sql="SELECT UserAccountID,UserAccountFisrtName,UserAccountLastName,UserAccountImage 
+			FROM UserAccount WHERE UserAccountUserName='$username' AND UserAccountPassword='".md5($pass)."'";
+			$rs=DB::query($sql);
 			if (DB::getNumRows()>0) {
 				$row=$rs->fetch_object();
-				setcookie("authFn",$row->UserAccountFisrtName,time()+3600,"/");
-				setcookie("authLn",$row->UserAccountLastName,time()+3600,"/");
-				setcookie("authImg",$row->UserAccountImage,time()+3600,"/");
-				setcookie("authID",$row->UserAccountID,time()+3600,"/");
-				unset($error);
-				//header("Location: index.php");
-			}*/
+				session_start();
+				$_SESSION["authFn"]=$row->UserAccountFisrtName;
+				$_SESSION["authLn"]=$row->UserAccountLastName;
+				$_SESSION["authImg"]=$row->UserAccountImage;
+				$_SESSION["authID"]=$row->UserAccountID;
+				header("Location: profile.php");
+			}
+			else
+				echo "string";
 		}
 		else
 			$ok="please complete the fields.";
@@ -139,7 +139,7 @@
 			$(function() {
 			      var elem = document.createElement('input');
 			      elem.setAttribute('type', 'date');
-			 
+
 			      if ( elem.type === 'text' ) {
 			    //     $('#date').datepicker();
 			         $( "#datepicker" ).datepicker();
@@ -154,7 +154,7 @@
 				<div class="header">
 					<div id="inside_header">
 						<div id="log" >
-						
+
 						</div>
 					</div>
 				</div>
@@ -182,11 +182,16 @@
 							echo $ok;
 							unset($ok);
 						}?>
-			
-					<BR><BR><BR><BR>
+
+					<br /><br /><br /><br />
 					<?php if(!isset($fn))$fn=$ln=$username=$pass=$bm=$bd=$by=$gender=$home=$mobile=$email=$shipping=$ques=$ans="";?>
 					<form action="<?=htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 						<table>
+							<tr>
+								<td>
+									<span id="err">all field required</span>
+								</td>
+							</tr>
 							<tr>
 								<td>FIRST NAME: </td>
 								<td><input placeholder="first name"  type="text" name="fn"  value="<?=$fn;?>"></td>
@@ -270,7 +275,7 @@
 									<input type="submit" value="CREATE ACCOUNT">
 								</td>
 								<td>
-									
+
 								</td>
 							</tr>
 						</table>
@@ -278,9 +283,7 @@
 									<a href="login.php" style="font-size:15px;">
 										<button>CANCEL</button>
 									</a>
-						<p>Learn how to validate form in</p>
-						<a class="w3" href="http://www.w3schools.com/php/php_form_complete.asp" target="blank_">http://www.w3schools.com/php/php_form_complete.asp</a>
-					
+
 			</div>
 		</center>
 <?php

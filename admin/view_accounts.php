@@ -21,10 +21,9 @@
 				$rs=DB::query($sqlcmd);
 				if(DB::getNumRows()>0){
 					echo "<table border='1'><caption>Uploads</caption>
-					<tr><th>Admin</th><th>Uploads</th></tr>
-					<tr>";
+					<tr><th>Admin</th><th>Uploads</th></tr>";
 					while($row=$rs->fetch_object())
-						echo "<td>".$row->AdminAccountName."</td><td> ".$row->NumberOfUploads."</td></tr>";
+						echo "<tr><td>".$row->AdminAccountName."</td><td> ".$row->NumberOfUploads."</td></tr>";
 					echo "</table>";
 				}
 				//-----------------------
@@ -37,14 +36,14 @@
 					echo "<th>UserName</th>";
 					echo "<th>Permission</th><tr>";
 					while ($row=$rs->fetch_object()) {
-						echo "<td>".$row->AdminAccountID."</td>";
+						echo "<tr><td>".$row->AdminAccountID."</td>";
 						echo "<td>".$row->AdminAccountName."</td>";
 						echo "<td>".$row->AdminAccountLastName."</td>";
 						echo "<td>".$row->AdminAccountUserName."</td>";
 						echo "<td>".$row->AdminAccountPermission."</td>";
-						echo "</tr><tr>";
+						echo "</tr>";
 					}
-					echo "</tr></table>";
+					echo "</table>";
 				}
 				//------------------
 				$sqlcmd="SELECT * FROM UserAccount";
@@ -57,15 +56,15 @@
 					echo "<th>Email</th>";
 					echo "<th>Gender</th></tr><tr>";
 					while ($row=$rs->fetch_object()) {
-						echo "<td>".$row->UserAccountID."</td>";
+						echo "<tr><td>".$row->UserAccountID."</td>";
 						echo "<td>".$row->UserAccountFisrtName."</td>";
 						echo "<td>".$row->UserAccountLastName."</td>";
 						echo "<td>".$row->UserAccountUserName."</td>";
 						echo "<td>".$row->UserAccountEmail."</td>";
 						echo "<td>".$row->UserAccountGender."</td>";
-						echo "</tr><tr>";
+						echo "</tr>";
 					}
-					echo "</tr></table>";
+					echo "</table>";
 				}
 				echo "</div>";
 			}

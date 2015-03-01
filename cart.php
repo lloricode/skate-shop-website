@@ -1,7 +1,9 @@
 <?php
 	$docfile="cart";
-	if(!isset($_COOKIE['authID'])) header("Location: login.php");
 	include 'php/main_style.php';
+	if(!isset($_SESSION['authID'])){
+		header("Location: login.php");
+	}
 	include 'php/fresco_style.php';
 	include 'php/header.php';
 	include 'php/menu.php';
@@ -15,17 +17,17 @@
 	if(isset($_GET['purchase']) and $_SERVER["REQUEST_METHOD"]=="GET"){
 		if($_GET['purchase']=="yes"){
 			//total purchanse in all item
-			$sql="SELECT SUM(p.ProductPrice*c.CartQuantity) AS total_ FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE c.CartPurchased=0 AND UserAccountID=".$_COOKIE['authID'];  
+			$sql="SELECT SUM(p.ProductPrice*c.CartQuantity) AS total_ FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE c.CartPurchased=0 AND UserAccountID=".$_SESSION['authID'];  
 			$rs=DB::query($sql);
 			$row = $rs->fetch_object();
 			$amount=$row->total_;
 			//total quantity in all purchase
-			$sql="SELECT SUM(CartQuantity) AS total_Q FROM Cart WHERE CartPurchased=0 AND UserAccountID=".$_COOKIE['authID'];  
+			$sql="SELECT SUM(CartQuantity) AS total_Q FROM Cart WHERE CartPurchased=0 AND UserAccountID=".$_SESSION['authID'];  
 			$rs=DB::query($sql);
 			$row = $rs->fetch_object();
 			$quant=$row->total_Q;
 			//insert purchase including 2 above
-			$sqlcmd="INSERT INTO Purchased(PurchasedAmount,PurchasedQuantity,UserAccountID,PurchasedDelivered) VALUES($amount,$quant,".$_COOKIE['authID'].",0)";
+			$sqlcmd="INSERT INTO Purchased(PurchasedAmount,PurchasedQuantity,UserAccountID,PurchasedDelivered) VALUES($amount,$quant,".$_SESSION['authID'].",0)";
 			DB::query($sqlcmd);
 			//slect purchaseID for purchaseLine
 			$sql="SELECT PurchasedId FROM Purchased ORDER BY PurchasedId DESC LIMIT 0,1";
@@ -33,7 +35,7 @@
 			$row = $rs->fetch_object();
 			$pid=$row->PurchasedId;
 			//select all item to be insert in purchaseLine WHERE purchase=0
-			$sql="SELECT ProductId,CartQuantity,CartItemSize FROM Cart WHERE CartPurchased=0 AND UserAccountID=".$_COOKIE['authID']; 
+			$sql="SELECT ProductId,CartQuantity,CartItemSize FROM Cart WHERE CartPurchased=0 AND UserAccountID=".$_SESSION['authID']; 
 			$rs=DB::query($sql);
 			while($row = $rs->fetch_object()){
 				$quantity=0;
@@ -81,7 +83,7 @@
 			}
 			//------
 			//change purchase to true where false
-			$sqlcmd="UPDATE Cart SET CartPurchased=1 WHERE CartPurchased=0 AND UserAccountID=".$_COOKIE['authID']; 
+			$sqlcmd="UPDATE Cart SET CartPurchased=1 WHERE CartPurchased=0 AND UserAccountID=".$_SESSION['authID']; 
 			DB::query($sqlcmd);
 		}
 	}
@@ -98,12 +100,12 @@
 			</div>
 	<?php }
 		else{
-			$sql="SELECT SUM(p.ProductPrice*c.CartQuantity) AS total_ FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE c.CartPurchased=0 AND UserAccountID=".$_COOKIE['authID'];  
+			$sql="SELECT SUM(p.ProductPrice*c.CartQuantity) AS total_ FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE c.CartPurchased=0 AND UserAccountID=".$_SESSION['authID'];  
 			$rs=DB::query($sql);
 			$row = $rs->fetch_object();
 			?>
 			<div class="menu2" style="margin-top:0px;"><br />
-				<span style="float:left">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $_COOKIE['authFn']." ".$_COOKIE['authLn']?></span>
+				<span style="float:left">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $_SESSION['authFn']." ".$_SESSION['authLn']?></span>
 				<span style="font-size:25px"><b>YOUR CART</b></span>
 				<span style="float:right">UNPURCHASE TOTAL: &#8369;<?php echo ($row->total_>0)?$row->total_:0?>&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			</div>
@@ -129,7 +131,7 @@
 								<tr>
 									<td><h2><?php echo $row->ProductName?></h2></td>
 									<?php //security later?>
-									<?php setcookie("prodID",$row->ProductID,time()+20,"/");?>
+									<input type="hidden" name="prodID" value="<?php echo $row->ProductID;?>">
 								</tr>
 								<tr>
 									<td>Brand: <b><?php echo $row->ProductBrand?></b></td>
@@ -197,7 +199,7 @@
 				}else{  
 
 					$sqlcmd="SELECT c.CartPurchased,c.CartID,c.UserAccountID,p.ProductAttactment,p.ProductID,p.ProductName,c.CartItemSize,c.CartQuantity,p.ProductPrice
-								FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE UserAccountID=".$_COOKIE['authID']." GROUP BY c.ProductID,c.CartItemSize,CartPurchased,CartDateAdded";
+								FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE UserAccountID=".$_SESSION['authID']." GROUP BY c.ProductID,c.CartItemSize,CartPurchased,CartDateAdded";
 							
 					$result=DB::query($sqlcmd);
 					if(DB::getNumRows() > 0){				?>
@@ -259,20 +261,20 @@
 						<p>BACK TO SHOP</p>
 					</div>
 				</a>
-				<?if(!isset($_GET['file'])){?>
+				<?php if(!isset($_GET['file'])){?>
 				<a href="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>?<?php echo $q?><?php echo $srch?><?php echo $c?>page=<?php echo $p?>&purchase=yes">
 					<div style="float:right; background-color:#990033; width:150px; height:50px;">
 						<p>PURCHASE</p>
 					</div>
 				</a>
-				<?}
+				<?php }
 				else{?>
 					<a href="cart.php?<?php echo $q;?><?php echo $cat?><?php echo $srch?>page=<?php echo $page?>">
 						<div style="float:right; background-color:#990033; width:150px; height:50px;">
 							<p>VIEW CART</p>
 						</div>
 					</a>
-				<?}?>
+				<?php }?>
 			</div>
 		</div>
 	</center>
