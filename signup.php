@@ -41,12 +41,16 @@
 		$ques=DB::esc($ques);
 		$ans=DB::esc($ans);
 
-		if(!preg_match("/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/", $bd) and !empty($bd))
-			$bdrr="invalid birhtday";
+		if(!preg_match("/[0-9]{4}\-[0-9]{2}\-[0-9]{2}/", $bd) and !empty($bd))
+			$bdrr="invalid birhtday format";
 		else{//----------------------------checking age input
-			list($tmp,$tmp,$year)=explode("/", $bd);
-			if($year>=2015)
-				$bdrr="age is not valid";
+			list($YY,$MM,$dd)=explode("-", $bd);
+				if($YY<=(date("Y")-18)){
+					if($MM<=date("m") and $dd<=date("d"))
+						$bdrr="below of 18yrs old is not allowed.";
+				}
+				else
+					$bdrr="below of 18yrs old is not allowed.";
 		}
 		$valid = array("male","female");
 		//validation
@@ -142,7 +146,10 @@
 
 			      if ( elem.type === 'text' ) {
 			    //     $('#date').datepicker();
-			         $( "#datepicker" ).datepicker();
+			        // $( "#datepicker" ).datepicker();
+			         $('#datepicker').datepicker({
+					   dateFormat: 'yy-mm-dd'
+					});
 			      }
 		   	})();
 		</script>
