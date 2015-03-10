@@ -41,7 +41,7 @@
 		$ques=DB::esc($ques);
 		$ans=DB::esc($ans);
 
-		if(!preg_match("/[0-9]{4}\-[0-9]{2}\-[0-9]{2}/", $bd) and !empty($bd))
+		if(!preg_match("/^[[0-9]{4}\-[0-9]{2}\-[0-9]{2}]*$/", $bd) and !empty($bd))
 			$bdrr="invalid birhtday format";
 		else{//----------------------------checking age input
 			list($YY,$MM,$dd)=explode("-", $bd);
@@ -128,32 +128,8 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css">
         <link href="img/icon.jpg" rel="shortcut icon" type="image/x-icon" />
 
-<!-- date picker-->
-         <meta charset="utf-8">
-		<title>jQuery UI Datepicker - Default functionality</title>
-		<link rel="stylesheet" href="js/datepicker/jquery-ui.css">
-		<script src="js/datepicker/jquery-1.10.2.js"></script>
-		<script src="js/datepicker/jquery-ui.js"></script>
-		<link rel="stylesheet" href="js/datepicker/style.css">
-		<script>
-		/*	$(function() {
-			$( "#datepicker" ).datepicker();
-			});*/
+        <?php include"php/datepicker.php"; ?>
 
-			$(function() {
-			      var elem = document.createElement('input');
-			      elem.setAttribute('type', 'date');
-
-			      if ( elem.type === 'text' ) {
-			    //     $('#date').datepicker();
-			        // $( "#datepicker" ).datepicker();
-			         $('#datepicker').datepicker({
-					   dateFormat: 'yy-mm-dd'
-					});
-			      }
-		   	})();
-		</script>
-		<!-- date picker-->
 	</head>
 	<body>
 		<div style="background-color:#111111; height:270;">
@@ -228,7 +204,7 @@
 								<td>BIRTHDATE:</td>
 								<td>
 									<input type="date" name="bd" id="datepicker"  value="<?=$bd;?>">
-									<script src="js/datepicker/jquery.min.js"></script>
+							<!--		<script src="js/datepicker/jquery.min.js"></script>-->
 								</td>
 								<td><span id="err"><?php if(isset($bdrr)) echo $bdrr;?></span></td>
 							</tr>

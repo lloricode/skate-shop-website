@@ -15,7 +15,7 @@ session_start();
 require_once('../../config.php');
 $path = "../../img/product/";
 
-	$valid_formats = array("jpg","png");
+	$valid_formats = array("jpg","png","jpeg");
 	if(isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST")
 	{
 			$name = $_FILES['pimage']['name'];

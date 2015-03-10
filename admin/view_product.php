@@ -1,4 +1,3 @@
-
 	<?php
 	include 'php/header.php';
 	?>
@@ -139,36 +138,36 @@
 							</tr>
 					<?php }	?>	
 						<tr>
-							<td rowspan="4"><?=($i+1)?></td>
-							<td rowspan="4"><?= $row->ProductID; ?></td>
-							<td rowspan="4"><?= $row->sale; ?></td>
-							<td rowspan="4"><?= $row->ProductName; ?></td>
-							<td rowspan="4"><?= $row->ProductBrand; ?></td>
-							<td rowspan="4"><?= "&#8369; ".$row->ProductPrice; ?></td>
-							<td rowspan="4"><?= $row->ProductType; ?></td>
-							<td rowspan="4"><?= $row->ProductStatus; ?></td>
+							<td rowspan="4"><?php echo ($i+1)?></td>
+							<td rowspan="4"><?php echo  $row->ProductID; ?></td>
+							<td rowspan="4"><?php echo  $row->sale; ?></td>
+							<td rowspan="4"><?php echo  $row->ProductName; ?></td>
+							<td rowspan="4"><?php echo  $row->ProductBrand; ?></td>
+							<td rowspan="4"><?php echo  "&#8369; ".$row->ProductPrice; ?></td>
+							<td rowspan="4"><?php echo  $row->ProductType; ?></td>
+							<td rowspan="4"><?php echo  $row->ProductStatus; ?></td>
 
 							<td><b>S</b></td>
-							<td><?= $row->ProductAvailabilitySmall; ?></td>
+							<td <?php if($row->ProductAvailabilitySmall<10) echo "style='color:darkred'" ?> ><?php echo  $row->ProductAvailabilitySmall; ?></td>
 
-							<td rowspan="4"><?= $row->ProductGender; ?></td>
+							<td rowspan="4"><?php echo  $row->ProductGender; ?></td>
 							<td rowspan="4">
-								<a href="edit.php?edit_product=<?= $row->ProductID; ?>"><img src="../img/product/<?= $row->ProductAttactment; ?>" width="100" /></a>
+								<a href="edit.php?edit_product=<?php echo  $row->ProductID; ?>"><img src="../img/product/<?php echo  $row->ProductAttactment; ?>" width="100" /></a>
 							</td>
-							<td rowspan="4"><?= $row->AdminAccountName; ?></td>
-							<td rowspan="4"><?= $row->ProductDateAdded; ?></td>
+							<td rowspan="4"><?php echo  $row->AdminAccountName; ?></td>
+							<td rowspan="4"><?php echo  $row->ProductDateAdded; ?></td>
 						</tr>
 						<tr>
 							<td><b>M</b></td>
-							<td><?= $row->ProductAvailabilityMedium; ?></td>
+							<td <?php if($row->ProductAvailabilityMedium<10) echo "style='color:darkred'" ?> ><?php echo  $row->ProductAvailabilityMedium; ?></td>
 						</tr>
 						<tr>
 							<td><b>L</b></td>
-							<td><?= $row->ProductAvailabilityLarge; ?></td>
+							<td <?php if($row->ProductAvailabilityLarge<10) echo "style='color:darkred'" ?> ><?php echo  $row->ProductAvailabilityLarge; ?></td>
 						</tr>
 						<tr>
 							<td><b>+</b></td>
-							<td><?=( $row->ProductAvailabilitySmall+$row->ProductAvailabilityMedium+$row->ProductAvailabilityLarge)?></td>
+							<td <?php if(( $row->ProductAvailabilitySmall+$row->ProductAvailabilityMedium+$row->ProductAvailabilityLarge)<10) echo "style='color:darkred'" ?> ><?php echo ( $row->ProductAvailabilitySmall+$row->ProductAvailabilityMedium+$row->ProductAvailabilityLarge)?></td>
 						</tr>
 		<?php 		}
 				}

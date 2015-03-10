@@ -26,6 +26,9 @@
 		case 'cart':
 			$title=$_SESSION['authFn']."'s Cart";
 			break;
+		case 'fill':
+			$title="Check Out";
+			break;
 		default:
 			$title="Skate Apparel";
 			break;

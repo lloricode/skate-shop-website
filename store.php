@@ -17,8 +17,8 @@
 					<li id="mainmenu2" <?php if(isset($qq)){ if($qq=="sale") echo "class='active_menu2'"; }?> ><a href="store.php?query=sale" >SALE</a></li>
 					<li id="mainmenu2" <?php if(isset($qq)){ if($qq=="male") echo "class='active_menu2'"; }?> ><a href="store.php?query=male">MALE</a></li>
 					<li id="mainmenu2" <?php if(isset($qq)){ if($qq=="female") echo "class='active_menu2'"; }?> ><a href="store.php?query=female">FEMALE</a></li>
-					<li id="mainmenu2" <?php if(isset($qq)){ if($qq=="brand") echo "class='active_menu2'"; }?> ><a href="store.php?query=brands">MISC</a></li>
-				</ul>
+				<!--	<li id="mainmenu2" <?php if(isset($qq)){ if($qq=="brand") echo "class='active_menu2'"; }?> ><a href="store.php?query=brands">MISC</a></li>
+				--></ul>
 			</div>
 			<?php
 				$actualURL = isset($_GET["query"]) ? "query=" . $_GET["query"] : "query=all";
@@ -143,11 +143,11 @@
 					} ?>
 				</div>
 				<div style="background-color:; height:30px; margin-top:50px;">
-					<a href="cart.php?<?php echo $q;?><?php echo $cat?><?php echo $srch?>page=<?php echo $page?>">
 						<div style="float:bottom; background-color:#990033; width:150px; height:50px;">
-							<p>VIEW CART</p>
-						</div>
+					<a href="cart.php?<?php echo $q;?><?php echo $cat?><?php echo $srch?>page=<?php echo $page?>">
+							<p style="padding: 13px 13px">VIEW CART</p>
 					</a>
+						</div>
 				</div>
 				<div style="background-color:; height:30px; margin-top:5px;">
 		<?php 		if(0!=$prev){		?>
@@ -156,16 +156,14 @@
 								<p>PREV PAGE</p>
 							</div>
 						</a>
-			<?php 	}	
-						
-
+			<?php 	}
 			 		if($total_result>$nxt){		?>
 						<a href="store.php?<?php echo $q.$cat."page=".($page+1);?>">
 							<div style="float:right; background-color:#D14719; width:120px; height:45px">
 								<p>NEXT PAGE</p>
 							</div>
 						</a>
-			<?php 	}	
+			<?php 	}
 						?>
 				</div>
 			</div>

@@ -14,79 +14,7 @@
 		$sqlcmd="DELETE FROM Cart Where CartID=$id";
 		DB::query($sqlcmd);
 	}
-	if(isset($_GET['purchase']) and $_SERVER["REQUEST_METHOD"]=="GET"){
-		if($_GET['purchase']=="yes"){
-			//total purchanse in all item
-			$sql="SELECT SUM(p.ProductPrice*c.CartQuantity) AS total_ FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE c.CartPurchased=0 AND UserAccountID=".$_SESSION['authID'];  
-			$rs=DB::query($sql);
-			$row = $rs->fetch_object();
-			$amount=$row->total_;
-			//total quantity in all purchase
-			$sql="SELECT SUM(CartQuantity) AS total_Q FROM Cart WHERE CartPurchased=0 AND UserAccountID=".$_SESSION['authID'];  
-			$rs=DB::query($sql);
-			$row = $rs->fetch_object();
-			$quant=$row->total_Q;
-			//insert purchase including 2 above
-			$sqlcmd="INSERT INTO Purchased(PurchasedAmount,PurchasedQuantity,UserAccountID,PurchasedDelivered) VALUES($amount,$quant,".$_SESSION['authID'].",0)";
-			DB::query($sqlcmd);
-			//slect purchaseID for purchaseLine
-			$sql="SELECT PurchasedId FROM Purchased ORDER BY PurchasedId DESC LIMIT 0,1";
-			$rs=DB::query($sql);
-			$row = $rs->fetch_object();
-			$pid=$row->PurchasedId;
-			//select all item to be insert in purchaseLine WHERE purchase=0
-			$sql="SELECT ProductId,CartQuantity,CartItemSize FROM Cart WHERE CartPurchased=0 AND UserAccountID=".$_SESSION['authID']; 
-			$rs=DB::query($sql);
-			while($row = $rs->fetch_object()){
-				$quantity=0;
-				switch ($row->CartItemSize) {
-					case 'small':
-						//select availabilty and sold to be update
-						$sqlcmd="SELECT ProductAvailabilitySmall,ProductSoldSmall FROM Product WHERE ProductID=".$row->ProductId;
-						$rs2=DB::query($sqlcmd);
-						$row2=$rs2->fetch_object();
-						$avail=$row2->ProductAvailabilitySmall;
-						$sold=$row2->ProductSoldSmall;
-						$quantity=$row->CartQuantity;
-						// the update
-						$sqlcmd="UPDATE Product SET ProductAvailabilitySmall=".($avail-$quantity).", ProductSoldSmall=".($sold+$quantity)." WHERE ProductID=".$row->ProductId;
-						DB::query($sqlcmd);
-						break;
-					case 'medium':
-						//select availabilty and sold to be update
-						$sqlcmd="SELECT ProductAvailabilityMedium,ProductSoldMedium FROM Product WHERE ProductID=".$row->ProductId;
-						$rs2=DB::query($sqlcmd);
-						$row2=$rs2->fetch_object();
-						$avail=$row2->ProductAvailabilityMedium;
-						$sold=$row2->ProductSoldMedium;
-						$quantity=$row->CartQuantity;
-						// the update
-						$sqlcmd="UPDATE Product SET ProductAvailabilityMedium=".($avail-$quantity).", ProductSoldMedium=".($sold+$quantity)." WHERE ProductID=".$row->ProductId;
-						DB::query($sqlcmd);
-						break;
-					case 'large':
-						//select availabilty and sold to be update
-						$sqlcmd="SELECT ProductAvailabilityLarge,ProductSoldLarge FROM Product WHERE ProductID=".$row->ProductId;
-						$rs2=DB::query($sqlcmd);
-						$row2=$rs2->fetch_object();
-						$avail=$row2->ProductAvailabilityLarge;
-						$sold=$row2->ProductSoldLarge;
-						$quantity=$row->CartQuantity;
-						// the update
-						$sqlcmd="UPDATE Product SET ProductAvailabilityLarge=".($avail-$quantity).", ProductSoldLarge=".($sold+$quantity)." WHERE ProductID=".$row->ProductId;
-						DB::query($sqlcmd);
-						break;
-				}
-				//insert purchaseLine incuding purchaseID
-				$insertline="INSERT INTO PurchasedLine(PurchasedId,ProductID,Quantity,Size) VALUES($pid,".$row->ProductId.",".$quantity.",'".$row->CartItemSize."')";
-				DB::query($insertline);
-			}
-			//------
-			//change purchase to true where false
-			$sqlcmd="UPDATE Cart SET CartPurchased=1 WHERE CartPurchased=0 AND UserAccountID=".$_SESSION['authID']; 
-			DB::query($sqlcmd);
-		}
-	}
+
 
 	$q=(isset($_GET['query']))?"query=".$_GET['query']."&":"";
 	$c=(isset($_GET['cat']))?"cat=".$_GET['cat']."&":"";
@@ -113,20 +41,16 @@
 	?>
 		<div class="main_body"><br />
 <div style="background:rgba(0,0,0,.1); height:1030px;">
-		<?php 	
+		<?php
 				if(isset($_GET['file'])){
-					$sqlcmd="SELECT * FROM Product WHERE ProductID='".htmlspecialchars(trim(stripcslashes($_GET['file']))) ."'";
+					$sqlcmd="SELECT * FROM Product WHERE ProductID='".DB::esc($_GET['file']) ."'";
 					$rs=DB::query($sqlcmd);
-					if($row=$rs->fetch_object()){
-
-						?>
-						
+					if($row=$rs->fetch_object()){			?>
 						<?php if(isset($_COOKIE['tmp'])){ echo $_COOKIE['tmp']; setcookie("tmp","",time()-5,"/");}?>
 						<form action="php/add_cart.php?<?php echo $q?><?php echo $srch?><?php echo $c?>page=<?php echo $p?>&file=<?php echo $_GET['file']?>" method="post" >
 							<table>
 								<tr>
 									<td rowspan="8"><img src="img/product/<?php echo $row->ProductAttactment?>" width="300" ></td>
-									
 								</tr>
 								<tr>
 									<td><h2><?php echo $row->ProductName?></h2></td>
@@ -192,15 +116,13 @@
 								</tr>
 							</table>
 						</form>
-			<?php 	
+			<?php
 					}
 					else
 						echo "invalid";
-				}else{  
-
+				}else{
 					$sqlcmd="SELECT c.CartPurchased,c.CartID,c.UserAccountID,p.ProductAttactment,p.ProductID,p.ProductName,c.CartItemSize,c.CartQuantity,p.ProductPrice
-								FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE UserAccountID=".$_SESSION['authID']." GROUP BY c.ProductID,c.CartItemSize,CartPurchased,CartDateAdded";
-							
+								FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE UserAccountID=".$_SESSION['authID']." GROUP BY c.ProductID,c.CartItemSize,CartPurchased,CartDateAdded ORDER BY CartPurchased";
 					$result=DB::query($sqlcmd);
 					if(DB::getNumRows() > 0){				?>
 						<table id="table_">
@@ -230,7 +152,7 @@
 													<span>REMOVE TO CART</span>
 												</div>
 											</a>
-								<?php 	}			?>	
+								<?php 	}			?>
 										<br />
 										<p style="color:white;"><?php echo $int?>:&nbsp;<?php echo $row->CartItemSize?>:<?php echo $row->CartQuantity?>&nbsp;&nbsp;<?php echo  $row->ProductName?> <b><br /> &#8369;<?php echo  $row->ProductPrice?></b></p>
 									</div>
@@ -238,8 +160,8 @@
 							</td>
 							<?php
 							if($int % 3 == 0)
-								echo "</tr><tr class='tableRow'>";	
-						}	
+								echo "</tr><tr class='tableRow'>";
+						}
 						echo "</tr></table>";
 					}
 					else
@@ -247,8 +169,6 @@
 						echo "No product";
 					}
 				}	?>
-			
-			
 			</div>
 			<table>
 				<tr>
@@ -261,15 +181,21 @@
 						<p>BACK TO SHOP</p>
 					</div>
 				</a>
-				<?php if(!isset($_GET['file'])){?>
-				<a href="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>?<?php echo $q?><?php echo $srch?><?php echo $c?>page=<?php echo $p?>&purchase=yes">
-					<div style="float:right; background-color:#990033; width:150px; height:50px;">
-						<p>PURCHASE</p>
-					</div>
-				</a>
-				<?php }
+				<?php if(!isset($_GET['file'])){
+
+					DB::query("SELECT CartPurchased as a FROM Cart WHERE CartPurchased=0 AND UserAccountID='".$_SESSION["authID"]."'");
+					if(DB::getNumRows()>0){
+				?>
+						<a href="fillcheckout.php">
+							<div style="float:right; background-color:#990033; width:150px; height:50px;">
+								<p>CHECKOUT</p>
+							</div>
+						</a>
+				<?php		//echo "<a href='".htmlspecialchars($_SERVER["PHP_SELF"])."?".$q.$srch.$c."page=".$p."&purchase=yes'>";
+					}
+				 }
 				else{?>
-					<a href="cart.php?<?php echo $q;?><?php echo $cat?><?php echo $srch?>page=<?php echo $page?>">
+					<a href="cart.php?<?php echo $q;?><?php echo $c?><?php echo $srch?>page=<?php echo $p?>">
 						<div style="float:right; background-color:#990033; width:150px; height:50px;">
 							<p>VIEW CART</p>
 						</div>

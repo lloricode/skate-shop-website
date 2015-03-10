@@ -156,7 +156,7 @@
 								}
 							}
 							else if(isset($_GET['search'])){
-									$query="SELECT * FROM Product WHERE ProductName='".htmlspecialchars(stripcslashes(trim($_GET['search'])))."'";
+									$query="SELECT * FROM Product WHERE ProductName='".DB::esc($_GET['search'])."'";
 							}
 							else{
 								echo "error query";
