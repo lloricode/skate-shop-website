@@ -7,7 +7,7 @@
 	include 'php/fresco_style.php';
 	include 'php/header.php';
 	include 'php/menu.php';
-	include("config.php");
+	//include("config.php");
 
 	if(isset($_GET['del']) and $_SERVER["REQUEST_METHOD"]=="GET"){
 		$id=trim(stripcslashes(htmlspecialchars($_GET['del'])));
@@ -121,7 +121,7 @@
 					else
 						echo "invalid";
 				}else{
-					$sqlcmd="SELECT c.CartPurchased,c.CartID,c.UserAccountID,p.ProductAttactment,p.ProductID,p.ProductName,c.CartItemSize,c.CartQuantity,p.ProductPrice
+					$sqlcmd="SELECT c.CartPurchased,c.CartID,c.UserAccountID,p.ProductAttactment,p.ProductID,p.ProductName,c.CartItemSize,c.CartQuantity,p.ProductPrice,p.ProductBrand
 								FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE UserAccountID=".$_SESSION['authID']." GROUP BY c.ProductID,c.CartItemSize,CartPurchased,CartDateAdded ORDER BY CartPurchased";
 					$result=DB::query($sqlcmd);
 					if(DB::getNumRows() > 0){				?>
@@ -131,9 +131,9 @@
 						{
 							 ?>
 							<td class="tableData">
-								<div class="mardagz" style="background: url('img/product/<?php echo  $row->ProductAttactment; ?>');background-repeat: no-repeat; background-size: cover;">
+								<div class="mardagz" style="background: url('<?php echo  $ri->h("img/product/".$row->ProductAttactment,260); ?>');background-repeat: no-repeat; background-size: cover;">
 									<div class="details">
-										<a href="img/product/<?php echo  $row->ProductAttactment; ?>" class='fresco'
+										<a href="<?php echo  $ri->h("img/product/".$row->ProductAttactment,700); ?>" class='fresco'
 											data-fresco-group="product"
 											data-fresco-caption="<?php echo $int?> Name: <?php echo  $row->ProductName; ?> <br />
 											Price: &#8369;<?php echo  $row->ProductPrice; ?>" >
@@ -154,7 +154,16 @@
 											</a>
 								<?php 	}			?>
 										<br />
-										<p style="color:white;"><?php echo $int?>:&nbsp;<?php echo $row->CartItemSize?>:<?php echo $row->CartQuantity?>&nbsp;&nbsp;<?php echo  $row->ProductName?> <b><br /> &#8369;<?php echo  $row->ProductPrice?></b></p>
+										<p style="font-size:13px;float:left">
+											&nbsp;&nbsp;<?php echo $int?>:
+											<span style="color:red;">	
+												 <?php echo  $row->ProductBrand?> &nbsp;</span><br />
+											<b>	&nbsp;&nbsp; <?php echo  $row->ProductName?> &nbsp;<br />
+												&nbsp;&nbsp; &#8369;<?php echo  $row->ProductPrice?></b>
+										</p>
+										<p style="color:white;float:right">
+											<?php echo $row->CartItemSize?>(<?php echo $row->CartQuantity?>)
+										</p>
 									</div>
 								</div>
 							</td>

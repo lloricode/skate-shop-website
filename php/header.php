@@ -3,6 +3,7 @@
  * @author Lloric Garcia
  * @copyright 2015//
  */
+	include"config.php";
 ?>
 
 	</head>
@@ -19,7 +20,7 @@
 										Welcome,
 										<a href='profile.php' >
 											<?php echo $_SESSION['authFn']?>!&nbsp;&nbsp;&nbsp;
-											<img src="img/UserImage/<?php echo $_SESSION['authImg'];?>" alt="" height="28" >
+											<img src="<?php echo $ri->h("img/UserImage/".$_SESSION['authImg'],28);?>" alt="<?php echo $_SESSION['authFn']." ".$_SESSION['authLn']; ?>" >
 										</a>&nbsp;&nbsp;&nbsp;&nbsp;
 									 	<a href="setting.php" class="setting">SETTING</a>&nbsp;&nbsp; <a href="php/logout.php" class="logout">LOG OUT</a>&nbsp;
 									</p>
@@ -32,3 +33,4 @@
 				</div>
 			</center>
 		</div>
+<?php include('top-cache.php'); ?>

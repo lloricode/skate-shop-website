@@ -52,7 +52,7 @@
 								</td>
 								<td><?php for($i=0;$i<50;$i++) echo "&nbsp;"; ?></td>
 								<td>
-									<input type="submit" name="login" value="LOG IN" style="background-color:red">
+									<input type="submit" name="login" value="RESET" style="background-color:red">
 								</td>
 							</tr>
 						</table>
@@ -61,5 +61,5 @@
 			</div>
 		</center>
 <?php
-	include 'php/footer.php';
+	include 'php/footer2.php';
 ?>

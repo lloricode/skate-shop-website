@@ -7,7 +7,7 @@
 		
 		<center>
 			<div class="main_body" ><BR>
-				<iframe src="html/slide.html" alt="Img" height="350" width="800" scrolling="no">
+				<iframe src="php/slide.php" alt="Img" height="350" width="800" scrolling="no">
 				</iframe> 
 				<div style="background:rgba(0,0,0,.2); height:700px; width:750px;">
 					<iframe src="php/contact.php" alt="Img" height="698" width="750" scrolling="no">

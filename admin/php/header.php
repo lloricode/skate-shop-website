@@ -13,7 +13,7 @@
 	<head>
 		<title>Skate Shop Admin Panel</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<link href="../img/icon.jpg" rel="shortcut icon" type="image/x-icon" />
+		<link href="../img/icon.png" rel="shortcut icon" type="image/x-icon" />
 	</head>
 	<body>
 	<div class="d">

@@ -14,8 +14,9 @@
 		<div style="width:350px; padding-top:20px; ">
 			<div id="myCarousel" class="carousel slide" data-ride="carousel">
 				<?php
+					$tmp_dir="../";
 					include("../config.php");
-					$sqlcmd="SELECT * FROM Product WHERE ProductSale=1";
+					$sqlcmd="SELECT ProductAttactment,ProductName FROM Product WHERE ProductSale=1";
 					$rs=DB::query($sqlcmd);
 					if(DB::getNumRows()>0){
 						echo "<ol class='carousel-indicators'><li data-target='#myCarousel' data-slide-to='0' class='active'></li>";
@@ -27,7 +28,7 @@
 								echo"<div class='item'>";
 							else
 								echo "<div class='item active'>";
-							echo "<img src='../img/product/".$row->ProductAttactment."' alt='image not found'></div>";
+							echo "<img src='". $ri->h("../img/product/".$row->ProductAttactment,260,"../")."' alt='$row->ProductName'></div>";
 						}
 						echo "</div>";
 					}
@@ -36,4 +37,3 @@
 		</div>
 	</body>
 </html>
-				

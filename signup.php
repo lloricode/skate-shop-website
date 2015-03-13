@@ -46,7 +46,7 @@
 		else{//----------------------------checking age input
 			list($YY,$MM,$dd)=explode("-", $bd);
 				if($YY<=(date("Y")-18)){
-					if($MM<=date("m") and $dd<=date("d"))
+					if($MM>=date("m") and $dd<=date("d") and $YY==(date("Y")-18))
 						$bdrr="below of 18yrs old is not allowed.";
 				}
 				else
@@ -270,6 +270,5 @@
 			</div>
 		</center>
 <?php
-
-	include 'php/footer.php';
+	include 'php/footer2.php';
 ?>

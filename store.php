@@ -4,7 +4,7 @@
 	include 'php/fresco_style.php';
 	include 'php/header.php';
 	include 'php/menu.php';
-	include "config.php";
+	//include "config.php";
 ?>
 		
 		<center>
@@ -85,9 +85,9 @@
 								{
 									 ?>
 									<td class="tableData">
-										<div class="mardagz" style="background: url('img/product/<?php echo  $row->ProductAttactment; ?>');background-repeat: no-repeat; background-size: cover;">
+										<div class="mardagz" style="background: url('<?php echo  $ri->h("img/product/".$row->ProductAttactment,260); ?>');background-repeat: no-repeat; background-size: cover;">
 											<div class="details">
-												<a href="img/product/<?php echo  $row->ProductAttactment; ?>" class='fresco'
+												<a href="<?php echo $ri->h("img/product/".$row->ProductAttactment,700);?>" alt="awawaw" class='fresco'
 													data-fresco-group="product"
 													data-fresco-caption="Name: <?php echo  $row->ProductName; ?> <br />
 													Price: &#8369;<?php echo  $row->ProductPrice; ?>" >
@@ -118,8 +118,8 @@
 													</div>
 									<?php 		}		?>
 												<br />
-												<p style="font-size:13px">
-												<span style="color:red">	
+												<p style="font-size:13px;">
+												<span style="color:red;">	
 													&nbsp;&nbsp; <?php echo  $row->ProductBrand?> &nbsp;</span><br />
 												<b>	&nbsp;&nbsp; <?php echo  $row->ProductName?> &nbsp;<br />
 													&nbsp;&nbsp; &#8369;<?php echo  $row->ProductPrice?></b>

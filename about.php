@@ -20,14 +20,14 @@
 			<div class="main_body" >
 				<div class="aboutUp">
 					<div class="aleft">
-						<BR>
+						<br />
 						<h1 style="float:left">&nbsp;&nbsp;&nbsp;WHO ARE WE?</h1>
-						<img src="img/about.jpg" width="380">
+						<img src="<?php echo $ri->w("img/about.jpg",300) ?>" >
 						
 						
 					</div>
 					<div class="aright">
-						<BR><BR><BR><BR>
+						<br /><br /><br /><br />
 						<p>
 							<?php
 								$file=fopen("text file/about.txt","r") or die("Unable to open file!.");
@@ -59,7 +59,7 @@
 				</div>
 				<div > 
 					<div class="aleft" style="background-color:#363636">
-						<img src="img/icon.jpg" width="300" style="margin-top:30px;">
+						<img src="<?php echo $ri->w("img/icon2.jpg",300) ?>" style="margin-top:30px;">
 						<p>
 							<?php
 								$file=fopen("text file/lloric.txt","r") or die("Unable to open file!.");
@@ -69,7 +69,7 @@
 						</p>
 					</div>
 					<div class="aright" style="background:#252525; ">
-						<img src="img/samurai.jpg" width="300" style="margin-top:30px;">
+						<img src="<?php echo $ri->w("img/samurai.jpg",300) ?>" style="margin-top:30px;">
 						<p>
 							<?php
 								$file=fopen("text file/megan.txt","r") or die("Unable to open file!.");

@@ -19,6 +19,8 @@
 		else
 		{?>
 			<div  class="d">
+			<a href="orders.php"><button>view orders</button></a><BR>
+			<a href="solds.php"><button>view product solds</button></a><BR>
 			<a href="view_accounts.php"><button>view accounts</button></a><BR>
 			<a href="view_product.php"><button>view product</button></a><BR>
 			<a href="edit_about.php"><button>add/edit document in ABOUT</button></a><BR>
