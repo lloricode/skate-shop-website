@@ -1,4 +1,5 @@
 <?php
 	include"php/footer2.php";
-	include('bottom-cache.php');
+	if(!($docfile=="cart" || $docfile=="fill" ))
+		include('bottom-cache.php');
 ?>

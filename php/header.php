@@ -26,11 +26,13 @@
 									</p>
 						<?php		}
 								else
-									echo "<p><a href='login.php' class='login'>LOG IN</a>&nbsp;&nbsp;</p>";
+									echo "<p><a href='login.php?".basename(DB::esc($_SERVER['PHP_SELF'])).(($_SERVER ['QUERY_STRING']=="")?"":"?".$_SERVER['QUERY_STRING'])."' class='login'>LOG IN</a>&nbsp;&nbsp;</p>";
 							?>
 						</div>
 					</div>
 				</div>
 			</center>
 		</div>
-<?php include('top-cache.php'); ?>
+<?php
+	if(!($docfile=="cart" || $docfile=="fill" ))
+ 		include('top-cache.php'); ?>

@@ -7,6 +7,8 @@
 	}
 	include"php/header.php";
 	include 'php/menu.php';
+
+
 ?>
 
 				<center>
@@ -17,11 +19,11 @@
 					<h1>Thanks for shopping!</h1>
 		<?php	}
 				else{
-						include"config.php";
+						//include"config.php";
 						DB::query("SELECT CartPurchased as a FROM Cart WHERE CartPurchased=0 AND UserAccountID='".$_SESSION["authID"]."'");
 						if(DB::getNumRows()>0){
 			?>
-				<form action="checkout.php" method="post">
+				<form action="php/checkout.php" method="post">
 					<table>
 						<tr>
 							<td>Credit Card Number:</td><td><input type="text" name="card" value="<?php if(isset($_COOKIE["card"])){ echo $_COOKIE["card"]; setcookie("card","",time()-10,"/");} ?>" ></td>
@@ -39,6 +41,16 @@
 							<td></td><td><input type="submit" value="CHECKOUT"></td>
 						</tr>
 					</table>
+					<br />
+<table><tr> <input type="hidden" name="ss" value="<?php echo $chk_item; ?>">
+			<?php
+				for ($i=0;$i<sizeof($chk_item);$i++) {
+					$rs=DB::query("SELECT c.*,p.ProductAttactment FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE c.CartID=".$chk_item[$i]);
+					$row=$rs->fetch_object();
+					?><td><img src="<?php echo  $ri->w("img/product/".$row->ProductAttactment,100); ?>"></td><?php
+				}
+			?>
+</tr></table>
 				</form>
 		<?php 			}
 						else

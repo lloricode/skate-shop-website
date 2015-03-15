@@ -1,5 +1,8 @@
 
 <?php
+	session_start();
+	if(isset($_SESSION['authID']))
+		header("Location: index.php");
 	/**
 	 * @author Lloric Garcia
 	 * @copyright 2015

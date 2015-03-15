@@ -45,7 +45,12 @@
 ?>
 
 
-
+<center>
+			<div style=" height: 1139px; width: 900px; background-image: url('img/bglog.jpg');">
+				<div id="getlogin">
+					<form action="<?=htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+						<BR><BR><BR><BR><BR>
+						<?php if(isset($error)) echo "$error"; ?>
 						E-MAIL ADDRESS/USERNAME:<?php for($i=0;$i<14;$i++) echo "&nbsp;"; ?><br>
 						<input type="text" name="email_username" style="width:300px; height:22px;"><BR><BR><BR>
 						

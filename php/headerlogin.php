@@ -64,11 +64,3 @@
 				</div>
 			</center>
 		</div>
-
-		<center>
-			<div style=" height: 1139px; width: 900px; background-image: url('img/bglog.jpg');">
-				<div id="getlogin">
-					<form action="<?=htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-						<BR><BR><BR><BR><BR>
-						<?php if(isset($error)) echo "$error"; ?>
-						

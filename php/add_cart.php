@@ -6,10 +6,10 @@
 		header("Location: ../login.php");
 
 	$sqlcmd1=$sqlcmd2=$sqlcmd3="";
-	$q=(isset($_GET['query']))?"query=".$_GET['query']."&":"";
-	$c=(isset($_GET['cat']))?"cat=".$_GET['cat']."&":"";
-	$p=$_GET['page'];
-	$srch=(isset($_GET['search']))?"search=".$_GET['search']."&":"";
+	//$q=(isset($_GET['query']))?"query=".$_GET['query']."&":"";
+	//$c=(isset($_GET['cat']))?"cat=".$_GET['cat']."&":"";
+	//$p=$_GET['page'];
+	//$srch=(isset($_GET['search']))?"search=".$_GET['search']."&":"";
 	function check($data){
 		return htmlspecialchars(trim(stripcslashes($data)));
 	}
@@ -174,5 +174,5 @@
 	/*else echo "string";
 		//setcookie("tmp","error in post",time()+5,"/");*/
 
- 	header("Location: ../cart.php?$q$c$srch file=".$_GET['file']."&page=$p");
+ 	header("Location: ../cart.php?".$_SERVER ['QUERY_STRING']);
 ?>

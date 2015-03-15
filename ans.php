@@ -28,7 +28,12 @@
 	}
 	$docfile="ans";
 	include 'php/headerlogin.php';
-?>
+?><center>
+			<div style=" height: 1139px; width: 900px; background-image: url('img/bglog.jpg');">
+				<div id="getlogin">
+					<form action="<?=htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+						<BR><BR><BR><BR><BR>
+						<?php if(isset($error)) echo "$error"; ?>
 						
 								<?php echo $_COOKIE['ques']?><br>
 						<input placeholder="enter your secret answer" type="password" name="sec_ans" style="width:300px; height:22px;"><BR><BR><BR>

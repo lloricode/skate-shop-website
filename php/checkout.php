@@ -1,6 +1,6 @@
 <?php
 	if(isset($_POST) and $_SERVER["REQUEST_METHOD"]=="POST"){
-		include"config.php";
+		include"../config.php";
 		//checking the paying
 		$card=$expire=$secure="";
 		$cardrr=$expirerr=$securerr="";
@@ -99,5 +99,5 @@
 	setcookie("card",$card,time()+20,"/");
 	setcookie("expire",$expire,time()+20,"/");
 	setcookie("secure",$secure,time()+20,"/");
-	header("Location: fillcheckout.php");
+	header("Location: ../fillcheckout.php");
 ?>
