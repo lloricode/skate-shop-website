@@ -15,7 +15,7 @@
 
 			if(!self::check_if_exist($output_name)){
 				self::$image->load($str);
-				self::$image->resizeToHeight($w);
+				self::$image->resizeToWidth($w);
 	   			self::$image->save(self::$dir.$output_name);
 	   			return self::$dir.$output_name;
    			}

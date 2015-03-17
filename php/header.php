@@ -3,7 +3,7 @@
  * @author Lloric Garcia
  * @copyright 2015//
  */
-	include"config.php";
+	//include"config.php";
 ?>
 
 	</head>

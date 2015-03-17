@@ -85,7 +85,7 @@
 								{
 									 ?>
 									<td class="tableData">
-										<div class="mardagz" style="background: url('<?php echo  $ri->h("img/product/".$row->ProductAttactment,260); ?>');background-repeat: no-repeat; background-size: cover;">
+										<div class="mardagz" style="background: url('<?php echo  $ri->h("img/product/".$row->ProductAttactment,700); ?>');background-repeat: no-repeat; background-size: cover;">
 											<div class="details">
 												<a href="<?php echo $ri->h("img/product/".$row->ProductAttactment,700);?>" alt="awawaw" class='fresco'
 													data-fresco-group="product"

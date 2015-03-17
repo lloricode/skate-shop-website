@@ -8,6 +8,7 @@
 <!--   -->
 <!--   -->
 <?php
+	include"php/visit.php";
 	session_start();
 	$title="";
 	switch ($docfile) {
@@ -39,7 +40,7 @@
   	<head>
     	<title><?=$title?></title>
     	<link rel="stylesheet" type="text/css" href="css/style.css">
-        <link href="img/icon.jpg" rel="shortcut icon" type="image/x-icon" />
+        <link href="img/icon.png" rel="shortcut icon" type="image/x-icon" />
 	</head>
 	<body>
 		<div style="background-color:#101010; height:90;">

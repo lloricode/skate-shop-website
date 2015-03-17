@@ -5,11 +5,13 @@
 	 */
 	if(!isset($_COOKIE['recID']))
 		header("Location: login.php");
-	include("config.php");
+	//include("config.php");
 ?>
 <?php
 	//session_start();
 	
+	$docfile=(!isset($match))?"reset":"success";
+	include 'php/headerlogin.php';
 	if ( isset($_POST) and $_SERVER["REQUEST_METHOD"]=="POST") {
 		$data=addslashes($_POST['newpass']);
 		$data2=addslashes($_POST['newpass2']);
@@ -28,8 +30,6 @@
 		else
 			$error= "password not match.<BR>";
 	}
-	$docfile=(!isset($match))?"reset":"success";
-	include 'php/headerlogin.php';
 ?><center>
 			<div style=" height: 1139px; width: 900px; background-image: url('img/bglog.jpg');">
 				<div id="getlogin">

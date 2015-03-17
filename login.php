@@ -4,9 +4,10 @@
 	 * @author Lloric Garcia
 	 * @copyright 2015
 	 */
-	include("config.php");
+	//include("config.php");
 ?>
 <?php
+	$msg="";
 	$docfile="login";
 	include 'php/headerlogin.php';
 //	if(isset($_SESSION['authID']))
@@ -36,14 +37,14 @@
 			//echo "[".(($_SERVER['QUERY_STRING']=="")?"index.php":$_SERVER['QUERY_STRING'])."]";
 		}
 		else
-			echo "Your Login UserName/Email or Pasword is invalid.<br />";
+			$msg= "Your Login UserName/Email or Pasword is invalid.<br />";
 	}
 ?>		<center>
 			<div style=" height: 1139px; width: 900px; background-image: url('img/bglog.jpg');">
 				<div id="getlogin">
 					<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?".$_SERVER ['QUERY_STRING']; ?>" method="post">
 						<BR><BR><BR><BR><BR>
-						<?php if(isset($error)) echo "$error"; ?>
+						<?php  echo "$msg"; ?>
 						E-MAIL ADDRESS/USERNAME:<?php for($i=0;$i<14;$i++) echo "&nbsp;"; ?><br />
 						<input type="text" name="user" style="width:300px; height:22px;"><br /><br /><br />
 						PASSWORD:<?php for($i=0;$i<42;$i++) echo "&nbsp;"; ?><br />

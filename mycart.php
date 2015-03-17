@@ -16,7 +16,7 @@
 			}
 		}
 		if(sizeof($_POST)==0)
-			$msg="Plesae select cart";
+			$msg="Please select cart";
 		else
 			header("Location: fillcheckout.php");
 	}
@@ -53,7 +53,7 @@
 						{
 							 ?>
 							<td class="tableData">
-								<div class="mardagz" style="background: url('<?php echo  $ri->h("img/product/".$row->ProductAttactment,260); ?>');background-repeat: no-repeat; background-size: cover;">
+								<div class="mardagz" style="background: url('<?php echo  $ri->h("img/product/".$row->ProductAttactment,700); ?>');background-repeat: no-repeat; background-size: cover;">
 									<div class="details">
 										<a href="<?php echo  $ri->h("img/product/".$row->ProductAttactment,700); ?>" class='fresco'
 											data-fresco-group="product"

@@ -3,11 +3,13 @@
 	 * @author Lloric Garcia
 	 * @copyright 2015
 	 */
-	include("config.php");
+	//include("config.php");
 ?>
 <?php
 	//session_start();
 	
+	$docfile="recover";
+	include 'php/headerlogin.php';
 	if ( isset($_GET) and $_SERVER["REQUEST_METHOD"]=="POST") {
 
 		$data=addslashes($_POST['email_username']);
@@ -40,8 +42,6 @@
 		else
 			$error= "UserName or Email not found.<BR>";
 	}
-	$docfile="recover";
-	include 'php/headerlogin.php';
 ?>
 
 

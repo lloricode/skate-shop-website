@@ -1,5 +1,6 @@
 
 <?php
+	include"php/visit.php";
 	session_start();
 	if(isset($_SESSION['authID']))
 		header("Location: index.php");
@@ -7,8 +8,7 @@
 	 * @author Lloric Garcia
 	 * @copyright 2015
 	 */
-	include 'config.php';
-
+	
 	if(isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST"){
 
 		$fn=$ln=$username=$pass=$bm=$bd=$by=$gender=$home=$mobile=$email=$shipping=$ques=$ans="";
@@ -129,7 +129,7 @@
 	<head>
 		<title>Skate Shop | Sign Up</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-        <link href="img/icon.jpg" rel="shortcut icon" type="image/x-icon" />
+       <link href="img/icon.png" rel="shortcut icon" type="image/x-icon" />
 
         <?php include"php/datepicker.php"; ?>
 

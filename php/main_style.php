@@ -8,7 +8,7 @@
 <!--   -->
 <!--   -->
 <?php
-	
+	include"php/visit.php";//?doc=".basename($_SERVER['PHP_SELF']);
 	session_start();
 	$title="";
 	switch ($docfile) {
