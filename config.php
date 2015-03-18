@@ -16,7 +16,7 @@
         include $filename;
     }
    
-   
+   $ri = new IMG(isset($tmp_dir)?$tmp_dir:"");
     DB::init();
 ?>
 

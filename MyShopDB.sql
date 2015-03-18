@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2015 at 09:20 AM
+-- Generation Time: Mar 18, 2015 at 08:27 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -228,6 +228,29 @@ INSERT INTO `useraccount` (`UserAccountID`, `UserAccountImage`, `UserAccountFisr
 (14, 'female.png', 'Angel May', 'Magaway', 'angel', 'f4f068e71e0d87bf0ad51e6214ab84e9', '02/17/2015', 'female', 'katipnan', '0909', 'angle@yahoo.com', '...', 'aa', '4124bc0a9335c27f086f24ba207a4912'),
 (15, 'female.png', 'Amie', 'Ongayo', 'amie', 'e6a4370aca6970175dee8c72cc7e08dc', '02/17/2015', 'female', 'qq', '9878', 'amie@yahoo.com', 'ww', 't', 'e358efa489f58062f10dd7316b65649e'),
 (16, 'male.png', 'aa', 'aa', 'aa', '4124bc0a9335c27f086f24ba207a4912', '02/17/2015', 'male', 'aa', '11', 'aa@yahoo.com', 'aa', 'aa', '4124bc0a9335c27f086f24ba207a4912');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `visit`
+--
+
+CREATE TABLE IF NOT EXISTS `visit` (
+  `id` int(11) NOT NULL,
+  `doc` varchar(100) NOT NULL,
+  `count` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `visit`
+--
+
+INSERT INTO `visit` (`id`, `doc`, `count`) VALUES
+(0, 'index.php', 1),
+(0, 'store.php?query=all', 1),
+(0, 'store.php?query=all&page=2', 1),
+(0, 'about.php', 2),
+(0, 'login.php?about.php', 2);
 
 --
 -- Indexes for dumped tables
