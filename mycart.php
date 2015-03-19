@@ -1,13 +1,12 @@
 <?php
 	$docfile="cart";
+	$docc=1;
 	include 'php/main_style.php';
-	include 'php/fresco_style.php';
-	include 'php/header.php';
-	if(!isset($_SESSION['authID']))
-		header("Location: login.php?".DB::esc(basename($_SERVER['PHP_SELF'])).(($_SERVER ['QUERY_STRING']=="")?"":"?".$_SERVER['QUERY_STRING']));
-	include 'php/menu.php';
 	//include("config.php");
 	$msg="";
+	//$chk_item=array();
+
+
 	if(isset($_POST) and $_SERVER["REQUEST_METHOD"]=="POST"){
 		foreach ($_POST as $value) {
 			DB::query("SELECT CartID FROM Cart WHERE CartID=".DB::esc($value)." AND UserAccountID=".$_SESSION["authID"]);
@@ -17,15 +16,33 @@
 		}
 		if(sizeof($_POST)==0)
 			$msg="Please select cart";
-		else
-			header("Location: fillcheckout.php");
+		else{
+			//htmlentities(serialize($chk_item));
+			$docc=0;
+			//header("Location: fillcheckout.php");
+		}
 	}
+	if($docc)
+		include 'php/fresco_style.php';
+	else
+		include"php/datepicker.php";
+	include 'php/header.php';
+	if(!isset($_SESSION['authID']))
+		header("Location: login.php?".DB::esc(basename($_SERVER['PHP_SELF'])).(($_SERVER ['QUERY_STRING']=="")?"":"?".$_SERVER['QUERY_STRING']));
+	include 'php/menu.php';
+	
 
 
 //	$q=(isset($_GET['query']))?"query=".$_GET['query']."&":"";
 //	$c=(isset($_GET['cat']))?"cat=".$_GET['cat']."&":"";
 	//$p=$_GET['page'];
 //	$srch=(isset($_GET['search']))?"search=".$_GET['search']."&":"";
+	if(isset($_COOKIE["paid"])){
+			echo "<center><div class='main_body'><br />";
+					setcookie("paid","",time()-10,"/");?>
+					<h1>Thanks for shopping!</h1>
+					</div></center>
+<?php }else	if($docc){
 ?>
 	<center><?php
 			$sql="SELECT SUM(p.ProductPrice*c.CartQuantity) AS total_ FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE c.CartPurchased=0 AND UserAccountID=".$_SESSION['authID'];  
@@ -119,6 +136,7 @@
 				?>
 						
 							<div >
+						<!--	<input type="hidden" value="<?php// echo htmlentities(serialize($chk_item)); ?>" name="checkout">-->
 								<p><input style="float:right; background-color:#990033; width:150px; height:50px;" type="submit" value="CHECKOUT"></p>
 							</div>
 						
@@ -129,6 +147,67 @@
 		</div>
 		</form>
 	</center>
+
+
 <?php
+	}
+	else{ ?>
+
+<center>
+			<div class="main_body"><br />
+			<?php
+				
+		
+						//include"config.php";
+						DB::query("SELECT CartPurchased as a FROM Cart WHERE CartPurchased=0 AND UserAccountID='".$_SESSION["authID"]."'");
+						if(DB::getNumRows()>0){
+			?>
+				<form action="php/checkout.php?<?php echo $_SERVER ['QUERY_STRING']; ?>" method="post">
+				<input type="hidden" name="pid" value="<?php echo htmlentities(serialize($chk_item)); ?>" />
+					<table>
+						<tr>
+							<td>Credit Card Number:</td><td><input type="text" name="card" value="<?php if(isset($_COOKIE["card"])){ echo $_COOKIE["card"]; setcookie("card","",time()-10,"/");} ?>" ></td>
+							<td><span id="err"><?php if(isset($_COOKIE["cardrr"])){ echo $_COOKIE["cardrr"]; setcookie("cardrr","",time()-10,"/");} ?></span></td>
+						</tr>
+						<tr>
+							<td>Expiration Date:</td><td><input type="date" id="datepicker" name="expire" value="<?php if(isset($_COOKIE["expire"])){ echo $_COOKIE["expire"]; setcookie("expire","",time()-10,"/");} ?>" ></td>
+							<td><span id="err"><?php if(isset($_COOKIE["expirerr"])){ echo $_COOKIE["expirerr"]; setcookie("expirerr","",time()-10,"/");} ?></span></td>
+						</tr>
+						<tr>
+							<td>Card Security Code:</td><td><input type="text" name="secure" value="<?php if(isset($_COOKIE["secure"])){ echo $_COOKIE["secure"]; setcookie("secure","",time()-10,"/");} ?>" ></td>
+							<td><span id="err"><?php if(isset($_COOKIE["securerr"])){ echo $_COOKIE["securerr"]; setcookie("securerr","",time()-10,"/");} ?></span></td>
+						</tr>
+						<tr>
+							<td></td><td><input type="submit" value="CHECKOUT"></td>
+						</tr>
+					</table>
+					<br />
+			<?php
+				//$chk_item=array();
+				//$chk_item=unserialize($chk_item);
+			?>
+<table><tr> 
+			<?php
+				for ($i=0;$i<sizeof($chk_item);$i++) {
+					$rs=DB::query("SELECT c.*,p.ProductAttactment FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE c.CartID=".$chk_item[$i]);
+					$row=$rs->fetch_object();
+					?><td><img src="<?php echo  $ri->w("img/product/".$row->ProductAttactment,100); ?>"></td><?php
+				}
+			?>
+</tr></table>
+				</form>
+		<?php 			}
+						else
+							header("Location: index.php");
+				 ?>
+			</div>
+		</center>
+
+
+
+
+<?php
+
+	}
 	include 'php/footer.php';
 ?>

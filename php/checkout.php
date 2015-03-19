@@ -1,6 +1,16 @@
 <?php
 	if(isset($_POST) and $_SERVER["REQUEST_METHOD"]=="POST"){
 		include"../config.php";
+		//product to be checkout
+		$pids=unserialize($_POST["pid"]);
+		$pidquery="";
+		$z=sizeof($pids);
+		for ($i=0; $i < $z; $i++) {
+			$pidquery.="c.CartID=".$pids[$i]." ";
+			if(($z-1)!=$i)
+				$pidquery.="AND ";
+		}
+		echo $pidquery;
 		//checking the paying
 		$card=$expire=$secure="";
 		$cardrr=$expirerr=$securerr="";
@@ -15,15 +25,15 @@
 
 		if($cardrr=="" and $expirerr=="" and $securerr==""){
 			session_start();
-			DB::query("SELECT CartPurchased as a FROM Cart WHERE CartPurchased=0 AND UserAccountID='".$_SESSION["authID"]."'");
+			DB::query("SELECT c.CartPurchased as a FROM Cart AS c WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID='".$_SESSION["authID"]."'");
 			if(/*$_GET['purchase']=="yes" and */DB::getNumRows()>0){
 				//total purchanse in all item
-				$sql="SELECT SUM(p.ProductPrice*c.CartQuantity) AS total_ FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE c.CartPurchased=0 AND UserAccountID=".$_SESSION['authID'];  
+				$sql="SELECT SUM(p.ProductPrice*c.CartQuantity) AS total_ FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE c.CartPurchased=0 AND $pidquery AND UserAccountID=".$_SESSION['authID'];  
 				$rs=DB::query($sql);
 				$row = $rs->fetch_object();
 				$amount=$row->total_;
 				//total quantity in all purchase
-				$sql="SELECT SUM(CartQuantity) AS total_Q FROM Cart WHERE CartPurchased=0 AND UserAccountID=".$_SESSION['authID'];
+				$sql="SELECT SUM(c.CartQuantity) AS total_Q FROM Cart AS c WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION['authID'];
 				$rs=DB::query($sql);
 				$row = $rs->fetch_object();
 				$quant=$row->total_Q;
@@ -37,7 +47,7 @@
 				$row = $rs->fetch_object();
 				$pid=$row->PurchasedId;
 				//select all item to be insert in purchaseLine WHERE purchase=0
-				$sql="SELECT ProductId,CartQuantity,CartItemSize FROM Cart WHERE CartPurchased=0 AND UserAccountID=".$_SESSION['authID'];
+				$sql="SELECT c.ProductId,c.CartQuantity,c.CartItemSize FROM Cart AS c WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION['authID'];
 				$rs=DB::query($sql);
 				while($row = $rs->fetch_object()){
 					$quantity=0;
@@ -85,7 +95,7 @@
 				}
 				//------
 				//change purchase to true where false
-				$sqlcmd="UPDATE Cart SET CartPurchased=1 WHERE CartPurchased=0 AND UserAccountID=".$_SESSION['authID'];
+				$sqlcmd="UPDATE Cart AS c SET c.CartPurchased=1 WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION['authID'];
 				DB::query($sqlcmd);
 				setcookie("paid","paid",time()+20,"/");
 			}
@@ -99,5 +109,5 @@
 	setcookie("card",$card,time()+20,"/");
 	setcookie("expire",$expire,time()+20,"/");
 	setcookie("secure",$secure,time()+20,"/");
-	header("Location: ../fillcheckout.php");
+	header("Location: ../mycart.php?".$_SERVER ['QUERY_STRING']);
 ?>
