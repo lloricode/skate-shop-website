@@ -10,9 +10,19 @@
 	<body>
 		<div>
 			<?php
-				$file=fopen("../text file/contact.txt","r") or die("Unable to open file!.");
+				include"../config.php";
+				$rs1=DB::query("SELECT * FROM Document WHERE DocumentCategory='contact title' ORDER BY DocumentArrange");
+				$rs2=DB::query("SELECT * FROM Document WHERE DocumentCategory='contact value' ORDER BY DocumentArrange");
+				while ($row1=$rs1->fetch_object()) {
+					echo "<h2>$row1->DocumentValue</h2>";
+					$row2=$rs2->fetch_object();
+					echo "<p>$row2->DocumentValue</p>";
+				}
+			?>
+			<?php
+			/*	$file=fopen("../text file/contact.txt","r") or die("Unable to open file!.");
 				echo fread($file, filesize("../text file/contact.txt"));
-				fclose($file);
+				fclose($file);*/
 			?>
 		</div>
 	</body>

@@ -14,7 +14,7 @@
 		else
 		{   include"../config.php"; 
 
-			$rs=DB::query("SELECT * FROM Visit");
+			$rs=DB::query("SELECT * FROM Visit ORDER BY count DESC");
 	?>
 			<div  class="d"><a href="index.php"><button>back to main</button></a>
 		<?php

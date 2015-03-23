@@ -28,20 +28,12 @@
 					</div>
 					<div class="aright">
 						<br /><br /><br /><br />
-						<p>
-							<?php
-								$file=fopen("text file/about.txt","r") or die("Unable to open file!.");
-								echo fread($file, filesize("text file/about.txt"));
-								fclose($file);
-							?>
-						</p>
-						<p>
-							<?php
-								$file=fopen("text file/about2.txt","r") or die("Unable to open file!.");
-								echo fread($file, filesize("text file/about2.txt"));
-								fclose($file);
-							?>
-						</p>
+					<?php
+						$rs=DB::query("SELECT * FROM Document WHERE DocumentCategory='about' ORDER BY DocumentArrange");
+						while ($row=$rs->fetch_object()) {
+							echo "<p>$row->DocumentValue</p>";
+						}
+					?>
 						<!-- fb like-->
 						<div class="fb-like" data-href="/webdev/index.php" data-layout="standard" data-action="like" data-show-faces="true" data-share="true">
 			
@@ -60,22 +52,24 @@
 				<div > 
 					<div class="aleft" style="background-color:#363636">
 						<img src="<?php echo $ri->w("img/icon2.jpg",300) ?>" style="margin-top:30px;">
-						<p>
-							<?php
-								$file=fopen("text file/lloric.txt","r") or die("Unable to open file!.");
-								echo fread($file, filesize("text file/lloric.txt"));
-								fclose($file);
-							?>
-						</p>
+						
+					<?php
+						$rs=DB::query("SELECT * FROM Document WHERE DocumentCategory='lloric' ORDER BY DocumentArrange");
+						while ($row=$rs->fetch_object()) {
+							echo "<p>$row->DocumentValue</p>";
+						}
+					?>
 					</div>
 					<div class="aright" style="background:#252525; ">
 						<img src="<?php echo $ri->w("img/samurai.jpg",300) ?>" style="margin-top:30px;">
 						<p>
-							<?php
-								$file=fopen("text file/megan.txt","r") or die("Unable to open file!.");
-								echo fread($file, filesize("text file/megan.txt"));
-								fclose($file);
-							?>
+							
+					<?php
+						$rs=DB::query("SELECT * FROM Document WHERE DocumentCategory='megan' ORDER BY DocumentArrange");
+						while ($row=$rs->fetch_object()) {
+							echo "<p>$row->DocumentValue</p>";
+						}
+					?>
 						</p>
 					</div>
 				</div>
