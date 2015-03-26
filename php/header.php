@@ -26,7 +26,7 @@
 									</p>
 						<?php		}
 								else
-									echo "<p><a href='login.php?".basename(DB::esc($_SERVER['PHP_SELF'])).(($_SERVER ['QUERY_STRING']=="")?"":"?".$_SERVER['QUERY_STRING'])."' class='login'>LOG IN</a>&nbsp;&nbsp;</p>";
+									echo "<p><a  class='login' href='signup.php'>SIGN UP</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href='login.php?".basename(DB::esc($_SERVER['PHP_SELF'])).(($_SERVER ['QUERY_STRING']=="")?"":"?".$_SERVER['QUERY_STRING'])."' class='login'>LOG IN</a>&nbsp;&nbsp;</p>";
 							?>
 						</div>
 					</div>
@@ -34,5 +34,5 @@
 			</center>
 		</div>
 <?php
-	if(!($docfile=="cart" || $docfile=="fill" ))
+	if(!($docfile=="cart" || $docfile=="fill"|| $docfile=="store"|| $docfile=="mycart" ))
  		include('top-cache.php'); ?>

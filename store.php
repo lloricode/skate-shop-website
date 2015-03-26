@@ -106,7 +106,7 @@
 													</div>
 									<?php 		}
 												else if(($row->ProductAvailabilitySmall+$row->ProductAvailabilityMedium+$row->ProductAvailabilityLarge)>0){     ?>
-													<a href="cart.php?<?php echo $_SERVER ['QUERY_STRING']."&file=".$row->ProductID?>">
+													<a href="cart.php?<?php echo /*$_SERVER ['QUERY_STRING'].*/"&file=".$row->ProductID?>">
 														<div class="cart tddiv">
 															<span>ADD TO CART</span>
 														</div>
@@ -144,7 +144,7 @@
 				</div>
 				<div style="background-color:; height:30px; margin-top:50px;">
 						<div style="float:bottom; background-color:#990033; width:150px; height:50px;">
-					<a href="mycart.php?<?php echo $_SERVER ['QUERY_STRING']?>">
+					<a href="mycart.php<?php //echo $_SERVER ['QUERY_STRING']?>">
 							<p style="padding: 13px 13px">VIEW CART</p>
 					</a>
 						</div>

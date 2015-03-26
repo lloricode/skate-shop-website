@@ -115,7 +115,7 @@
 				$_SESSION["authLn"]=$row->UserAccountLastName;
 				$_SESSION["authImg"]=$row->UserAccountImage;
 				$_SESSION["authID"]=$row->UserAccountID;
-				header("Location: profile.php");
+				header("Location: index.php");
 			}
 			else
 				echo "string";

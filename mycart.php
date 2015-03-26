@@ -4,7 +4,7 @@
 
 
 <?php
-	$docfile="cart";
+	$docfile="mycart";
 	$docc=1;
 	include 'php/main_style.php';
 	//include("config.php");
@@ -12,10 +12,10 @@
 	//$chk_item=array();
 
 
-	if( !isset($_POST["chk"]) and isset($_POST) and $_SERVER["REQUEST_METHOD"]=="POST"){ 
+	if( !isset($_POST["pid2"]) and isset($_POST) and $_SERVER["REQUEST_METHOD"]=="POST"){ 
 		foreach ($_POST as $value) {
 			$q="SELECT CartID FROM Cart WHERE CartID=".DB::esc($value)." AND UserAccountID=".$_SESSION["authID"];
-				echo $q;
+			//	echo $q;
 			DB::query($q);
 			if(DB::getNumRows()){
 				$chk_item[]=DB::esc($value);
@@ -31,7 +31,7 @@
 	}
 	if($docc)
 		include 'php/fresco_style.php';
-	else
+	//else
 		include"php/datepicker.php";
 	include 'php/header.php';
 	if(!isset($_SESSION['authID']))
@@ -46,8 +46,9 @@
 
 
 <?php
+	$cardrr=$expirerr=$securerr="";
+	$card=$expire=$secure="";
 	if( isset($_POST["chk"]) and isset($_POST) and $_SERVER["REQUEST_METHOD"]=="POST"){ $docc=3;
-
 		//include"../config.php";
 		//product to be checkout
 		$pids=unserialize($_POST["pid"]);
@@ -56,15 +57,27 @@
 		for ($i=0; $i < $z; $i++) {
 			$pidquery.="c.CartID=".$pids[$i]." ";
 			if(($z-1)!=$i)
-				$pidquery.="OR ";
+				$pidquery.="OR ";  
 		}
 		//echo "on line".__LINE__.": ".$pidquery."<br />";
 		//checking the paying
-		$card=$expire=$secure="";
-		$cardrr=$expirerr=$securerr="";
 		if(empty($_POST["card"])) $cardrr="Card number required."; else $card=DB::esc($_POST["card"]);
 		if(empty($_POST["expire"])) $expirerr="Expiration date required."; else $expire=DB::esc($_POST["expire"]);
 		if(empty($_POST["secure"])) $securerr="Security code required."; else $secure=DB::esc($_POST["secure"]);
+
+		if(!preg_match("/^[[0-9]{4}\-[0-9]{2}\-[0-9]{2}]*$/", $expire) and !empty($expire))
+			$expirerr="invalid date format";
+		else{//----------------------------checking age input
+			if(!empty($_POST["expire"])){
+				list($YY,$MM,$dd)=explode("-", $expire);
+				if($YY>=date("Y")){
+					if($MM<=date("m") and $dd<=date("d") and $YY==(date("Y")))
+						$expirerr="Your card is already expired..";
+				}
+				else
+					$expirerr="Your card is already expired.";
+			}
+		}
 
 		if(!empty($_POST["card"]) and !preg_match("/^[0-9]*$/", $card))
 			$cardrr="Invalid format";
@@ -74,36 +87,36 @@
 		if($cardrr=="" and $expirerr=="" and $securerr==""){
 			//session_start();
 			$q="SELECT c.CartPurchased as a FROM Cart AS c WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION["authID"];
-			echo "on line".__LINE__.": ".$q."<br />";
+			//echo "on line".__LINE__.": ".$q."<br />";
 			DB::query($q);
-			echo "on line".__LINE__.": ".DB::getNumRows()."<br />";
+			//echo "on line".__LINE__.": ".DB::getNumRows()."<br />";
 			if(/*$_GET['purchase']=="yes" and */DB::getNumRows()>0){
 				//total purchanse in all item
 				$sql="SELECT SUM(p.ProductPrice*c.CartQuantity) AS total_ FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE c.CartPurchased=0 AND $pidquery AND UserAccountID=".$_SESSION['authID'];  
-				echo "on line".__LINE__.": ".$sql."<br />";
+			//	echo "on line".__LINE__.": ".$sql."<br />";
 				$rs=DB::query($sql);
 				$row = $rs->fetch_object();
 				$amount=$row->total_;
 				//total quantity in all purchase
 				$sql="SELECT SUM(c.CartQuantity) AS total_Q FROM Cart AS c WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION['authID'];
-				echo "on line".__LINE__.": ".$sql."<br />";
+			//	echo "on line".__LINE__.": ".$sql."<br />";
 				$rs=DB::query($sql);
 				$row = $rs->fetch_object();
 				$quant=$row->total_Q;
 				//insert purchase including 2 above
 				$sqlcmd="INSERT INTO Purchased(PurchasedAmount,PurchasedQuantity,UserAccountID,PurchasedDelivered,card_number,card_expiration,secure_code)
 					VALUES($amount,$quant,".$_SESSION['authID'].",0,'$card','$expire','$secure')";
-				echo "on line".__LINE__.": ".$sqlcmd."<br />";
+			//	echo "on line".__LINE__.": ".$sqlcmd."<br />";
 				DB::query($sqlcmd);
 				//slect purchaseID for purchaseLine
 				$sql="SELECT PurchasedId FROM Purchased ORDER BY PurchasedId DESC LIMIT 0,1";
-				echo "on line".__LINE__.": ".$sql."<br />";
+			//	echo "on line".__LINE__.": ".$sql."<br />";
 				$rs=DB::query($sql);
 				$row = $rs->fetch_object();
 				$pid=$row->PurchasedId;
 				//select all item to be insert in purchaseLine WHERE purchase=0
 				$sql="SELECT c.ProductId,c.CartQuantity,c.CartItemSize FROM Cart AS c WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION['authID'];
-				echo "on line".__LINE__.": ".$sql."<br />";
+			//	echo "on line".__LINE__.": ".$sql."<br />";
 				$rs=DB::query($sql);
 				while($row = $rs->fetch_object()){
 					$quantity=0;
@@ -111,7 +124,7 @@
 						case 'small':
 							//select availabilty and sold to be update
 							$sqlcmd="SELECT ProductAvailabilitySmall,ProductSoldSmall FROM Product WHERE ProductID=".$row->ProductId;
-							echo "on line".__LINE__.": ".$sqlcmd."<br />";
+			//				echo "on line".__LINE__.": ".$sqlcmd."<br />";
 							$rs2=DB::query($sqlcmd);
 							$row2=$rs2->fetch_object();
 							$avail=$row2->ProductAvailabilitySmall;
@@ -119,13 +132,13 @@
 							$quantity=$row->CartQuantity;
 							// the update
 							$sqlcmd="UPDATE Product SET ProductAvailabilitySmall=".($avail-$quantity).", ProductSoldSmall=".($sold+$quantity)." WHERE ProductID=".$row->ProductId;
-							echo "on line".__LINE__.": ".$sqlcmd."<br />";
+			//				echo "on line".__LINE__.": ".$sqlcmd."<br />";
 							DB::query($sqlcmd);
 							break;
 						case 'medium':
 							//select availabilty and sold to be update
 							$sqlcmd="SELECT ProductAvailabilityMedium,ProductSoldMedium FROM Product WHERE ProductID=".$row->ProductId;
-							echo "on line".__LINE__.": ".$sqlcmd."<br />";
+			//				echo "on line".__LINE__.": ".$sqlcmd."<br />";
 							$rs2=DB::query($sqlcmd);
 							$row2=$rs2->fetch_object();
 							$avail=$row2->ProductAvailabilityMedium;
@@ -133,13 +146,13 @@
 							$quantity=$row->CartQuantity;
 							// the update
 							$sqlcmd="UPDATE Product SET ProductAvailabilityMedium=".($avail-$quantity).", ProductSoldMedium=".($sold+$quantity)." WHERE ProductID=".$row->ProductId;
-							echo "on line".__LINE__.": ".$sqlcmd."<br />";
+			//				echo "on line".__LINE__.": ".$sqlcmd."<br />";
 							DB::query($sqlcmd);
 							break;
 						case 'large':
 							//select availabilty and sold to be update
 							$sqlcmd="SELECT ProductAvailabilityLarge,ProductSoldLarge FROM Product WHERE ProductID=".$row->ProductId;
-							echo "on line".__LINE__.": ".$sqlcmd."<br />";
+			//				echo "on line".__LINE__.": ".$sqlcmd."<br />";
 							$rs2=DB::query($sqlcmd);
 							$row2=$rs2->fetch_object();
 							$avail=$row2->ProductAvailabilityLarge;
@@ -147,13 +160,13 @@
 							$quantity=$row->CartQuantity;
 							// the update
 							$sqlcmd="UPDATE Product SET ProductAvailabilityLarge=".($avail-$quantity).", ProductSoldLarge=".($sold+$quantity)." WHERE ProductID=".$row->ProductId;
-							echo "on line".__LINE__.": ".$sqlcmd."<br />";
+			//				echo "on line".__LINE__.": ".$sqlcmd."<br />";
 							DB::query($sqlcmd);
 							break;
 					}
 					//insert purchaseLine incuding purchaseID
 					$insertline="INSERT INTO PurchasedLine(PurchasedId,ProductID,Quantity,Size) VALUES($pid,".$row->ProductId.",".$quantity.",'".$row->CartItemSize."')";
-					echo "on line".__LINE__.": ".$insertline."<br />";
+			//		echo "on line".__LINE__.": ".$insertline."<br />";
 					DB::query($insertline);
 				}
 				//------
@@ -164,10 +177,11 @@
 			//	setcookie("paid","paid",time()+20,"/");
 			}
 		}
-		else{
-			foreach ($_POST as $value) {
+		else{ 
+			$w = unserialize( $_POST["pid2"]);
+			foreach ($w as $value) {
 				$q="SELECT CartID FROM Cart WHERE CartID=".DB::esc($value)." AND UserAccountID=".$_SESSION["authID"];
-				echo $q;
+				//echo "on line".__LINE__.": ".$q;
 			DB::query($q);
 			if(DB::getNumRows()){
 				$chk_item[]=DB::esc($value);
@@ -209,7 +223,9 @@
 					</div></center>
 <?php }else	if($docc){
 ?>
-	<center><?php
+	<center>
+		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?".$_SERVER ['QUERY_STRING'] ?>" method="post">
+	<?php
 			$sql="SELECT SUM(p.ProductPrice*c.CartQuantity) AS total_ FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE c.CartPurchased=0 AND UserAccountID=".$_SESSION['authID'];  
 			$rs=DB::query($sql);
 			$row = $rs->fetch_object();
@@ -223,14 +239,21 @@
 		<div class="main_body"><br />
 <div style="background:rgba(0,0,0,.1); height:1030px;">
 		<?php
-					$sqlcmd="SELECT c.CartPurchased,c.CartID,c.UserAccountID,p.ProductAttactment,p.ProductID,p.ProductName,c.CartItemSize,c.CartQuantity,p.ProductPrice,p.ProductBrand
-								FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE UserAccountID=".$_SESSION['authID']." GROUP BY c.ProductID,c.CartItemSize,CartPurchased,CartDateAdded ORDER BY CartPurchased";
-					$result=DB::query($sqlcmd);
+			$sqlcmd="SELECT c.CartPurchased,c.CartID,c.UserAccountID,p.ProductAttactment,p.ProductID,p.ProductName,c.CartItemSize,c.CartQuantity,p.ProductPrice,p.ProductBrand
+								FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID 
+								WHERE UserAccountID=".$_SESSION['authID']." 
+								GROUP BY c.ProductID,c.CartItemSize,CartPurchased,CartDateAdded 
+								ORDER BY CartPurchased";
+				DB::query($sqlcmd);
+				echo "Result: ".DB::getNumROws()."<br />";
+				$nxt=(isset($_GET["page"]))?DB::esc($_GET["page"]):1;
+					$result=DB::query($sqlcmd." LIMIT ".(($nxt-1)*9).",9");
 					if(DB::getNumRows() > 0){		$chk=0;		?>
-						<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?".$_SERVER ['QUERY_STRING'] ?>" method="post">
-						<?php echo $msg;?>
+						
+						<?php if(isset($_COOKIE['tmp'])){ echo $_COOKIE['tmp']; setcookie("tmp","",time()-5,"/");}?>
 						<table id="table_">
 						<tr class="tableRow">
+						
 				<?php 	for($int = 1; $row = $result->fetch_object(); $int++)
 						{
 							 ?>
@@ -283,13 +306,22 @@
 					}
 					?>
 			</div>
-			<table>
-				<tr>
-					<td></td>
-				</tr>
-			</table>
-			<div style="background-color:; height:50px; margin-top:33px;">
-				<a href="store.php?<?php echo $_SERVER ['QUERY_STRING']?>">
+			<div style="height:40px;width:900px;background-color:">
+				<?php if($nxt-1>0){ ?>
+				<a href="mycart.php?page=<?php echo $nxt-1; ?><?php //echo $_SERVER ['QUERY_STRING']?>">
+				<div style="float:left; background-color:red; width:150px; height:40px;">
+					<p>PREV</p>
+				</div>
+				</a>
+				<?php }?>
+				<a href="mycart.php?page=<?php echo $nxt+1; ?><?php //echo $_SERVER ['QUERY_STRING']?>">
+				<div style="float:right; background-color:red; width:150px; height:40px;">
+					<p>NEXT</p>
+				</div>
+				</a>
+			</div>
+			<div style="background-color:; height:50px; margin-top:-16px;">
+				<a href="store.php?query=all<?php //echo $_SERVER ['QUERY_STRING']?>">
 					<div style="float:left; background-color:#D14719; width:150px; height:50px;">
 						<p>BACK TO SHOP</p>
 					</div>
@@ -330,16 +362,16 @@
 				<input type="hidden" value="chk" name="chk">
 					<table>
 						<tr>
-							<td>Credit Card Number:</td><td><input type="text" name="card" value="<?php if(isset($_COOKIE["card"])){ echo $_COOKIE["card"]; setcookie("card","",time()-10,"/");} ?>" ></td>
-							<td><span id="err"><?php if(isset($_COOKIE["cardrr"])){ echo $_COOKIE["cardrr"]; setcookie("cardrr","",time()-10,"/");} ?></span></td>
+							<td>Credit Card Number:</td><td><input type="text" name="card" value="<?php echo $card; ?>" ></td>
+							<td><span id="err"><?php echo $cardrr; ?></span></td>
 						</tr>
 						<tr>
-							<td>Expiration Date:</td><td><input type="date" id="datepicker" name="expire" value="<?php if(isset($_COOKIE["expire"])){ echo $_COOKIE["expire"]; setcookie("expire","",time()-10,"/");} ?>" ></td>
-							<td><span id="err"><?php if(isset($_COOKIE["expirerr"])){ echo $_COOKIE["expirerr"]; setcookie("expirerr","",time()-10,"/");} ?></span></td>
+							<td>Expiration Date:</td><td><input type="date" id="datepicker" name="expire" value="<?php echo $expire; ?>" ></td>
+							<td><span id="err"><?php echo $expirerr; ?></span></td>
 						</tr>
 						<tr>
-							<td>Card Security Code:</td><td><input type="text" name="secure" value="<?php if(isset($_COOKIE["secure"])){ echo $_COOKIE["secure"]; setcookie("secure","",time()-10,"/");} ?>" ></td>
-							<td><span id="err"><?php if(isset($_COOKIE["securerr"])){ echo $_COOKIE["securerr"]; setcookie("securerr","",time()-10,"/");} ?></span></td>
+							<td>Card Security Code:</td><td><input type="text" name="secure" value="<?php echo $secure; ?>" ></td>
+							<td><span id="err"><?php echo $securerr; ?></span></td>
 						</tr>
 						<tr>
 							<td></td><td><input type="submit" value="CHECKOUT"></td>
@@ -350,16 +382,28 @@
 				//$chk_item=array();
 				//$chk_item=unserialize($chk_item);
 			?>
-<table><tr> 
-			<?php
+			<input type="hidden" name="pid2" value="<?php echo htmlentities(serialize($chk_item)); ?>">
+<table><tr>
+
+			<?php $total=0;
 				for ($i=0;$i<sizeof($chk_item);$i++) {
-					$rs=DB::query("SELECT c.*,p.ProductAttactment,p.ProductName,p.ProductPrice FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE c.CartID=".$chk_item[$i]);
+					$rs=DB::query("SELECT c.*,p.ProductAttactment,p.ProductName,p.ProductPrice,(c.CartQuantity*p.ProductPrice) AS total,
+						(p.ProductAvailabilitySmall+p.ProductAvailabilityMedium+p.ProductAvailabilityLarge) AS alltotal,
+						(CASE c.CartItemSize WHEN 'small' THEN p.ProductAvailabilitySmall 
+											WHEN 'medium' THEN p.ProductAvailabilityMedium
+											WHEN 'large' THEN p.ProductAvailabilityLarge END ) AS stock 
+					FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE c.CartID=".$chk_item[$i]);
 					$row=$rs->fetch_object();
-					?><td> <img src="<?php echo  $ri->wh("img/product/".$row->ProductAttactment,100,100); ?>"/> <?php echo "<p>".$row->ProductName."<br />".$row->CartItemSize."(".$row->CartQuantity.")<br />&#8369;".$row->ProductPrice."</p>" ?></td><?php
+					$total+=$row->total;
+					?><td> <img src="<?php echo  $ri->wh("img/product/".$row->ProductAttactment,100,100); ?>"/> <?php echo "<p>".$row->ProductName."<br />"
+					.$row->CartItemSize."(".$row->CartQuantity.")".
+					((0==$row->alltotal)?"<span style='color:red'>out of stock</span>":(($row->CartQuantity>$row->stock)?"only<span style='color:red'>".$row->stock."</span>":""))
+					."<br />&#8369;".$row->ProductPrice."</p>" ?></td><?php
 
 				}
+
 			?>
-</tr></table>
+</tr></table><?php echo "Total: ".$total; ?>
 				</form>
 		<?php 			}
 						else

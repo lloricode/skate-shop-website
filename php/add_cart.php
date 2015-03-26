@@ -10,9 +10,9 @@
 	//$c=(isset($_GET['cat']))?"cat=".$_GET['cat']."&":"";
 	//$p=$_GET['page'];
 	//$srch=(isset($_GET['search']))?"search=".$_GET['search']."&":"";
-	function check($data){
+	/*function check($data){
 		return htmlspecialchars(trim(stripcslashes($data)));
-	}
+	}*/
 	if( isset($_POST['prodID']) and isset($_POST) and $_SERVER["REQUEST_METHOD"]=="POST"){
 		require_once('../config.php');
 		$sq=$mq=$lq=$size="";
@@ -25,9 +25,9 @@
 		$mc=$row->ProductAvailabilityMedium;
 		$lc=$row->ProductAvailabilityLarge;
 
-		$sq=check($_POST['small_quant']);
-		$mq=check($_POST['medium_quant']);
-		$lq=check($_POST['large_quant']);
+		$sq=DB::esc((isset($_POST['small_quant']))?$_POST['small_quant']:0);
+		$mq=DB::esc((isset($_POST['medium_quant']))?$_POST['medium_quant']:0);
+		$lq=DB::esc((isset($_POST['large_quant']))?$_POST['large_quant']:0);
 
 		if(!empty($_POST['size_small'])){
 			if(!empty($sq) and preg_match("/^[0-9]*$/",$sq)){
@@ -35,6 +35,10 @@
 					setcookie("oosS","small is only $sc.",time()+20,"/");
 					$oos=1;
 				}
+			}
+			else{
+				setcookie("oosS","invalid value.",time()+20,"/");
+				$oos=2;
 			}
 		}
 		if(!empty($_POST['size_medium'])){
@@ -44,6 +48,10 @@
 					$oos=1;
 				}
 			}
+			else{
+				setcookie("oosS","invalid value.",time()+20,"/");
+				$oos=2;
+			}
 		}
 		if(!empty($_POST['size_large'])){
 			if(!empty($lq) and preg_match("/^[0-9]*$/",$lq)){
@@ -51,6 +59,10 @@
 					setcookie("oosL","large is only $lc.",time()+20,"/");
 					$oos=1;
 				}
+			}
+			else{
+				setcookie("oosS","invalid value.",time()+20,"/");
+				$oos=2;
 			}
 		}
 		if(!$oos){
@@ -168,11 +180,18 @@
 			else
 				setcookie("tmp","failed to add to your cart.",time()+5,"/");
 		}
+		else if($oos==2)
+			setcookie("tmp","invalid quantity",time()+5,"/");
 		else
 			setcookie("tmp","quantity reach",time()+5,"/");
 	}
 	/*else echo "string";
 		//setcookie("tmp","error in post",time()+5,"/");*/
-
- 	header("Location: ../cart.php?".$_SERVER ['QUERY_STRING']);
+	if($error!=0 or $oos==2 or $oos){
+ 		header("Location: ../cart.php?".$_SERVER ['QUERY_STRING']);
+	}
+ 	else{
+		header("Location: ../mycart.php");
+ 	}
+ 	//header("Location: ../mycart.php");//.$_SERVER ['QUERY_STRING']);
 ?>

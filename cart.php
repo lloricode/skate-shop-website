@@ -1,5 +1,6 @@
 <?php
 	$docfile="cart";
+	$docfile="store";
 	include 'php/main_style.php';
 	include 'php/fresco_style.php';
 	include 'php/header.php';
@@ -29,7 +30,8 @@
 					$rs=DB::query($sqlcmd);
 					if($row=$rs->fetch_object()){			?>
 						<?php if(isset($_COOKIE['tmp'])){ echo $_COOKIE['tmp']; setcookie("tmp","",time()-5,"/");}?>
-						<form action="php/add_cart.php?<?php echo $_SERVER ['QUERY_STRING']?>&file=<?php echo $_GET['file']?>" method="post" >
+						<form action="php/add_cart.php?file=<?php echo $row->ProductID; ?>" method="post" >
+						<input type="hidden" name="prodID" value="<?php echo $row->ProductID;?>">
 							<table>
 								<tr>
 									<td rowspan="8"><img src="<?php echo  $ri->w("img/product/".$row->ProductAttactment,300); ?>" ></td>
@@ -37,7 +39,7 @@
 								<tr>
 									<td><h2><?php echo $row->ProductName?></h2></td>
 									<?php //security later?>
-									<input type="hidden" name="prodID" value="<?php echo $row->ProductID;?>">
+									
 								</tr>
 								<tr>
 									<td>Brand: <b><?php echo $row->ProductBrand?></b></td>
@@ -116,7 +118,7 @@
 					</div>
 				</a>
 				
-					<a href="mycart.php?<?php echo $_SERVER ['QUERY_STRING']?>">
+					<a href="mycart.php">
 						<div style="float:right; background-color:#990033; width:150px; height:50px;">
 							<p>VIEW CART</p>
 						</div>
@@ -124,7 +126,7 @@
 				
 			</div>
 		</div>
-		</form>
+		
 	</center>
 <?php
 	include 'php/footer.php';
