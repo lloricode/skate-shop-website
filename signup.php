@@ -44,16 +44,18 @@
 		$ques=DB::esc($ques);
 		$ans=DB::esc($ans);
 
-		if(!preg_match("/^[[0-9]{4}\-[0-9]{2}\-[0-9]{2}]*$/", $bd) and !empty($bd))
+		if(!preg_match("/^[[0-9]{4}\-[0-9]{2}\-[0-9]{2}]*$/", $bd) and !empty($_POST["bd"]))
 			$bdrr="invalid birhtday format";
 		else{//----------------------------checking age input
-			list($YY,$MM,$dd)=explode("-", $bd);
+			if(!empty($_POST["bd"])){
+				list($YY,$MM,$dd)=explode("-", $bd);
 				if($YY<=(date("Y")-18)){
 					if($MM>=date("m") and $dd<=date("d") and $YY==(date("Y")-18))
 						$bdrr="below of 18yrs old is not allowed.";
 				}
 				else
 					$bdrr="below of 18yrs old is not allowed.";
+			}
 		}
 		$valid = array("male","female");
 		//validation

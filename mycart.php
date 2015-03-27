@@ -243,7 +243,6 @@
 		<?php
 			$sqlcmd="SELECT c.CartPurchased,c.CartID,c.UserAccountID,p.ProductAttactment,p.ProductID,p.ProductName,c.CartItemSize,c.CartQuantity,p.ProductPrice,p.ProductBrand
 								FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID
-								LEFT JOIN Purchased AS pu ON pu.PurchasedID=c.PurchasedID
 								WHERE c.UserAccountID=".$_SESSION['authID']." 
 								GROUP BY c.ProductID,c.CartItemSize,CartPurchased,CartDateAdded 
 								ORDER BY CartPurchased";

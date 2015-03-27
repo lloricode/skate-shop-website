@@ -25,16 +25,37 @@ body            {background-image: url("../img/background website.jpg");	backgro
 #tdpad3         {padding: 5px 39px;}
 /*----------------------menu css------------------------------------------*/
 .active_menu    {background-color:#EE691E;}
-#mainmenu:hover {background-color: #EE691E;cursor: pointer;   opacity: 0.9;}
- #mainmenu{font-size: 43px; display: inline;list-style-type: none;padding: 19px 5px;}
+#mainmenu:hover {background-color: #b14d1d;cursor: pointer;   opacity: 0.9; transition-property:background-color;transition-duration:1.5s; transition-timing-function:linear;font-size: 45px;transform:scale(1.1);}
+ #mainmenu{font-size: 39px; display: inline; list-style-type:none; padding: 19px 5px; transition:all .2s ease-in-out;}}
 /*----------------------sale male female misc css------------------------------------------*/
 .active_menu2    {background-color:#700028;}
-#mainmenu2:hover {background-color: #700028;cursor: pointer;   opacity: 0.9;}
-#navlist2 #mainmenu2{margin-top: 100px; font-size: 30px; display: inline;list-style-type: none;padding: 9.75px 50px;}
+
+#mainmenu2:hover {background-color: #590020;
+                  cursor: pointer;
+                  opacity: 0.9;
+                   transition-property:background-color;
+                   transition-duration:1.5s; 
+                   transition-timing-function:linear
+                    transform: scale(1.1);
+                    font-size: 35px}
+
+
+#navlist2 #mainmenu2{margin-top: 100px;
+                    font-size: 30px;
+                    display: inline;
+                    list-style-type: none;
+                    padding: 9.75px 50px;
+                    transition:all .2s ease-in-out;
+                    font-weight: heavy}
+
 /*----------------------shoes jackets tees jeans shorts css------------------------------------------*/
-.active_menu3    {color:#AB311C;}
-#mainmenu3:hover {background-color: #242424;cursor: pointer;   opacity: 0.5;}
-#navlist3 #mainmenu3{margin-top: 100px; font-size: 25px; display: inline;list-style-type: none;padding: 8px 30px;}
+.active_menu3    {color:#AB311C; transition:all .2s ease-in-out}
+#mainmenu3:hover {background-color: #242424;cursor: pointer;  ; ;opacity: 0.5;transition-property:background-color;
+                   transition-duration:1.5s; 
+                   transition-timing-function:linear
+                    transform: scale(1.1);
+                    font-size: 35px}
+#navlist3 #mainmenu3{margin-top: 100px; font-size: 25px; display: inline;list-style-type: none;padding: 8px 30px; transition-property: background-color; transition-duration:1.0s ; transition-timing-function:linear transition:all .2s ease-in-out;}
 /*----------------------table css------------------------------------------*/
 #table_         {border: 4;}
 .mainTable      {}
@@ -106,4 +127,5 @@ body            {background-image: url("../img/background website.jpg");	backgro
 .btnorange:hover {
   background: #cc7033;
   text-decoration: none;
+
 }
