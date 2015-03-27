@@ -115,7 +115,7 @@
 				$row = $rs->fetch_object();
 				$pid=$row->PurchasedId;
 				//select all item to be insert in purchaseLine WHERE purchase=0
-				$sql="SELECT c.ProductId,c.CartQuantity,c.CartItemSize FROM Cart AS c WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION['authID'];
+				$sql="SELECT c.CartID,c.ProductId,c.CartQuantity,c.CartItemSize FROM Cart AS c WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION['authID'];
 			//	echo "on line".__LINE__.": ".$sql."<br />";
 				$rs=DB::query($sql);
 				while($row = $rs->fetch_object()){
@@ -168,6 +168,8 @@
 					$insertline="INSERT INTO PurchasedLine(PurchasedId,ProductID,Quantity,Size) VALUES($pid,".$row->ProductId.",".$quantity.",'".$row->CartItemSize."')";
 			//		echo "on line".__LINE__.": ".$insertline."<br />";
 					DB::query($insertline);
+					//update cart
+					DB::query("UPDATE Cart SET PurchasedID=".$pid." WHERE CartID=".$row->CartID);
 				}
 				//------
 				//change purchase to true where false
@@ -240,8 +242,9 @@
 <div style="background:rgba(0,0,0,.1); height:1030px;">
 		<?php
 			$sqlcmd="SELECT c.CartPurchased,c.CartID,c.UserAccountID,p.ProductAttactment,p.ProductID,p.ProductName,c.CartItemSize,c.CartQuantity,p.ProductPrice,p.ProductBrand
-								FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID 
-								WHERE UserAccountID=".$_SESSION['authID']." 
+								FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID
+								LEFT JOIN Purchased AS pu ON pu.PurchasedID=c.PurchasedID
+								WHERE c.UserAccountID=".$_SESSION['authID']." 
 								GROUP BY c.ProductID,c.CartItemSize,CartPurchased,CartDateAdded 
 								ORDER BY CartPurchased";
 				DB::query($sqlcmd);
@@ -356,11 +359,22 @@
 						//include"config.php";
 						DB::query("SELECT CartPurchased as a FROM Cart WHERE CartPurchased=0 AND UserAccountID='".$_SESSION["authID"]."'");
 						if(DB::getNumRows()>0){
+							$rss=DB::query("SELECT * FROM UserAccount WHERE UserAccountID=".$_SESSION["authID"]);
+							$roww=$rss->fetch_object();
 			?>
 				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?".$_SERVER ['QUERY_STRING'] ?>?<?php echo $_SERVER ['QUERY_STRING']; ?>" method="post">
 				<input type="hidden" name="pid" value="<?php echo htmlentities(serialize($chk_item)); ?>" />
 				<input type="hidden" value="chk" name="chk">
 					<table>
+						<tr>
+							<td>Shipping Address</td><td><?php echo $roww->UserAccountShipping; ?></td>
+						</tr>
+						<tr>
+							<td>Email</td><td><?php echo $roww->UserAccountEmail; ?></td>
+						</tr>
+						<tr>
+							<td>Contact</td><td><?php echo $roww->UserAccountMobile; ?></td>
+						</tr>
 						<tr>
 							<td>Credit Card Number:</td><td><input type="text" name="card" value="<?php echo $card; ?>" ></td>
 							<td><span id="err"><?php echo $cardrr; ?></span></td>
