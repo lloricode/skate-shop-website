@@ -34,5 +34,5 @@
 			</center>
 		</div>
 <?php
-	if(!($docfile=="cart" || $docfile=="fill"|| $docfile=="store"|| $docfile=="mycart" ))
+	if(!($docfile=="cart" || $docfile=="fill"|| $docfile=="store"|| $docfile=="mycart"|| $docfile=="profile" ))
  		include('top-cache.php'); ?>

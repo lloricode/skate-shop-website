@@ -14,7 +14,7 @@
 				<a href="add_account.php"><button>add admin account</button></a>
 		<?php		}
 				//--------------------------
-				$sqlcmd="SELECT AdminAccount.AdminAccountName,COUNT(Product.AdminAccountID) AS NumberOfUploads FROM Product 
+		/*		$sqlcmd="SELECT AdminAccount.AdminAccountName,COUNT(Product.AdminAccountID) AS NumberOfUploads FROM Product 
 					LEFT JOIN AdminAccount 
 					ON Product.AdminAccountID=AdminAccount.AdminAccountID 
 					GROUP BY AdminAccountName";
@@ -25,28 +25,31 @@
 					while($row=$rs->fetch_object())
 						echo "<tr><td>".$row->AdminAccountName."</td><td> ".$row->NumberOfUploads."</td></tr>";
 					echo "</table>";
-				}
+				}*/
 				//-----------------------
-				$sqlcmd="SELECT * FROM AdminAccount";
+				$sqlcmd="SELECT u.* FROM UserAccount AS u LEFT JOIN UserAccountType AS ut ON u.UserAccountID=ut.UserAccountID WHERE ut.UserAccountTypeValue='admin'";
 				$rs=DB::query($sqlcmd);
 				if(DB::getNumRows()>0){
+					
 					echo "<table class='grid' border=1><caption>Admins</caption><tr>";
 					echo "<th>ID</th>";
 					echo "<th colspan='2'>Full Name</th>";
 					echo "<th>UserName</th>";
 					echo "<th>Permission</th><tr>";
 					while ($row=$rs->fetch_object()) {
-						echo "<tr><td>".$row->AdminAccountID."</td>";
-						echo "<td>".$row->AdminAccountName."</td>";
-						echo "<td>".$row->AdminAccountLastName."</td>";
-						echo "<td>".$row->AdminAccountUserName."</td>";
-						echo "<td>".$row->AdminAccountPermission."</td>";
+						$rs1=DB::query("SELECT UserAccountAccessValue FROM UserAccountAccess WHERE UserAccountID=".$row->UserAccountID);
+					$row1=$rs1->fetch_object();
+						echo "<tr><td>".$row->UserAccountID."</td>";
+						echo "<td>".$row->UserAccountFirstName."</td>";
+						echo "<td>".$row->UserAccountLastName."</td>";
+						echo "<td>".$row->UserAccountUserName."</td>";
+						echo "<td>".$row1->UserAccountAccessValue."</td>";
 						echo "</tr>";
 					}
 					echo "</table>";
 				}
 				//------------------
-				$sqlcmd="SELECT * FROM UserAccount";
+				$sqlcmd="SELECT u.* FROM UserAccount AS u LEFT JOIN UserAccountType AS ut ON u.UserAccountID=ut.UserAccountID WHERE ut.UserAccountTypeValue='user'";
 				$rs=DB::query($sqlcmd);
 				if(DB::getNumRows()>0){
 					echo "<table border=1><caption>Users</caption><tr>";
@@ -57,7 +60,7 @@
 					echo "<th>Gender</th></tr><tr>";
 					while ($row=$rs->fetch_object()) {
 						echo "<tr><td>".$row->UserAccountID."</td>";
-						echo "<td>".$row->UserAccountFisrtName."</td>";
+						echo "<td>".$row->UserAccountFirstName."</td>";
 						echo "<td>".$row->UserAccountLastName."</td>";
 						echo "<td>".$row->UserAccountUserName."</td>";
 						echo "<td>".$row->UserAccountEmail."</td>";

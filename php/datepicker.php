@@ -3,10 +3,19 @@
 <!-- date picker-->
          <meta charset="utf-8">
 		<title>jQuery UI Datepicker - Default functionality</title>
+		<?php if(isset($s)){ ?>
+		<link rel="stylesheet" href="../js/datepicker/jquery-ui.css">
+		<script src="../js/datepicker/jquery-1.10.2.js"></script>
+		<script src="../js/datepicker/jquery-ui.js"></script>
+		<link rel="stylesheet" href="../js/datepicker/style.css">
+		<?php }else{ ?>
+
 		<link rel="stylesheet" href="js/datepicker/jquery-ui.css">
 		<script src="js/datepicker/jquery-1.10.2.js"></script>
 		<script src="js/datepicker/jquery-ui.js"></script>
-		<link rel="stylesheet" href="js/datepicker/style.css">
+		<link rel="stylesheet" href="../js/datepicker/style.css">
+
+	<?php		}?>
 		<script>
 		/*	$(function() {
 			$( "#datepicker" ).datepicker();

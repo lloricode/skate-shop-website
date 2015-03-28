@@ -46,8 +46,8 @@
 
 
 <?php
-	$cardrr=$expirerr=$securerr="";
-	$card=$expire=$secure="";
+	$shipping=$cardrr=$expirerr=$securerr="";
+	$shippingrr=$card=$expire=$secure="";
 	if( isset($_POST["chk"]) and isset($_POST) and $_SERVER["REQUEST_METHOD"]=="POST"){ $docc=3;
 		//include"../config.php";
 		//product to be checkout
@@ -57,13 +57,14 @@
 		for ($i=0; $i < $z; $i++) {
 			$pidquery.="c.CartID=".$pids[$i]." ";
 			if(($z-1)!=$i)
-				$pidquery.="OR ";  
+				$pidquery.=" OR ";  
 		}
 		//echo "on line".__LINE__.": ".$pidquery."<br />";
 		//checking the paying
 		if(empty($_POST["card"])) $cardrr="Card number required."; else $card=DB::esc($_POST["card"]);
 		if(empty($_POST["expire"])) $expirerr="Expiration date required."; else $expire=DB::esc($_POST["expire"]);
 		if(empty($_POST["secure"])) $securerr="Security code required."; else $secure=DB::esc($_POST["secure"]);
+		if(empty($_POST["shipping"])) $shippingrr="Shipping Address required."; else $shipping=DB::esc($_POST["shipping"]);
 
 		if(!preg_match("/^[[0-9]{4}\-[0-9]{2}\-[0-9]{2}]*$/", $expire) and !empty($expire))
 			$expirerr="invalid date format";
@@ -79,52 +80,63 @@
 			}
 		}
 
+		if(!empty($_POST["shipping"]) and !preg_match("/^[a-zA-Z 0-9]*$/", $shipping))
+			$shippingrr="Invalid Shipping Address";
 		if(!empty($_POST["card"]) and !preg_match("/^[0-9]*$/", $card))
 			$cardrr="Invalid format";
 		if(!empty($_POST["secure"]) and !preg_match("/^[0-9]*$/", $secure))
-			$securerr="Invalid format";
-
-		if($cardrr=="" and $expirerr=="" and $securerr==""){
+			$securerr="Invalid format"; echo $securerr; 
+		if($cardrr=="" and $expirerr=="" and $securerr=="" and $shippingrr==""){ 
 			//session_start();
-			$q="SELECT c.CartPurchased as a FROM Cart AS c WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION["authID"];
-			//echo "on line".__LINE__.": ".$q."<br />";
-			DB::query($q);
+			$q="SELECT COUNT(c.CartPurchased) as a FROM Cart AS c WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION["authID"];
+			echo "on line".__LINE__.": ".$q."<br />";
+			$rss=DB::query($q);
+			$roww=$rss->fetch_object();
+			echo "on line".__LINE__.": ".$roww->a."<br />";
 			//echo "on line".__LINE__.": ".DB::getNumRows()."<br />";
-			if(/*$_GET['purchase']=="yes" and */DB::getNumRows()>0){
+			if(/*$_GET['purchase']=="yes" and */$roww->a>0){
 				//total purchanse in all item
-				$sql="SELECT SUM(p.ProductPrice*c.CartQuantity) AS total_ FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE c.CartPurchased=0 AND $pidquery AND UserAccountID=".$_SESSION['authID'];  
-			//	echo "on line".__LINE__.": ".$sql."<br />";
+				$sql="SELECT SUM(p.ProductPrice*c.CartQuantity) AS total_ FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION['authID'];  
+				echo "on line".__LINE__.": ".$sql."<br />";
 				$rs=DB::query($sql);
 				$row = $rs->fetch_object();
 				$amount=$row->total_;
 				//total quantity in all purchase
 				$sql="SELECT SUM(c.CartQuantity) AS total_Q FROM Cart AS c WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION['authID'];
-			//	echo "on line".__LINE__.": ".$sql."<br />";
+				echo "on line".__LINE__.": ".$sql."<br />";
 				$rs=DB::query($sql);
 				$row = $rs->fetch_object();
 				$quant=$row->total_Q;
 				//insert purchase including 2 above
-				$sqlcmd="INSERT INTO Purchased(PurchasedAmount,PurchasedQuantity,UserAccountID,PurchasedDelivered,card_number,card_expiration,secure_code)
-					VALUES($amount,$quant,".$_SESSION['authID'].",0,'$card','$expire','$secure')";
-			//	echo "on line".__LINE__.": ".$sqlcmd."<br />";
+				$sqlcmd="INSERT INTO Purchased(PurchasedAmount,PurchasedQuantity,UserAccountID,PurchasedDelivered)
+					VALUES($amount,$quant,".$_SESSION['authID'].",0)";
+				echo "on line".__LINE__.": ".$sqlcmd."<br />";
 				DB::query($sqlcmd);
 				//slect purchaseID for purchaseLine
 				$sql="SELECT PurchasedId FROM Purchased ORDER BY PurchasedId DESC LIMIT 0,1";
-			//	echo "on line".__LINE__.": ".$sql."<br />";
+				echo "on line".__LINE__.": ".$sql."<br />";
 				$rs=DB::query($sql);
 				$row = $rs->fetch_object();
 				$pid=$row->PurchasedId;
+
+				
+				//DB::query($sqlcmd);
+				//insert payment
+				$sqlcmd="INSERT INTO Payment(UserAccountID,PaymentShippingAddress,PaymentCardNumber,PaymentCardExpiration,PaymentSecureCode,PurchasedId)
+					VALUES(".$_SESSION['authID'].",'$shipping',$card,'$expire',$secure,$pid)";
+					echo "on line".__LINE__.": ".$sqlcmd."<br />";
+				DB::query($sqlcmd);
 				//select all item to be insert in purchaseLine WHERE purchase=0
 				$sql="SELECT c.CartID,c.ProductId,c.CartQuantity,c.CartItemSize FROM Cart AS c WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION['authID'];
-			//	echo "on line".__LINE__.": ".$sql."<br />";
+				echo "on line".__LINE__.": ".$sql."<br />";
 				$rs=DB::query($sql);
-				while($row = $rs->fetch_object()){
+				for($i=0;$row = $rs->fetch_object();$i++){
 					$quantity=0;
 					switch ($row->CartItemSize) {
 						case 'small':
 							//select availabilty and sold to be update
 							$sqlcmd="SELECT ProductAvailabilitySmall,ProductSoldSmall FROM Product WHERE ProductID=".$row->ProductId;
-			//				echo "on line".__LINE__.": ".$sqlcmd."<br />";
+							echo "on line".__LINE__.": ".$sqlcmd."<br />";
 							$rs2=DB::query($sqlcmd);
 							$row2=$rs2->fetch_object();
 							$avail=$row2->ProductAvailabilitySmall;
@@ -132,13 +144,13 @@
 							$quantity=$row->CartQuantity;
 							// the update
 							$sqlcmd="UPDATE Product SET ProductAvailabilitySmall=".($avail-$quantity).", ProductSoldSmall=".($sold+$quantity)." WHERE ProductID=".$row->ProductId;
-			//				echo "on line".__LINE__.": ".$sqlcmd."<br />";
+							echo "on line".__LINE__.": ".$sqlcmd."<br />";
 							DB::query($sqlcmd);
 							break;
 						case 'medium':
 							//select availabilty and sold to be update
 							$sqlcmd="SELECT ProductAvailabilityMedium,ProductSoldMedium FROM Product WHERE ProductID=".$row->ProductId;
-			//				echo "on line".__LINE__.": ".$sqlcmd."<br />";
+							echo "on line".__LINE__.": ".$sqlcmd."<br />";
 							$rs2=DB::query($sqlcmd);
 							$row2=$rs2->fetch_object();
 							$avail=$row2->ProductAvailabilityMedium;
@@ -146,13 +158,13 @@
 							$quantity=$row->CartQuantity;
 							// the update
 							$sqlcmd="UPDATE Product SET ProductAvailabilityMedium=".($avail-$quantity).", ProductSoldMedium=".($sold+$quantity)." WHERE ProductID=".$row->ProductId;
-			//				echo "on line".__LINE__.": ".$sqlcmd."<br />";
+							echo "on line".__LINE__.": ".$sqlcmd."<br />";
 							DB::query($sqlcmd);
 							break;
 						case 'large':
 							//select availabilty and sold to be update
 							$sqlcmd="SELECT ProductAvailabilityLarge,ProductSoldLarge FROM Product WHERE ProductID=".$row->ProductId;
-			//				echo "on line".__LINE__.": ".$sqlcmd."<br />";
+							echo "on line".__LINE__.": ".$sqlcmd."<br />";
 							$rs2=DB::query($sqlcmd);
 							$row2=$rs2->fetch_object();
 							$avail=$row2->ProductAvailabilityLarge;
@@ -160,21 +172,21 @@
 							$quantity=$row->CartQuantity;
 							// the update
 							$sqlcmd="UPDATE Product SET ProductAvailabilityLarge=".($avail-$quantity).", ProductSoldLarge=".($sold+$quantity)." WHERE ProductID=".$row->ProductId;
-			//				echo "on line".__LINE__.": ".$sqlcmd."<br />";
+							echo "on line".__LINE__.": ".$sqlcmd."<br />";
 							DB::query($sqlcmd);
 							break;
 					}
 					//insert purchaseLine incuding purchaseID
-					$insertline="INSERT INTO PurchasedLine(PurchasedId,ProductID,Quantity,Size) VALUES($pid,".$row->ProductId.",".$quantity.",'".$row->CartItemSize."')";
-			//		echo "on line".__LINE__.": ".$insertline."<br />";
+					$insertline="INSERT INTO PurchasedLine(PurchasedId,CartID,Quantity,Size) VALUES($pid,".$pids[$i].",".$quantity.",'".$row->CartItemSize."')";
+					echo "on line".__LINE__.": ".$insertline."<br />";
 					DB::query($insertline);
 					//update cart
-					DB::query("UPDATE Cart SET PurchasedID=".$pid." WHERE CartID=".$row->CartID);
+					//DB::query("UPDATE Cart SET PurchasedID=".$pid." WHERE CartID=".$row->CartID);
 				}
 				//------
 				//change purchase to true where false
 				$sqlcmd="UPDATE Cart AS c SET c.CartPurchased=1 WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION['authID'];
-				//echo "on line".__LINE__.": ".$sqlcmd."<br />";
+				echo "on line".__LINE__.": ".$sqlcmd."<br />";
 				DB::query($sqlcmd);
 			//	setcookie("paid","paid",time()+20,"/");
 			}
@@ -183,7 +195,7 @@
 			$w = unserialize( $_POST["pid2"]);
 			foreach ($w as $value) {
 				$q="SELECT CartID FROM Cart WHERE CartID=".DB::esc($value)." AND UserAccountID=".$_SESSION["authID"];
-				//echo "on line".__LINE__.": ".$q;
+				echo "on line".__LINE__.": ".$q;
 			DB::query($q);
 			if(DB::getNumRows()){
 				$chk_item[]=DB::esc($value);
@@ -226,9 +238,11 @@
 <?php }else	if($docc){
 ?>
 	<center>
-		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?".$_SERVER ['QUERY_STRING'] ?>" method="post">
+		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
 	<?php
-			$sql="SELECT SUM(p.ProductPrice*c.CartQuantity) AS total_ FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE c.CartPurchased=0 AND UserAccountID=".$_SESSION['authID'];  
+			$sql="SELECT SUM(p.ProductPrice*c.CartQuantity) AS total_ 
+				FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID 
+				WHERE c.CartPurchased=0 AND c.UserAccountID=".$_SESSION['authID'];  
 			$rs=DB::query($sql);
 			$row = $rs->fetch_object();
 			?>
@@ -241,23 +255,47 @@
 		<div class="main_body"><br />
 <div style="background:rgba(0,0,0,.1); height:1030px;">
 		<?php
-			$sqlcmd="SELECT c.CartPurchased,c.CartID,c.UserAccountID,p.ProductAttactment,p.ProductID,p.ProductName,c.CartItemSize,c.CartQuantity,p.ProductPrice,p.ProductBrand
-								FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID
+			/*$sqlcmd="SELECT c.CartPurchased,c.CartID,c.UserAccountID,c.CartItemSize,c.CartQuantity,
+							p.ProductAttactment,p.ProductID,p.ProductName,p.ProductPrice,p.ProductBrand
+								FROM Cart AS c
+								JOIN Product AS p ON c.ProductID=p.ProductID
+								JOIN PurchasedLine AS pl ON c.CartID=pl.CartID
+								JOIN Purchased AS pp ON pp.PurchasedID=pl.PurchasedID
 								WHERE c.UserAccountID=".$_SESSION['authID']." 
-								GROUP BY c.ProductID,c.CartItemSize,CartPurchased,CartDateAdded 
-								ORDER BY CartPurchased";
+								GROUP BY c.ProductID,c.CartItemSize,CartPurchased,CartDateAdded
+								ORDER BY c.CartPurchased";
+FROM Purchased AS pur
+						JOIN PurchasedLine AS pl ON pl.PurchasedId=pur.PurchasedId
+						JOIN Cart AS c ON c.CartID=pl.CartID
+								*/
+				$sqlcmd="SELECT pro.ProductAttactment,pro.ProductID,pro.ProductName,pro.ProductPrice,pro.ProductBrand,
+						c.CartPurchased,c.CartID,c.UserAccountID,c.CartItemSize,c.CartQuantity
+						FROM Cart AS c
+						JOIN Product AS pro ON c.ProductID=pro.ProductID
+						WHERE c.UserAccountID=".$_SESSION['authID']."
+						ORDER BY c.CartPurchased";
 				DB::query($sqlcmd);
 				echo "Result: ".DB::getNumROws()."<br />";
 				$nxt=(isset($_GET["page"]))?DB::esc($_GET["page"]):1;
 					$result=DB::query($sqlcmd." LIMIT ".(($nxt-1)*9).",9");
 					if(DB::getNumRows() > 0){		$chk=0;		?>
 						
-						<?php if(isset($_COOKIE['tmp'])){ echo $_COOKIE['tmp']; setcookie("tmp","",time()-5,"/");}?>
+				<!--		<?php //if(isset($_COOKIE['tmp'])){ echo $_COOKIE['tmp']; setcookie("tmp","",time()-5,"/");}?> -->
+				<?php echo $msg; ?>
 						<table id="table_">
 						<tr class="tableRow">
 						
 				<?php 	for($int = 1; $row = $result->fetch_object(); $int++)
 						{
+							$del=0;
+							if($row->CartPurchased){ 
+								$rs1=DB::query("SELECT p.PurchasedDelivered,p.PurchasedID
+									FROM PurchasedLine AS pl
+									JOIN Purchased AS p ON pl.PurchasedID=p.PurchasedID
+									WHERE pl.CartID=".$row->CartID);
+								$row1=$rs1->fetch_object();
+								$del=$row1->PurchasedDelivered;
+							}
 							 ?>
 							<td class="tableData">
 								<div class="mardagz" style="background: url('<?php echo  $ri->h("img/product/".$row->ProductAttactment,700); ?>');background-repeat: no-repeat; background-size: cover;">
@@ -270,9 +308,23 @@
 												<span>ZOOM IMAGE</span>
 											</div>
 										</a>
-								<?php 	if($row->CartPurchased){	$chk=0;	?>
+								<?php 	if($del){
+											$rs2=DB::query("SELECT PurchasedApprovedStatus FROM PurchasedApproved WHERE PurchasedID=".$row1->PurchasedID);
+											$row2=$rs2->fetch_object();
+											if($row2->PurchasedApprovedStatus){	?>
+												<div class="purchased tddiv">
+													<span>DELIVERED</span>
+												</div>
+								<?php		}
+											else{ ?>
+												<div class="purchased tddiv">
+													<span>CANCELED</span>
+												</div>
+						<?php				}
+										}
+										else if($row->CartPurchased){	$chk=0;	?>
 											<div class="purchased tddiv">
-												<span>PURCHASED</span>
+												<span>PENDING</span>
 											</div>
 								<?php 	}
 										else{	$chk=1;	?>
@@ -285,7 +337,7 @@
 										<br />
 										<p style="font-size:13px;float:left">
 											&nbsp;&nbsp;<?php echo $int?>:
-											<span style="color:red;">	
+											<span style="color:red;">
 												 <?php echo  $row->ProductBrand?> &nbsp;</span><br />
 											<b>	&nbsp; <?php echo  $row->ProductName?> &nbsp;<br />
 												&nbsp; &#8369;<?php echo  $row->ProductPrice?></b>
@@ -296,7 +348,7 @@
 									</div>
 								</div>
 							</td>
-							<?php
+							<?php 
 							if($int % 3 == 0)
 								echo "</tr><tr class='tableRow'>";
 						}
@@ -361,18 +413,19 @@
 							$rss=DB::query("SELECT * FROM UserAccount WHERE UserAccountID=".$_SESSION["authID"]);
 							$roww=$rss->fetch_object();
 			?>
-				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?".$_SERVER ['QUERY_STRING'] ?>?<?php echo $_SERVER ['QUERY_STRING']; ?>" method="post">
+				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>?<?php echo $_SERVER ['QUERY_STRING']; ?>" method="post">
 				<input type="hidden" name="pid" value="<?php echo htmlentities(serialize($chk_item)); ?>" />
 				<input type="hidden" value="chk" name="chk">
 					<table>
-						<tr>
-							<td>Shipping Address</td><td><?php echo $roww->UserAccountShipping; ?></td>
-						</tr>
 						<tr>
 							<td>Email</td><td><?php echo $roww->UserAccountEmail; ?></td>
 						</tr>
 						<tr>
 							<td>Contact</td><td><?php echo $roww->UserAccountMobile; ?></td>
+						</tr>
+						<tr>
+							<td>Shipping Address</td><td><input type="text" name="shipping" value="<?php echo $shipping; ?>" ></td>
+							<td><span id="err"><?php echo $shippingrr; ?></span></td>
 						</tr>
 						<tr>
 							<td>Credit Card Number:</td><td><input type="text" name="card" value="<?php echo $card; ?>" ></td>

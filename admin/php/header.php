@@ -14,6 +14,9 @@
 		<title>Skate Shop Admin Panel</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link href="../img/icon.png" rel="shortcut icon" type="image/x-icon" />
+		<?php
+			if(isset($s))
+				include"../php/datepicker.php"; ?>
 	</head>
 	<body>
 	<div class="d">

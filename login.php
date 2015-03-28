@@ -18,17 +18,17 @@
 		$passcode=addslashes(md5($_POST['pass']));
 
 		if(filter_var($usercode, FILTER_VALIDATE_EMAIL)){
-			$tmp="UserAccountEmail";
+			$tmp="u.UserAccountEmail";
 		}
 		else
-			$tmp="UserAccountUserName";
+			$tmp="u.UserAccountUserName";
 
-		$sql="SELECT UserAccountID,UserAccountFisrtName,UserAccountLastName,UserAccountImage 
-			FROM UserAccount WHERE $tmp='$usercode' AND UserAccountPassword='$passcode'";
+		$sql="SELECT u.UserAccountID,u.UserAccountFirstName,u.UserAccountLastName,u.UserAccountImage 
+			FROM UserAccount AS u WHERE $tmp='$usercode' AND u.UserAccountPassword='$passcode'";
 		$rs=DB::query($sql);
 		if (DB::getNumRows()>0) {
 			$row=$rs->fetch_object();
-			$_SESSION["authFn"]=$row->UserAccountFisrtName;//setcookie("authFn",$row->UserAccountFisrtName,time()+3600,"/");
+			$_SESSION["authFn"]=$row->UserAccountFirstName;//setcookie("authFn",$row->UserAccountFisrtName,time()+3600,"/");
 			$_SESSION["authLn"]=$row->UserAccountLastName;//setcookie("authLn",$row->UserAccountLastName,time()+3600,"/");
 			$_SESSION["authImg"]=$row->UserAccountImage;//setcookie("authImg",$row->UserAccountImage,time()+3600,"/");
 			$_SESSION["authID"]=$row->UserAccountID;//setcookie("authID",$row->UserAccountID,time()+3600,"/");

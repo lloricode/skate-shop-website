@@ -11,8 +11,8 @@
 	
 	if(isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST"){
 
-		$fn=$ln=$username=$pass=$bm=$bd=$by=$gender=$home=$mobile=$email=$shipping=$ques=$ans="";
-		$fnrr=$lnrr=$usernamerr=$passrr=$bdrr=$genderrr=$homerr=$mobilerr=$emailrr=$shippingrr=$quesrr=$ansrr=" ";
+		$fn=$ln=$username=$pass=$bm=$bd=$by=$gender=$home=$mobile=$email=$ques=$ans="";
+		$fnrr=$lnrr=$usernamerr=$passrr=$bdrr=$genderrr=$homerr=$mobilerr=$emailrr=$quesrr=$ansrr=" ";
 
 		//check if empty
 		if(empty($_POST['fn'])) $fnrr="First Name is required"; else $fn=$_POST['fn'];
@@ -27,7 +27,6 @@
 		if(empty($_POST['home'])) $homerr="Home Address is required"; else $home=$_POST['home'];
 		if(empty($_POST['mobile'])) $mobilerr="Mobile is required"; else $mobile=$_POST['mobile'];
 		if(empty($_POST['email'])) $emailrr="Email is required"; else $email=$_POST['email'];
-		if(empty($_POST['shipping'])) $shippingrr="Shipping Address is required"; else $shipping=$_POST['shipping'];
 		if(empty($_POST['ques'])) $quesrr="Secret Question is required"; else $ques=$_POST['ques'];
 		if(empty($_POST['ans'])) $ansrr="Secret Answer is required"; else $ans=$_POST['ans'];
 
@@ -40,7 +39,6 @@
 		$home=DB::esc($home);
 		$mobile=DB::esc($mobile);
 		$email=DB::esc($email);
-		$shipping=DB::esc($shipping);
 		$ques=DB::esc($ques);
 		$ans=DB::esc($ans);
 
@@ -96,24 +94,27 @@
 
 
 		if($fnrr==" " && $lnrr==" " && $usernamerr==" " && $passrr==" "  && $bdrr==" "  &&
-			$genderrr==" " && $homerr==" " && $mobilerr==" " && $emailrr==" " && $shippingrr==" " && $quesrr==" " && $ansrr==" "){
+			$genderrr==" " && $homerr==" " && $mobilerr==" " && $emailrr==" " &&  $quesrr==" " && $ansrr==" "){
 
 			$gen=($gender=="male")?"male.png":"female.png";//set the default photo depends on user's gender
 
-	 		$sql="INSERT INTO UserAccount(UserAccountImage,UserAccountFisrtName,UserAccountLastName,UserAccountUserName,UserAccountPassword,UserAccountBD,
-	 			UserAccountGender,UserAccountHomeAddress,UserAccountMobile,UserAccountEmail,UserAccountShipping,UserAccountSecretQuestion,UserAccountAnswer)
+	 		$sql="INSERT INTO UserAccount(UserAccountImage,UserAccountFirstName,UserAccountLastName,UserAccountUserName,UserAccountPassword,UserAccountBD,
+	 			UserAccountGender,UserAccountHomeAddress,UserAccountMobile,UserAccountEmail,UserAccountSecretQuestion,UserAccountAnswer)
 				VALUES('$gen','$fn','$ln','$username','".md5($pass)."','$bd',
-					'$gender','$home','$mobile','$email','$shipping','$ques','".md5($ans)."')";
+					'$gender','$home','$mobile','$email','$ques','".md5($ans)."')";
 			DB::query($sql);
+			$rs=DB::query("SELECT UserAccountID FROM UserAccount ORDER BY UserAccountID DESC LIMIT 1");
+			$row=$rs->fetch_object();
+			DB::query("INSERT INTO UserAccountType(UserAccountID,UserAccountTypeValue) VALUES(".$row->UserAccountID.",'user')");
 			//$ok="Account Created!<br /><a href='login.php'>Back to Log in.</a>";
 //------------------------------------------------------------------------------------------
-			$sql="SELECT UserAccountID,UserAccountFisrtName,UserAccountLastName,UserAccountImage 
+			$sql="SELECT UserAccountID,UserAccountFirstName,UserAccountLastName,UserAccountImage 
 			FROM UserAccount WHERE UserAccountUserName='$username' AND UserAccountPassword='".md5($pass)."'";
 			$rs=DB::query($sql);
 			if (DB::getNumRows()>0) {
 				$row=$rs->fetch_object();
 				session_start();
-				$_SESSION["authFn"]=$row->UserAccountFisrtName;
+				$_SESSION["authFn"]=$row->UserAccountFirstName;
 				$_SESSION["authLn"]=$row->UserAccountLastName;
 				$_SESSION["authImg"]=$row->UserAccountImage;
 				$_SESSION["authID"]=$row->UserAccountID;
@@ -172,7 +173,7 @@
 						}?>
 
 					<br /><br /><br /><br />
-					<?php if(!isset($fn))$fn=$ln=$username=$pass=$bm=$bd=$by=$gender=$home=$mobile=$email=$shipping=$ques=$ans="";?>
+					<?php if(!isset($fn))$fn=$ln=$username=$pass=$bm=$bd=$by=$gender=$home=$mobile=$email=$ques=$ans="";?>
 					<form action="<?=htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 						<table>
 							<tr>
@@ -235,11 +236,6 @@
 								<td>EMAIL ADDRESS:</td>
 								<td><input placeholder="email address" type="text" name="email" value="<?=$email;?>"></td>
 								<td><span id="err"><?php if(isset($emailrr)) echo $emailrr;?></span></td>
-							</tr>
-							<tr>
-								<td>SHIPPING ADDRESS:</td>
-								<td colspan="2"><textarea placeholder="shipping address" rows="3" cols="48" name="shipping"   ><?=$shipping;?></textarea></td>
-								<td><span id="err"><?php if(isset($shippingrr)) echo $shippingrr;?></span></td>
 							</tr>
 							<tr>
 								<td>SECRET QUESTION:</td>

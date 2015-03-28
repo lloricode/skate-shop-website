@@ -21,7 +21,7 @@
 		else
 			$tmp="UserAccountUserName";
 
-		$sql="SELECT UserAccountID,UserAccountFisrtName,UserAccountLastName,
+		$sql="SELECT UserAccountID,UserAccountFirstName,UserAccountLastName,
 		UserAccountSecretQuestion,UserAccountAnswer,UserAccountImage 
 		FROM UserAccount WHERE $tmp='$data'";
 
@@ -32,7 +32,7 @@
 		if (DB::getNumRows()>0) {
 			$row=$rs->fetch_object();
 			setcookie("recID",$row->UserAccountID,time()+60,"/");
-			setcookie("fn",$row->UserAccountFisrtName,time()+60,"/");
+			setcookie("fn",$row->UserAccountFirstName,time()+60,"/");
 			setcookie("ln",$row->UserAccountLastName,time()+60,"/");
 			setcookie("ques",$row->UserAccountSecretQuestion,time()+60,"/");
 			setcookie("ans",$row->UserAccountAnswer,time()+60,"/");

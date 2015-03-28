@@ -66,7 +66,7 @@ $path = "../../img/product/";
 										ProductAvailabilityMedium=". $_POST['pstockM'] . ",
 										ProductAvailabilityLarge=". $_POST['pstockL'] . ",
 										ProductGender='". $_POST['pgender'] . "',
-										AdminAccountID='". $_SESSION['auth_accountID'] . "' WHERE ProductID=".$_GET['id'];
+										UserAccountID='". $_SESSION['auth_accountID'] . "' WHERE ProductID=".$_GET['id'];
 	                               DB::query($query);
 	                               setcookie("tmp","update successfull!",time()+5,"/");	
 	            }

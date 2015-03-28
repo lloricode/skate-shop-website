@@ -114,8 +114,8 @@
 			/*	$query = "SELECT p.ProductID,p.ProductSale,p.ProductName, p.ProductBrand ,p.ProductPrice,p.ProductType, 
 				p.ProductStatus,p.ProductAvailability,p.ProductGender,p.ProductAttactment, 
 				a.AdminAccountName,p.ProductDateAdded */
-				$query=" SELECT p.*,a.AdminAccountName,(CASE ProductSale WHEN 1 THEN 'Sale' ELSE 'Not sale' END) AS sale
-				FROM Product AS p INNER JOIN AdminAccount AS a ON p.AdminAccountID = a.AdminAccountID ORDER BY ProductID";
+				$query=" SELECT p.*,u.UserAccountFirstName,(CASE ProductSale WHEN 1 THEN 'Sale' ELSE 'Not sale' END) AS sale
+				FROM Product AS p INNER JOIN UserAccount AS u ON p.UserAccountID = u.UserAccountID ORDER BY ProductID";
 
 				$result = DB::query($query);
 				if(DB::getNumRows() > 0){
@@ -154,7 +154,7 @@
 							<td rowspan="4">
 								<a href="edit.php?edit_product=<?php echo  $row->ProductID; ?>"><img src="../img/product/<?php echo  $row->ProductAttactment; ?>" width="100" /></a>
 							</td>
-							<td rowspan="4"><?php echo  $row->AdminAccountName; ?></td>
+							<td rowspan="4"><?php echo  $row->UserAccountFirstName; ?></td>
 							<td rowspan="4"><?php echo  $row->ProductDateAdded; ?></td>
 						</tr>
 						<tr>

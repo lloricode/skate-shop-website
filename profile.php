@@ -17,7 +17,7 @@
 				<BR><BR><BR><BR><BR><BR>
 				<table>
 					<tr>
-						<th><?php echo $row->UserAccountFisrtName."   ".$row->UserAccountLastName?></th>
+						<th><?php echo $row->UserAccountFirstName."   ".$row->UserAccountLastName?></th>
 					</tr>
 					<tr>
 						<th><?php echo $row->UserAccountBD?></th>
@@ -33,9 +33,6 @@
 					</tr>
 					<tr>
 						<th><?php echo $row->UserAccountEmail?></th>
-					</tr>
-					<tr>
-						<th><?php echo "Shpping Address: ".$row->UserAccountShipping?></th>
 					</tr>
 				</table>
 			</div>
