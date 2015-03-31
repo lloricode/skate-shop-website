@@ -10,7 +10,7 @@
 			header("Location: index.php");
 		else
 		{
-			include"../config.php";	?>
+		//	include"../config.php";	?>
 			<div  class="d">
 			<a href="index.php"><button>back to main</button></a><br />
 			<?php

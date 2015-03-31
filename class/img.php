@@ -1,17 +1,17 @@
 <?php
 	class IMG{
-		private static $image,$dir;
+		private static $image,$dir="";
 		function __construct($tmp_dir) {
 			self::$image = new SimpleImage();
 			self::$dir=$tmp_dir;
-			if(!self::check_if_exist($tmp_dir."tmp"))
-				mkdir($tmp_dir."tmp");
+			if(!self::check_if_exist($tmp_dir."cache"))
+				mkdir($tmp_dir."cache");
 		}
 		function w($str,$w){//width
 
 			$str2=self::get_file_name($str);
 			list($str2,$ext)=explode(".", $str2);
-			$output_name="tmp/".$str2."-(Width".$w.").".$ext;
+			$output_name="cache/".$str2."-(Width".$w.").".$ext;
 
 			if(!self::check_if_exist($output_name)){
 				self::$image->load($str);
@@ -26,7 +26,7 @@
 
 			$str2=self::get_file_name($str);
 			list($str2,$ext)=explode(".", $str2);
-			$output_name="tmp/".$str2."-(Heigt".$h.").".$ext;
+			$output_name="cache/".$str2."-(Heigt".$h.").".$ext;
 
 			if(!self::check_if_exist($output_name)){
 				self::$image->load($str);
@@ -41,7 +41,7 @@
 
 			$str2=self::get_file_name($str);
 			list($str2,$ext)=explode(".", $str2);
-			$output_name="tmp/".$str2."-(Width".$w."&Height".$h.").".$ext;
+			$output_name="cache/".$str2."-(Width".$w."&Height".$h.").".$ext;
 
 			if(!self::check_if_exist($output_name)){
 				self::$image->load($str);

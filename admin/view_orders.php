@@ -10,7 +10,7 @@
 			header("Location: index.php");
 		else
 		{
-			include"../config.php";	?>
+			//include"../config.php";	?>
 			<div  class="d">
 			<a href="orders.php"><button>back</button></a><br />
 			<?php
@@ -87,14 +87,14 @@
 								</td>
 							</tr>
 						</table>
-<?php					$rs=DB::query("SELECT p.* ,pl.*
+<?php					$rs=DB::query("SELECT p.* ,pl.*,c.CartQuantity,c.CartItemSize
 							FROM PurchasedLine AS pl
 							JOIN Cart AS c ON c.CartID=pl.CartID
 							JOIN Product AS p ON p.ProductID=c.ProductID
 							WHERE pl.PurchasedID=".$_GET["pid"]);
 						echo "<table class='grid' border=1><caption>Orders</caption><tr><th>ProductID</th><th>Price</th><th>ProductName</th><th>Image</th><th>Size</th><th>Quantity</th></tr>";
 						for ($i=1;$row=$rs->fetch_object();$i++) {
-							echo "<tr><td>$row->ProductID</td><td>&#8369;$row->ProductPrice</td><td>$row->ProductName</td><td><img src='../img/product/$row->ProductAttactment' width='100'/></td><td>$row->Size</td><td>$row->Quantity</td></tr>";
+							echo "<tr><td>$row->ProductID</td><td>&#8369;$row->ProductPrice</td><td>$row->ProductName</td><td><img src='../img/product/$row->ProductAttactment' width='100'/></td><td>$row->CartItemSize</td><td>$row->CartQuantity</td></tr>";
 						}
 						echo "</table>";
 

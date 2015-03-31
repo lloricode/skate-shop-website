@@ -46,7 +46,7 @@ $path = "../../img/product/";
 									ProductAvailabilityLarge,
 									ProductGender,
 									ProductAttactment,
-									AdminAccountID
+									UserAccountID
 									) VALUES(
 									$sale,
 									'". $_POST['pname'] . "',

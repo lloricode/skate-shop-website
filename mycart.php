@@ -85,36 +85,36 @@
 		if(!empty($_POST["card"]) and !preg_match("/^[0-9]*$/", $card))
 			$cardrr="Invalid format";
 		if(!empty($_POST["secure"]) and !preg_match("/^[0-9]*$/", $secure))
-			$securerr="Invalid format"; echo $securerr; 
+			$securerr="Invalid format";// echo $securerr; 
 		if($cardrr=="" and $expirerr=="" and $securerr=="" and $shippingrr==""){ 
 			//session_start();
 			$q="SELECT COUNT(c.CartPurchased) as a FROM Cart AS c WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION["authID"];
-			echo "on line".__LINE__.": ".$q."<br />";
+		//	echo "on line".__LINE__.": ".$q."<br />";
 			$rss=DB::query($q);
 			$roww=$rss->fetch_object();
-			echo "on line".__LINE__.": ".$roww->a."<br />";
+		//	echo "on line".__LINE__.": ".$roww->a."<br />";
 			//echo "on line".__LINE__.": ".DB::getNumRows()."<br />";
 			if(/*$_GET['purchase']=="yes" and */$roww->a>0){
 				//total purchanse in all item
 				$sql="SELECT SUM(p.ProductPrice*c.CartQuantity) AS total_ FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION['authID'];  
-				echo "on line".__LINE__.": ".$sql."<br />";
+		//		echo "on line".__LINE__.": ".$sql."<br />";
 				$rs=DB::query($sql);
 				$row = $rs->fetch_object();
 				$amount=$row->total_;
 				//total quantity in all purchase
 				$sql="SELECT SUM(c.CartQuantity) AS total_Q FROM Cart AS c WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION['authID'];
-				echo "on line".__LINE__.": ".$sql."<br />";
+		//		echo "on line".__LINE__.": ".$sql."<br />";
 				$rs=DB::query($sql);
 				$row = $rs->fetch_object();
 				$quant=$row->total_Q;
 				//insert purchase including 2 above
 				$sqlcmd="INSERT INTO Purchased(PurchasedAmount,PurchasedQuantity,UserAccountID,PurchasedDelivered)
 					VALUES($amount,$quant,".$_SESSION['authID'].",0)";
-				echo "on line".__LINE__.": ".$sqlcmd."<br />";
+		//		echo "on line".__LINE__.": ".$sqlcmd."<br />";
 				DB::query($sqlcmd);
 				//slect purchaseID for purchaseLine
 				$sql="SELECT PurchasedId FROM Purchased ORDER BY PurchasedId DESC LIMIT 0,1";
-				echo "on line".__LINE__.": ".$sql."<br />";
+		//		echo "on line".__LINE__.": ".$sql."<br />";
 				$rs=DB::query($sql);
 				$row = $rs->fetch_object();
 				$pid=$row->PurchasedId;
@@ -124,11 +124,11 @@
 				//insert payment
 				$sqlcmd="INSERT INTO Payment(UserAccountID,PaymentShippingAddress,PaymentCardNumber,PaymentCardExpiration,PaymentSecureCode,PurchasedId)
 					VALUES(".$_SESSION['authID'].",'$shipping',$card,'$expire',$secure,$pid)";
-					echo "on line".__LINE__.": ".$sqlcmd."<br />";
+		//			echo "on line".__LINE__.": ".$sqlcmd."<br />";
 				DB::query($sqlcmd);
 				//select all item to be insert in purchaseLine WHERE purchase=0
 				$sql="SELECT c.CartID,c.ProductId,c.CartQuantity,c.CartItemSize FROM Cart AS c WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION['authID'];
-				echo "on line".__LINE__.": ".$sql."<br />";
+		//		echo "on line".__LINE__.": ".$sql."<br />";
 				$rs=DB::query($sql);
 				for($i=0;$row = $rs->fetch_object();$i++){
 					$quantity=0;
@@ -136,7 +136,7 @@
 						case 'small':
 							//select availabilty and sold to be update
 							$sqlcmd="SELECT ProductAvailabilitySmall,ProductSoldSmall FROM Product WHERE ProductID=".$row->ProductId;
-							echo "on line".__LINE__.": ".$sqlcmd."<br />";
+		//					echo "on line".__LINE__.": ".$sqlcmd."<br />";
 							$rs2=DB::query($sqlcmd);
 							$row2=$rs2->fetch_object();
 							$avail=$row2->ProductAvailabilitySmall;
@@ -144,13 +144,13 @@
 							$quantity=$row->CartQuantity;
 							// the update
 							$sqlcmd="UPDATE Product SET ProductAvailabilitySmall=".($avail-$quantity).", ProductSoldSmall=".($sold+$quantity)." WHERE ProductID=".$row->ProductId;
-							echo "on line".__LINE__.": ".$sqlcmd."<br />";
+		//					echo "on line".__LINE__.": ".$sqlcmd."<br />";
 							DB::query($sqlcmd);
 							break;
 						case 'medium':
 							//select availabilty and sold to be update
 							$sqlcmd="SELECT ProductAvailabilityMedium,ProductSoldMedium FROM Product WHERE ProductID=".$row->ProductId;
-							echo "on line".__LINE__.": ".$sqlcmd."<br />";
+		//					echo "on line".__LINE__.": ".$sqlcmd."<br />";
 							$rs2=DB::query($sqlcmd);
 							$row2=$rs2->fetch_object();
 							$avail=$row2->ProductAvailabilityMedium;
@@ -158,13 +158,13 @@
 							$quantity=$row->CartQuantity;
 							// the update
 							$sqlcmd="UPDATE Product SET ProductAvailabilityMedium=".($avail-$quantity).", ProductSoldMedium=".($sold+$quantity)." WHERE ProductID=".$row->ProductId;
-							echo "on line".__LINE__.": ".$sqlcmd."<br />";
+		//					echo "on line".__LINE__.": ".$sqlcmd."<br />";
 							DB::query($sqlcmd);
 							break;
 						case 'large':
 							//select availabilty and sold to be update
 							$sqlcmd="SELECT ProductAvailabilityLarge,ProductSoldLarge FROM Product WHERE ProductID=".$row->ProductId;
-							echo "on line".__LINE__.": ".$sqlcmd."<br />";
+		//					echo "on line".__LINE__.": ".$sqlcmd."<br />";
 							$rs2=DB::query($sqlcmd);
 							$row2=$rs2->fetch_object();
 							$avail=$row2->ProductAvailabilityLarge;
@@ -172,13 +172,14 @@
 							$quantity=$row->CartQuantity;
 							// the update
 							$sqlcmd="UPDATE Product SET ProductAvailabilityLarge=".($avail-$quantity).", ProductSoldLarge=".($sold+$quantity)." WHERE ProductID=".$row->ProductId;
-							echo "on line".__LINE__.": ".$sqlcmd."<br />";
+		//					echo "on line".__LINE__.": ".$sqlcmd."<br />";
 							DB::query($sqlcmd);
 							break;
 					}
 					//insert purchaseLine incuding purchaseID
-					$insertline="INSERT INTO PurchasedLine(PurchasedId,CartID,Quantity,Size) VALUES($pid,".$pids[$i].",".$quantity.",'".$row->CartItemSize."')";
-					echo "on line".__LINE__.": ".$insertline."<br />";
+					//$insertline="INSERT INTO PurchasedLine(PurchasedId,CartID,Quantity,Size) VALUES($pid,".$pids[$i].",".$quantity.",'".$row->CartItemSize."')";
+					$insertline="INSERT INTO PurchasedLine(PurchasedId,CartID) VALUES($pid,".$pids[$i].")";
+		//			echo "on line".__LINE__.": ".$insertline."<br />";
 					DB::query($insertline);
 					//update cart
 					//DB::query("UPDATE Cart SET PurchasedID=".$pid." WHERE CartID=".$row->CartID);
@@ -186,7 +187,7 @@
 				//------
 				//change purchase to true where false
 				$sqlcmd="UPDATE Cart AS c SET c.CartPurchased=1 WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION['authID'];
-				echo "on line".__LINE__.": ".$sqlcmd."<br />";
+		//		echo "on line".__LINE__.": ".$sqlcmd."<br />";
 				DB::query($sqlcmd);
 			//	setcookie("paid","paid",time()+20,"/");
 			}
@@ -195,7 +196,7 @@
 			$w = unserialize( $_POST["pid2"]);
 			foreach ($w as $value) {
 				$q="SELECT CartID FROM Cart WHERE CartID=".DB::esc($value)." AND UserAccountID=".$_SESSION["authID"];
-				echo "on line".__LINE__.": ".$q;
+			//	echo "on line".__LINE__.": ".$q;
 			DB::query($q);
 			if(DB::getNumRows()){
 				$chk_item[]=DB::esc($value);

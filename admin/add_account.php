@@ -1,10 +1,12 @@
 
 <?php
-	session_start();
+	$s=0;
+		include 'php/header.php';
+	//session_start();
 	if($_SESSION['auth_permission']!="admin")
 		header("Location: index.php");
 	if(isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST"){
-		include"../config.php";
+		//include"../config.php";
 		$access=$fn=$ln=$username=$pass=$bm=$bd=$by=$gender=$home=$mobile=$email=$ques=$ans="";
 		$accessrr=$fnrr=$lnrr=$usernamerr=$passrr=$bdrr=$genderrr=$homerr=$mobilerr=$emailrr=$quesrr=$ansrr=" ";
 
@@ -120,8 +122,7 @@
  * @copyright 2015
  */
 
-		$s=0;
-		include 'php/header.php';
+		
 
 		if(!isset($_SESSION['auth_accountID']))
 			header("Location: index.php");

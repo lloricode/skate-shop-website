@@ -22,18 +22,19 @@
 					<div class="aleft">
 						<br />
 						<h1 style="float:left">&nbsp;&nbsp;&nbsp;WHO ARE WE?</h1>
-						<img src="<?php echo $ri->w("img/about.jpg",300) ?>" >
+						<img src="<?php echo $ri->w("img/samurai.jpg",300) ?>" >
 						
 						
 					</div>
 					<div class="aright">
 						<br /><br /><br /><br />
+						<div style="width:400px">
 					<?php
 						$rs=DB::query("SELECT * FROM Document WHERE DocumentCategory='about' ORDER BY DocumentArrange");
 						while ($row=$rs->fetch_object()) {
-							echo "<p>$row->DocumentValue</p>";
+							echo "<p style='text-indent: 50px;	text-align: justify;'>$row->DocumentValue</p>";
 						}
-					?>
+					?></div>
 						<!-- fb like-->
 						<div class="fb-like" data-href="/webdev/index.php" data-layout="standard" data-action="like" data-show-faces="true" data-share="true">
 			
@@ -52,25 +53,26 @@
 				<div > 
 					<div class="aleft" style="background-color:#363636">
 						<img src="<?php echo $ri->w("img/icon2.jpg",300) ?>" style="margin-top:30px;">
-						
+						<div style="height:100px;width:400px;">
 					<?php
 						$rs=DB::query("SELECT * FROM Document WHERE DocumentCategory='lloric' ORDER BY DocumentArrange");
 						while ($row=$rs->fetch_object()) {
-							echo "<p>$row->DocumentValue</p>";
+							echo "<p style='text-indent: 50px;	text-align: justify;'>$row->DocumentValue</p>";
 						}
 					?>
 					</div>
+					</div>
 					<div class="aright" style="background:#252525; ">
-						<img src="<?php echo $ri->w("img/samurai.jpg",300) ?>" style="margin-top:30px;">
-						<p>
+						<img src="<?php echo $ri->w("img/meg.jpg",300) ?>" style="margin-top:30px;">
+						<div style="height:100px;width:400px;">
 							
 					<?php
 						$rs=DB::query("SELECT * FROM Document WHERE DocumentCategory='megan' ORDER BY DocumentArrange");
 						while ($row=$rs->fetch_object()) {
-							echo "<p>$row->DocumentValue</p>";
+							echo "<p style='text-indent: 50px;	text-align: justify;'>$row->DocumentValue</p>";
 						}
 					?>
-						</p>
+						</div>
 					</div>
 				</div>
 			</div>

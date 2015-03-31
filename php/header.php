@@ -4,14 +4,37 @@
  * @copyright 2015//
  */
 	//include"config.php";
+	$banner="";
+	switch ($docfile) {
+		case 'index':
+			$banner="1";
+			break;
+		case 'store':
+			$banner="2";
+			break;
+		case 'contact':
+			$banner="3";
+			break;
+		case 'index':
+			$banner="1";
+			break;
+		case 'about':
+			$banner="4";
+			break;
+		case 'mycart':
+			$banner="5";
+			break;
+		case 'cart':
+			$banner="6";
+			break;
+	}
 ?>
 
 	</head>
 	<body>
-
 		<div style="background-color:#101010; height:270;">
 			<center>
-				<div class="header">
+				<div class="header" style="background-image:url('img/header/banner<?php echo $banner;?>.jpg');">
 					<div id="inside_header">
 						<div id="log" >
 							<?php
@@ -34,5 +57,5 @@
 			</center>
 		</div>
 <?php
-	if(!($docfile=="cart" || $docfile=="fill"|| $docfile=="store"|| $docfile=="mycart"|| $docfile=="profile" ))
+	if(!($docfile=="cart" || $docfile=="fill"|| $docfile=="store"|| $docfile=="mycart"|| $docfile=="profile"))
  		include('top-cache.php'); ?>

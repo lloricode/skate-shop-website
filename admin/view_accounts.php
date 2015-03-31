@@ -14,18 +14,19 @@
 				<a href="add_account.php"><button>add admin account</button></a>
 		<?php		}
 				//--------------------------
-		/*		$sqlcmd="SELECT AdminAccount.AdminAccountName,COUNT(Product.AdminAccountID) AS NumberOfUploads FROM Product 
-					LEFT JOIN AdminAccount 
-					ON Product.AdminAccountID=AdminAccount.AdminAccountID 
-					GROUP BY AdminAccountName";
+				$sqlcmd="SELECT u.UserAccountFirstName,COUNT(p.UserAccountID) AS NumberOfUploads 
+					FROM Product AS p
+					LEFT JOIN UserAccount AS u
+					ON p.UserAccountID=u.UserAccountID
+					GROUP BY u.UserAccountFirstName";
 				$rs=DB::query($sqlcmd);
 				if(DB::getNumRows()>0){
 					echo "<table border='1'><caption>Uploads</caption>
 					<tr><th>Admin</th><th>Uploads</th></tr>";
 					while($row=$rs->fetch_object())
-						echo "<tr><td>".$row->AdminAccountName."</td><td> ".$row->NumberOfUploads."</td></tr>";
+						echo "<tr><td>".$row->UserAccountFirstName."</td><td> ".$row->NumberOfUploads."</td></tr>";
 					echo "</table>";
-				}*/
+				}
 				//-----------------------
 				$sqlcmd="SELECT u.* FROM UserAccount AS u LEFT JOIN UserAccountType AS ut ON u.UserAccountID=ut.UserAccountID WHERE ut.UserAccountTypeValue='admin'";
 				$rs=DB::query($sqlcmd);

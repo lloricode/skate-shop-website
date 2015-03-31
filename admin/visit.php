@@ -12,7 +12,7 @@
 			header("Location: index.php");
 		}
 		else
-		{   include"../config.php"; 
+		{ //  include"../config.php"; 
 
 			$rs=DB::query("SELECT * FROM Visit ORDER BY count DESC");
 	?>

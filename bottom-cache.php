@@ -1,9 +1,10 @@
 <?php
-if (!is_dir($cache_folder)) { //create a new folder if we need to
-	    mkdir($cache_folder);
+$tt=(isset($tmp_dir)?$tmp_dir:"");
+if (!is_dir($tt.$cache_folder)) { //create a new folder if we need to
+	    mkdir($tt.$cache_folder);
 	}
 // Cache the contents to a file
-$cached = fopen($cachefile, 'w');
+$cached = fopen($tt.$cachefile, 'w');
 fwrite($cached, ob_get_contents());
 fclose($cached);
 ob_end_flush(); // Send the output to the browser

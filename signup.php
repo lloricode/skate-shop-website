@@ -1,14 +1,16 @@
 
 <?php
-	include"php/visit.php";
-	session_start();
+	//include"php/visit.php";
+	//session_start();
 	if(isset($_SESSION['authID']))
 		header("Location: index.php");
 	/**
 	 * @author Lloric Garcia
 	 * @copyright 2015
 	 */
-	
+	$docfile="signup";
+	include"php/main_style.php";
+	include"php/header.php";
 	if(isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST"){
 
 		$fn=$ln=$username=$pass=$bm=$bd=$by=$gender=$home=$mobile=$email=$ques=$ans="";
@@ -127,28 +129,7 @@
 			$ok="please complete the fields.";
 	}
 ?>
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Skate Shop | Sign Up</title>
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-       <link href="img/icon.png" rel="shortcut icon" type="image/x-icon" />
 
-        <?php include"php/datepicker.php"; ?>
-
-	</head>
-	<body>
-		<div style="background-color:#111111; height:270;">
-			<center>
-				<div class="header">
-					<div id="inside_header">
-						<div id="log" >
-
-						</div>
-					</div>
-				</div>
-			</center>
-		</div>
 		<div style="background-color:#111111; height:90;">
 			<center>
 				<div class="menu" >

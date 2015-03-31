@@ -28,7 +28,7 @@
 			$title="Success Reset Password!";
 			break;
 		default:
-			$title="Skate Apparel";
+			$title="Home";
 			break;
 	}
 ?>
@@ -38,7 +38,7 @@
 <!DOCTYPE html>
 <html>
   	<head>
-    	<title><?=$title?></title>
+    	<title><?php echo "Skate Apparel | ".$title?></title>
     	<link rel="stylesheet" type="text/css" href="css/style.css">
         <link href="img/icon.png" rel="shortcut icon" type="image/x-icon" />
 	</head>
@@ -54,7 +54,7 @@
 								</a>
 							</td>
 		                    <td >
-		                    	<div><br>WELCOME TO SKATESHOP</div> 
+		                    	<div><br>WELCOME TO SKATE APPAREL</div> 
 		                    </td>
 		                    <td>
 		                    	<a href="index.php" style="font-size:15px;">

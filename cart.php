@@ -1,6 +1,5 @@
 <?php
 	$docfile="cart";
-	$docfile="store";
 	include 'php/main_style.php';
 	include 'php/fresco_style.php';
 	include 'php/header.php';

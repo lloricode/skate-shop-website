@@ -1,85 +1,253 @@
 /*By Torlao && Garcia*/
 
-#getlogin       {width:500px;height:500px;background:rgba(0,0,0,.5);}
-#log            {float:right;}
-#inside_header  {width: 1100px;height: 50px;background:rgba(0,0,0,.5);}
-a,p,div         {text-decoration:none;color: white;font-family: sans-serif;/*segoe ui light*/}
-body            {background-image: url("../img/background website.jpg");	background-attachment: fixed;}
-.header         {height: 270px;width: 1100px;margin-top:0;background-image:url("../img/banner.jpg");background-repeat: no-repeat; background-size: cover;}
-.menu           {height: 90px;width: 1100px;background-color:#111111;}
-.menu2          {margin-top:-17px; width: 900px;height: 55px;background-color:#9E003A;}
-.menu3          {width: 900px;height: 45px;background-color:#252525;}
-.main_body      {/* margin-top: -16px;*/height:1149px;width:900px;background-color:#464646;}
-.footer         {padding-top:10px;height:30px;background-color:#111111;}
+.main_body_contact      {/* margin-top: -16px;*/height:1848px;width:900px;background-color:#464646;}
+body
+{
+background-image:url('ruinous_brick_wall_brick.jpg');
+}
+
+body:before 
+{content: "";position: fixed;top: 
+-10px;left: 0;width: 100%;height: 10px;
+-webkit-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+-moz-box-shadow: 0px 0px 10px rgba(0,0,0,.8)
+;box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+z-index: 100;
+}
+
+#getlogin      
+ {
+ 	width:500px;
+  height:500px;
+  background:rgba(0,0,0,.5);}
+
+#log           
+ {
+ 	float:right;
+ 	transition: all .2s ease-in-out;
+/*margin-top: -13px;*/
+ }
+
+#log:hover	
+{
+	transform:scale(1.1);
+  font-weight: heavy;
+}
+
+#inside_header  
+{
+  width: 1150px;
+  height: 60px;
+  background:rgba(0,0,0,.5);
+  top:0;
+  position:fixed; 
+}
+
+a,p,div         
+{text-decoration:none;color: white;font-family: sans-serif;/*segoe ui light*/}
+
+body           
+ {background-image: url("../img/bg.jpg");	background-attachment: fixed;}
+.header        
+ {height: 270px;width: 1100px;
+margin-top:0;
+background-image:url("../img/banner.jpg");
+background-repeat: no-repeat; 
+Background-size: cover;}
+
+
+.menu           
+{height: 90px;width: 1100px;background-color:#111111;}
+
+.menu2         
+ {margin-top:-17px; width: 900px;height: 55px;background-color:#9E003A;}
+
+.menu3          
+{width: 900px;height: 45px;background-color:#252525;}
+
+
+.main_body      
+{/* margin-top: -16px;*/height:1149px;width:900px;background-color:#464646;}
+
+.footer        
+ {padding-top:10px;height:30px;background-color:#111111;}
 /*#input          {margin-top:35px;margin-right: 20px;}*/
-#m              {background-color: white;font-size:98px;}
-#active         {position: absolute;height: 90px;background-color:orange;margin-top:-2px;clear:both;}
+#m              
+{background-color: white;font-size:98px;}
+#active        
+ {
+  position: absolute;
+  height: 90px;
+  background-color:orange;
+  margin-top:-2px;
+  clear:both;}
 /*#menuH:hover    {position: absolute;height: 90px;background-color: #D14719;margin-top:-2px;clear:both;}
 #menuH          {position: absolute;margin-top: 25px;}*/
-#n              {background-color: #111111;}
+#n              
+{background-color: #111111;}
 /*#t1             {margin-left: 10px;float:left;background-attachment:fixed;}*/
 /*#t2             {}*/
-#box            {height: 300px;	width: 250px;}
+#box           
+ {height: 400px;	width: 300px;}
 /*#tdpad          {padding: 0px 100px;}*/
 /*#tdpad2         {padding: 10px 45px;}*/
-#tdpad3         {padding: 5px 39px;}
+#tdpad3         
+{padding: 5px 39px;}
 /*----------------------menu css------------------------------------------*/
-.active_menu    {background-color:#EE691E;}
-#mainmenu:hover {background-color: #b14d1d;cursor: pointer;   opacity: 0.9; transition-property:background-color;transition-duration:1.5s; transition-timing-function:linear;font-size: 45px;transform:scale(1.1);}
- #mainmenu{font-size: 39px; display: inline; list-style-type:none; padding: 19px 5px; transition:all .2s ease-in-out;}}
+.active_menu    
+{
+	background-color:#EE691E;
+	font-weight: heavy;
+  display: block;
+}
+
+#mainmenu:hover 
+{
+	background-color: #b14d1d;cursor: pointer;   
+	opacity: 0.9; 
+	transition-property:background-color;
+	Transition-duration:1.5s; 
+	transition-timing-function:linear;
+  transform:scale(1.1);
+	font-size: 45px;
+	font-weight: heavy;
+}
+
+ #mainmenu
+ {
+ 	font-size: 35px; 
+ 	display: inline;
+ 	list-style-type:none; 
+ 	padding: 19px 5px; 
+ 	transition:all .2s ease-in-out;
+ 	padding:19px 4px;
+ }
+
+
 /*----------------------sale male female misc css------------------------------------------*/
-.active_menu2    {background-color:#700028;}
+.active_menu2
+{
+  background-color:#700028;
+}
 
-#mainmenu2:hover {background-color: #590020;
-                  cursor: pointer;
-                  opacity: 0.9;
-                   transition-property:background-color;
-                   transition-duration:1.5s; 
-                   transition-timing-function:linear
-                    transform: scale(1.1);
-                    font-size: 35px}
+.menu:active
+{
+  background-color: #ecf0f1;
+}
 
+#mainmenu2:hover
+{
+	background-color: #590020;
+  cursor: pointer;
+  opacity: 0.9;
+  transition-property:background-color;
+  Transition-duration:1.5s; 
+  transition-timing-function:linear;
+  transform:scale(1.1);
+  font-size: 35px
+}
 
-#navlist2 #mainmenu2{margin-top: 100px;
-                    font-size: 30px;
-                    display: inline;
-                    list-style-type: none;
-                    padding: 9.75px 50px;
-                    transition:all .2s ease-in-out;
-                    font-weight: heavy}
+#mainmenu2
+{
+    transition:all .2as ease-in-out;
+    padding: 2px 10px ;
+}
+
+#navlist2 #mainmenu2
+{
+  margin-top: 100px;
+  font-size: 30px;
+  display: inline;
+  list-style-type: none;
+  padding: 9px 50px;
+  transition-property:background-color;
+  transition-duration:.5s; 
+  transition-timing-function:linear
+  transform: scale(1.1);
+  font-weight: heavy
+}
 
 /*----------------------shoes jackets tees jeans shorts css------------------------------------------*/
-.active_menu3    {color:#AB311C; transition:all .2s ease-in-out}
-#mainmenu3:hover {background-color: #242424;cursor: pointer;  ; ;opacity: 0.5;transition-property:background-color;
-                   transition-duration:1.5s; 
-                   transition-timing-function:linear
-                    transform: scale(1.1);
-                    font-size: 35px}
-#navlist3 #mainmenu3{margin-top: 100px; font-size: 25px; display: inline;list-style-type: none;padding: 8px 30px; transition-property: background-color; transition-duration:1.0s ; transition-timing-function:linear transition:all .2s ease-in-out;}
+.active_menu3    {color:#AB311C;}
+
+#mainmenu3:hover 
+{
+  background-color: #242424;
+  cursor: pointer;
+  opacity: 0.5;transition-property:background-color;
+  transition-duration:1.5s; 
+  transition-timing-function:linear
+  transform: scale(1.1);
+  font-size: 35px
+  padding:10px;
+}
+
+#navlist3 #mainmenu3
+{
+  margin-top: 100px; 
+	font-size: 25px; 
+  display: inline;
+	list-style-type: none;padding: 8px 30px; 
+	transition-property: background-color; 
+	transition-duration:1.0s ; 
+	transition-timing-function:linear;
+	transition:all .2s ease-in-out;
+
+}
 /*----------------------table css------------------------------------------*/
 #table_         {border: 4;}
 .mainTable      {}
 .tableRow       {}
 .tableRow td    {padding: 20px;}
 .tableData      {width: 250px;   height: 290px;   clear: both;}
-.mardagz        {width: 100%;  height: 260px;}
+
+.mardagz        
+{
+  width: 100%;  
+  height: 260px;
+  transition:all .2s ease-in-out;
+}
+
+.mardagz:hover
+{
+  transform: scale (2.0);
+  wdth:110px;
+  height:270px;
+}
+
+
 .details        {background-color: transparent;  width: 100%;  height: 25px;   position: relative;   top: 235px;}
 .name           {background: #F9641C;width:50%;height:25px;float:left;}
-.cart           {background: #A00535;width:50%;height:25px;float:right}
-.purchased      {background: green;width:50%;height:25px;float:right}
-.tddiv span     {position: relative;margin: 0px 10px;top: 2px;color: white;text-transform: uppercase;;text-shadow: 1px 1px gray;font-size: 10px;}
-.tddiv          {transition: opacity 0.5s ease;text-align: center;}
-.tddiv:hover    {cursor: pointer;   opacity: 0.5;}
+.cart           
+{background: #A00535;width:50%;height:25px;float:right}
+.purchased      
+{
+  background: green;
+  width:50%;
+  height:25px;
+  float:right
+}
+
+.tddiv span     
+{position: relative;margin: 0px 10px;top: 2px;color: white;text-transform: uppercase;text-shadow: 1px 1px gray;font-size: 10px;}
+.tddiv          
+{transition: opacity 0.5s ease;text-align: center;}
+.tddiv:hover    
+{cursor: pointer;   opacity: 0.5;}
 /*-------------------------------PREV   NEXT------------------------------------*/
 /*.prev         {margin-left: -3px; background: red;  width: 200px;    height: 30px;    margin-right: 60px;}
 .view           {background: brown;    width: 200px;    height: 40px;    margin: 0px  60px;}
 .next           {background: red;    width: 200px;    height: 30px;    margin-left: 62px;}
 #nptdpad        {margin: 0px 80px;}*/
 /*--------------------------signup.php---------------*/
-#text           {width: 340px;    float: right;    margin-right: 200px;}
-#label          {float: left;}
-#err            {color: red;    font-size: 12px;}
-.w3:hover       {color: yellow;}
+#text           
+{width: 340px;    Float: right;    margin-right: 200px;}
+#label          
+{float: left;}
+#err           
+ {color: red;    font-size: 12px;}
+.w3:hover       
+{color: yellow;}
 /*-------------------------------about.php----------------------------*/
 .aboutUp        {width: 900px;height: 549px;        }
 .aleft          {float: left;height: 539px;width: 450px;       }
@@ -95,9 +263,13 @@ body            {background-image: url("../img/background website.jpg");	backgro
 .social         {padding: 10px 10px;}
 .media          {height:30px; margin-top:-10px;   }
 /*------------------------log in----------*/
-.login:hover    {color: #D14719;}
+.login:hover    {color: #b14d1d; font-weight: ;}
 .logout			{color:#CC3300}
-.logout:hover   {color: red;}
+.logout:hover 
+{
+  color:  #b14d1d;
+  font-weight: bold;
+}
 .setting:hover  {color:#D14719;}
 .profile 		{ inline;list-style-type: none;}
 /*------------------------text box----------*/
@@ -128,4 +300,15 @@ body            {background-image: url("../img/background website.jpg");	backgro
   background: #cc7033;
   text-decoration: none;
 
+}
+
+.btnNextpage:hover
+{
+  background-color: #b14d1d;
+  transform: scale (1.1);
+}
+
+.btnNextpage
+{
+  transition:all .2s ease-in-out;
 }

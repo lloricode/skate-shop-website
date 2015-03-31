@@ -24,6 +24,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 				$_SESSION["auth_accountID"]=$row->UserAccountID;
 				$_SESSION["auth_name"]=$row->UserAccountFirstName;
 				$_SESSION["auth_lname"]=$row->UserAccountLastName;
+				$_SESSION["auth_img"]=$row->UserAccountImage;
 				header("Location: ../index.php");
 			}
 			else

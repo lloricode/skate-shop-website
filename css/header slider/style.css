@@ -1,0 +1,36 @@
+@font-face {
+  font-family: 'Josefin Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Josefin Sans Light'), local('JosefinSans-Light'), url(http://fonts.gstatic.com/s/josefinsans/v9/C6HYlRF50SGJq1XyXj04z04GofcKVZz6wtzX_QUIqsI.woff2) format('woff2'), url(http://fonts.gstatic.com/s/josefinsans/v9/C6HYlRF50SGJq1XyXj04z2Fp2sMiApZm5Dx7NpSTOZk.woff) format('woff');
+}
+@font-face {
+  font-family: 'Josefin Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Josefin Sans'), local('JosefinSans'), url(http://fonts.gstatic.com/s/josefinsans/v9/xgzbb53t8j-Mo-vYa23n5ugdm0LZdjqr5-oayXSOefg.woff2) format('woff2'), url(http://fonts.gstatic.com/s/josefinsans/v9/xgzbb53t8j-Mo-vYa23n5nhCUOGz7vYGh680lGh-uXM.woff) format('woff');
+}
+@font-face {
+  font-family: 'Josefin Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Josefin Sans SemiBold'), local('JosefinSans-SemiBold'), url(http://fonts.gstatic.com/s/josefinsans/v9/C6HYlRF50SGJq1XyXj04z_Bf3Xtc57ojmY2ox2Xv8Go.woff2) format('woff2'), url(http://fonts.gstatic.com/s/josefinsans/v9/C6HYlRF50SGJq1XyXj04z9Od4RnLmtUrdSQkDmC5b8k.woff) format('woff');
+}
+@font-face {
+  font-family: 'Josefin Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Josefin Sans Bold'), local('JosefinSans-Bold'), url(http://fonts.gstatic.com/s/josefinsans/v9/C6HYlRF50SGJq1XyXj04z3NuWYKPzoeKl5tYj8yhly0.woff2) format('woff2'), url(http://fonts.gstatic.com/s/josefinsans/v9/C6HYlRF50SGJq1XyXj04z3l4twXkwp3_u9ZoePkT564.woff) format('woff');
+}
+@font-face {
+  font-family: 'Josefin Sans';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Josefin Sans Italic'), local('JosefinSans-Italic'), url(http://fonts.gstatic.com/s/josefinsans/v9/q9w3H4aeBxj0hZ8Osfi3dxMBlNeli-0RcAdOFWWLdxQ.woff2) format('woff2'), url(http://fonts.gstatic.com/s/josefinsans/v9/q9w3H4aeBxj0hZ8Osfi3d3pumDtkw9GHrrDfd7ZnWpU.woff) format('woff');
+}
+@font-face {
+  font-family: 'Josefin Sans';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Josefin Sans Bold Italic'), local('JosefinSans-BoldItalic'), url(http://fonts.gstatic.com/s/josefinsans/v9/ppse0J9fKSaoxCIIJb33G0cqRxak6Wc5LUVz-l064SE.woff2) format('woff2'), url(http://fonts.gstatic.com/s/josefinsans/v9/ppse0J9fKSaoxCIIJb33G70qgHI2SEqiJszC-CVc3gY.woff) format('woff');
+}
