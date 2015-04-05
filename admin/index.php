@@ -21,6 +21,7 @@
 			<div  class="d">
 			<a href="visit.php"><button>view visit</button></a><br />
 			<a href="orders.php"><button>view orders</button></a><br />
+			<a href="delivered.php"><button>view delivered Status</button></a><br />
 			<a href="solds.php"><button>view product solds</button></a><br />
 			<a href="view_accounts.php"><button>view accounts</button></a><br />
 			<a href="view_product.php"><button>view product</button></a><br />

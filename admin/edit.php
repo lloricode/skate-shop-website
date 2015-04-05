@@ -73,16 +73,27 @@
 					</td>
 				</tr>
 				<tr>
-					<td>Product Stock Small</td>
-					<td><input type="text" placeholder="Product Stock" name="pstockS" value="<?php echo $row->ProductAvailabilitySmall; ?>" /></td>
+
+				<?php
+						$rs1=DB::query("SELECT ProductInventorySize,ProductInventoryID,ProductInventoryStock FROM ProductInventory WHERE ProductId=".$row->ProductID);
+						$row1=$rs1->fetch_object();
+				?>
+					<td>Product Stock </td><td><input type="text" placeholder="size" name="sizeone" value="<?php echo  $row1->ProductInventorySize; ?>" /></td>
+					<input type="hidden" name="size_one" value="<?php echo  $row1->ProductInventorySize; ?>">
+					<td><input type="text" placeholder="Product Stock" name="pstockS" value="<?php echo $row1->ProductInventoryStock; ?>" /></td>
+					<input type="hidden" name="idone" value="<?php echo  $row1->ProductInventoryID; ?>">
 				</tr>
 				<tr>
-					<td>Product Stock Medium</td>
-					<td><input type="text" placeholder="Product Stock" name="pstockM" value="<?php echo $row->ProductAvailabilityMedium; ?>" /></td>
+					<td>Product Stock <?php $row1=$rs1->fetch_object(); ?></td><td><input type="text" placeholder="size" name="sizetwo"  value="<?php echo  $row1->ProductInventorySize; ?>"/></td>
+					<input type="hidden" name="size_two" value="<?php echo  $row1->ProductInventorySize; ?>">
+					<td><input type="text" placeholder="Product Stock" name="pstockM" value="<?php echo $row1->ProductInventoryStock; ?>" /></td>
+					<input type="hidden" name="idtwo" value="<?php echo  $row1->ProductInventoryID; ?>">
 				</tr>
 				<tr>
-					<td>Product Stock Large</td>
-					<td><input type="text" placeholder="Product Stock" name="pstockL" value="<?php echo $row->ProductAvailabilityLarge; ?>" /></td>
+					<td>Product Stock <?php $row1=$rs1->fetch_object(); ?></td><td><input type="text" placeholder="size" name="sizethree"  value="<?php echo  $row1->ProductInventorySize; ?>"/></td>
+					<input type="hidden" name="size_three" value="<?php echo  $row1->ProductInventorySize; ?>">
+					<td><input type="text" placeholder="Product Stock" name="pstockL" value="<?php echo $row1->ProductInventoryStock; ?>" /></td>
+					<input type="hidden" name="idthree" value="<?php echo  $row1->ProductInventoryID; ?>">
 				</tr>
 				<tr>
 					<td>Product For</td>

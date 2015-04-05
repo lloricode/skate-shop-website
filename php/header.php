@@ -27,6 +27,15 @@
 		case 'cart':
 			$banner="6";
 			break;
+		case 'signup':
+			$banner="6";
+			break;
+		case 'setting':
+			$banner="6";
+			break;
+		case 'profile':
+			$banner="6";
+			break;
 	}
 ?>
 
@@ -57,5 +66,5 @@
 			</center>
 		</div>
 <?php
-	if(!($docfile=="cart" || $docfile=="fill"|| $docfile=="store"|| $docfile=="mycart"|| $docfile=="profile"))
- 		include('top-cache.php'); ?>
+	if(!($docfile=="cart" || $docfile=="fill"|| $docfile=="store"|| $docfile=="mycart"|| $docfile=="profile"|| $docfile=="setting"))
+ 		include('php/top-cache.php'); ?>

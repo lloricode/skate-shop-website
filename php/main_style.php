@@ -53,3 +53,7 @@
         <link href="img/icon.png" rel="shortcut icon" type="image/x-icon" />
         <script type="text/javascript" src="js/header slider/document.js"></script>
         <script type="text/javascript" src="js/header slider/rotator.js"></script>
+        <?php 
+        	if($docfile=="signup")
+        		include"php/datepicker.php";
+        ?>

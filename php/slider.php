@@ -1,4 +1,4 @@
-<?php include"../top-cache.php"; ?>
+<?php include"../php/top-cache.php"; ?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -38,4 +38,4 @@
 		</div>
 	</body>
 </html>
-<?php include"../bottom-cache.php"; ?>
+<?php include"../php/bottom-cache.php"; ?>

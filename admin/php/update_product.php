@@ -62,12 +62,22 @@ $path = "../../img/product/";
 										ProductPrice=". $_POST['pprice'] . ",
 										ProductType='". $_POST['ptype'] . "',
 										ProductStatus='". $_POST['pstatus'] . "',
-										ProductAvailabilitySmall=". $_POST['pstockS'] . ",
-										ProductAvailabilityMedium=". $_POST['pstockM'] . ",
-										ProductAvailabilityLarge=". $_POST['pstockL'] . ",
 										ProductGender='". $_POST['pgender'] . "',
 										UserAccountID='". $_SESSION['auth_accountID'] . "' WHERE ProductID=".$_GET['id'];
 	                               DB::query($query);
+
+	                $query="UPDATE ProductInventory SET
+							ProductInventoryStock=". $_POST['pstockS'] . ",ProductInventorySize='".$_POST['sizeone']."'
+							WHERE ProductInventoryID='".$_POST['idone']."'";
+	                DB::query($query);
+	                $query="UPDATE ProductInventory SET
+							ProductInventoryStock=". $_POST['pstockM'] . ",ProductInventorySize='".$_POST['sizetwo']."'
+							WHERE ProductInventoryID='".$_POST['idtwo']."'";
+	                DB::query($query);
+	                $query="UPDATE ProductInventory SET
+							ProductInventoryStock=". $_POST['pstockL'] . ",ProductInventorySize='".$_POST['sizethree']."'
+							WHERE ProductInventoryID='".$_POST['idthree']."'";
+	                DB::query($query);
 	                               setcookie("tmp","update successfull!",time()+5,"/");	
 	            }
 				header("Location: ../edit.php?edit_product=".$_GET['id']);

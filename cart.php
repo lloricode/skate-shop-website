@@ -7,9 +7,6 @@
 		header("Location: login.php?".DB::esc(basename($_SERVER['PHP_SELF'])).(($_SERVER ['QUERY_STRING']=="")?"":"?".$_SERVER['QUERY_STRING']));
 	include 'php/menu.php';
 	//include("config.php");
-
-
-
 //	$q=(isset($_GET['query']))?"query=".$_GET['query']."&":"";
 //	$c=(isset($_GET['cat']))?"cat=".$_GET['cat']."&":"";
 	//$p=$_GET['page'];
@@ -62,32 +59,47 @@
 												</td>
 											</tr>
 											<tr>
-											<?php if($row->ProductAvailabilitySmall>0){?>
-													<td><input type="checkbox" name="size_small" value="small">small</td>
-													<td><input type="text" name="small_quant" placeholder="quantity of small" value="1"></td>
+											<?php
+												$rs2=DB::query("SELECT ProductInventorySize,ProductInventoryStock
+														FROM ProductInventory WHERE ProductID=".$row->ProductID);
+												$row1=$rs2->fetch_object();
+											?>
+											<?php if($row1->ProductInventoryStock>0){?>
+													<td><input type="checkbox" name="size_small" value="<?php echo $row1->ProductInventorySize ?>"><?php echo $row1->ProductInventorySize ?></td>
+													<td><input type="text" name="small_quant" placeholder="quantity of <?php echo $row1->ProductInventorySize ?>" value="1"></td>
+													<input type="hidden" name="sizeone" value="<?php echo $row1->ProductInventorySize ?>">
 											<?php }
 												else{	?>
-													<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;small</td>
+													<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row1->ProductInventorySize ?></td>
 													<td>Out Of Stock</td>
 											<?php }	?>
 											</tr>
+
+										<?php 	$row2=$rs2->fetch_object(); ?>
+
+
 											<tr>
-											<?php if($row->ProductAvailabilityMedium>0){?>
-													<td><input type="checkbox" name="size_medium" value="medium">medium</td>
-													<td><input type="text" name="medium_quant" placeholder="quantity of medium" value="1"></td>
+											<?php if($row2->ProductInventoryStock>0){?>
+													<td><input type="checkbox" name="size_medium" value="<?php echo $row2->ProductInventorySize ?>"><?php echo $row2->ProductInventorySize ?></td>
+													<td><input type="text" name="medium_quant" placeholder="quantity of <?php echo $row2->ProductInventorySize ?>" value="1"></td>
+											<input type="hidden" name="sizetwo" value="<?php echo $row2->ProductInventorySize ?>">
 											<?php }
 												else{	?>
-													<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;medium</td>
+													<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row2->ProductInventorySize ?></td>
 													<td>Out Of Stock</td>
 											<?php }	?>
 											</tr>
+
+										<?php 	$row3=$rs2->fetch_object(); ?>
+
 											<tr>
-											<?php if($row->ProductAvailabilityLarge>0){?>
-													<td><input type="checkbox" name="size_large" value="large">large</td>
-													<td><input type="text" name="large_quant" placeholder="quantity of large" value="1"></td>
+											<?php if($row3->ProductInventoryStock>0){?>
+													<td><input type="checkbox" name="size_large" value="<?php echo $row3->ProductInventorySize ?>"><?php echo $row3->ProductInventorySize ?></td>
+													<td><input type="text" name="large_quant" placeholder="quantity of <?php echo $row3->ProductInventorySize ?>" value="1"></td>
+										<input type="hidden" name="sizethree" value="<?php echo $row3->ProductInventorySize ?>">
 											<?php }
 												else{	?>
-													<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;large</td>
+													<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row3->ProductInventorySize ?></td>
 													<td>Out Of Stock</td>
 											<?php }	?>
 											</tr>
@@ -111,7 +123,7 @@
 				</tr>
 			</table>
 			<div style="background-color:; height:50px; margin-top:33px;">
-				<a href="store.php?<?php echo $_SERVER ['QUERY_STRING']?>">
+				<a href="store.php?query=all<?php //echo $_SERVER ['QUERY_STRING']?>">
 					<div style="float:left; background-color:#D14719; width:150px; height:50px;">
 						<p>BACK TO SHOP</p>
 					</div>
@@ -119,7 +131,7 @@
 				
 					<a href="mycart.php">
 						<div style="float:right; background-color:#990033; width:150px; height:50px;">
-							<p>VIEW CART</p>
+							<p style='font-weight:bold; color:#ecfof1'>VIEW CART</p>
 						</div>
 					</a>
 				

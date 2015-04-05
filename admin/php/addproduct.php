@@ -41,9 +41,6 @@ $path = "../../img/product/";
 									ProductPrice,
 									ProductType,
 									ProductStatus,
-									ProductAvailabilitySmall,
-									ProductAvailabilityMedium,
-									ProductAvailabilityLarge,
 									ProductGender,
 									ProductAttactment,
 									UserAccountID
@@ -54,15 +51,60 @@ $path = "../../img/product/";
 									'". $_POST['pprice'] . "',
 									'". $_POST['ptype'] . "',
 									'". $_POST['pstatus'] . "',
-									'". $_POST['pstockS'] . "',
-									'". $_POST['pstockM'] . "',
-									'". $_POST['pstockL'] . "',
 									'". $_POST['pgender'] . "',
 									'". $imgfile . "',
 									'". $_SESSION['auth_accountID'] . "'
 									)";
 								echo $query;
                                 DB::query($query);
+
+                               $rs=DB::query("SELECT ProductID FROM Product ORDER BY ProductID DESC LIMIT 0,1");
+                               $row=$rs->fetch_object();
+								$query = "INSERT INTO ProductInventory(
+									ProductID,
+									ProductInventorySize,
+									ProductInventoryStock,
+									ProductInventorySold
+									) VALUES(
+									'". $row->ProductID . "',
+									'". $_POST['pstockSv'] . "',
+									'". $_POST['pstockS'] . "',
+									'". 0 . "'
+									)";
+								echo $query;
+                                DB::query($query);
+
+
+								$query = "INSERT INTO ProductInventory(
+									ProductID,
+									ProductInventorySize,
+									ProductInventoryStock,
+									ProductInventorySold
+									) VALUES(
+									'". $row->ProductID . "',
+									'". $_POST['pstockMv'] . "',
+									'". $_POST['pstockM'] . "',
+									'". 0 . "'
+									)";
+								echo $query;
+                                DB::query($query);
+
+
+								$query = "INSERT INTO ProductInventory(
+									ProductID,
+									ProductInventorySize,
+									ProductInventoryStock,
+									ProductInventorySold
+									) VALUES(
+									'". $row->ProductID . "',
+									'". $_POST['pstockLv'] . "',
+									'". $_POST['pstockL'] . "',
+									'". 0 . "'
+									)";
+								echo $query;
+                                DB::query($query);
+
+
 								//echo "Success";
 								header("Location: ../view_product.php");
 

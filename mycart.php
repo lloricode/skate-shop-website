@@ -86,53 +86,72 @@
 			$cardrr="Invalid format";
 		if(!empty($_POST["secure"]) and !preg_match("/^[0-9]*$/", $secure))
 			$securerr="Invalid format";// echo $securerr; 
-		if($cardrr=="" and $expirerr=="" and $securerr=="" and $shippingrr==""){ 
+		if($cardrr=="" and $expirerr=="" and $securerr=="" and $shippingrr==""){
 			//session_start();
 			$q="SELECT COUNT(c.CartPurchased) as a FROM Cart AS c WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION["authID"];
-		//	echo "on line".__LINE__.": ".$q."<br />";
+			echo "on line".__LINE__.": ".$q."<br />";
 			$rss=DB::query($q);
 			$roww=$rss->fetch_object();
-		//	echo "on line".__LINE__.": ".$roww->a."<br />";
+			echo "on line".__LINE__.": ".$roww->a."<br />";
 			//echo "on line".__LINE__.": ".DB::getNumRows()."<br />";
 			if(/*$_GET['purchase']=="yes" and */$roww->a>0){
 				//total purchanse in all item
 				$sql="SELECT SUM(p.ProductPrice*c.CartQuantity) AS total_ FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION['authID'];  
-		//		echo "on line".__LINE__.": ".$sql."<br />";
+				echo "on line".__LINE__.": ".$sql."<br />";
 				$rs=DB::query($sql);
 				$row = $rs->fetch_object();
 				$amount=$row->total_;
 				//total quantity in all purchase
 				$sql="SELECT SUM(c.CartQuantity) AS total_Q FROM Cart AS c WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION['authID'];
-		//		echo "on line".__LINE__.": ".$sql."<br />";
+				echo "on line".__LINE__.": ".$sql."<br />";
 				$rs=DB::query($sql);
 				$row = $rs->fetch_object();
 				$quant=$row->total_Q;
 				//insert purchase including 2 above
 				$sqlcmd="INSERT INTO Purchased(PurchasedAmount,PurchasedQuantity,UserAccountID,PurchasedDelivered)
 					VALUES($amount,$quant,".$_SESSION['authID'].",0)";
-		//		echo "on line".__LINE__.": ".$sqlcmd."<br />";
+				echo "on line".__LINE__.": ".$sqlcmd."<br />";
 				DB::query($sqlcmd);
 				//slect purchaseID for purchaseLine
 				$sql="SELECT PurchasedId FROM Purchased ORDER BY PurchasedId DESC LIMIT 0,1";
-		//		echo "on line".__LINE__.": ".$sql."<br />";
+				echo "on line".__LINE__.": ".$sql."<br />";
 				$rs=DB::query($sql);
 				$row = $rs->fetch_object();
 				$pid=$row->PurchasedId;
 
-				
 				//DB::query($sqlcmd);
 				//insert payment
 				$sqlcmd="INSERT INTO Payment(UserAccountID,PaymentShippingAddress,PaymentCardNumber,PaymentCardExpiration,PaymentSecureCode,PurchasedId)
 					VALUES(".$_SESSION['authID'].",'$shipping',$card,'$expire',$secure,$pid)";
-		//			echo "on line".__LINE__.": ".$sqlcmd."<br />";
+					echo "on line".__LINE__.": ".$sqlcmd."<br />";
 				DB::query($sqlcmd);
 				//select all item to be insert in purchaseLine WHERE purchase=0
 				$sql="SELECT c.CartID,c.ProductId,c.CartQuantity,c.CartItemSize FROM Cart AS c WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION['authID'];
-		//		echo "on line".__LINE__.": ".$sql."<br />";
+				echo "on line".__LINE__.": ".$sql."<br />";
 				$rs=DB::query($sql);
 				for($i=0;$row = $rs->fetch_object();$i++){
 					$quantity=0;
-					switch ($row->CartItemSize) {
+
+
+
+				//select availabilty and sold to be update
+				$sqlcmd="SELECT ProductInventoryStock,ProductInventorySold FROM ProductInventory WHERE
+				 ProductInventorySize='".$row->CartItemSize."' AND ProductID=".$row->ProductId;
+				echo "on line".__LINE__.": ".$sqlcmd."<br />";
+				$rs2=DB::query($sqlcmd);
+				$row2=$rs2->fetch_object();
+				$avail=$row2->ProductInventoryStock;
+				$sold=$row2->ProductInventorySold;
+				$quantity=$row->CartQuantity;
+				// the update
+				$sqlcmd="UPDATE ProductInventory SET ProductInventoryStock=".($avail-$quantity).", ProductInventorySold=".($sold+$quantity)."
+				 WHERE ProductInventorySize='".$row->CartItemSize."' AND ProductID=".$row->ProductId;
+				echo "on line".__LINE__.": ".$sqlcmd."<br />";
+				DB::query($sqlcmd);
+
+
+
+					/*switch ($row->CartItemSize) {
 						case 'small':
 							//select availabilty and sold to be update
 							$sqlcmd="SELECT ProductAvailabilitySmall,ProductSoldSmall FROM Product WHERE ProductID=".$row->ProductId;
@@ -175,7 +194,7 @@
 		//					echo "on line".__LINE__.": ".$sqlcmd."<br />";
 							DB::query($sqlcmd);
 							break;
-					}
+					}*/
 					//insert purchaseLine incuding purchaseID
 					//$insertline="INSERT INTO PurchasedLine(PurchasedId,CartID,Quantity,Size) VALUES($pid,".$pids[$i].",".$quantity.",'".$row->CartItemSize."')";
 					$insertline="INSERT INTO PurchasedLine(PurchasedId,CartID) VALUES($pid,".$pids[$i].")";
@@ -187,7 +206,7 @@
 				//------
 				//change purchase to true where false
 				$sqlcmd="UPDATE Cart AS c SET c.CartPurchased=1 WHERE c.CartPurchased=0 AND $pidquery AND c.UserAccountID=".$_SESSION['authID'];
-		//		echo "on line".__LINE__.": ".$sqlcmd."<br />";
+				echo "on line".__LINE__.": ".$sqlcmd."<br />";
 				DB::query($sqlcmd);
 			//	setcookie("paid","paid",time()+20,"/");
 			}
@@ -196,7 +215,7 @@
 			$w = unserialize( $_POST["pid2"]);
 			foreach ($w as $value) {
 				$q="SELECT CartID FROM Cart WHERE CartID=".DB::esc($value)." AND UserAccountID=".$_SESSION["authID"];
-			//	echo "on line".__LINE__.": ".$q;
+				echo "on line".__LINE__.": ".$q;
 			DB::query($q);
 			if(DB::getNumRows()){
 				$chk_item[]=DB::esc($value);
@@ -312,12 +331,12 @@ FROM Purchased AS pur
 								<?php 	if($del){
 											$rs2=DB::query("SELECT PurchasedApprovedStatus FROM PurchasedApproved WHERE PurchasedID=".$row1->PurchasedID);
 											$row2=$rs2->fetch_object();
-											if($row2->PurchasedApprovedStatus){	?>
+											if($row2->PurchasedApprovedStatus){	$chk=0; ?>
 												<div class="purchased tddiv">
 													<span>DELIVERED</span>
 												</div>
 								<?php		}
-											else{ ?>
+											else{ $chk=0; ?>
 												<div class="purchased tddiv">
 													<span>CANCELED</span>
 												</div>
@@ -344,8 +363,25 @@ FROM Purchased AS pur
 												&nbsp; &#8369;<?php echo  $row->ProductPrice?></b>
 										</p>
 										<p style="color:white;float:right;font-size:13px">
+
+										<?php
+											$sql="SELECT ProductInventoryStock FROM ProductInventory WHERE ProductInventorySize='".$row->CartItemSize."' AND ProductID=".$row->ProductID;
+											//echo $sql;
+											$rs5=DB::query($sql);
+											$row5=$rs5->fetch_object();
+										?>
 											<?php echo $row->CartItemSize?>(<?php echo $row->CartQuantity?>)<br />
-											<?php if($chk) echo "CHECKOUT<input type='checkbox' name='chk".$int."' value='".$row->CartID."'>";?></p>
+
+											<?php //echo "$row->CartQuantity <= $row5->ProductInventoryStock"; ?>
+											<?php      ?>
+											<?php 	if($chk){
+														if($row->CartQuantity <= $row5->ProductInventoryStock) {
+															echo "CHECKOUT<input type='checkbox' name='chk".$int."' value='".$row->CartID."'>";
+														}
+														else{
+															echo "out of stock";
+														}
+													}?></p>
 									</div>
 								</div>
 							</td>
@@ -451,24 +487,18 @@ FROM Purchased AS pur
 			?>
 			<input type="hidden" name="pid2" value="<?php echo htmlentities(serialize($chk_item)); ?>">
 <table><tr>
-
 			<?php $total=0;
 				for ($i=0;$i<sizeof($chk_item);$i++) {
-					$rs=DB::query("SELECT c.*,p.ProductAttactment,p.ProductName,p.ProductPrice,(c.CartQuantity*p.ProductPrice) AS total,
-						(p.ProductAvailabilitySmall+p.ProductAvailabilityMedium+p.ProductAvailabilityLarge) AS alltotal,
-						(CASE c.CartItemSize WHEN 'small' THEN p.ProductAvailabilitySmall 
-											WHEN 'medium' THEN p.ProductAvailabilityMedium
-											WHEN 'large' THEN p.ProductAvailabilityLarge END ) AS stock 
-					FROM Cart AS c LEFT JOIN Product AS p ON c.ProductID=p.ProductID WHERE c.CartID=".$chk_item[$i]);
+					$rs=DB::query("SELECT c.*,p.ProductAttactment,p.ProductName,p.ProductPrice,(c.CartQuantity*p.ProductPrice) AS total
+					FROM Cart AS c JOIN Product AS p ON c.ProductID=p.ProductID
+					JOIN ProductInventory AS pi ON pi.ProductID=p.ProductID
+					WHERE c.CartID=".$chk_item[$i]);
 					$row=$rs->fetch_object();
 					$total+=$row->total;
 					?><td> <img src="<?php echo  $ri->wh("img/product/".$row->ProductAttactment,100,100); ?>"/> <?php echo "<p>".$row->ProductName."<br />"
-					.$row->CartItemSize."(".$row->CartQuantity.")".
-					((0==$row->alltotal)?"<span style='color:red'>out of stock</span>":(($row->CartQuantity>$row->stock)?"only<span style='color:red'>".$row->stock."</span>":""))
+					.$row->CartItemSize."(".$row->CartQuantity.")"
 					."<br />&#8369;".$row->ProductPrice."</p>" ?></td><?php
-
 				}
-
 			?>
 </tr></table><?php echo "Total: ".$total; ?>
 				</form>
@@ -478,10 +508,6 @@ FROM Purchased AS pur
 				 ?>
 			</div>
 		</center>
-
-
-
-
 <?php
 
 	}

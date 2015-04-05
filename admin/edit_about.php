@@ -1,5 +1,7 @@
 <?php
 	include 'php/header.php';
+	if(!isset($_SESSION['auth_accountID']))
+		header("Location: index.php");
 	//include"../config.php";
 	$lloric=$megan=$a1=$a2=$a3="";
 	$rs=DB::query("SELECT DocumentValue FROM Document WHERE DocumentID=14");

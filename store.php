@@ -5,6 +5,7 @@
 	include 'php/header.php';
 	include 'php/menu.php';
 	//include "config.php";
+	
 ?>
 		
 		<center>
@@ -39,23 +40,23 @@
 				</ul>
 			</div>
 			<div class="main_body">
+			<form action="" method="get">
 				<div style="background-color:; height:1010px;">
-					<?php 		
+					<?php
 					$dir=$q="";
-					if(isset($_GET['query'])) 
+					if(isset($_GET['query']))
 						$q=$dir=$_GET['query'];
-					if(isset($_GET['cat'])) 
+					if(isset($_GET['cat']))
 						$dir=$dir.">".$_GET['cat'];
 					if(isset($_GET['search']))
-						$dir="product name searched";
+						$dir="Searched Result in \"".$_GET['search']."\".";
 
 					echo $dir."<br />";
 					if(isset($_COOKIE['sqle_error']))
 						echo $_COOKIE['sqle_error'];
-					
+
 					include 'php/store_query.php';
-					
-					
+
 					$prev=(isset($_GET['page']))?$_GET['page']:0;
 					$nxt=($prev==0)?9:$prev*9;
 					$prev=$nxt-9;
@@ -63,10 +64,10 @@
 					$result =DB::query($query);
 					$total_result=DB::getNumRows();
 					if($total_result>0) echo ($prev+1)."-".(($total_result<$nxt)?$total_result:$nxt)." of ";echo "$total_result result.<br />";
-					
-					$cat=(isset($_GET['cat']))?"cat=".$_GET['cat']."&":"";   $q=(isset($_GET['query']))?"query=".$_GET['query']."&":""; 
-				 	$page=(isset($_GET['page']))?$_GET['page']:1; 
-				 	$srch=(isset($_GET['search']))?"search=".$_GET['search']."&":""; 
+
+					$cat=(isset($_GET['cat']))?"cat=".$_GET['cat']."&":"";   $q=(isset($_GET['query']))?"query=".$_GET['query']."&":"";
+				 	$page=(isset($_GET['page']))?$_GET['page']:1;
+				 	$srch=(isset($_GET['search']))?"search=".$_GET['search']."&":"";
 					if($ready){
 						$query.=" ORDER BY ProductID LIMIT $prev,9";
 						//echo "$query<br />";
@@ -79,17 +80,20 @@
 						else{
 							if(DB::getNumRows() > 0)
 							{
+
+								
 								echo "<table id='table_'>";
 								echo "<tr class='tableRow'>";
 								for($int = 1; $row = $result->fetch_object(); $int++)
 								{
+									$rs2=DB::query("SELECT SUM(ProductInventoryStock) AS stock FROM ProductInventory WHERE ProductID=".$row->ProductID);
+								$row2=$rs2->fetch_object();
 									 ?>
 									<td class="tableData">
 										<div class="mardagz" style="background: url('<?php echo  $ri->h("img/product/".$row->ProductAttactment,700); ?>');background-repeat: no-repeat; background-size: cover;
-																	 box-shadow:2px 10px 2px 2px #ffffff?>')"
-										>
+																	 box-shadow:2px 10px 2px 2px #ffffff?>')">
 											<div class="details">
-												<a href="<?php echo $ri->h("img/product/".$row->ProductAttactment,700);?>" alt="awawaw" class='fresco'
+												<a href="<?php echo $ri->h("img/product/".$row->ProductAttactment,700);?>" alt="<?php echo  $row->ProductName; ?>" class='fresco'
 													data-fresco-group="product"
 													data-fresco-caption="Name: <?php echo  $row->ProductName; ?> <br />
 													Price: &#8369;<?php echo  $row->ProductPrice; ?>" >
@@ -107,7 +111,7 @@
 														<span>OUT OF STOCK</span>
 													</div>
 									<?php 		}
-												else if(($row->ProductAvailabilitySmall+$row->ProductAvailabilityMedium+$row->ProductAvailabilityLarge)>0){     ?>
+												else if(($row2->stock)>0){     ?>
 													<a href="cart.php?<?php echo /*$_SERVER ['QUERY_STRING'].*/"&file=".$row->ProductID?>">
 														<div class="cart tddiv">
 															<span>ADD TO CART</span>
@@ -120,12 +124,14 @@
 													</div>
 									<?php 		}		?>
 												<br />
-												<p style="font-size:13px;">
-												<span style="color:red;">	
-													&nbsp;&nbsp; <?php echo  $row->ProductBrand?> &nbsp;</span><br />
-												<b>	&nbsp;&nbsp; <?php echo  $row->ProductName?> &nbsp;<br />
-													&nbsp;&nbsp; &#8369;<?php echo  $row->ProductPrice?></b>
+												<p style="font-size:13px;float:left">
+													&nbsp;&nbsp; Product no.<?php echo $row->ProductID;?><br />
+												<span style="color:#C96666;">
+													&nbsp;&nbsp; Brand:<?php echo  $row->ProductBrand?> &nbsp;</span><br />
+												<b>	&nbsp;&nbsp; Name:<?php echo  $row->ProductName?> &nbsp;<br /></b>
 												</p>
+												<p style="float:right">
+													&#8369;<?php echo  $row->ProductPrice?>&nbsp;&nbsp; </p>
 											</div>
 										</div>
 									</td>
@@ -138,8 +144,8 @@
 							else
 							{
 								echo "No product";
-								if(isset($_GET['search']))
-									echo "<br />for name \"".$_GET['search']."\".";
+								/*if(isset($_GET['search']))
+									echo "<br />for name \"".$_GET['search']."\".";*/
 							}
 						}
 					} ?>
@@ -168,6 +174,7 @@
 			<?php 	}
 						?>
 				</div>
+				</form>
 			</div>
 		</center>
 <?php

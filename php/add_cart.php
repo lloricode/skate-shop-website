@@ -1,10 +1,8 @@
 <?php
-
 //security 
 	session_start();
 	if(!isset($_SESSION['authID']))
 		header("Location: ../login.php");
-
 	$sqlcmd1=$sqlcmd2=$sqlcmd3="";
 	//$q=(isset($_GET['query']))?"query=".$_GET['query']."&":"";
 	//$c=(isset($_GET['cat']))?"cat=".$_GET['cat']."&":"";
@@ -18,17 +16,23 @@
 		$sq=$mq=$lq=$size="";
 		$oos=$ok1=$ok2=$ok3=$error=0;
 		//check the quantity in every sizes
-		$sql="SELECT ProductAvailabilitySmall,ProductAvailabilityMedium,ProductAvailabilityLarge FROM Product WHERE ProductID=".DB::esc($_POST['prodID']);
+		$sql="SELECT ProductInventoryStock,ProductInventorySize FROM ProductInventory WHERE ProductID=".DB::esc($_POST['prodID']);
 		$rs=DB::query($sql);
-		$row=$rs->fetch_object();
-		$sc=$row->ProductAvailabilitySmall;
-		$mc=$row->ProductAvailabilityMedium;
-		$lc=$row->ProductAvailabilityLarge;
 
+		while(		$row=$rs->fetch_object()   ){
+
+				$tmp[]=$row->ProductInventoryStock;
+
+		}
+
+
+
+		$sc=$tmp[0];
+		$mc=$tmp[1];
+		$lc=$tmp[2];
 		$sq=DB::esc((isset($_POST['small_quant']))?$_POST['small_quant']:0);
 		$mq=DB::esc((isset($_POST['medium_quant']))?$_POST['medium_quant']:0);
 		$lq=DB::esc((isset($_POST['large_quant']))?$_POST['large_quant']:0);
-
 		if(!empty($_POST['size_small'])){
 			if(!empty($sq) and preg_match("/^[0-9]*$/",$sq)){
 				if($sq>$sc){
@@ -72,7 +76,7 @@
 				$error++;
 			}
 			//check if injected
-			if(isset($_POST['size_small'])){ //------
+		/*	if(isset($_POST['size_small'])){ //------
 				if($_POST['size_small']!="small"){
 					setcookie("sizerr","this is for human.",time()+20,"/"); 
 					$error++;											//-----------
@@ -89,8 +93,7 @@
 					setcookie("sizerr","this is for human.",time()+20,"/"); 
 					$error++;											//-----------
 				}
-			}
-
+			}*/
 			if($error==0) {
 				if(isset($_POST['size_small'])){
 					if(preg_match("/^[0-9]*$/",$sq)){
@@ -104,7 +107,7 @@
 								$sqlcmd1="UPDATE Cart SET CartQuantity=".($val+$sq)." WHERE CartPurchased=0 AND CartID=$cartid";
 							}
 							else
-								$sqlcmd1="INSERT INTO Cart(UserAccountID,ProductID,CartQuantity,CartItemSize,CartPurchased) VALUES('".$_SESSION['authID']."','".DB::esc($_POST['prodID'])."','$sq','small','0')";
+								$sqlcmd1="INSERT INTO Cart(UserAccountID,ProductID,CartQuantity,CartItemSize,CartPurchased) VALUES('".$_SESSION['authID']."','".DB::esc($_POST['prodID'])."','$sq','".DB::esc($_POST['sizeone'])."','0')";
 							$ok1=1;
 						}
 						else{
@@ -129,7 +132,7 @@
 								$sqlcmd2="UPDATE Cart SET CartQuantity=".($val+$mq)." WHERE CartPurchased=0 AND CartID=$cartid";
 							}
 							else
-								$sqlcmd2="INSERT INTO Cart(UserAccountID,ProductID,CartQuantity,CartItemSize,CartPurchased) VALUES('".$_SESSION['authID']."','".DB::esc($_POST['prodID'])."','$mq','medium','0')";
+								$sqlcmd2="INSERT INTO Cart(UserAccountID,ProductID,CartQuantity,CartItemSize,CartPurchased) VALUES('".$_SESSION['authID']."','".DB::esc($_POST['prodID'])."','$mq','".DB::esc($_POST['sizetwo'])."','0')";
 							$ok2=1;
 						}
 						else{
@@ -154,7 +157,7 @@
 								$sqlcmd3="UPDATE Cart SET CartQuantity=".($val+$lq)." WHERE CartPurchased=0 AND CartID=$cartid";
 							}
 							else
-								$sqlcmd3="INSERT INTO Cart(UserAccountID,ProductID,CartQuantity,CartItemSize,CartPurchased) VALUES('".$_SESSION['authID']."','".DB::esc($_POST['prodID'])."','$lq','large','0')";
+								$sqlcmd3="INSERT INTO Cart(UserAccountID,ProductID,CartQuantity,CartItemSize,CartPurchased) VALUES('".$_SESSION['authID']."','".DB::esc($_POST['prodID'])."','$lq','".DB::esc($_POST['sizethree'])."','0')";
 							$ok3=1;
 						}
 						else{
@@ -188,7 +191,7 @@
 	/*else echo "string";
 		//setcookie("tmp","error in post",time()+5,"/");*/
 	if($error!=0 or $oos==2 or $oos){
- 		header("Location: ../cart.php?".$_SERVER ['QUERY_STRING']);
+		header("Location: ../cart.php?".$_SERVER ['QUERY_STRING']);
 	}
  	else{
 		header("Location: ../mycart.php");

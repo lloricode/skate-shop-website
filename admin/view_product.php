@@ -56,16 +56,22 @@
 					</td>
 				</tr>
 				<tr>
-					<td>Product Stock Small</td>
-					<td><input type="text" placeholder="SMALL" name="pstockS" /></td>
+					<td>Product size</td>
+					<td><input type="text" placeholder="size" name="pstockSv" /></td>
+					<td>Product Stock</td>
+					<td><input type="text" placeholder="value" name="pstockS" /></td>
 				</tr>
 				<tr>
-					<td>Product Stock Medium</td>
-					<td><input type="text" placeholder="MEDIUM" name="pstockM" /></td>
+					<td>Product size</td>
+					<td><input type="text" placeholder="size" name="pstockMv" /></td>
+					<td>Product Stock</td>
+					<td><input type="text" placeholder="value" name="pstockM" /></td>
 				</tr>
 				<tr>
-					<td>Product Stock Large</td>
-					<td><input type="text" placeholder="LARGE" name="pstockL" /></td>
+					<td>Product size</td>
+					<td><input type="text" placeholder="size" name="pstockLv" /></td>
+					<td>Product Stock</td>
+					<td><input type="text" placeholder="value" name="pstockL" /></td>
 				</tr>
 				<tr>
 					<td>Product For</td>
@@ -146,28 +152,33 @@
 							<td rowspan="4"><?php echo  "&#8369; ".$row->ProductPrice; ?></td>
 							<td rowspan="4"><?php echo  $row->ProductType; ?></td>
 							<td rowspan="4"><?php echo  $row->ProductStatus; ?></td>
+<?php 
+	$rs1=DB::query("SELECT ProductInventorySize,ProductInventoryStock FROM ProductInventory WHERE ProductId=".$row->ProductID);
+	$row1=$rs1->fetch_object();
+	$total=0;
+	$total+=$row1->ProductInventoryStock;
+ ?>
+							<td><b><?php echo  $row1->ProductInventorySize; ?></b></td>
+							<td <?php if($row1->ProductInventoryStock<10) echo "style='color:darkred'" ?> ><?php echo  $row1->ProductInventoryStock; ?></td>
 
-							<td><b>S</b></td>
-							<td <?php if($row->ProductAvailabilitySmall<10) echo "style='color:darkred'" ?> ><?php echo  $row->ProductAvailabilitySmall; ?></td>
-
-							<td rowspan="4"><?php echo  $row->ProductGender; ?></td>
-							<td rowspan="4">
+							<td rowspan="4"><?php echo  $row->ProductGender;?></td>
+							<td rowspan="4"> <?php $row1=$rs1->fetch_object();  $total+=$row1->ProductInventoryStock;  ?>
 								<a href="edit.php?edit_product=<?php echo  $row->ProductID; ?>"><img src="../img/product/<?php echo  $row->ProductAttactment; ?>" width="100" /></a>
 							</td>
 							<td rowspan="4"><?php echo  $row->UserAccountFirstName; ?></td>
 							<td rowspan="4"><?php echo  $row->ProductDateAdded; ?></td>
 						</tr>
 						<tr>
-							<td><b>M</b></td>
-							<td <?php if($row->ProductAvailabilityMedium<10) echo "style='color:darkred'" ?> ><?php echo  $row->ProductAvailabilityMedium; ?></td>
+							<td><b><?php echo  $row1->ProductInventorySize; ?></b></td>
+							<td <?php if($row1->ProductInventoryStock<10) echo "style='color:darkred'" ?> ><?php echo  $row1->ProductInventoryStock; ?></td>
 						</tr>
-						<tr>
-							<td><b>L</b></td>
-							<td <?php if($row->ProductAvailabilityLarge<10) echo "style='color:darkred'" ?> ><?php echo  $row->ProductAvailabilityLarge; ?></td>
+						<tr>  <?php $row1=$rs1->fetch_object();  $total+=$row1->ProductInventoryStock;  ?>
+							<td><b><?php echo  $row1->ProductInventorySize; ?></b></td>
+							<td <?php if($row1->ProductInventoryStock<10) echo "style='color:darkred'" ?> ><?php echo  $row1->ProductInventoryStock; ?></td>
 						</tr>
 						<tr>
 							<td><b>+</b></td>
-							<td <?php if(( $row->ProductAvailabilitySmall+$row->ProductAvailabilityMedium+$row->ProductAvailabilityLarge)<10) echo "style='color:darkred'" ?> ><?php echo ( $row->ProductAvailabilitySmall+$row->ProductAvailabilityMedium+$row->ProductAvailabilityLarge)?></td>
+							<td <?php if(( $total)<10) echo "style='color:darkred'" ?> ><?php echo ( $total)?></td>
 						</tr>
 		<?php 		}
 				}

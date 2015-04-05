@@ -87,9 +87,15 @@
 		}
 
 		//check if password and secret answer is match
-		$pass2=DB::esc($_POST['pass2']);
-		if($pass2!=$pass)
-			$passrr="Password mismatch";
+		if(!preg_match("/^[^\s]*$/", $pass) and !empty($_POST['pass']))
+			$passrr="white space not allowed";
+		else if(!preg_match("/^[[^\s]{7,}]*$/", $pass) and !empty($_POST['pass']))
+			$passrr="password minimum is 8 ";
+		else{
+			$pass2=DB::esc($_POST['pass2']);
+			if($pass2!=$pass)
+				$passrr="Password mismatch";
+		}
 		$ans2=DB::esc($_POST['ans2']);
 		if($ans2!=$ans)
 			$ansrr="Secret Answer mismatch";
@@ -190,7 +196,7 @@
 							<tr>
 								<td>BIRTHDATE:</td>
 								<td>
-									<input type="date" name="bd" id="datepicker"  value="<?=$bd;?>">
+									<input type="date" placeholder="Birthday" name="bd" id="datepicker"  value="<?=$bd;?>">
 							<!--		<script src="js/datepicker/jquery.min.js"></script>-->
 								</td>
 								<td><span id="err"><?php if(isset($bdrr)) echo $bdrr;?></span></td>

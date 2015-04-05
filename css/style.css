@@ -36,7 +36,7 @@ z-index: 100;
 
 #inside_header  
 {
-  width: 1150px;
+  width: 1100px;
   height: 60px;
   background:rgba(0,0,0,.5);
   top:0;
@@ -67,7 +67,7 @@ Background-size: cover;}
 
 
 .main_body      
-{/* margin-top: -16px;*/height:1149px;width:900px;background-color:#464646;}
+{/* margin-top: -16px;*/height:1149px;width:900px;background-color:#464646; }
 
 .footer        
  {padding-top:10px;height:30px;background-color:#111111;}
@@ -199,7 +199,18 @@ Background-size: cover;}
 .mainTable      {}
 .tableRow       {}
 .tableRow td    {padding: 20px;}
-.tableData      {width: 250px;   height: 290px;   clear: both;}
+.tableData      
+{
+  width: 250px;   
+  height: 290px;  
+  clear: both;
+  transition:all .2s ease-in-out;
+}
+
+.tabledata
+{
+  transform: scale(2.0);
+}
 
 .mardagz        
 {
@@ -216,7 +227,13 @@ Background-size: cover;}
 }
 
 
-.details        {background-color: transparent;  width: 100%;  height: 25px;   position: relative;   top: 235px;}
+.details        
+{
+  background-color: transparent;  
+  width: 100%;  height: 25px;  
+  position: relative;   
+  top: 235px;
+}
 .name           {background: #F9641C;width:50%;height:25px;float:left;}
 .cart           
 {background: #A00535;width:50%;height:25px;float:right}
@@ -250,8 +267,8 @@ Background-size: cover;}
 {color: yellow;}
 /*-------------------------------about.php----------------------------*/
 .aboutUp        {width: 900px;height: 549px;        }
-.aleft          {float: left;height: 539px;width: 450px;       }
-.aright         {float: right;height: 539px;width: 450px;   }
+.aleft          {float: left;height: 550px;width: 450px;       }
+.aright         {float: right;height: 550px;width: 450px;   }
 .anamel         {height: 50px;width: 450px;background-color: #9E003A;    float: left;}
 .anamer         {height: 50px;width: 450px;background-color: #7C0025;    float: right;}
 /*-------------------add_cart---------------------*/
@@ -263,14 +280,14 @@ Background-size: cover;}
 .social         {padding: 10px 10px;}
 .media          {height:30px; margin-top:-10px;   }
 /*------------------------log in----------*/
-.login:hover    {color: #b14d1d; font-weight: ;}
+.login:hover    {color: #b14d1d; font-weight:heavy ;}
 .logout			{color:#CC3300}
 .logout:hover 
 {
   color:  #b14d1d;
   font-weight: bold;
 }
-.setting:hover  {color:#D14719;}
+.setting:hover  {color:#D14719; font-weight:heavy;}
 .profile 		{ inline;list-style-type: none;}
 /*------------------------text box----------*/
 .txtF 			{border: 1px dotted #000000;outline:0;height:25px;width: 175px;margin-top:35px;margin-right: 20px; } 

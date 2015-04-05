@@ -22,7 +22,7 @@
 					<div class="aleft">
 						<br />
 						<h1 style="float:left">&nbsp;&nbsp;&nbsp;WHO ARE WE?</h1>
-						<img src="<?php echo $ri->w("img/samurai.jpg",300) ?>" >
+						<img src="<?php echo $ri->w("img/index.jpg",300) ?>" >
 						
 						
 					</div>

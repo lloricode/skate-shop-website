@@ -1,5 +1,7 @@
 <?php
 	include 'php/header.php';
+	if(!isset($_SESSION['auth_accountID']))
+		header("Location: index.php");
 	//include"../config.php";
 	$d1=$d2=$d3=$d4="";
 	$v1=$v2=$v3=$v4="";

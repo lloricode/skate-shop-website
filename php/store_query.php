@@ -1,11 +1,7 @@
 
-			
-			
-				
-					
 						<?php
 								$ready=1;$brand=0;
-							if(isset($_GET['query']) ){	
+							if(isset($_GET['query']) ){
 								if(isset($_GET['cat'])){
 									if($_GET['cat']=="shoes"){
 										if(isset($_GET['query'])){
@@ -156,15 +152,13 @@
 								}
 							}
 							else if(isset($_GET['search'])){
-									$query="SELECT * FROM Product WHERE ProductName LIKE '".DB::esc($_GET['search'])."%'";
+									$query="SELECT * FROM Product WHERE
+									ProductName LIKE '".DB::esc($_GET['search'])."%'
+									OR ProductBrand LIKE '".DB::esc($_GET['search'])."%'
+									OR ProductID LIKE '".DB::esc($_GET['search'])."%'";
 							}
 							else{
 								echo "error query";
 								$ready=0;
 							}
-								
-							
 						?>
-						
-					
-		

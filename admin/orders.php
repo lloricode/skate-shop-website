@@ -17,9 +17,9 @@
 				$rs=DB::query("SELECT p.PurchasedID,u.UserAccountFirstName,u.UseraccountLastName,p.PurchasedDate
 					FROM Purchased AS p LEFT JOIN Useraccount AS u ON p.UseraccountID=u.UseraccountID WHERE p.PurchasedDelivered=0 ORDER BY PurchasedDate DESC");
 				if(DB::getNumRows()>0){
-					echo "<table class='grid' border=1><tr><td></td><td>Official recite</td><td>Clients</td><td>Date</td></tr>";
+					echo "<table class='grid' border=1><tr><th>no</th><th>Official recite</th><th>Clients</th><th>Date</th></tr>";
 					for ($i=1;$row=$rs->fetch_object();$i++) {
-						echo "<tr><td>".$i."</td><td>".$row->PurchasedID."</td><td><a href='view_orders.php?pid=$row->PurchasedID'>".$row->UserAccountFirstName." ".$row->UseraccountLastName."</a></td><td>".$row->PurchasedDate."</td></tr>";
+						echo "<tr><td>".$i."</td><td><a href='view_orders.php?pid=$row->PurchasedID'>".$row->PurchasedID."</a></td><td>".$row->UserAccountFirstName." ".$row->UseraccountLastName."</td><td>".$row->PurchasedDate."</td></tr>";
 					}
 					echo "</table>";
 				}
