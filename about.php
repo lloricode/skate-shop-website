@@ -21,7 +21,7 @@
 				<div class="aboutUp">
 					<div class="aleft">
 						<br />
-						<h1 style="float:left">&nbsp;&nbsp;&nbsp;WHO ARE WE?</h1>
+						<h1 style="float:left;margin-left:70px">WHO ARE WE?</h1>
 						<img src="<?php echo $ri->w("img/index.jpg",300) ?>" >
 						
 						
@@ -43,7 +43,7 @@
 				</div>
 				<div>
 						<div class="anamel">
-							<p style="font-size:25px; margin-top:10px;">LLORIC <b>GARCIA</b></p>
+							<p style="font-size:25px; margin-top:10px;">LLORIC MAYUGA <b>GARCIA</b></p>
 						</div>
 
 						<div class="anamer">

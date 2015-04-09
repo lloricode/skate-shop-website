@@ -11,11 +11,10 @@
 		<script src="../js/bootstrap/bootstrap.min.js"></script> 
        	<meta name="robots" content="noindex,nofollow" />
 	</head>
-	<body>
-		<div style="width:350px; padding-top:20px; ">
+	<body style="background-color:#464646">
 			<div id="myCarousel" class="carousel slide" data-ride="carousel">
 				<?php
-					$tmp_dir="../";
+				/*	$tmp_dir="../";
 					include("../config.php");
 					$sqlcmd="SELECT ProductAttactment,ProductName FROM Product WHERE ProductSale=1";
 					$rs=DB::query($sqlcmd);
@@ -32,9 +31,41 @@
 							echo "<img src='". $ri->h("../img/product/".$row->ProductAttactment,260,"../")."' alt='$row->ProductName'></div>";
 						}
 						echo "</div>";
-					}
+					}*/
+					$slider=6;
 				?>
-			</div>
+				<div id="myCarousel" class="carousel slide" data-ride="carousel">
+				
+
+
+				<ol class='carousel-indicators'>
+					
+			<?php
+				for($i=0;$i<$slider;$i++){
+					if($i>0) {?>
+						<li data-target='#myCarousel' data-slide-to='<?php echo $i; ?>'>
+		<?php 		}else{  ?>
+						<li data-target='#myCarousel' data-slide-to='0' class='active'>
+		<?php		} ?>
+					</li>
+		<?php		}
+			?>
+				</ol>
+				<div class='carousel-inner' role='listbox'>
+					
+						
+			<?php
+				for($i=0;$i<$slider;$i++){
+					if($i>0) {?>
+						<div class='item'>
+		<?php 		}else{  ?>
+						<div class='item active'>
+		<?php		} ?>
+						<img src='../img/home slider/<?php echo ($i+1); ?>.jpg' alt='image not found' />
+						</div>
+
+		<?php		}
+			?></div></div>
 		</div>
 	</body>
 </html>

@@ -49,7 +49,7 @@
 					if(isset($_GET['cat']))
 						$dir=$dir.">".$_GET['cat'];
 					if(isset($_GET['search']))
-						$dir="Searched Result in \"".$_GET['search']."\".";
+						$dir="Searched Result in \" ".$_GET['search']." \".";
 
 					echo $dir."<br />";
 					if(isset($_COOKIE['sqle_error']))
@@ -125,7 +125,7 @@
 									<?php 		}		?>
 												<br />
 												<p style="font-size:13px;float:left">
-													&nbsp;&nbsp; Product no.<?php echo $row->ProductID;?><br />
+													&nbsp;&nbsp; No.<?php echo $row->ProductID;?><br />
 												<span style="color:#C96666;">
 													&nbsp;&nbsp; Brand:<?php echo  $row->ProductBrand?> &nbsp;</span><br />
 												<b>	&nbsp;&nbsp; Name:<?php echo  $row->ProductName?> &nbsp;<br /></b>

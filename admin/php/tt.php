@@ -1,5 +1,7 @@
 <?php
 	include"../../config.php";
+	$s="DELETE FROM `received` WHERE 1";
+	DB::query($s);
 	$s="DELETE FROM `purchasedline` WHERE 1";
 	DB::query($s);
 	$s="SELECT * FROM `purchasedapproved` WHERE 1";
@@ -12,7 +14,7 @@
 	DB::query($s);
 	$s="DELETE FROM `cart` WHERE 1";
 	DB::query($s);
-	//header("Location: ../index.php");
+	header("Location: ../index.php");
 /*
 	$rs=DB::query("SELECT ProductID FROM Product ORDER BY ProductID ASC");
 

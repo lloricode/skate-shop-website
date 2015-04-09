@@ -14,7 +14,7 @@
 			<div class="main_body">
 				<div class="primary" style="  background-image: url('img/UserImage/<?php echo $_SESSION['authImg']?>');background-repeat: no-repeat; background-size: cover;">
 				</div>
-				<BR><BR><BR><BR><BR><BR>
+				<br /><br /><br /><br /><br /><br />
 				<table>
 					<tr>
 						<th><?php echo $row->UserAccountFirstName."   ".$row->UserAccountLastName?></th>

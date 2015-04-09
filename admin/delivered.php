@@ -15,7 +15,7 @@
 				<a href="index.php"><button>back to main</button></a><br />
 				<?php
 					$rs=DB::query("SELECT u.UserAccountID,pa.PurchasedApprovedID,u.UserAccountFirstName,p.PurchasedID,pa.PurchasedApprovedID,u.UseraccountLastName,p.PurchasedDate,
-								(CASE pa.PurchasedApprovedStatus WHEN 1 THEN 'YES' ELSE 'CANCELED' END) AS status
+								(CASE pa.PurchasedApprovedStatus WHEN 1 THEN 'YES' ELSE 'CANCELED' END) AS statusaproved
 								FROM Purchased AS p
 								JOIN Useraccount AS u ON p.UseraccountID=u.UseraccountID
 								JOIN PurchasedApproved AS pa ON p.PurchasedID=pa.PurchasedID
@@ -31,31 +31,37 @@
 							$row2=$rs2->fetch_object();
 							echo "<tr><td>".$i."</td><td><a href='view_delivered.php?pid=$row->PurchasedID'>".$row->PurchasedID."</a></td>
 							<td>".$row->UserAccountFirstName." ".$row->UseraccountLastName."</td><td>".$row->PurchasedDate."</td>
-							<td>$row2->UserAccountFirstName $row2->UseraccountLastName</td><td>$row->status</td>
+							<td>$row2->UserAccountFirstName $row2->UseraccountLastName</td><td>$row->statusaproved</td>
 							<td>";
 
-							$rs3=DB::query("SELECT (CASE ReceivedStatus WHEN 1 THEN 'Reveived' ELSE 'Not' END) AS status FROM Received
+							$rs3=DB::query("SELECT (CASE ReceivedStatus WHEN 1 THEN 'Reveived' ELSE 'Not' END) AS statusreceived FROM Received
 								WHERE PurchasedApprovedID=".$row->PurchasedApprovedID);
 							$tmp=DB::getNumRows();
 							if($tmp){
 								$row3=$rs3->fetch_object();
-								echo $row3->status;
+								echo $row3->statusreceived;
+							}
+							else if($row->statusaproved=="CANCELED"){
+								echo "*****";
 							}
 							else
 								echo "on the way";
 
 
 							echo"</td>";
-							if(!$tmp){?>
+							if(!$tmp){
+								if($row->statusaproved=="YES"){ ?>
 								<form action="php/recieve.php" method="post">
-								<input type="hidden" name="pi" value="<?php echo $row->PurchasedApprovedID; ?>">
+									<input type="hidden" name="pi" value="<?php echo $row->PurchasedApprovedID; ?>">
 			<?php					echo"	<td>yes<input type='radio'  value='y' name='rr' > no<input type='radio'  value='n' name='rr' ></td>
 										<td><input type='submit' value='set'></td>";
-
-										echo "</form>";
+								echo "</form>";
+								}else{ ?>
+									<td colspan="2">------</td>
+				<?php				}
 							}
 							else
-								echo "<td colspan='2'>.......</td>";
+								echo "<td colspan='2'>done</td>";
 						echo"	</tr>";
 						}
 				?>

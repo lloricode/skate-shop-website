@@ -36,8 +36,11 @@
 		case 'mycart':
 			$title=$_SESSION['authFn']."'s Cart";
 			break;
+		case 'setting':
+			$title="Setting";
+			break;
 		default:
-			$title="Skate Apparel";
+			$title="Home";
 			break;
 	}
 ?>
@@ -54,6 +57,6 @@
         <script type="text/javascript" src="js/header slider/document.js"></script>
         <script type="text/javascript" src="js/header slider/rotator.js"></script>
         <?php 
-        	if($docfile=="signup")
+        	if($docfile=="signup" or $docfile=="setting")
         		include"php/datepicker.php";
         ?>

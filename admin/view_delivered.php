@@ -16,13 +16,15 @@
 			<?php
 				if(!isset($_GET["pid"]))
 					header("Location: orders.php");
-
-				$rs=DB::query("SELECT pay.*,p.*,u.UserAccountFirstName,u.UseraccountLastName,u.UseraccountEmail,u.UseraccountMobile
+				$sql="SELECT pay.*,p.*,u.UserAccountFirstName,u.UseraccountLastName,u.UseraccountEmail,u.UseraccountMobile
 					FROM Purchased AS p
 					JOIN Useraccount AS u ON p.UseraccountID=u.UseraccountID
 					JOIN Payment AS pay ON p.PurchasedID=pay.PurchasedID
-					WHERE p.PurchasedDelivered=1 AND pay.PurchasedID=".DB::esc($_GET["pid"])." ORDER BY PurchasedDate");
-				if(DB::getNumRows()>0){
+					WHERE p.PurchasedDelivered=1 AND p.PurchasedID=".DB::esc($_GET["pid"]);
+				$rs=DB::query($sql);
+			/*	echo $sql."<br />";
+				echo DB::getNumRows();*/
+				if(DB::getNumRows()){
 					$row=$rs->fetch_object();
 					?>
 						<table class="grid" border=1>
@@ -83,8 +85,8 @@
 						echo "</table>";
 
 					}
-					else
-						header("Location: orders.php");
+					/*else
+						header("Location: delivered.php");*/
 			?>
 			</div>
 			<?php

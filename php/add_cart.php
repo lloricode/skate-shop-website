@@ -22,7 +22,7 @@
 		while(		$row=$rs->fetch_object()   ){
 
 				$tmp[]=$row->ProductInventoryStock;
-
+				$tmp2[]=$row->ProductInventorySize;
 		}
 
 
@@ -36,7 +36,7 @@
 		if(!empty($_POST['size_small'])){
 			if(!empty($sq) and preg_match("/^[0-9]*$/",$sq)){
 				if($sq>$sc){
-					setcookie("oosS","small is only $sc.",time()+20,"/");
+					setcookie("oosS","size \"".$tmp2[0]."\" is only $sc.",time()+20,"/");
 					$oos=1;
 				}
 			}
@@ -48,7 +48,7 @@
 		if(!empty($_POST['size_medium'])){
 			if(!empty($mq) and preg_match("/^[0-9]*$/",$mq)){
 				if($mq>$mc){
-					setcookie("oosM","medium is only $mc.",time()+20,"/");
+					setcookie("oosM","size \"".$tmp2[1]."\" is only $mc.",time()+20,"/");
 					$oos=1;
 				}
 			}
@@ -60,7 +60,7 @@
 		if(!empty($_POST['size_large'])){
 			if(!empty($lq) and preg_match("/^[0-9]*$/",$lq)){
 				if($lq>$lc){
-					setcookie("oosL","large is only $lc.",time()+20,"/");
+					setcookie("oosL","size \"".$tmp2[2]."\" is only $lc.",time()+20,"/");
 					$oos=1;
 				}
 			}

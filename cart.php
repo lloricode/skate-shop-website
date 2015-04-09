@@ -38,6 +38,9 @@
 									
 								</tr>
 								<tr>
+									<td>No: <b><?php echo $row->ProductID?></b></td>
+								</tr>
+								<tr>
 									<td>Brand: <b><?php echo $row->ProductBrand?></b></td>
 								</tr>
 								<tr>

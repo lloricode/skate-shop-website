@@ -1,7 +1,3 @@
-<?php
-	session_start();
-	include"../config.php";
-?>
 <!DOCTYPE html>
 <html>
   <head></head>
@@ -16,14 +12,14 @@
 				</div>
 			</center>
 		</div>
-    <title><?php echo "Skate Apparel | invalid"?></title>
+    <title>Skate Apparel | invalid</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 		<div style="background-color:#101010; height:90;">
 			<center>
 				<div class="menu">
 		            <div style="float:left;margin-top:3px;">
 		           	<ul id="navlist">
-						<li id="mainmenu" class='active_menu' ><a href="../index.php" id="current">HOME</a></li>.
+						<li id="mainmenu"  ><a href="../index.php" id="current">HOME</a></li>.
 						<li id="mainmenu"  ><a href="../store.php?query=all">STORE</a></li>.
 						<li id="mainmenu"  ><a href="../contact.php">CONTACT</a></li>.
 						<li id="mainmenu"  ><a href="../about.php">ABOUT</a></li>.
@@ -38,7 +34,7 @@
 					</form>
 				</div>
 			</center>
-		</div>		
+		</div>
 		<center>
 			<div class="main_body"><BR>
 			<h1>You have no Permission to access this url</h1>

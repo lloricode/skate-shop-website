@@ -50,7 +50,7 @@
 								if(isset($_SESSION['authID'])){  ?>
 									<p>
 										Welcome,
-										<a href='profile.php' >
+										<a href='profile.php' class="setting">
 											<?php echo $_SESSION['authFn']?>!&nbsp;&nbsp;&nbsp;
 											<img src="<?php echo $ri->h("img/UserImage/".$_SESSION['authImg'],28);?>" alt="<?php echo $_SESSION['authFn']." ".$_SESSION['authLn']; ?>" >
 										</a>&nbsp;&nbsp;&nbsp;&nbsp;

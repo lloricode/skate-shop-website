@@ -1,4 +1,3 @@
-
 						<?php
 								$ready=1;$brand=0;
 							if(isset($_GET['query']) ){
@@ -152,10 +151,15 @@
 								}
 							}
 							else if(isset($_GET['search'])){
-									$query="SELECT * FROM Product WHERE
-									ProductName LIKE '".DB::esc($_GET['search'])."%'
-									OR ProductBrand LIKE '".DB::esc($_GET['search'])."%'
-									OR ProductID LIKE '".DB::esc($_GET['search'])."%'";
+									$tmpsql="";
+									if(preg_match("/^[0-9]*$/", $_GET['search']))
+										$tmpsql=" ProductID= ".DB::esc($_GET["search"]);
+									else
+										$tmpsql= " ProductBrand LIKE '".DB::esc($_GET['search'])."%'
+											OR ProductName LIKE '".DB::esc($_GET['search'])."%'";
+
+
+									$query="SELECT * FROM Product WHERE $tmpsql";
 							}
 							else{
 								echo "error query";

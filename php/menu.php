@@ -12,7 +12,7 @@
 					</div>
 					<form action="store.php" >
 						<span style="float:right">
-							<input type="text" class="txtF" height="100px" placeholder="SEARCH ITEM" name="search">
+							<input type="text" class="txtF" height="100px" placeholder="SEARCH ITEM" name="search" value="<?php $seach=(isset($_GET["search"]))?$_GET["search"]:""; echo $seach;?>">
 							<input style="margin-left:0px" type="submit" value="GO">
 						</span>
 					</form>

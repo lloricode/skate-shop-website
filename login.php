@@ -14,8 +14,8 @@
 //		header("Location: index.php");
 	setcookie("recID","",time()-3600,"/");
 	if ( isset($_GET) and $_SERVER["REQUEST_METHOD"]=="POST") {
-		$usercode=addslashes($_POST['user']);
-		$passcode=addslashes(md5($_POST['pass']));
+		$usercode=DB::esc($_POST['user']);
+		$passcode=DB::esc(md5($_POST['pass']));
 
 		if(filter_var($usercode, FILTER_VALIDATE_EMAIL)){
 			$tmp="u.UserAccountEmail";

@@ -31,7 +31,7 @@
 								<td><?php echo $row->UserAccountFirstName." ".$row->UseraccountLastName; ?></td>
 							</tr>
 							<tr>
-								<td>PurchasedID</td>
+								<td>PurchasedID/Official Receipt</td>
 								<td><?php echo $row->PurchasedID; ?></td>
 							</tr>
 							<tr>

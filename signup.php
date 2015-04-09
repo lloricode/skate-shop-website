@@ -2,14 +2,14 @@
 <?php
 	//include"php/visit.php";
 	//session_start();
-	if(isset($_SESSION['authID']))
-		header("Location: index.php");
 	/**
 	 * @author Lloric Garcia
 	 * @copyright 2015
 	 */
 	$docfile="signup";
 	include"php/main_style.php";
+	if(isset($_SESSION['authID']))
+		header("Location: index.php");
 	include"php/header.php";
 	if(isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST"){
 
@@ -87,9 +87,9 @@
 		}
 
 		//check if password and secret answer is match
-		if(!preg_match("/^[^\s]*$/", $pass) and !empty($_POST['pass']))
+		if(!preg_match("/^[^\\s]*$/", $pass) and !empty($_POST['pass']))
 			$passrr="white space not allowed";
-		else if(!preg_match("/^[[^\s]{7,}]*$/", $pass) and !empty($_POST['pass']))
+		else if(!preg_match("/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,}$/", $pass) and !empty($_POST['pass']))
 			$passrr="password minimum is 8 ";
 		else{
 			$pass2=DB::esc($_POST['pass2']);

@@ -356,11 +356,10 @@ FROM Purchased AS pur
 								<?php 	}			?>
 										<br />
 										<p style="font-size:13px;float:left">
-											&nbsp;&nbsp;<?php echo $int?>:
-											<span style="color:red;">
-												 <?php echo  $row->ProductBrand?> &nbsp;</span><br />
-											<b>	&nbsp; <?php echo  $row->ProductName?> &nbsp;<br />
-												&nbsp; &#8369;<?php echo  $row->ProductPrice?></b>
+											&nbsp;&nbsp;No.<?php echo $row->ProductID?><br />
+											<span style="color:#C96666;">
+												&nbsp; Brand:<?php echo  $row->ProductBrand?> </span><br />
+											<b>	&nbsp;&nbsp;Name:<?php echo  $row->ProductName?> &nbsp;</b>
 										</p>
 										<p style="color:white;float:right;font-size:13px">
 
@@ -370,7 +369,8 @@ FROM Purchased AS pur
 											$rs5=DB::query($sql);
 											$row5=$rs5->fetch_object();
 										?>
-											<?php echo $row->CartItemSize?>(<?php echo $row->CartQuantity?>)<br />
+											&#8369;<?php echo  $row->ProductPrice?><br />
+											size:<?php echo $row->CartItemSize?>(<?php echo $row->CartQuantity?>)<br />
 
 											<?php //echo "$row->CartQuantity <= $row5->ProductInventoryStock"; ?>
 											<?php      ?>
