@@ -16,7 +16,7 @@
 
 			$rs=DB::query("SELECT * FROM Visit ORDER BY count DESC");
 	?>
-			<div  class="d"><a href="index.php"><button>back to main</button></a>
+			<div  class="d"><a href="index.php"><button class="btn">back to main</button></a>
 		<?php
 			if(DB::getNumRows()){
 				echo "<table>";
@@ -29,6 +29,6 @@
 			</div>
 			<?php
 		}
+	
+		include"php/footer.php";
 	?>
-	</body>
-</html>

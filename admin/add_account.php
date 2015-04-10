@@ -129,7 +129,8 @@
 		else
 		{
 				?>
-			<a href="view_accounts.php"><button>back</button></a>
+				<div class="d">
+			<a href="view_accounts.php"><button class="btn">back</button></a>
 				<?php 	if(isset($ok)){
 							echo $ok;
 							unset($ok);
@@ -225,7 +226,7 @@
 								<td>
 								</td>
 								<td>
-									<input type="submit" value="CREATE ACCOUNT">
+									<input class="btn" type="submit" value="CREATE ACCOUNT">
 								</td>
 								<td>
 
@@ -233,8 +234,8 @@
 							</tr>
 						</table>
 						</form>
+						</div>
 			<?php
 		}
+	include"php/footer.php";
 	?>
-	</body>
-</html>

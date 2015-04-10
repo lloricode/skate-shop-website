@@ -1,9 +1,11 @@
 body{
-	background-color: gray;
+/*	background-color: gray;*/
+	background-image: url("../../img/bg.jpg");	background-attachment: fixed;
 }
 .d{
-	background-color:; 
+	background-color:rgba(53, 51, 51, 0.86);
 	margin: 20px 20px;
+	padding: 30px 30px;
 }
 
 /*---------------------- add account------------------------*/
@@ -15,4 +17,63 @@ body{
 
 .text{
 	width: 400px;
+}
+.btn {
+  -webkit-border-radius: 4;
+  -moz-border-radius: 4;
+  border-radius: 4px;
+  font-family: Arial;
+  color: #d6d6cf;
+  font-size: 20px;
+  background: #5d6266;
+  padding: 2px 4px 2px 4px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #737f87;
+  text-decoration: none;
+}
+
+ .inputs {
+    background: #1F2124;
+    background: -moz-linear-gradient(#1F2124, #27292C);
+    background: -ms-linear-gradient(#1F2124, #27292C);
+    background: -o-linear-gradient(#1F2124, #27292C);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(#1F2124), to(#27292C));
+    background: -webkit-linear-gradient(#1F2124, #27292C);
+    background: linear-gradient(#1F2124, #27292C);
+    border: 1px solid #000;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    font-family: 'Ubuntu', 'Lato', sans-serif;
+    color: #FFF;
+    width: 270px;
+    height: 25px;
+}
+
+.inputs:focus {
+    box-shadow: inset 0 0 2px #000;
+    background: #494D54;
+    border-color: #51CBEE;
+    outline: none;
+}
+
+ul li{
+  padding: 20px 20px;
+  display: inline;
+  list-style-type: none;
+}
+.actve{
+  color: #A79E9E;
+}
+.actve:hover{
+  color:#655353;
+}
+a{
+  text-decoration: none;
+  color: black;
+}
+a:hover{
+  color: #655353;
 }

@@ -65,7 +65,8 @@
 					$total_result=DB::getNumRows();
 					if($total_result>0) echo ($prev+1)."-".(($total_result<$nxt)?$total_result:$nxt)." of ";echo "$total_result result.<br />";
 
-					$cat=(isset($_GET['cat']))?"cat=".$_GET['cat']."&":"";   $q=(isset($_GET['query']))?"query=".$_GET['query']."&":"";
+					$cat=(isset($_GET['cat']))?"cat=".$_GET['cat']."&":"";
+					$q=(isset($_GET['query']))?"query=".$_GET['query']."&":"";
 				 	$page=(isset($_GET['page']))?$_GET['page']:1;
 				 	$srch=(isset($_GET['search']))?"search=".$_GET['search']."&":"";
 					if($ready){

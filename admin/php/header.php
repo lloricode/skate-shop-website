@@ -26,7 +26,7 @@ include"../config.php";?>
 	<img src="<?php echo $ri->h("../img/UserImage/".$_SESSION['auth_img'],28);?>" alt="<?php echo $_SESSION['auth_name']." ".$_SESSION['auth_lname']; ?>" >
 <?php }
 	if(isset($_SESSION['auth_accountID']))
-		echo "Hello!, ".$_SESSION['auth_name']."! &nbsp;&nbsp;&nbsp;<a href='php/logout.php'><button>Logout</button></a><br />";
+		echo "Hello!, ".$_SESSION['auth_name']."! &nbsp;&nbsp;&nbsp;<a href='php/logout.php'><button class='btn'>Logout</button></a><br />";
 	
 
 ?>

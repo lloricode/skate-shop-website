@@ -12,7 +12,7 @@
 		{
 			//include"../config.php";	?>
 			<div  class="d">
-			<a href="index.php"><button>back to main</button></a><br />
+			<a href="index.php"><button class="btn">back to main</button></a><br />
 			<?php
 				$rs=DB::query("SELECT p.PurchasedID,u.UserAccountFirstName,u.UseraccountLastName,p.PurchasedDate
 					FROM Purchased AS p LEFT JOIN Useraccount AS u ON p.UseraccountID=u.UseraccountID WHERE p.PurchasedDelivered=0 ORDER BY PurchasedDate DESC");
@@ -29,6 +29,5 @@
 			</div>
 			<?php
 		}
+	include"php/footer.php";
 	?>
-	</body>
-</html>

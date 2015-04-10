@@ -12,7 +12,7 @@
 		{
 		//	include"../config.php";	?>
 			<div  class="d">
-			<a href="index.php"><button>back to main</button></a><br />
+			<a href="index.php"><button class="btn">back to main</button></a><br />
 			<?php
 				/*$rs=DB::query("SELECT p.*,SUM(ProductInventorySold) AS sold
 					FROM Product AS p JOIN ProductInventory AS pi ON p.ProductID=pi.ProductID
@@ -43,6 +43,5 @@
 			</div>
 			<?php
 		}
+	include"php/footer.php";
 	?>
-	</body>
-</html>

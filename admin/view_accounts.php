@@ -7,11 +7,11 @@
 		<?php
 			if(isset($_SESSION['auth_accountID'])){ ?>
 				<div  class="d">
-				<a href="index.php"><button>back to main</button></a>
+				<a href="index.php"><button class="btn">back to main</button></a>
 			<?php 
 
 				if($_SESSION['auth_permission']=="admin"){ 		 ?>
-				<a href="add_account.php"><button>add admin account</button></a>
+				<a href="add_account.php"><button class="btn">add admin account</button></a>
 		<?php		}
 				//--------------------------
 				$sqlcmd="SELECT u.UserAccountFirstName,COUNT(p.UserAccountID) AS NumberOfUploads 
@@ -74,8 +74,5 @@
 			}
 			else
 				header("Location: index.php");
+		include"php/footer.php";
 		?>
-		
-	</body>
-</html>
-

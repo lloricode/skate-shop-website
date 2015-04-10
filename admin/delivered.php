@@ -12,7 +12,7 @@
 		{
 			//include"../config.php";	?>
 			<div  class="d">
-				<a href="index.php"><button>back to main</button></a><br />
+				<a href="index.php"><button class="btn">back to main</button></a><br />
 				<?php
 					$rs=DB::query("SELECT u.UserAccountID,pa.PurchasedApprovedID,u.UserAccountFirstName,p.PurchasedID,pa.PurchasedApprovedID,u.UseraccountLastName,p.PurchasedDate,
 								(CASE pa.PurchasedApprovedStatus WHEN 1 THEN 'YES' ELSE 'CANCELED' END) AS statusaproved
@@ -54,7 +54,7 @@
 								<form action="php/recieve.php" method="post">
 									<input type="hidden" name="pi" value="<?php echo $row->PurchasedApprovedID; ?>">
 			<?php					echo"	<td>yes<input type='radio'  value='y' name='rr' > no<input type='radio'  value='n' name='rr' ></td>
-										<td><input type='submit' value='set'></td>";
+										<td><input class='btn' type='submit' value='set'></td>";
 								echo "</form>";
 								}else{ ?>
 									<td colspan="2">------</td>
@@ -71,6 +71,5 @@
 					else
 						echo "no data";
 		}
+		include"php/footer.php";
 	?>
-	</body>
-</html>

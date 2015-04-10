@@ -12,7 +12,7 @@
 		{
 			//include"../config.php";	?>
 			<div  class="d">
-			<a href="orders.php"><button>back</button></a><br />
+			<a href="orders.php"><button class="btn">back</button></a><br />
 			<?php
 				if(!isset($_GET["pid"]))
 					header("Location: orders.php");
@@ -73,14 +73,14 @@
 							<tr>
 								<td colspan="2">
 									<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>?pid=<?php echo $row->PurchasedID; ?>" method="post">
-										<input type="hidden" value="<?php echo $row->PurchasedID; ?>" name="pid"><input type="submit" value="DELIVER">
+										<input type="hidden" value="<?php echo $row->PurchasedID; ?>" name="pid"><input class="btn" type="submit" value="DELIVER">
 									</form>
 									<?php
 										if(isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST"){ ?>
 											<form action="php/deliver.php?pid=<?php echo $row->PurchasedID; ?>" method="post">
 												Approve<input type="radio" name="approve" value="1"><br />
 												Dis-Approved<input type="radio" name="approve" value="0"><br />
-												<input type="hidden" value="<?php echo $row->PurchasedID; ?>" name="pid"><input type="submit" value="SUBMIT">
+												<input type="hidden" value="<?php echo $row->PurchasedID; ?>" name="pid"><input class="btn" type="submit" value="SUBMIT">
 											</form>
 							<?php		}
 									?>
@@ -105,6 +105,5 @@
 			</div>
 			<?php
 		}
+	include"php/footer.php";
 	?>
-	</body>
-</html>

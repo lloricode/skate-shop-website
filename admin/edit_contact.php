@@ -51,7 +51,7 @@
 
 ?>
 		<div class="d">
-			<a href="index.php"><button>back to main</button></a>
+			<a href="index.php"><button class="btn">back to main</button></a>
 			<form action="" method="post">
 				<table>
 					<tr>
@@ -71,10 +71,11 @@
 						<textarea placeholder="value4" rows="3" cols="48" name="v4" ><?php echo $v4; ?></textarea></td>
 					</tr>
 					<tr>
-						<td></td><td><input type="submit"  value="submit" required></td>
+						<td></td><td><input class="btn" type="submit"  value="submit" required></td>
 					</tr>
 				</table>
 			</form>
 		</div>
-	</body>
-</html>
+<?php
+	include"php/footer.php";
+?>
