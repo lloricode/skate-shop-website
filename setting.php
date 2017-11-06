@@ -21,7 +21,7 @@
 						<br /><br /><hr /><br />
 						<h3>Personal Information</h3>
 						<?php
-							$rs=DB::query("SELECT * FROM USerAccount WHERE UserAccountID=".$_SESSION["authID"]);
+							$rs=DB::query("SELECT * FROM UserAccount WHERE UserAccountID=".$_SESSION["authID"]);
 							$row=$rs->fetch_object();
 							$fn=$row->UserAccountFirstName;
 							$ln=$row->UserAccountLastName;

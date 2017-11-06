@@ -17,7 +17,7 @@
 					$rs=DB::query("SELECT u.UserAccountID,pa.PurchasedApprovedID,u.UserAccountFirstName,p.PurchasedID,pa.PurchasedApprovedID,u.UseraccountLastName,p.PurchasedDate,
 								(CASE pa.PurchasedApprovedStatus WHEN 1 THEN 'YES' ELSE 'CANCELED' END) AS statusaproved
 								FROM Purchased AS p
-								JOIN Useraccount AS u ON p.UseraccountID=u.UseraccountID
+								JOIN UserAccount AS u ON p.UseraccountID=u.UseraccountID
 								JOIN PurchasedApproved AS pa ON p.PurchasedID=pa.PurchasedID
 								WHERE p.PurchasedDelivered=1
 								ORDER BY PurchasedDate DESC");

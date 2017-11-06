@@ -15,7 +15,7 @@
 			<a href="index.php"><button class="btn">back to main</button></a><br />
 			<?php
 				$rs=DB::query("SELECT p.PurchasedID,u.UserAccountFirstName,u.UseraccountLastName,p.PurchasedDate
-					FROM Purchased AS p LEFT JOIN Useraccount AS u ON p.UseraccountID=u.UseraccountID WHERE p.PurchasedDelivered=0 ORDER BY PurchasedDate DESC");
+					FROM Purchased AS p LEFT JOIN UserAccount AS u ON p.UseraccountID=u.UseraccountID WHERE p.PurchasedDelivered=0 ORDER BY PurchasedDate DESC");
 				if(DB::getNumRows()>0){
 					echo "<table class='grid' border=1><tr><th>no</th><th>Official Receipt</th><th>Clients</th><th>Date</th></tr>";
 					for ($i=1;$row=$rs->fetch_object();$i++) {

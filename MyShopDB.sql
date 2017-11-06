@@ -23,10 +23,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cart`
+-- Table structure for table `Cart`
 --
 
-CREATE TABLE IF NOT EXISTS `cart` (
+CREATE TABLE IF NOT EXISTS `Cart` (
 `CartID` int(11) NOT NULL,
   `UserAccountID` int(11) NOT NULL,
   `ProductID` int(11) NOT NULL,
@@ -37,10 +37,10 @@ CREATE TABLE IF NOT EXISTS `cart` (
 ) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `cart`
+-- Dumping data for table `Cart`
 --
 
-INSERT INTO `cart` (`CartID`, `UserAccountID`, `ProductID`, `CartPurchased`, `CartQuantity`, `CartItemSize`, `CartDateAdded`) VALUES
+INSERT INTO `Cart` (`CartID`, `UserAccountID`, `ProductID`, `CartPurchased`, `CartQuantity`, `CartItemSize`, `CartDateAdded`) VALUES
 (83, 12, 83, 1, 1, '56', '2015-04-05 10:04:28'),
 (84, 12, 91, 1, 2, 'medium', '2015-04-05 10:12:16'),
 (85, 12, 89, 1, 1, 'ttt', '2015-04-05 10:13:41'),
@@ -60,10 +60,10 @@ INSERT INTO `cart` (`CartID`, `UserAccountID`, `ProductID`, `CartPurchased`, `Ca
 -- --------------------------------------------------------
 
 --
--- Table structure for table `document`
+-- Table structure for table `Document`
 --
 
-CREATE TABLE IF NOT EXISTS `document` (
+CREATE TABLE IF NOT EXISTS `Document` (
 `DocumentID` int(11) NOT NULL,
   `DocumentCategory` varchar(20) NOT NULL,
   `DocumentValue` varchar(500) NOT NULL,
@@ -71,10 +71,10 @@ CREATE TABLE IF NOT EXISTS `document` (
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `document`
+-- Dumping data for table `Document`
 --
 
-INSERT INTO `document` (`DocumentID`, `DocumentCategory`, `DocumentValue`, `DocumentArrange`) VALUES
+INSERT INTO `Document` (`DocumentID`, `DocumentCategory`, `DocumentValue`, `DocumentArrange`) VALUES
 (1, 'about', 'The SkateShop was established in 2012.Within its first year of business the we were able to open two more branches in Brooklyn, New York.', 1),
 (2, 'about', 'Our stores cater to the masses providing easier access for people to obtain our products in places where we do not have branches yet.', 2),
 (3, 'lloric', 'Lloric Garcia graduated Suma Cum Laude with the degree of Computer Science majoring in Programming. He has created and co-created many websites an had worked in many IT \\\\r\\\\ncompanies...Google, Facebook, Twitter just to name a few.', 1),
@@ -92,10 +92,10 @@ INSERT INTO `document` (`DocumentID`, `DocumentCategory`, `DocumentValue`, `Docu
 -- --------------------------------------------------------
 
 --
--- Table structure for table `payment`
+-- Table structure for table `Payment`
 --
 
-CREATE TABLE IF NOT EXISTS `payment` (
+CREATE TABLE IF NOT EXISTS `Payment` (
 `PaymentID` int(11) NOT NULL,
   `UserAccountID` int(11) NOT NULL,
   `PaymentShippingAddress` varchar(50) NOT NULL,
@@ -106,10 +106,10 @@ CREATE TABLE IF NOT EXISTS `payment` (
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `payment`
+-- Dumping data for table `Payment`
 --
 
-INSERT INTO `payment` (`PaymentID`, `UserAccountID`, `PaymentShippingAddress`, `PaymentCardNumber`, `PaymentCardExpiration`, `PaymentSecureCode`, `PurchasedID`) VALUES
+INSERT INTO `Payment` (`PaymentID`, `UserAccountID`, `PaymentShippingAddress`, `PaymentCardNumber`, `PaymentCardExpiration`, `PaymentSecureCode`, `PurchasedID`) VALUES
 (4, 12, 'sprikiwi lab', '112', '2015-04-07', '567', 55),
 (5, 12, 'ij', '987', '2015-04-14', '87', 56),
 (6, 12, 'klk', '98', '2015-04-24', '9', 57),
@@ -124,10 +124,10 @@ INSERT INTO `payment` (`PaymentID`, `UserAccountID`, `PaymentShippingAddress`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product`
+-- Table structure for table `Product`
 --
 
-CREATE TABLE IF NOT EXISTS `product` (
+CREATE TABLE IF NOT EXISTS `Product` (
 `ProductID` int(11) NOT NULL,
   `ProductName` varchar(50) NOT NULL,
   `ProductPrice` double NOT NULL,
@@ -142,10 +142,10 @@ CREATE TABLE IF NOT EXISTS `product` (
 ) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `product`
+-- Dumping data for table `Product`
 --
 
-INSERT INTO `product` (`ProductID`, `ProductName`, `ProductPrice`, `ProductType`, `ProductStatus`, `ProductGender`, `ProductAttactment`, `UserAccountID`, `ProductDateAdded`, `ProductSale`, `ProductBrand`) VALUES
+INSERT INTO `Product` (`ProductID`, `ProductName`, `ProductPrice`, `ProductType`, `ProductStatus`, `ProductGender`, `ProductAttactment`, `UserAccountID`, `ProductDateAdded`, `ProductSale`, `ProductBrand`) VALUES
 (83, 'jjj', 8767, 'shoes', 'Available', 'male', '977876fbc5889f4d323508aa88b9abc9.jpg', 10, '2015-02-24 01:46:14', 1, 'nova'),
 (84, 'lira', 9999, 'shoes', 'Available', 'male', '1a1064995548a9317f00784967226575.jpg', 10, '2015-02-24 19:07:13', 1, 'luba'),
 (85, 'wer', 324, 'shoes', 'Available', 'female', 'a40eedce43d22bf9112e63489606abc3.jpg', 10, '2015-03-05 19:00:17', 1, 'ewwet'),
@@ -193,10 +193,10 @@ INSERT INTO `product` (`ProductID`, `ProductName`, `ProductPrice`, `ProductType`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `productinventory`
+-- Table structure for table `ProductInventory`
 --
 
-CREATE TABLE IF NOT EXISTS `productinventory` (
+CREATE TABLE IF NOT EXISTS `ProductInventory` (
 `ProductInventoryID` int(11) NOT NULL,
   `ProductID` int(11) NOT NULL,
   `ProductInventorySize` varchar(20) NOT NULL,
@@ -205,10 +205,10 @@ CREATE TABLE IF NOT EXISTS `productinventory` (
 ) ENGINE=InnoDB AUTO_INCREMENT=132 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `productinventory`
+-- Dumping data for table `ProductInventory`
 --
 
-INSERT INTO `productinventory` (`ProductInventoryID`, `ProductID`, `ProductInventorySize`, `ProductInventoryStock`, `ProductInventorySold`) VALUES
+INSERT INTO `ProductInventory` (`ProductInventoryID`, `ProductID`, `ProductInventorySize`, `ProductInventoryStock`, `ProductInventorySold`) VALUES
 (1, 83, '56', 2, 2),
 (2, 83, '10', 4, 9),
 (3, 83, '100', 34, 2),
@@ -342,10 +342,10 @@ INSERT INTO `productinventory` (`ProductInventoryID`, `ProductID`, `ProductInven
 -- --------------------------------------------------------
 
 --
--- Table structure for table `purchased`
+-- Table structure for table `Purchased`
 --
 
-CREATE TABLE IF NOT EXISTS `purchased` (
+CREATE TABLE IF NOT EXISTS `Purchased` (
 `PurchasedID` int(11) NOT NULL,
   `PurchasedAmount` double NOT NULL,
   `PurchasedQuantity` int(11) NOT NULL,
@@ -355,10 +355,10 @@ CREATE TABLE IF NOT EXISTS `purchased` (
 ) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `purchased`
+-- Dumping data for table `Purchased`
 --
 
-INSERT INTO `purchased` (`PurchasedID`, `PurchasedAmount`, `PurchasedQuantity`, `UserAccountID`, `PurchasedDate`, `PurchasedDelivered`) VALUES
+INSERT INTO `Purchased` (`PurchasedID`, `PurchasedAmount`, `PurchasedQuantity`, `UserAccountID`, `PurchasedDate`, `PurchasedDelivered`) VALUES
 (55, 8767, 1, 12, '2015-04-05 10:08:59', 1),
 (56, 1794, 2, 12, '2015-04-05 10:12:41', 1),
 (57, 64, 1, 12, '2015-04-05 10:13:58', 1),
@@ -373,10 +373,10 @@ INSERT INTO `purchased` (`PurchasedID`, `PurchasedAmount`, `PurchasedQuantity`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `purchasedapproved`
+-- Table structure for table `PurchasedApproved`
 --
 
-CREATE TABLE IF NOT EXISTS `purchasedapproved` (
+CREATE TABLE IF NOT EXISTS `PurchasedApproved` (
 `PurchasedApprovedID` int(11) NOT NULL,
   `PurchasedID` int(11) NOT NULL,
   `UserAccountID` int(11) NOT NULL,
@@ -384,10 +384,10 @@ CREATE TABLE IF NOT EXISTS `purchasedapproved` (
 ) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `purchasedapproved`
+-- Dumping data for table `PurchasedApproved`
 --
 
-INSERT INTO `purchasedapproved` (`PurchasedApprovedID`, `PurchasedID`, `UserAccountID`, `PurchasedApprovedStatus`) VALUES
+INSERT INTO `PurchasedApproved` (`PurchasedApprovedID`, `PurchasedID`, `UserAccountID`, `PurchasedApprovedStatus`) VALUES
 (31, 55, 25, 0),
 (32, 56, 25, 0),
 (33, 57, 25, 0),
@@ -402,20 +402,20 @@ INSERT INTO `purchasedapproved` (`PurchasedApprovedID`, `PurchasedID`, `UserAcco
 -- --------------------------------------------------------
 
 --
--- Table structure for table `purchasedline`
+-- Table structure for table `PurchasedLine`
 --
 
-CREATE TABLE IF NOT EXISTS `purchasedline` (
+CREATE TABLE IF NOT EXISTS `PurchasedLine` (
 `PurchasedLineID` int(11) NOT NULL,
   `PurchasedID` int(11) NOT NULL,
   `CartID` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `purchasedline`
+-- Dumping data for table `PurchasedLine`
 --
 
-INSERT INTO `purchasedline` (`PurchasedLineID`, `PurchasedID`, `CartID`) VALUES
+INSERT INTO `PurchasedLine` (`PurchasedLineID`, `PurchasedID`, `CartID`) VALUES
 (4, 55, 83),
 (5, 56, 84),
 (6, 57, 85),
@@ -432,10 +432,10 @@ INSERT INTO `purchasedline` (`PurchasedLineID`, `PurchasedID`, `CartID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `received`
+-- Table structure for table `Received`
 --
 
-CREATE TABLE IF NOT EXISTS `received` (
+CREATE TABLE IF NOT EXISTS `Received` (
 `ReceivedID` int(11) NOT NULL,
   `PurchasedApprovedID` int(11) NOT NULL,
   `UserAccountID` int(11) DEFAULT NULL,
@@ -443,10 +443,10 @@ CREATE TABLE IF NOT EXISTS `received` (
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `received`
+-- Dumping data for table `Received`
 --
 
-INSERT INTO `received` (`ReceivedID`, `PurchasedApprovedID`, `UserAccountID`, `ReceivedStatus`) VALUES
+INSERT INTO `Received` (`ReceivedID`, `PurchasedApprovedID`, `UserAccountID`, `ReceivedStatus`) VALUES
 (14, 34, 25, 0),
 (15, 37, 10, 1),
 (16, 35, 10, 0),
@@ -455,10 +455,10 @@ INSERT INTO `received` (`ReceivedID`, `PurchasedApprovedID`, `UserAccountID`, `R
 -- --------------------------------------------------------
 
 --
--- Table structure for table `useraccount`
+-- Table structure for table `UserAccount`
 --
 
-CREATE TABLE IF NOT EXISTS `useraccount` (
+CREATE TABLE IF NOT EXISTS `UserAccount` (
 `UserAccountID` int(11) NOT NULL,
   `UserAccountImage` varchar(60) NOT NULL,
   `UserAccountFirstName` varchar(20) NOT NULL,
@@ -475,10 +475,10 @@ CREATE TABLE IF NOT EXISTS `useraccount` (
 ) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `useraccount`
+-- Dumping data for table `UserAccount`
 --
 
-INSERT INTO `useraccount` (`UserAccountID`, `UserAccountImage`, `UserAccountFirstName`, `UserAccountLastName`, `UserAccountUserName`, `UserAccountPassword`, `UserAccountBD`, `UserAccountGender`, `UserAccountHomeAddress`, `UserAccountMobile`, `UserAccountEmail`, `UserAccountSecretQuestion`, `UserAccountAnswer`) VALUES
+INSERT INTO `UserAccount` (`UserAccountID`, `UserAccountImage`, `UserAccountFirstName`, `UserAccountLastName`, `UserAccountUserName`, `UserAccountPassword`, `UserAccountBD`, `UserAccountGender`, `UserAccountHomeAddress`, `UserAccountMobile`, `UserAccountEmail`, `UserAccountSecretQuestion`, `UserAccountAnswer`) VALUES
 (7, 'fad1ee46e6e7006cf39d601b334ca40f.jpg', 'll', 'll', 'll', '5b54c0a045f179bcbbbc9abcb8b5cd4c', '1990-06-14', 'male', 'hh', '766', 'hh@yahoo.com', 'hh', '5e36941b3d856737e81516acd45edc50'),
 (8, 'female.png', 'bb', 'bb', 'bb', '21ad0bd836b90d08f4cf640b4c298e7c', '1992-12-04', 'female', 'bb', '88', 'bb@yahoo.com', 'bb', '21ad0bd836b90d08f4cf640b4c298e7c'),
 (9, 'male.png', 'mm', 'mm', 'mm', 'b3cd915d758008bd19d0f2428fbb354a', '1989-02-24', 'male', 'mm', '88', 'mm@yahoo.com', 'mm', 'b3cd915d758008bd19d0f2428fbb354a'),
@@ -498,40 +498,40 @@ INSERT INTO `useraccount` (`UserAccountID`, `UserAccountImage`, `UserAccountFirs
 -- --------------------------------------------------------
 
 --
--- Table structure for table `useraccountaccess`
+-- Table structure for table `UserAccountAccess`
 --
 
-CREATE TABLE IF NOT EXISTS `useraccountaccess` (
+CREATE TABLE IF NOT EXISTS `UserAccountAccess` (
 `UserAccountAccessID` int(11) NOT NULL,
   `UserAccountID` int(11) NOT NULL,
   `UserAccountAccessValue` enum('admin','editor') NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `useraccountaccess`
+-- Dumping data for table `UserAccountAccess`
 --
 
-INSERT INTO `useraccountaccess` (`UserAccountAccessID`, `UserAccountID`, `UserAccountAccessValue`) VALUES
+INSERT INTO `UserAccountAccess` (`UserAccountAccessID`, `UserAccountID`, `UserAccountAccessValue`) VALUES
 (1, 10, 'admin'),
 (3, 25, 'editor');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `useraccounttype`
+-- Table structure for table `UserAccountType`
 --
 
-CREATE TABLE IF NOT EXISTS `useraccounttype` (
+CREATE TABLE IF NOT EXISTS `UserAccountType` (
 `UserAccountTypeID` int(11) NOT NULL,
   `UserAccountID` int(11) NOT NULL,
   `UserAccountTypeValue` enum('admin','user') DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `useraccounttype`
+-- Dumping data for table `UserAccountType`
 --
 
-INSERT INTO `useraccounttype` (`UserAccountTypeID`, `UserAccountID`, `UserAccountTypeValue`) VALUES
+INSERT INTO `UserAccountType` (`UserAccountTypeID`, `UserAccountID`, `UserAccountTypeValue`) VALUES
 (1, 10, 'admin'),
 (22, 7, 'user'),
 (23, 8, 'user'),
@@ -551,20 +551,20 @@ INSERT INTO `useraccounttype` (`UserAccountTypeID`, `UserAccountID`, `UserAccoun
 -- --------------------------------------------------------
 
 --
--- Table structure for table `visit`
+-- Table structure for table `Visit`
 --
 
-CREATE TABLE IF NOT EXISTS `visit` (
+CREATE TABLE IF NOT EXISTS `Visit` (
 `id` int(11) NOT NULL,
   `doc` varchar(100) NOT NULL,
   `count` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=252 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `visit`
+-- Dumping data for table `Visit`
 --
 
-INSERT INTO `visit` (`id`, `doc`, `count`) VALUES
+INSERT INTO `Visit` (`id`, `doc`, `count`) VALUES
 (1, 'index.php', 403),
 (2, 'store.php?query=all', 482),
 (3, 'store.php?query=all&page=2', 12),
@@ -573,91 +573,91 @@ INSERT INTO `visit` (`id`, `doc`, `count`) VALUES
 (6, 'contact.php', 155),
 (7, 'mycart.php?query=all', 149),
 (8, 'login.php?mycart.php?query=all', 14),
-(9, 'cart.php?query=all&file=83', 6),
+(9, 'Cart.php?query=all&file=83', 6),
 (10, 'mycart.php?query=all&file=83', 1),
-(11, 'cart.php?query=all&file=83&file=83', 3),
+(11, 'Cart.php?query=all&file=83&file=83', 3),
 (12, 'mycart.php?query=all&file=83&file=83', 7),
 (13, 'fillcheckout.php', 10),
 (14, 'store.php?search=l', 9),
 (15, 'store.php?search=ll', 3),
 (16, 'store.php?search=lll', 1),
-(17, 'cart.php?query=all&file=90', 7),
-(18, 'cart.php?query=all&file=90&file=90', 5),
+(17, 'Cart.php?query=all&file=90', 7),
+(18, 'Cart.php?query=all&file=90&file=90', 5),
 (19, 'mycart.php?query=all&file=90&file=90', 25),
 (20, 'mycart.php?query=all&del=31', 1),
 (21, 'store.php?query=all&del=31', 1),
-(22, 'cart.php?query=all&del=31&file=86', 1),
-(23, 'cart.php?query=all&del=31&file=86&file=86', 1),
+(22, 'Cart.php?query=all&del=31&file=86', 1),
+(23, 'Cart.php?query=all&del=31&file=86&file=86', 1),
 (24, 'mycart.php?query=all&del=31&file=86&file=86', 2),
-(25, 'cart.php?query=all&file=86', 6),
-(26, 'cart.php?query=all&file=86&file=86', 6),
+(25, 'Cart.php?query=all&file=86', 6),
+(26, 'Cart.php?query=all&file=86&file=86', 6),
 (27, 'mycart.php?query=all&file=86&file=86', 45),
 (28, 'mycart.php?query=all&file=86&file=86&del=34', 1),
 (29, 'store.php?query=all&file=86&file=86&del=34', 1),
-(30, 'cart.php?query=all&file=86&file=86&del=34&file=87', 1),
-(31, 'cart.php?query=all&file=86&file=86&del=34&file=87&file=87', 1),
+(30, 'Cart.php?query=all&file=86&file=86&del=34&file=87', 1),
+(31, 'Cart.php?query=all&file=86&file=86&del=34&file=87&file=87', 1),
 (32, 'mycart.php?query=all&file=86&file=86&del=34&file=87&file=87', 2),
 (33, 'mycart.php', 545),
 (34, 'store.php', 8),
 (35, 'store.php?query=all&file=90&file=90', 1),
-(36, 'cart.php?query=all&file=90&file=90&file=84', 1),
-(37, 'cart.php?query=all&file=90&file=90&file=84&file=84', 1),
+(36, 'Cart.php?query=all&file=90&file=90&file=84', 1),
+(37, 'Cart.php?query=all&file=90&file=90&file=84&file=84', 1),
 (38, 'mycart.php?query=all&file=90&file=90&file=84&file=84', 6),
 (39, 'store.php?query=all&cat=jackets', 16),
-(40, 'cart.php?query=all&cat=jackets&file=101', 1),
-(41, 'cart.php?query=all&cat=jackets&file=101&file=101', 1),
+(40, 'Cart.php?query=all&cat=jackets&file=101', 1),
+(41, 'Cart.php?query=all&cat=jackets&file=101&file=101', 1),
 (42, 'mycart.php?query=all&cat=jackets&file=101&file=101', 3),
-(43, 'cart.php?query=all&file=87', 4),
-(44, 'cart.php?query=all&file=87&file=87', 4),
+(43, 'Cart.php?query=all&file=87', 4),
+(44, 'Cart.php?query=all&file=87&file=87', 4),
 (45, 'store.php?query=all&file=87&file=87', 1),
-(46, 'cart.php?query=all&file=87&file=87&file=88', 1),
-(47, 'cart.php?query=all&file=87&file=87&file=88&file=88', 1),
+(46, 'Cart.php?query=all&file=87&file=87&file=88', 1),
+(47, 'Cart.php?query=all&file=87&file=87&file=88&file=88', 1),
 (48, 'mycart.php?query=all&file=87&file=87&file=88&file=88', 3),
-(49, 'cart.php?query=all&file=84', 3),
-(50, 'cart.php?query=all&file=84&file=84', 1),
+(49, 'Cart.php?query=all&file=84', 3),
+(50, 'Cart.php?query=all&file=84&file=84', 1),
 (51, 'store.php?query=all&file=84&file=84', 1),
-(52, 'cart.php?query=all&file=84&file=84&file=90', 1),
-(53, 'cart.php?query=all&file=84&file=84&file=90&file=90', 1),
+(52, 'Cart.php?query=all&file=84&file=84&file=90', 1),
+(53, 'Cart.php?query=all&file=84&file=84&file=90&file=90', 1),
 (54, 'mycart.php?query=all&file=84&file=84&file=90&file=90', 3),
-(55, 'cart.php?query=all&file=88', 1),
-(56, 'cart.php?query=all&file=88&file=88', 1),
+(55, 'Cart.php?query=all&file=88', 1),
+(56, 'Cart.php?query=all&file=88&file=88', 1),
 (57, 'store.php?query=all&file=88&file=88', 1),
-(58, 'cart.php?query=all&file=88&file=88&file=86', 1),
-(59, 'cart.php?query=all&file=88&file=88&file=86&file=86', 1),
+(58, 'Cart.php?query=all&file=88&file=88&file=86', 1),
+(59, 'Cart.php?query=all&file=88&file=88&file=86&file=86', 1),
 (60, 'mycart.php?query=all&file=88&file=88&file=86&file=86', 3),
 (61, 'store.php?query=all&file=86&file=86', 1),
-(62, 'cart.php?query=all&file=86&file=86&file=91', 1),
-(63, 'cart.php?query=all&file=86&file=86&file=91&file=91', 1),
+(62, 'Cart.php?query=all&file=86&file=86&file=91', 1),
+(63, 'Cart.php?query=all&file=86&file=86&file=91&file=91', 1),
 (64, 'store.php?query=all&file=86&file=86&file=91&file=91', 1),
-(65, 'cart.php?query=all&page=2&file=98', 1),
-(66, 'cart.php?query=all&page=2&file=98&file=98', 1),
+(65, 'Cart.php?query=all&page=2&file=98', 1),
+(66, 'Cart.php?query=all&page=2&file=98&file=98', 1),
 (67, 'mycart.php?query=all&page=2&file=98&file=98', 3),
 (68, 'mycart.php?query=all&file=87&file=87', 5),
-(69, 'cart.php?query=all&file=87&file=87&file=87', 1),
+(69, 'Cart.php?query=all&file=87&file=87&file=87', 1),
 (70, 'mycart.php?query=all&file=87&file=87&file=87', 3),
-(71, 'cart.php?query=all&page=2&file=95', 1),
-(72, 'cart.php?query=all&page=2&file=95&file=95', 1),
-(73, 'cart.php?query=all&page=2&file=95&file=95&file=95', 1),
+(71, 'Cart.php?query=all&page=2&file=95', 1),
+(72, 'Cart.php?query=all&page=2&file=95&file=95', 1),
+(73, 'Cart.php?query=all&page=2&file=95&file=95&file=95', 1),
 (74, 'mycart.php?query=all&page=2&file=95&file=95&file=95', 1),
 (75, 'mycart.php?query=all&page=2&file=95&file=95&file=95&del=55', 1),
 (76, 'mycart.php?query=all&page=2&file=95&file=95&file=95&del=55&del=54', 1),
 (77, 'login.php?index.php', 101),
 (78, 'store.php?query=female', 10),
 (79, 'store.php?query=female&cat=jeans', 2),
-(80, 'login.php?cart.php?query=all&file=84', 2),
+(80, 'login.php?Cart.php?query=all&file=84', 2),
 (81, 'mycart.php?query=all&file=84', 2),
 (82, 'store.php?query=all&file=83', 2),
-(83, 'cart.php?query=all&file=83&file=84', 1),
-(84, 'cart.php?query=all&file=83&file=88', 1),
-(85, 'cart.php?query=all&file=83&file=88&file=88', 1),
+(83, 'Cart.php?query=all&file=83&file=84', 1),
+(84, 'Cart.php?query=all&file=83&file=88', 1),
+(85, 'Cart.php?query=all&file=83&file=88&file=88', 1),
 (86, 'mycart.php?query=all&file=83&file=88&file=88', 4),
 (87, 'mycart.php?query=all&del=56', 1),
 (88, 'mycart.php?query=all&del=56&del=58', 1),
 (89, 'mycart.php?query=all&del=56&del=58&del=59', 1),
-(90, 'cart.php?query=all&file=91', 1),
-(91, 'cart.php?query=all&file=91&file=91', 1),
+(90, 'Cart.php?query=all&file=91', 1),
+(91, 'Cart.php?query=all&file=91&file=91', 1),
 (92, 'mycart.php?query=all&file=91&file=91', 2),
-(93, 'login.php?cart.php?query=all&file=90', 2),
+(93, 'login.php?Cart.php?query=all&file=90', 2),
 (94, 'mycart.php?query=all&file=90', 2),
 (95, 'login.php?mycart.php?query=all&file=86&file=86', 1),
 (96, 'mycart.php?query=all?query=all', 12),
@@ -671,11 +671,11 @@ INSERT INTO `visit` (`id`, `doc`, `count`) VALUES
 (104, 'login.php?store.php?query=all', 8),
 (105, 'setting.php', 257),
 (106, 'profile.php', 44),
-(107, 'cart.php?&file=94', 3),
-(108, 'cart.php?file=94', 1),
-(109, 'cart.php?&file=84', 18),
+(107, 'Cart.php?&file=94', 3),
+(108, 'Cart.php?file=94', 1),
+(109, 'Cart.php?&file=84', 18),
 (110, 'mycart.php?&del=2', 1),
-(111, 'cart.php?&file=83', 108),
+(111, 'Cart.php?&file=83', 108),
 (112, 'mycart.php??', 1),
 (113, 'mycart.php????', 1),
 (114, 'mycart.php????????', 1),
@@ -683,25 +683,25 @@ INSERT INTO `visit` (`id`, `doc`, `count`) VALUES
 (116, 'mycart.php????????????????????????????????', 1),
 (117, 'mycart.php????????????????????????????????????????????????????????????????', 2),
 (118, 'mycart.php?&del=4', 1),
-(119, 'cart.php?&file=88', 6),
+(119, 'Cart.php?&file=88', 6),
 (120, 'login.php?mycart.php', 47),
 (121, 'mycart.php?page=2', 5),
 (122, 'mycart.php?page=1', 1),
-(123, 'cart.php?&file=93', 1),
-(124, 'cart.php?&file=86', 9),
+(123, 'Cart.php?&file=93', 1),
+(124, 'Cart.php?&file=86', 9),
 (125, 'store.php?query=all&cat=shorts', 8),
-(126, 'cart.php?&file=117', 5),
-(127, 'cart.php?file=117', 1),
+(126, 'Cart.php?&file=117', 5),
+(127, 'Cart.php?file=117', 1),
 (128, 'mycart.php?&del=21', 1),
 (129, 'mycart.php?&del=24', 1),
 (130, 'store.php?query=male', 31),
 (131, 'store.php?query=male&cat=jackets', 10),
-(132, 'cart.php?&file=104', 1),
-(133, 'cart.php?&file=109', 2),
+(132, 'Cart.php?&file=104', 1),
+(133, 'Cart.php?&file=109', 2),
 (134, 'mycart.php?&del=27', 1),
 (135, 'mycart.php?&del=26', 1),
-(136, 'cart.php?&file=95', 2),
-(137, 'cart.php?&file=89', 2),
+(136, 'Cart.php?&file=95', 2),
+(137, 'Cart.php?&file=89', 2),
 (138, 'signup.php', 124),
 (139, 'recovery.php', 23),
 (140, 'ans.php', 20),
@@ -717,7 +717,7 @@ INSERT INTO `visit` (`id`, `doc`, `count`) VALUES
 (150, 'store.php?query=all&cat=jackets&page=2', 3),
 (151, 'store.php?query=all&cat=shoes', 6),
 (152, 'store.php?query=all&cat=shoes&page=2', 3),
-(153, 'cart.php?&file=122', 1),
+(153, 'Cart.php?&file=122', 1),
 (154, 'login.php?signup.php', 8),
 (155, 'store.php?query=female&cat=tees', 3),
 (156, 'store.php?query=female&cat=jackets', 4),
@@ -725,24 +725,24 @@ INSERT INTO `visit` (`id`, `doc`, `count`) VALUES
 (158, 'store.php?query=female&cat=shorts', 1),
 (159, 'store.php?query=sale', 26),
 (160, 'store.php?query=male&cat=shoes', 2),
-(161, 'login.php?cart.php?&file=83', 18),
+(161, 'login.php?Cart.php?&file=83', 18),
 (162, 'store.php?query=male&page=2', 1),
 (163, 'login.php?store.php?query=sale', 2),
-(164, 'cart.php?&file=87', 7),
-(165, 'cart.php?&file=107', 1),
-(166, 'cart.php?&file=90', 4),
+(164, 'Cart.php?&file=87', 7),
+(165, 'Cart.php?&file=107', 1),
+(166, 'Cart.php?&file=90', 4),
 (167, 'mycart.php?&del=41', 1),
 (168, 'store.php?query=male&cat=jackets&page=2', 1),
-(169, 'cart.php?&file=111', 1),
+(169, 'Cart.php?&file=111', 1),
 (170, 'store.php?query=sale&cat=shorts', 2),
 (171, 'store.php?query=sale&cat=jeans', 1),
 (172, 'store.php?query=sale&cat=tees', 2),
 (173, 'store.php?search=jk', 3),
-(174, 'cart.php?&file=91', 6),
-(175, 'cart.php?&file=118', 7),
-(176, 'cart.php?file=118', 1),
+(174, 'Cart.php?&file=91', 6),
+(175, 'Cart.php?&file=118', 7),
+(176, 'Cart.php?file=118', 1),
 (177, 'mycart.php?&del=46', 1),
-(178, 'cart.php?file=83', 24),
+(178, 'Cart.php?file=83', 24),
 (179, 'mycart.php?&del=53', 1),
 (180, 'mycart.php?&del=53&del=54', 1),
 (181, 'mycart.php?&del=53&del=54&del=55', 1),
@@ -754,17 +754,17 @@ INSERT INTO `visit` (`id`, `doc`, `count`) VALUES
 (187, 'mycart.php?&del=63', 1),
 (188, 'mycart.php?&del=63&del=62', 1),
 (189, 'mycart.php?&del=63&del=62&del=61', 1),
-(190, 'cart.php?&file=85', 4),
+(190, 'Cart.php?&file=85', 4),
 (191, 'mycart.php?&del=67', 1),
 (192, 'mycart.php?&del=68', 1),
 (193, 'store.php?search=jjj', 1),
-(194, 'cart.php?file=86', 1),
+(194, 'Cart.php?file=86', 1),
 (195, 'store.php?search=moy', 1),
 (196, 'store.php?search=garca', 1),
 (197, 'store.php?search=garcia', 1),
-(198, 'cart.php?&file=129', 2),
-(199, 'cart.php?file=129', 1),
-(200, 'cart.php?file=87', 3),
+(198, 'Cart.php?&file=129', 2),
+(199, 'Cart.php?file=129', 1),
+(200, 'Cart.php?file=87', 3),
 (201, 'store.php?search=', 2),
 (202, 'store.php?search=a', 8),
 (203, 'store.php?search=k', 4),
@@ -783,7 +783,7 @@ INSERT INTO `visit` (`id`, `doc`, `count`) VALUES
 (216, 'store.php?count=3&query=all', 1),
 (217, 'store.php?count=6&query=all&cat=jackets', 1),
 (218, 'store.php?count=4343&query=sale', 1),
-(219, 'login.php?cart.php?&file=84', 2),
+(219, 'login.php?Cart.php?&file=84', 2),
 (220, 'store.php?&file=84', 1),
 (221, 'store.php?search=3', 1),
 (222, 'store.php?search=8', 3),
@@ -802,7 +802,7 @@ INSERT INTO `visit` (`id`, `doc`, `count`) VALUES
 (235, 'store.php?search=11', 1),
 (236, 'store.php?search=111', 1),
 (237, 'store.php?search=83', 2),
-(238, 'cart.php?&file=108', 3),
+(238, 'Cart.php?&file=108', 3),
 (239, 'store.php?search=nova', 1),
 (240, 'store.php?search=98', 1),
 (241, 'store.php?search=li', 1),
@@ -811,8 +811,8 @@ INSERT INTO `visit` (`id`, `doc`, `count`) VALUES
 (244, 'store.php?search=kj', 1),
 (245, 'store.php?search=kjh', 1),
 (246, 'store.php?search=fh', 1),
-(247, 'cart.php?file=91', 1),
-(248, 'login.php?cart.php?&file=85', 2),
+(247, 'Cart.php?file=91', 1),
+(248, 'login.php?Cart.php?&file=85', 2),
 (249, 'store.php?query=sale&page=2', 1),
 (250, 'store.php?query=sale&page=1', 1),
 (251, 'store.php?query=all&page=8', 1);
@@ -822,81 +822,81 @@ INSERT INTO `visit` (`id`, `doc`, `count`) VALUES
 --
 
 --
--- Indexes for table `cart`
+-- Indexes for table `Cart`
 --
-ALTER TABLE `cart`
+ALTER TABLE `Cart`
  ADD PRIMARY KEY (`CartID`), ADD KEY `fk_cart_product` (`ProductID`), ADD KEY `fk_cart_useraccount` (`UserAccountID`);
 
 --
--- Indexes for table `document`
+-- Indexes for table `Document`
 --
-ALTER TABLE `document`
+ALTER TABLE `Document`
  ADD PRIMARY KEY (`DocumentID`);
 
 --
--- Indexes for table `payment`
+-- Indexes for table `Payment`
 --
-ALTER TABLE `payment`
+ALTER TABLE `Payment`
  ADD PRIMARY KEY (`PaymentID`), ADD KEY `fk_payment_useraccount` (`UserAccountID`), ADD KEY `fk_payment_purchased` (`PurchasedID`);
 
 --
--- Indexes for table `product`
+-- Indexes for table `Product`
 --
-ALTER TABLE `product`
+ALTER TABLE `Product`
  ADD PRIMARY KEY (`ProductID`), ADD KEY `fk__product_useraccount` (`UserAccountID`);
 
 --
--- Indexes for table `productinventory`
+-- Indexes for table `ProductInventory`
 --
-ALTER TABLE `productinventory`
+ALTER TABLE `ProductInventory`
  ADD PRIMARY KEY (`ProductInventoryID`), ADD KEY `fk_productinventory_product` (`ProductID`);
 
 --
--- Indexes for table `purchased`
+-- Indexes for table `Purchased`
 --
-ALTER TABLE `purchased`
+ALTER TABLE `Purchased`
  ADD PRIMARY KEY (`PurchasedID`), ADD KEY `fk_purchased_useraccount` (`UserAccountID`);
 
 --
--- Indexes for table `purchasedapproved`
+-- Indexes for table `PurchasedApproved`
 --
-ALTER TABLE `purchasedapproved`
+ALTER TABLE `PurchasedApproved`
  ADD PRIMARY KEY (`PurchasedApprovedID`), ADD KEY `fk_purchasedapproved_purchased` (`PurchasedID`), ADD KEY `fk_purchasedapproved_useraccount` (`UserAccountID`);
 
 --
--- Indexes for table `purchasedline`
+-- Indexes for table `PurchasedLine`
 --
-ALTER TABLE `purchasedline`
+ALTER TABLE `PurchasedLine`
  ADD PRIMARY KEY (`PurchasedLineID`), ADD KEY `fk_purchasedline_cart` (`CartID`), ADD KEY `fk_purchasedline_purchased` (`PurchasedID`);
 
 --
--- Indexes for table `received`
+-- Indexes for table `Received`
 --
-ALTER TABLE `received`
+ALTER TABLE `Received`
  ADD PRIMARY KEY (`ReceivedID`), ADD KEY `fk_received_purchasedapproved` (`PurchasedApprovedID`), ADD KEY `fk_received_useraccount` (`UserAccountID`);
 
 --
--- Indexes for table `useraccount`
+-- Indexes for table `UserAccount`
 --
-ALTER TABLE `useraccount`
+ALTER TABLE `UserAccount`
  ADD PRIMARY KEY (`UserAccountID`), ADD UNIQUE KEY `UserAccountUserName` (`UserAccountUserName`);
 
 --
--- Indexes for table `useraccountaccess`
+-- Indexes for table `UserAccountAccess`
 --
-ALTER TABLE `useraccountaccess`
+ALTER TABLE `UserAccountAccess`
  ADD PRIMARY KEY (`UserAccountAccessID`), ADD KEY `fk_useraccountaccess_useraccount` (`UserAccountID`);
 
 --
--- Indexes for table `useraccounttype`
+-- Indexes for table `UserAccountType`
 --
-ALTER TABLE `useraccounttype`
+ALTER TABLE `UserAccountType`
  ADD PRIMARY KEY (`UserAccountTypeID`), ADD KEY `fk_useraccounttype_useraccount` (`UserAccountID`);
 
 --
--- Indexes for table `visit`
+-- Indexes for table `Visit`
 --
-ALTER TABLE `visit`
+ALTER TABLE `Visit`
  ADD PRIMARY KEY (`id`);
 
 --
@@ -904,138 +904,138 @@ ALTER TABLE `visit`
 --
 
 --
--- AUTO_INCREMENT for table `cart`
+-- AUTO_INCREMENT for table `Cart`
 --
-ALTER TABLE `cart`
+ALTER TABLE `Cart`
 MODIFY `CartID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=98;
 --
--- AUTO_INCREMENT for table `document`
+-- AUTO_INCREMENT for table `Document`
 --
-ALTER TABLE `document`
+ALTER TABLE `Document`
 MODIFY `DocumentID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
--- AUTO_INCREMENT for table `payment`
+-- AUTO_INCREMENT for table `Payment`
 --
-ALTER TABLE `payment`
+ALTER TABLE `Payment`
 MODIFY `PaymentID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
--- AUTO_INCREMENT for table `product`
+-- AUTO_INCREMENT for table `Product`
 --
-ALTER TABLE `product`
+ALTER TABLE `Product`
 MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=131;
 --
--- AUTO_INCREMENT for table `productinventory`
+-- AUTO_INCREMENT for table `ProductInventory`
 --
-ALTER TABLE `productinventory`
+ALTER TABLE `ProductInventory`
 MODIFY `ProductInventoryID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=132;
 --
--- AUTO_INCREMENT for table `purchased`
+-- AUTO_INCREMENT for table `Purchased`
 --
-ALTER TABLE `purchased`
+ALTER TABLE `Purchased`
 MODIFY `PurchasedID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=65;
 --
--- AUTO_INCREMENT for table `purchasedapproved`
+-- AUTO_INCREMENT for table `PurchasedApproved`
 --
-ALTER TABLE `purchasedapproved`
+ALTER TABLE `PurchasedApproved`
 MODIFY `PurchasedApprovedID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=41;
 --
--- AUTO_INCREMENT for table `purchasedline`
+-- AUTO_INCREMENT for table `PurchasedLine`
 --
-ALTER TABLE `purchasedline`
+ALTER TABLE `PurchasedLine`
 MODIFY `PurchasedLineID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
--- AUTO_INCREMENT for table `received`
+-- AUTO_INCREMENT for table `Received`
 --
-ALTER TABLE `received`
+ALTER TABLE `Received`
 MODIFY `ReceivedID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
--- AUTO_INCREMENT for table `useraccount`
+-- AUTO_INCREMENT for table `UserAccount`
 --
-ALTER TABLE `useraccount`
+ALTER TABLE `UserAccount`
 MODIFY `UserAccountID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
 --
--- AUTO_INCREMENT for table `useraccountaccess`
+-- AUTO_INCREMENT for table `UserAccountAccess`
 --
-ALTER TABLE `useraccountaccess`
+ALTER TABLE `UserAccountAccess`
 MODIFY `UserAccountAccessID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT for table `useraccounttype`
+-- AUTO_INCREMENT for table `UserAccountType`
 --
-ALTER TABLE `useraccounttype`
+ALTER TABLE `UserAccountType`
 MODIFY `UserAccountTypeID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=41;
 --
--- AUTO_INCREMENT for table `visit`
+-- AUTO_INCREMENT for table `Visit`
 --
-ALTER TABLE `visit`
+ALTER TABLE `Visit`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=252;
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `cart`
+-- Constraints for table `Cart`
 --
-ALTER TABLE `cart`
-ADD CONSTRAINT `fk_cart_product` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`),
-ADD CONSTRAINT `fk_cart_useraccount` FOREIGN KEY (`UserAccountID`) REFERENCES `useraccount` (`UserAccountID`);
+ALTER TABLE `Cart`
+ADD CONSTRAINT `fk_cart_product` FOREIGN KEY (`ProductID`) REFERENCES `Product` (`ProductID`),
+ADD CONSTRAINT `fk_cart_useraccount` FOREIGN KEY (`UserAccountID`) REFERENCES `UserAccount` (`UserAccountID`);
 
 --
--- Constraints for table `payment`
+-- Constraints for table `Payment`
 --
-ALTER TABLE `payment`
-ADD CONSTRAINT `fk_payment_purchased` FOREIGN KEY (`PurchasedID`) REFERENCES `purchased` (`PurchasedID`),
-ADD CONSTRAINT `fk_payment_useraccount` FOREIGN KEY (`UserAccountID`) REFERENCES `useraccount` (`UserAccountID`);
+ALTER TABLE `Payment`
+ADD CONSTRAINT `fk_payment_purchased` FOREIGN KEY (`PurchasedID`) REFERENCES `Purchased` (`PurchasedID`),
+ADD CONSTRAINT `fk_payment_useraccount` FOREIGN KEY (`UserAccountID`) REFERENCES `UserAccount` (`UserAccountID`);
 
 --
--- Constraints for table `product`
+-- Constraints for table `Product`
 --
-ALTER TABLE `product`
-ADD CONSTRAINT `fk__product_useraccount` FOREIGN KEY (`UserAccountID`) REFERENCES `useraccount` (`UserAccountID`);
+ALTER TABLE `Product`
+ADD CONSTRAINT `fk__product_useraccount` FOREIGN KEY (`UserAccountID`) REFERENCES `UserAccount` (`UserAccountID`);
 
 --
--- Constraints for table `productinventory`
+-- Constraints for table `ProductInventory`
 --
-ALTER TABLE `productinventory`
-ADD CONSTRAINT `fk_productinventory_product` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`);
+ALTER TABLE `ProductInventory`
+ADD CONSTRAINT `fk_productinventory_product` FOREIGN KEY (`ProductID`) REFERENCES `Product` (`ProductID`);
 
 --
--- Constraints for table `purchased`
+-- Constraints for table `Purchased`
 --
-ALTER TABLE `purchased`
-ADD CONSTRAINT `fk_purchased_useraccount` FOREIGN KEY (`UserAccountID`) REFERENCES `useraccount` (`UserAccountID`);
+ALTER TABLE `Purchased`
+ADD CONSTRAINT `fk_purchased_useraccount` FOREIGN KEY (`UserAccountID`) REFERENCES `UserAccount` (`UserAccountID`);
 
 --
--- Constraints for table `purchasedapproved`
+-- Constraints for table `PurchasedApproved`
 --
-ALTER TABLE `purchasedapproved`
-ADD CONSTRAINT `fk_purchasedapproved_purchased` FOREIGN KEY (`PurchasedID`) REFERENCES `purchased` (`PurchasedID`),
-ADD CONSTRAINT `fk_purchasedapproved_useraccount` FOREIGN KEY (`UserAccountID`) REFERENCES `useraccount` (`UserAccountID`);
+ALTER TABLE `PurchasedApproved`
+ADD CONSTRAINT `fk_purchasedapproved_purchased` FOREIGN KEY (`PurchasedID`) REFERENCES `Purchased` (`PurchasedID`),
+ADD CONSTRAINT `fk_purchasedapproved_useraccount` FOREIGN KEY (`UserAccountID`) REFERENCES `UserAccount` (`UserAccountID`);
 
 --
--- Constraints for table `purchasedline`
+-- Constraints for table `PurchasedLine`
 --
-ALTER TABLE `purchasedline`
-ADD CONSTRAINT `fk_purchasedline_cart` FOREIGN KEY (`CartID`) REFERENCES `cart` (`CartID`),
-ADD CONSTRAINT `fk_purchasedline_purchased` FOREIGN KEY (`PurchasedID`) REFERENCES `purchased` (`PurchasedID`);
+ALTER TABLE `PurchasedLine`
+ADD CONSTRAINT `fk_purchasedline_cart` FOREIGN KEY (`CartID`) REFERENCES `Cart` (`CartID`),
+ADD CONSTRAINT `fk_purchasedline_purchased` FOREIGN KEY (`PurchasedID`) REFERENCES `Purchased` (`PurchasedID`);
 
 --
--- Constraints for table `received`
+-- Constraints for table `Received`
 --
-ALTER TABLE `received`
-ADD CONSTRAINT `fk_received_purchasedapproved` FOREIGN KEY (`PurchasedApprovedID`) REFERENCES `purchasedapproved` (`PurchasedApprovedID`),
-ADD CONSTRAINT `fk_received_useraccount` FOREIGN KEY (`UserAccountID`) REFERENCES `useraccount` (`UserAccountID`);
+ALTER TABLE `Received`
+ADD CONSTRAINT `fk_received_purchasedapproved` FOREIGN KEY (`PurchasedApprovedID`) REFERENCES `PurchasedApproved` (`PurchasedApprovedID`),
+ADD CONSTRAINT `fk_received_useraccount` FOREIGN KEY (`UserAccountID`) REFERENCES `UserAccount` (`UserAccountID`);
 
 --
--- Constraints for table `useraccountaccess`
+-- Constraints for table `UserAccountAccess`
 --
-ALTER TABLE `useraccountaccess`
-ADD CONSTRAINT `fk_useraccountaccess_useraccount` FOREIGN KEY (`UserAccountID`) REFERENCES `useraccount` (`UserAccountID`);
+ALTER TABLE `UserAccountAccess`
+ADD CONSTRAINT `fk_useraccountaccess_useraccount` FOREIGN KEY (`UserAccountID`) REFERENCES `UserAccount` (`UserAccountID`);
 
 --
--- Constraints for table `useraccounttype`
+-- Constraints for table `UserAccountType`
 --
-ALTER TABLE `useraccounttype`
-ADD CONSTRAINT `fk_useraccounttype_useraccount` FOREIGN KEY (`UserAccountID`) REFERENCES `useraccount` (`UserAccountID`);
+ALTER TABLE `UserAccountType`
+ADD CONSTRAINT `fk_useraccounttype_useraccount` FOREIGN KEY (`UserAccountID`) REFERENCES `UserAccount` (`UserAccountID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
