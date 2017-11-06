@@ -11,8 +11,8 @@
 			?>
 			<div class="d">
 			<form method="POST" action="php/login.php">
-				<input class="inputs" type="text" placeholder="Username" name="user" />
-				<input class="inputs" type="password" placeholder="Password" name="pass" />
+				<input class="inputs" type="text" placeholder="Username" name="user" value="q"/>
+				<input class="inputs" type="password" placeholder="Password" name="pass" value="q" />
 				<input class="btn" type="submit" value="Login" />
 			</form>
 			</div>
